@@ -14,6 +14,7 @@
 		3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54327F96F710059BB0A /* ViewController.swift */; };
 		3B5AB54627F96F720059BB0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AB54527F96F720059BB0A /* Assets.xcassets */; };
 		3B5AB54927F96F720059BB0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AB54727F96F720059BB0A /* Main.storyboard */; };
+		3B5AB55327F970D30059BB0A /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55227F970D30059BB0A /* Board.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3B5AB54527F96F720059BB0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B5AB54827F96F720059BB0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minesweeper.entitlements; sourceTree = "<group>"; };
+		3B5AB55227F970D30059BB0A /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				3B5AB53F27F96F710059BB0A /* Actions.sks */,
 				3B5AB54127F96F710059BB0A /* GameScene.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
+				3B5AB55227F970D30059BB0A /* Board.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
 				3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */,
@@ -144,6 +147,7 @@
 			files = (
 				3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */,
 				3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */,
+				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

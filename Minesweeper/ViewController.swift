@@ -12,24 +12,23 @@ import GameplayKit
 class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
+    var difficulty = "Beginner"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         if let view = self.skView {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
+            let rows = Util.difficulties[difficulty]![0]
+            let cols = Util.difficulties[difficulty]![1]
+            let mines = Util.difficulties[difficulty]![2]
             
-            view.ignoresSiblingOrder = true
+            self.view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
+            Resources.initialize()
+            let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines)
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.presentScene(scene)
+            
+            //view.showsFPS = true
+            //view.showsNodeCount = true
         }
     }
 }

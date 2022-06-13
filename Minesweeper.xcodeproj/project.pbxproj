@@ -7,27 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberView.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
-		3B5AB53E27F96F710059BB0A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AB53D27F96F710059BB0A /* GameScene.sks */; };
-		3B5AB54027F96F710059BB0A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AB53F27F96F710059BB0A /* Actions.sks */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
 		3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54327F96F710059BB0A /* ViewController.swift */; };
 		3B5AB54627F96F720059BB0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AB54527F96F720059BB0A /* Assets.xcassets */; };
 		3B5AB54927F96F720059BB0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AB54727F96F720059BB0A /* Main.storyboard */; };
 		3B5AB55327F970D30059BB0A /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55227F970D30059BB0A /* Board.swift */; };
+		3B5AB55527F974AE0059BB0A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55427F974AE0059BB0A /* Tile.swift */; };
+		3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */; };
+		3B5AB55D27F978E40059BB0A /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55C27F978E40059BB0A /* Resources.swift */; };
+		3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* TimerView.swift */; };
+		3B88CEA628023695008C84E2 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* CounterView.swift */; };
+		3B98639728448DF10017FAA0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B98639628448DF10017FAA0 /* Util.swift */; };
+		3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7632856F7CB00566000 /* GameScene+Input.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B4830592842C76F0060FCFD /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3B5AB53D27F96F710059BB0A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		3B5AB53F27F96F710059BB0A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		3B5AB54127F96F710059BB0A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3B5AB54327F96F710059BB0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3B5AB54527F96F720059BB0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B5AB54827F96F720059BB0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minesweeper.entitlements; sourceTree = "<group>"; };
 		3B5AB55227F970D30059BB0A /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		3B5AB55427F974AE0059BB0A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSheet.swift; sourceTree = "<group>"; };
+		3B5AB55C27F978E40059BB0A /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		3B88CEA32800EEA8008C84E2 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		3B88CEA528023695008C84E2 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		3B98639628448DF10017FAA0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		3BF1A7632856F7CB00566000 /* GameScene+Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Input.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +73,17 @@
 			isa = PBXGroup;
 			children = (
 				3B5AB53B27F96F710059BB0A /* AppDelegate.swift */,
-				3B5AB53D27F96F710059BB0A /* GameScene.sks */,
-				3B5AB53F27F96F710059BB0A /* Actions.sks */,
-				3B5AB54127F96F710059BB0A /* GameScene.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
+				3B5AB54127F96F710059BB0A /* GameScene.swift */,
+				3BF1A7632856F7CB00566000 /* GameScene+Input.swift */,
+				3B4830592842C76F0060FCFD /* NumberView.swift */,
+				3B88CEA32800EEA8008C84E2 /* TimerView.swift */,
+				3B88CEA528023695008C84E2 /* CounterView.swift */,
 				3B5AB55227F970D30059BB0A /* Board.swift */,
+				3B5AB55427F974AE0059BB0A /* Tile.swift */,
+				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
+				3B5AB55C27F978E40059BB0A /* Resources.swift */,
+				3B98639628448DF10017FAA0 /* Util.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
 				3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */,
@@ -131,9 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B5AB53E27F96F710059BB0A /* GameScene.sks in Resources */,
 				3B5AB54627F96F720059BB0A /* Assets.xcassets in Resources */,
-				3B5AB54027F96F710059BB0A /* Actions.sks in Resources */,
 				3B5AB54927F96F720059BB0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,10 +161,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */,
 				3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */,
 				3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */,
+				3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */,
+				3B5AB55527F974AE0059BB0A /* Tile.swift in Sources */,
+				3B5AB55D27F978E40059BB0A /* Resources.swift in Sources */,
 				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
+				3B98639728448DF10017FAA0 /* Util.swift in Sources */,
+				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,
+				3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */,
+				3B88CEA628023695008C84E2 /* CounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +308,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Minesweeper/Minesweeper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -291,6 +316,7 @@
 				DEVELOPMENT_TEAM = AUBXDCV2VL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -298,7 +324,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -311,6 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Minesweeper/Minesweeper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -318,6 +345,7 @@
 				DEVELOPMENT_TEAM = AUBXDCV2VL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -325,7 +353,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

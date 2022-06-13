@@ -25,4 +25,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     
+    @IBAction func newGame(_ sender: NSMenuItem) {
+        //print(sender.title)
+        if sender.title != "New Game" {
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+            controller.difficulty = sender.title
+            if let window = NSApplication.shared.mainWindow {
+                window.contentViewController = controller
+            }
+        }
+    }
 }

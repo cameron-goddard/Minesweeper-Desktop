@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "Icon16x16M.png",
+      "filename" : "Icon512x512RetinaM-16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "Icon16x16RetinaM.png",
+      "filename" : "Icon512x512RetinaM-32.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "Icon32x32M.png",
+      "filename" : "Icon512x512RetinaM-32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "Icon32x32RetinaM.png",
+      "filename" : "Icon512x512RetinaM-64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "Icon128x128M.png",
+      "filename" : "Icon512x512RetinaM-128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "Icon128x128RetinaM.png",
+      "filename" : "Icon512x512RetinaM-256.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "Icon256x256M.png",
+      "filename" : "Icon512x512RetinaM-256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "Icon256x256RetinaM.png",
+      "filename" : "Icon512x512RetinaM-512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "Icon512x512M.png",
+      "filename" : "Icon512x512RetinaM-512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "icontest.png",
+      "filename" : "Icon512x512RetinaM-1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

@@ -11,7 +11,13 @@ class BindingsViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height)
     }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.view.window?.title = "Key Bindings"
+    }
+    
     
 }

@@ -9,4 +9,10 @@ import Cocoa
 
 class StatsLabelCellView: NSTableCellView {
 
+    @IBOutlet weak var statLabelField: NSTextField!
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        // Drawing code here.
+    }
+    
 }

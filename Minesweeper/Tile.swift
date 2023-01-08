@@ -44,7 +44,7 @@ class Tile {
         self.c = c
         self.state = state
         self.value = val
-        self.node.texture = Resources.tiles.covered
+        self.node.texture = Util.currentTheme.tiles.covered
         self.node.anchorPoint = CGPoint(x: 0, y: 1)
         self.node.name = String(r) + "," + String(c)
     }
@@ -63,11 +63,11 @@ class Tile {
         case .Uncovered:
             self.node.texture = Util.textureLookup(value: self.value)
         case .Covered:
-            self.node.texture = Resources.tiles.covered
+            self.node.texture = Util.currentTheme.tiles.covered
         case .Flagged:
-            self.node.texture = Resources.tiles.flagged
+            self.node.texture = Util.currentTheme.tiles.flagged
         case .Question:
-            self.node.texture = Resources.tiles.question
+            self.node.texture = Util.currentTheme.tiles.question
         }
     }
     
@@ -76,6 +76,26 @@ class Tile {
     }
     
     func isNumber() -> Bool {
-        return self.value == .One || self.value == .Two || self.value == .Three || self.value == .Four || self.value == .Five || self.value == .Six || self.value == .Seven || self.value == .Eight
+        return !(self.value == .Empty || self.value == .Mine || self.value == .MineRed || self.value == .MineWrong)
+    }
+    
+    func pressed() {
+        self.node.texture = SKTexture(imageNamed: "filler")
+    }
+    
+    func raised() {
+        self.setState(state: self.state)
+    }
+}
+
+extension Tile: Equatable {
+    static func == (lhs: Tile, rhs: Tile) -> Bool {
+        return lhs.r == rhs.r && lhs.c == rhs.c
+    }
+}
+
+extension Tile: CustomStringConvertible {
+    var description: String {
+        return "[\(r), \(c)]"
     }
 }

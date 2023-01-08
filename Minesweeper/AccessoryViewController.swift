@@ -7,6 +7,10 @@
 
 import Cocoa
 
-class AccessoryViewController: NSTitleBarAccessoryViewController {
+class AccessoryViewController: NSTitlebarAccessoryViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
 }

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Stats {
+    var bbV: Int
+    var bbVs: Int
+}

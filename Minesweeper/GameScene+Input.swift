@@ -14,10 +14,19 @@ extension GameScene {
         let clickedNode = self.nodes(at: event.location(in: scene!))
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
-                mainButton.texture = Resources.mainButton.happyPressed
+                mainButton.texture = Util.currentTheme.mainButton.happyPressed
             } else {
                 if gameOver { return }
-                mainButton.texture = Resources.mainButton.cautious
+                mainButton.texture = Util.currentTheme.mainButton.cautious
+                
+                currentTile = clickedNode[0].name
+                
+                let coords = Util.convertLocation(name: name)
+                let tile = board.tileAt(r: coords[0], c: coords[1])!
+                if tile.state != .Uncovered {
+                    tile.pressed()
+                }
+                
             }
         }
     }
@@ -27,7 +36,7 @@ extension GameScene {
         
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
-                mainButton.texture = Resources.mainButton.happy
+                mainButton.texture = Util.currentTheme.mainButton.happy
                 newGame()
             } else {
                 if gameOver { return }
@@ -36,10 +45,14 @@ extension GameScene {
                     gameStarted = true
                 }
                 
-                mainButton.texture = Resources.mainButton.happy
-                let coords = Util.convertLocation(name: name)
+                NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: "test", userInfo: ["3BV": Int.random(in: 0...10)])
                 
-                if board.tileAt(r: coords[0], c: coords[1])!.state == .Flagged {
+                mainButton.texture = Util.currentTheme.mainButton.happy
+                let coords = Util.convertLocation(name: name)
+                let tile = board.tileAt(r: coords[0], c: coords[1])!
+                
+                
+                if tile.state == .Flagged {
                     counterView.increment()
                 }
                 
@@ -66,12 +79,20 @@ extension GameScene {
             let tile = board.tileAt(r: coords[0], c: coords[1])
             
             if tile!.state == .Flagged {
-                board.setAt(r: coords[0], c: coords[1], state: .Covered)
+                print(Util.userDefault(withKey: .UseQuestions))
+                if Util.userDefault(withKey: .UseQuestions) as! Bool {
+                    board.setAt(r: coords[0], c: coords[1], state: .Question)
+                } else {
+                    board.setAt(r: coords[0], c: coords[1], state: .Covered)
+                }
                 counterView.increment()
             }
-            else if tile!.state == .Covered || tile!.state == .Question {
+            else if tile!.state == .Covered {
                 board.setAt(r: coords[0], c: coords[1], state: .Flagged)
                 counterView.decrement()
+            }
+            else if tile!.state == .Question {
+                board.setAt(r: coords[0], c: coords[1], state: .Covered)
             }
         }
     }
@@ -79,7 +100,43 @@ extension GameScene {
     override func rightMouseUp(with event: NSEvent) {}
     
     override func mouseDragged(with event: NSEvent) {
+        let clickedNode = self.nodes(at: event.location(in: scene!))
         
+        if clickedNode.count != 0, let name = clickedNode[0].name {
+            if name == "Main Button" { return }
+            if gameOver { return }
+            
+            if currentTile == clickedNode[0].name {
+                let coords = Util.convertLocation(name: name)
+                let tile = board.tileAt(r: coords[0], c: coords[1])
+                
+                if tile?.state != .Uncovered {
+                    tile?.pressed()
+                }
+            } else {
+                let coords = Util.convertLocation(name: currentTile!)
+                let tile = board.tileAt(r: coords[0], c: coords[1])
+                
+                tile?.setState(state: .Covered)
+                currentTile = clickedNode[0].name
+            }
+            
+        }
+
+
+    }
+    
+    
+    
+    override func mouseExited(with event: NSEvent) {
+        let clickedNode = self.nodes(at: event.location(in: scene!))
+        if let name = clickedNode[0].name {
+            let coords = Util.convertLocation(name: name)
+            let tile = board.tileAt(r: coords[0], c: coords[1])
+            if tile?.state != .Uncovered {
+                tile?.raised()
+            }
+        }
     }
     
 }

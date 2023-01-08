@@ -20,9 +20,6 @@ class WindowController: NSWindowController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateController(withIdentifier: "Stats") as! StatsWindowController
         controller.showWindow(self)
-        let vc = controller.contentViewController as! StatsViewController
-        let mainVC = self.contentViewController as! ViewController
-        mainVC.statsVC = vc
     }
     
     @objc func changeTheme(sender: NSMenuItem) {
@@ -74,7 +71,7 @@ extension WindowController: NSToolbarDelegate {
             let font = NSFont.systemFont(ofSize: 11, weight: .semibold)
             titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
             
-            for item in Util.defaultThemes {
+            for item in Util.themes {
                 let menuItem = themesMenu.addItem(withTitle: item.name, action: nil, keyEquivalent: "")
                 menuItem.action = #selector(changeTheme(sender:))
             }
@@ -85,6 +82,7 @@ extension WindowController: NSToolbarDelegate {
         }
         if itemIdentifier == NSToolbarItem.Identifier.toolbarStatsItem {
             let item = NSToolbarItem(itemIdentifier: itemIdentifier)
+            item.label = "Stats"
             item.toolTip = "Stats"
             item.isBordered = true
             item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)
@@ -92,13 +90,6 @@ extension WindowController: NSToolbarDelegate {
             return item
         }
         return nil
-    }
-    
-    func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier]
-    {
-        // Return the identifiers you'd like to show as "selected" when clicked.
-        // Similar to how they look in typical Preferences windows.
-        return []
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {

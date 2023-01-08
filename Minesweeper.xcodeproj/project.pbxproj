@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B34CCBB2869FE3800B76AE6 /* Theme.swift */; };
 		3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberView.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
@@ -16,14 +17,27 @@
 		3B5AB55327F970D30059BB0A /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55227F970D30059BB0A /* Board.swift */; };
 		3B5AB55527F974AE0059BB0A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55427F974AE0059BB0A /* Tile.swift */; };
 		3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */; };
-		3B5AB55D27F978E40059BB0A /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55C27F978E40059BB0A /* Resources.swift */; };
 		3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* TimerView.swift */; };
 		3B88CEA628023695008C84E2 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* CounterView.swift */; };
 		3B98639728448DF10017FAA0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B98639628448DF10017FAA0 /* Util.swift */; };
+		3B9DF10928971939007CADA6 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3B9DF10828971939007CADA6 /* Sparkle */; };
+		3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */; };
+		3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF110289CAD00007CADA6 /* Stats.swift */; };
+		3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */; };
+		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
+		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
+		3B9DF11A289DF588007CADA6 /* StatsLabelCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF119289DF588007CADA6 /* StatsLabelCellView.swift */; };
+		3B9DF11C289DF598007CADA6 /* StatsValueCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF11B289DF598007CADA6 /* StatsValueCellView.swift */; };
 		3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7632856F7CB00566000 /* GameScene+Input.swift */; };
+		3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A789285ED78F00566000 /* GeneralViewController.swift */; };
+		3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */; };
+		3BF1A791285ED7CF00566000 /* BindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A790285ED7CF00566000 /* BindingsViewController.swift */; };
+		3BF1A795286037CA00566000 /* ThemeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A794286037CA00566000 /* ThemeScene.swift */; };
+		3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7CD2866AAD600566000 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B34CCBB2869FE3800B76AE6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3B4830592842C76F0060FCFD /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,11 +49,23 @@
 		3B5AB55227F970D30059BB0A /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		3B5AB55427F974AE0059BB0A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSheet.swift; sourceTree = "<group>"; };
-		3B5AB55C27F978E40059BB0A /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		3B88CEA32800EEA8008C84E2 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		3B88CEA528023695008C84E2 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		3B98639628448DF10017FAA0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameViewController.swift; sourceTree = "<group>"; };
+		3B9DF110289CAD00007CADA6 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryViewController.swift; sourceTree = "<group>"; };
+		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
+		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		3B9DF119289DF588007CADA6 /* StatsLabelCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsLabelCellView.swift; sourceTree = "<group>"; };
+		3B9DF11B289DF598007CADA6 /* StatsValueCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsValueCellView.swift; sourceTree = "<group>"; };
+		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BF1A7632856F7CB00566000 /* GameScene+Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Input.swift"; sourceTree = "<group>"; };
+		3BF1A789285ED78F00566000 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
+		3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		3BF1A790285ED7CF00566000 /* BindingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingsViewController.swift; sourceTree = "<group>"; };
+		3BF1A794286037CA00566000 /* ThemeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeScene.swift; sourceTree = "<group>"; };
+		3BF1A7CD2866AAD600566000 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,15 +73,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B9DF10928971939007CADA6 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B1BDB04286BBDD000A36569 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				3B9DF110289CAD00007CADA6 /* Stats.swift */,
+				3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */,
+				3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */,
+				3B9DF119289DF588007CADA6 /* StatsLabelCellView.swift */,
+				3B9DF11B289DF598007CADA6 /* StatsValueCellView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		3B5AB52F27F96F710059BB0A = {
 			isa = PBXGroup;
 			children = (
+				3BB6CA15290DE6F2009F339D /* README.md */,
 				3B5AB53A27F96F710059BB0A /* Minesweeper */,
 				3B5AB53927F96F710059BB0A /* Products */,
 			);
@@ -73,22 +113,46 @@
 			isa = PBXGroup;
 			children = (
 				3B5AB53B27F96F710059BB0A /* AppDelegate.swift */,
+				3BF1A7CD2866AAD600566000 /* WindowController.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
+				3B5AB55227F970D30059BB0A /* Board.swift */,
 				3B5AB54127F96F710059BB0A /* GameScene.swift */,
 				3BF1A7632856F7CB00566000 /* GameScene+Input.swift */,
-				3B4830592842C76F0060FCFD /* NumberView.swift */,
-				3B88CEA32800EEA8008C84E2 /* TimerView.swift */,
-				3B88CEA528023695008C84E2 /* CounterView.swift */,
-				3B5AB55227F970D30059BB0A /* Board.swift */,
 				3B5AB55427F974AE0059BB0A /* Tile.swift */,
+				3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */,
+				3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */,
+				3B34CCBB2869FE3800B76AE6 /* Theme.swift */,
 				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
-				3B5AB55C27F978E40059BB0A /* Resources.swift */,
+				3B9DF114289DBBE1007CADA6 /* Number Views */,
+				3B1BDB04286BBDD000A36569 /* Stats */,
+				3BF1A78B285ED79900566000 /* Settings */,
 				3B98639628448DF10017FAA0 /* Util.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
 				3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */,
 			);
 			path = Minesweeper;
+			sourceTree = "<group>";
+		};
+		3B9DF114289DBBE1007CADA6 /* Number Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B4830592842C76F0060FCFD /* NumberView.swift */,
+				3B88CEA528023695008C84E2 /* CounterView.swift */,
+				3B88CEA32800EEA8008C84E2 /* TimerView.swift */,
+			);
+			path = "Number Views";
+			sourceTree = "<group>";
+		};
+		3BF1A78B285ED79900566000 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3BF1A789285ED78F00566000 /* GeneralViewController.swift */,
+				3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */,
+				3BF1A794286037CA00566000 /* ThemeScene.swift */,
+				3BF1A790285ED7CF00566000 /* BindingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +171,9 @@
 			dependencies = (
 			);
 			name = Minesweeper;
+			packageProductDependencies = (
+				3B9DF10828971939007CADA6 /* Sparkle */,
+			);
 			productName = Minesweeper;
 			productReference = 3B5AB53827F96F710059BB0A /* Minesweeper.app */;
 			productType = "com.apple.product-type.application";
@@ -119,7 +186,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					3B5AB53727F96F710059BB0A = {
 						CreatedOnToolsVersion = 13.3;
@@ -135,6 +202,9 @@
 				Base,
 			);
 			mainGroup = 3B5AB52F27F96F710059BB0A;
+			packageReferences = (
+				3B9DF10728971939007CADA6 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			productRefGroup = 3B5AB53927F96F710059BB0A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,12 +236,24 @@
 				3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */,
 				3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */,
 				3B5AB55527F974AE0059BB0A /* Tile.swift in Sources */,
-				3B5AB55D27F978E40059BB0A /* Resources.swift in Sources */,
+				3BF1A791285ED7CF00566000 /* BindingsViewController.swift in Sources */,
+				3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */,
+				3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */,
+				3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */,
+				3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */,
+				3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */,
+				3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */,
 				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
+				3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */,
+				3B9DF11C289DF598007CADA6 /* StatsValueCellView.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
+				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,
+				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
 				3B98639728448DF10017FAA0 /* Util.swift in Sources */,
+				3B9DF11A289DF588007CADA6 /* StatsLabelCellView.swift in Sources */,
 				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,
 				3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */,
+				3BF1A795286037CA00566000 /* ThemeScene.swift in Sources */,
 				3B88CEA628023695008C84E2 /* CounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,12 +392,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Minesweeper/Minesweeper.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AUBXDCV2VL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Minesweeper/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -324,9 +408,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -339,12 +424,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Minesweeper/Minesweeper.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AUBXDCV2VL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Minesweeper/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -353,7 +440,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -383,6 +470,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3B9DF10728971939007CADA6 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				branch = 2.x;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3B9DF10828971939007CADA6 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B9DF10728971939007CADA6 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3B5AB53027F96F710059BB0A /* Project object */;
 }

@@ -22,7 +22,8 @@ class ViewController: NSViewController {
             let cols = Util.difficulties[difficulty]![1]
             let mines = Util.difficulties[difficulty]![2]
             
-            self.view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
+            //consider changing fullSizeContentView in the future
+            view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
             let scene = GameScene(size: self.skView.frame.size, theme: Util.currentTheme, rows: rows, cols: cols, mines: mines)
             view.presentScene(scene)
             

@@ -193,7 +193,7 @@
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" identifier="Main" title="Minesweeper" separatorStyle="shadow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="compact" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="371" y="392" width="304" height="390"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -221,12 +221,27 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController storyboardIdentifier="Main" id="XfG-lQ-9wD" customClass="ViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl" customClass="SKView">
+                    <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1008" height="646"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <containerView id="hgU-MH-CSB" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="1008" height="608"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <segue destination="ViI-BI-6qN" kind="embed" id="n3i-Sq-VJi"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hgU-MH-CSB" secondAttribute="trailing" id="9G7-I7-cXq"/>
+                            <constraint firstItem="hgU-MH-CSB" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="A6D-IZ-mkl"/>
+                            <constraint firstAttribute="bottom" secondItem="hgU-MH-CSB" secondAttribute="bottom" id="X4H-0v-QDm"/>
+                            <constraint firstItem="hgU-MH-CSB" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="ao1-pn-0Ar"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="skView" destination="m2S-Jp-Qdl" id="qux-te-cT3"/>
+                        <outlet property="skView" destination="hgU-MH-CSB" id="cv1-rf-AsX"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1131,7 +1146,7 @@ DQ
         <scene sceneID="fw6-R5-e6c">
             <objects>
                 <viewController id="D4j-9O-HrE" customClass="StatsViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="x0w-Ik-KVp">
+                    <view key="view" id="x0w-Ik-KVp">
                         <rect key="frame" x="0.0" y="0.0" width="20" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -1281,6 +1296,19 @@ DQ
                 <customObject id="asj-ZM-Oge" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1240" y="-96"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QxA-fv-m0u">
+            <objects>
+                <viewController id="ViI-BI-6qN" sceneMemberID="viewController">
+                    <view key="view" id="St6-nl-ThK">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="59q-9c-Ben" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="87" y="1356"/>
         </scene>
     </scenes>
     <resources>

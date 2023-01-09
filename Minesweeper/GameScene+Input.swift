@@ -26,7 +26,6 @@ extension GameScene {
                 if tile.state != .Uncovered {
                     tile.pressed()
                 }
-                
             }
         }
     }
@@ -55,7 +54,6 @@ extension GameScene {
                 if tile.state == .Flagged {
                     counterView.increment()
                 }
-                
                 if board.revealAt(r: coords[0], c: coords[1]) {
                     finishGame(won: false)
                 }
@@ -117,16 +115,13 @@ extension GameScene {
                 let coords = Util.convertLocation(name: currentTile!)
                 let tile = board.tileAt(r: coords[0], c: coords[1])
                 
-                tile?.setState(state: .Covered)
+                if tile?.state != .Uncovered {
+                    tile?.setState(state: .Covered)
+                }
                 currentTile = clickedNode[0].name
             }
-            
         }
-
-
     }
-    
-    
     
     override func mouseExited(with event: NSEvent) {
         let clickedNode = self.nodes(at: event.location(in: scene!))
@@ -138,5 +133,4 @@ extension GameScene {
             }
         }
     }
-    
 }

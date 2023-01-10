@@ -115,9 +115,7 @@ extension GameScene {
                 let coords = Util.convertLocation(name: currentTile!)
                 let tile = board.tileAt(r: coords[0], c: coords[1])
                 
-                if tile?.state != .Uncovered {
-                    tile?.setState(state: .Covered)
-                }
+                tile?.setState(state: tile!.state)
                 currentTile = clickedNode[0].name
             }
         }

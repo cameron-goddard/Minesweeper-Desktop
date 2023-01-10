@@ -16,7 +16,7 @@ class ThemesViewController: NSViewController {
     @IBOutlet weak var themePreview: SKView!
     @IBOutlet weak var themeName: NSTextField!
     @IBOutlet weak var themeDesc: NSTextField!
-    @IBOutlet weak var themeFavorite: NSButton!
+    //@IBOutlet weak var themeFavorite: NSButton!
     @IBOutlet weak var themeDefault: NSTextField!
     @IBOutlet weak var themeStyle: NSTextField!
     @IBOutlet weak var themeMode: NSTextField!
@@ -54,16 +54,16 @@ class ThemesViewController: NSViewController {
         
     }
     
-    @IBAction func favoriteButtonPressed(_ sender: NSButton) {
-        let unpressedConfig = NSImage.SymbolConfiguration(paletteColors: [.controlAccentColor, .tertiaryLabelColor, .quaternaryLabelColor])
-        let pressedConfig = NSImage.SymbolConfiguration(paletteColors: [.white, .tertiaryLabelColor, .controlAccentColor])
-        
-        if sender.state == .on {
-            sender.image = sender.image!.withSymbolConfiguration(pressedConfig)
-        } else {
-            sender.image = sender.image!.withSymbolConfiguration(unpressedConfig)
-        }
-    }
+//    @IBAction func favoriteButtonPressed(_ sender: NSButton) {
+//        let unpressedConfig = NSImage.SymbolConfiguration(paletteColors: [.controlAccentColor, .tertiaryLabelColor, .quaternaryLabelColor])
+//        let pressedConfig = NSImage.SymbolConfiguration(paletteColors: [.white, .tertiaryLabelColor, .controlAccentColor])
+//
+//        if sender.state == .on {
+//            sender.image = sender.image!.withSymbolConfiguration(pressedConfig)
+//        } else {
+//            sender.image = sender.image!.withSymbolConfiguration(unpressedConfig)
+//        }
+//    }
     
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 {

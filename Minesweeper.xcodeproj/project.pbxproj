@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B34CCBB2869FE3800B76AE6 /* Theme.swift */; };
+		3B46A3F3296D2FF300C26502 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F2296D2FF300C26502 /* AboutViewController.swift */; };
 		3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberView.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		3B34CCBB2869FE3800B76AE6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		3B46A3F2296D2FF300C26502 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3B4830592842C76F0060FCFD /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				3B9DF114289DBBE1007CADA6 /* Number Views */,
 				3B1BDB04286BBDD000A36569 /* Stats */,
 				3BF1A78B285ED79900566000 /* Settings */,
+				3B46A3F2296D2FF300C26502 /* AboutViewController.swift */,
 				3B98639628448DF10017FAA0 /* Util.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
@@ -249,6 +252,7 @@
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
 				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,
 				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
+				3B46A3F3296D2FF300C26502 /* AboutViewController.swift in Sources */,
 				3B98639728448DF10017FAA0 /* Util.swift in Sources */,
 				3B9DF11A289DF588007CADA6 /* StatsLabelCellView.swift in Sources */,
 				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,

@@ -119,8 +119,6 @@ class Util {
             UserDefaults.standard.set((sender as! NSButton).state.rawValue, forKey: forKey.rawValue)
         }
     }
-    
-    
 }
 
 enum UserDefaultsKey: String {

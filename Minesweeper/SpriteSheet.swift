@@ -9,9 +9,8 @@ import Foundation
 import SpriteKit
 
 struct SpriteSheet {
-    let atlas: SKTexture
-    let row: Int
-    let columns: Int
+    let atlas : SKTexture
+    let row, columns : Int
     let rowHeights = [0:26, 1:23, 2:23, 3:16]
     let rowWidths = [0:26, 1:13, 2:13, 3:16]
     

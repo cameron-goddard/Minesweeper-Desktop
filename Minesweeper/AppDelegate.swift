@@ -15,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var checkForUpdatesItem: NSMenuItem!
     let updaterController: SPUStandardUpdaterController
     let controller: ViewController = ViewController()
-    @IBOutlet weak var hardItem: NSMenuItem!
     
     override init() {
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
@@ -25,7 +24,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         checkForUpdatesItem.target = updaterController
         checkForUpdatesItem.action = #selector(SPUStandardUpdaterController.checkForUpdates(_:))
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCustomGame(notification:)), name: Notification.Name("NewCustomGame"), object: nil)
-        hardItem.action = #selector(ViewController.newGame(_:))
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

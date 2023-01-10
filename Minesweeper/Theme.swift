@@ -14,12 +14,12 @@ import SpriteKit
     let name: String
     let desc: String
     
-    let mainButton: MainButton
-    let flagNumbers: Numbers
-    let numbers: Numbers
-    let tiles: Tiles
-    let borders: Borders
-    let backgroundColor: NSColor
+    let mainButton : MainButton
+    let flagNumbers : Numbers
+    let numbers : Numbers
+    let tiles : Tiles
+    let borders : Borders
+    let backgroundColor : NSColor
     
     var isDefault = true
     let style : String

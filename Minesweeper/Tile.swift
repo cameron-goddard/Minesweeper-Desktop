@@ -34,10 +34,10 @@ class Tile {
     
     let node = SKSpriteNode()
     
-    var r: Int
-    var c: Int
-    var state: State
-    var value: Value
+    var r : Int
+    var c : Int
+    var state : State
+    var value : Value
     
     init(r: Int, c: Int, state: State, val: Value = .Empty) {
         self.r = r

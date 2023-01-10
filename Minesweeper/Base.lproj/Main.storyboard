@@ -86,7 +86,11 @@
                                                 <action selector="newGame:" target="Voe-Tx-rLC" id="jy0-nR-D9S"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Hard" tag="3" keyEquivalent="3" id="JSU-0s-34M"/>
+                                        <menuItem title="Hard" tag="3" keyEquivalent="3" id="JSU-0s-34M">
+                                            <connections>
+                                                <action selector="newGame:" target="Voe-Tx-rLC" id="gtG-C1-8rP"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Custom..." keyEquivalent="4" id="U5c-xf-mhO" userLabel="Custom...">
                                             <connections>
                                                 <action selector="customGame:" target="Voe-Tx-rLC" id="Soy-yX-0r0"/>
@@ -179,7 +183,6 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Minesweeper" customModuleProvider="target">
                     <connections>
                         <outlet property="checkForUpdatesItem" destination="C1Y-N6-n45" id="min-pP-chu"/>
-                        <outlet property="hardItem" destination="JSU-0s-34M" id="vuH-9f-Fyt"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -295,7 +298,7 @@
                 </windowController>
                 <customObject id="XFy-UQ-qH6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="548" y="694"/>
+            <point key="canvasLocation" x="805" y="696"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ee6-b0-oSU">

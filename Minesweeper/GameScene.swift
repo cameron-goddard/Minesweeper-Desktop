@@ -175,25 +175,26 @@ class GameScene: SKScene {
     }
     
     func setTextures() {
-        topLeftCorner.texture = theme.borders.cornerTopLeft
-        topRightCorner.texture = theme.borders.cornerTopRight
-        topBorder.texture = theme.borders.borderTop
-        mainButton.texture = theme.mainButton.happy
-        middleBorder.texture = theme.borders.borderMiddle
-        bottomBorder.texture = theme.borders.borderBottom
-        middleLeftCorner.texture = theme.borders.cornerMiddleLeft
-        middleRightCorner.texture = theme.borders.cornerMiddleRight
-        topLeftBorder.texture = theme.borders.borderTopLeft
-        topRightBorder.texture = theme.borders.borderTopRight
-        leftBorder.texture = theme.borders.borderLeft
-        rightBorder.texture = theme.borders.borderRight
-        bottomLeftCorner.texture = theme.borders.cornerBottomLeft
-        bottomRightCorner.texture = theme.borders.cornerBottomRight
+        topLeftCorner.texture = Util.currentTheme.borders.cornerTopLeft
+        topRightCorner.texture = Util.currentTheme.borders.cornerTopRight
+        topBorder.texture = Util.currentTheme.borders.borderTop
+        mainButton.texture = Util.currentTheme.mainButton.happy
+        middleBorder.texture = Util.currentTheme.borders.borderMiddle
+        bottomBorder.texture = Util.currentTheme.borders.borderBottom
+        middleLeftCorner.texture = Util.currentTheme.borders.cornerMiddleLeft
+        middleRightCorner.texture = Util.currentTheme.borders.cornerMiddleRight
+        topLeftBorder.texture = Util.currentTheme.borders.borderTopLeft
+        topRightBorder.texture = Util.currentTheme.borders.borderTopRight
+        leftBorder.texture = Util.currentTheme.borders.borderLeft
+        rightBorder.texture = Util.currentTheme.borders.borderRight
+        bottomLeftCorner.texture = Util.currentTheme.borders.cornerBottomLeft
+        bottomRightCorner.texture = Util.currentTheme.borders.cornerBottomRight
         
+        board.setTextures()
         timerView.setTextures()
         counterView.setTextures()
         
-        self.backgroundColor = theme.backgroundColor
+        self.backgroundColor = Util.currentTheme.backgroundColor
     }
     
     override func didMove(to view: SKView) {
@@ -219,11 +220,9 @@ class GameScene: SKScene {
         board.revealedTiles = 0
         gameOver = false
         gameStarted = false
-        board.reset() //change later to account for different sizes
+        board.reset()
         timerView.reset()
         counterView.reset(mines: self.mines)
-        theme = Util.currentTheme
-        setTextures()
     }
     
     override func update(_ currentTime: TimeInterval) {

@@ -78,6 +78,15 @@ class Board {
         setNumbers()
     }
     
+    func setTextures() {
+        for r in 0...rows-1 {
+            for c in 0...cols-1 {
+                let tile = tileAt(r: r, c: c)!
+                tile.setState(state: tile.state)
+            }
+        }
+    }
+    
     private func numberOfAdjacentMines(r: Int, c: Int) -> Int {
         var ret = 0
         for tile in getAdjacentTiles(r: r, c: c) {

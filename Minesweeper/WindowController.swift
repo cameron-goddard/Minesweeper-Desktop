@@ -11,6 +11,10 @@ class WindowController: NSWindowController {
     
     @IBOutlet weak var toolbar: NSToolbar!
     
+    var viewController : ViewController {
+        self.contentViewController as! ViewController
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         //initAccessoryView()
@@ -32,6 +36,7 @@ class WindowController: NSWindowController {
             }
         }
         sender.state = .on
+        (viewController.skView.scene as! GameScene).setTextures()
     }
 }
 

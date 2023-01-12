@@ -33,5 +33,10 @@ class CounterView: NumberView {
         self.set(value: mines)
     }
     
+    override func setTextures() {
+        super.setTextures()
+        self.set(value: mines)
+    }
+    
 }
 

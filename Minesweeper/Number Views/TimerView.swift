@@ -37,4 +37,11 @@ class TimerView: NumberView {
         }
         set(value: seconds)
     }
+    
+    override func setTextures() {
+        super.setTextures()
+        if !timer.isValid {
+            self.set(value: 0)
+        }
+    }
 }

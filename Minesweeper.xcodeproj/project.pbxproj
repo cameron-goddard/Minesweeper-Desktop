@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B34CCBB2869FE3800B76AE6 /* Theme.swift */; };
 		3B46A3F3296D2FF300C26502 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F2296D2FF300C26502 /* AboutViewController.swift */; };
+		3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F42970EE5C00C26502 /* AssetCellView.swift */; };
+		3B46A3F72970F44100C26502 /* AssetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F62970F44100C26502 /* AssetScene.swift */; };
 		3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberView.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		3B34CCBB2869FE3800B76AE6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3B46A3F2296D2FF300C26502 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		3B46A3F42970EE5C00C26502 /* AssetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCellView.swift; sourceTree = "<group>"; };
+		3B46A3F62970F44100C26502 /* AssetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetScene.swift; sourceTree = "<group>"; };
 		3B4830592842C76F0060FCFD /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 				3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */,
 				3BF1A794286037CA00566000 /* ThemeScene.swift */,
 				3BF1A790285ED7CF00566000 /* BindingsViewController.swift */,
+				3B46A3F42970EE5C00C26502 /* AssetCellView.swift */,
+				3B46A3F62970F44100C26502 /* AssetScene.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -257,7 +263,9 @@
 				3B9DF11A289DF588007CADA6 /* StatsLabelCellView.swift in Sources */,
 				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,
 				3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */,
+				3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */,
 				3BF1A795286037CA00566000 /* ThemeScene.swift in Sources */,
+				3B46A3F72970F44100C26502 /* AssetScene.swift in Sources */,
 				3B88CEA628023695008C84E2 /* CounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

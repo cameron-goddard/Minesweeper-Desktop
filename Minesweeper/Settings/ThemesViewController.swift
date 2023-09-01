@@ -11,8 +11,13 @@ import GameplayKit
 class ThemesViewController: NSViewController {
 
     
+    @IBOutlet weak var tabView: NSTabView!
+    
     @IBOutlet weak var tableView: NSTableView!
     var themes: [Theme] = Util.themes
+    
+    
+    
     @IBOutlet weak var themePreview: SKView!
     @IBOutlet weak var themeName: NSTextField!
     @IBOutlet weak var themeDesc: NSTextField!
@@ -51,7 +56,6 @@ class ThemesViewController: NSViewController {
         if theme.isDefault {
             addDeleteControl.setEnabled(false, forSegment: 1)
         }
-        
     }
     
 //    @IBAction func favoriteButtonPressed(_ sender: NSButton) {
@@ -72,30 +76,80 @@ class ThemesViewController: NSViewController {
             openPanel.beginSheetModal(for: self.view.window!, completionHandler: { num in
                 if num == .OK {
                     let path = openPanel.url
-                    print(path)
                 } else {
                     print("nothing chosen")
                 }
             })
         }
-        
     }
 }
 
 extension ThemesViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return themes.count
+        if tableView == self.tableView {
+            return themes.count
+        } else {
+            return 45
+        }
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let themeCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "themeCell"), owner: self) as? NSTableCellView else { return nil }
-        themeCell.textField?.stringValue = themes[row].name
-        return themeCell
+        if tableView == self.tableView {
+            guard let themeCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "themeCell"), owner: self) as? NSTableCellView else { return nil }
+            themeCell.textField?.stringValue = themes[row].name
+            return themeCell
+        } else {
+            guard let assetCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "assetCell"), owner: self) as? AssetCellView else { return nil }
+            //print(self.tableView.selectedRow)
+            let current = themes[self.tableView.selectedRow]
+            let tilesMirror = Mirror(reflecting: current.tiles)
+            let mainButtonMirror = Mirror(reflecting: current.mainButton)
+            let numbersMirror = Mirror(reflecting: current.numbers)
+            let bordersMirror = Mirror(reflecting: current.borders)
+            
+            
+            let mirrors = [tilesMirror, mainButtonMirror, bordersMirror]
+            
+            var assetLabels : [String] = []
+            var assetImages : [SKTexture] = []
+            
+            for m in mirrors {
+                assetLabels += m.children.map({ $0.label! })
+                assetImages += m.children.map({ $0.value as! SKTexture })
+            }
+            
+            
+            //let assetLabels = mirror.children.map({ $0.label! })
+            //let assetImages = mirror.children.map({ $0.value as! SKTexture })
+            //print(assetImages)
+            assetCell.assetName.stringValue = assetLabels[row]
+            assetCell.assetPreview.presentScene(AssetScene(asset: assetImages[row]))
+            
+            return assetCell
+        }
+    }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        if tableView == self.tableView {
+            return 20
+        } else {
+            return 36
+        }
     }
 }
 
 extension ThemesViewController: NSTableViewDelegate {
     func tableViewSelectionDidChange(_ notification: Notification) {
         showThemeInfo()
+    }
+}
+
+extension ThemesViewController: NSTabViewDelegate {
+    
+    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        if tabViewItem!.label == "Assets" {
+            assetsTableView.reloadData()
+        }
+        //print(tabViewItem!.label)
     }
 }

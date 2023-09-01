@@ -208,10 +208,10 @@ class GameScene: SKScene {
         gameStarted = false
         if won {
             board.flagMines()
-            mainButton.texture = theme.mainButton.cool
+            mainButton.texture = Util.currentTheme.mainButton.cool
         } else {
             board.lostGame()
-            mainButton.texture = theme.mainButton.dead
+            mainButton.texture = Util.currentTheme.mainButton.dead
         }
         timerView.stopTimer()
     }

@@ -89,7 +89,7 @@ extension ThemesViewController: NSTableViewDataSource {
         if tableView == self.tableView {
             return themes.count
         } else {
-            return 45
+            return 36
         }
     }
     

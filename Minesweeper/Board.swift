@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import Defaults
 
 class Board {
     let node: SKShapeNode
@@ -147,7 +148,7 @@ class Board {
             if tile.value == .Empty {
                 reveal(r: r, c: c)
             } else {
-                if revealedTiles == 0 && Util.userDefault(withKey: .SafeFirstClick) as! Bool && tile.value == .Mine {
+                if revealedTiles == 0 && Defaults[.safeFirstClick] && tile.value == .Mine {
                     
                     let allTiles = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
                     

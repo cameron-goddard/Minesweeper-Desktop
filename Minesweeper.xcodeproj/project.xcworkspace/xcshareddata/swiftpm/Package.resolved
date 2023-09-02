@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
+      "identity" : "defaults",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/Defaults",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bd14dae265091c5fb1ba1123a52861ae9f2ede84"
+      }
+    },
+    {
       "identity" : "sparkle",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle",
       "state" : {
         "branch" : "2.x",
-        "revision" : "4abbb2b4f17437c46be45cc9e012c002823b4697"
+        "revision" : "d005af3e03a0916f2111ac322159b99670be18f6"
       }
     }
   ],

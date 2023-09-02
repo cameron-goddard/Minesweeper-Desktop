@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import Defaults
 
 class WindowController: NSWindowController {
     
@@ -28,7 +29,7 @@ class WindowController: NSWindowController {
     
     @objc func changeTheme(sender: NSMenuItem) {
         Util.currentTheme = Util.theme(withName: sender.title)
-        Util.setUserDefault(forKey: .CurrentTheme, sender: sender.title)
+        Defaults[.theme] = sender.title
         
         for item in sender.menu!.items {
             if item.state == .on {
@@ -130,4 +131,8 @@ extension NSToolbarItem.Identifier {
     static let toolbarShareButtonItem = NSToolbarItem.Identifier(rawValue: "ToolbarShareButtonItem")
     static let toolbarThemesMenuItem = NSToolbarItem.Identifier(rawValue: "ToolbarThemesMenuItem")
     static let toolbarStatsItem = NSToolbarItem.Identifier(rawValue: "ToolbarStatsItem")
+}
+
+extension Defaults.Keys {
+    static let theme = Key<String>("theme", default: "Classic")
 }

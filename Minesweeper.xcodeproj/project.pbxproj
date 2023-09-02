@@ -29,6 +29,7 @@
 		3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */; };
 		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
+		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
 		3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7632856F7CB00566000 /* GameScene+Input.swift */; };
 		3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A789285ED78F00566000 /* GeneralViewController.swift */; };
 		3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */; };
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */,
 				3B9DF10928971939007CADA6 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +178,7 @@
 			name = Minesweeper;
 			packageProductDependencies = (
 				3B9DF10828971939007CADA6 /* Sparkle */,
+				3BB04F032AA3F01A00893F21 /* Defaults */,
 			);
 			productName = Minesweeper;
 			productReference = 3B5AB53827F96F710059BB0A /* Minesweeper.app */;
@@ -207,6 +210,7 @@
 			mainGroup = 3B5AB52F27F96F710059BB0A;
 			packageReferences = (
 				3B9DF10728971939007CADA6 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
 			productRefGroup = 3B5AB53927F96F710059BB0A /* Products */;
 			projectDirPath = "";
@@ -490,6 +494,14 @@
 				kind = branch;
 			};
 		};
+		3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -497,6 +509,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3B9DF10728971939007CADA6 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		3BB04F032AA3F01A00893F21 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

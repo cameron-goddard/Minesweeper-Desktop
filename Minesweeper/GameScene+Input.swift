@@ -7,6 +7,7 @@
 
 import SpriteKit
 import GameplayKit
+import Defaults
 
 extension GameScene {
     
@@ -77,8 +78,7 @@ extension GameScene {
             let tile = board.tileAt(r: coords[0], c: coords[1])
             
             if tile!.state == .Flagged {
-                print(Util.userDefault(withKey: .UseQuestions))
-                if Util.userDefault(withKey: .UseQuestions) as! Bool {
+                if Defaults[.questions] {
                     board.setAt(r: coords[0], c: coords[1], state: .Question)
                 } else {
                     board.setAt(r: coords[0], c: coords[1], state: .Covered)

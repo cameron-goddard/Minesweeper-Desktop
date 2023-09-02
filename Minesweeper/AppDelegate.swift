@@ -8,6 +8,7 @@
 
 import Cocoa
 import Sparkle
+import Defaults
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -39,7 +40,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let storyboard = NSStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
             controller.difficulty = sender.title
-            Util.setUserDefault(forKey: .CurrentDifficulty, sender: sender.title)
+            Defaults[.difficulty] = sender.title
+            //Util.setUserDefault(forKey: .CurrentDifficulty, sender: sender.title)
             if let window = NSApplication.shared.mainWindow {
                 window.contentViewController = controller
             }
@@ -58,7 +60,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
         controller.difficulty = "Custom"
-        Util.setUserDefault(forKey: .CurrentDifficulty, sender: "Custom")
+        Defaults[.difficulty] = "Custom"
+        
+        //Util.setUserDefault(forKey: .CurrentDifficulty, sender: "Custom")
         Util.difficulties["Custom"]![0] = (notification.object as! [Int])[0]
         Util.difficulties["Custom"]![1] = (notification.object as! [Int])[1]
         Util.difficulties["Custom"]![2] = (notification.object as! [Int])[2]
@@ -66,4 +70,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.contentViewController = controller
         }
     }
+}
+
+extension Defaults.Keys {
+    static let difficulty = Key<String>("difficulty", default: "Beginner")
+    static let customDifficulty = Key<Array<Int>>("customDifficulty", default: [-1, -1])
 }

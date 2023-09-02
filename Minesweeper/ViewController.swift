@@ -8,11 +8,12 @@
 import Cocoa
 import SpriteKit
 import GameplayKit
+import Defaults
 
 class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
-    var difficulty = Util.userDefault(withKey: .CurrentDifficulty) as! String
+    var difficulty = Defaults[.difficulty]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +23,10 @@ class ViewController: NSViewController {
             let cols = Util.difficulties[difficulty]![1]
             let mines = Util.difficulties[difficulty]![2]
             
-            //consider changing fullSizeContentView in the future
+            // Consider changing fullSizeContentView in the future
             view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
+            
+            // TODO: Add current theme to user defaults
             let scene = GameScene(size: self.skView.frame.size, theme: Util.currentTheme, rows: rows, cols: cols, mines: mines)
             view.presentScene(scene)
             
@@ -33,7 +36,7 @@ class ViewController: NSViewController {
     }
     
     override func viewDidAppear() {
-        if Util.userDefault(withKey: .ToolbarDifficulty) as! Bool {
+        if Defaults[.toolbarDifficulty] {
             view.window!.subtitle = difficulty
         }
     }

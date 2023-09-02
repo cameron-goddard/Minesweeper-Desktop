@@ -42,12 +42,12 @@ extension StatsViewController: NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableColumn == tableView.tableColumns[0] {
-            guard let statsLabelCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsLabelCell"), owner: self) as? StatsLabelCellView else { return nil }
-            statsLabelCell.statLabelField.stringValue = stats[row]
+            guard let statsLabelCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsLabelCell"), owner: self) as? NSTableCellView else { return nil }
+            statsLabelCell.textField!.stringValue = stats[row]
             return statsLabelCell
         } else {
-            guard let statsValueCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsValueCell"), owner: self) as? StatsValueCellView else { return nil }
-            statsValueCell.statValueField.integerValue = values[row]
+            guard let statsValueCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsValueCell"), owner: self) as? NSTableCellView else { return nil }
+            statsValueCell.textField!.integerValue = values[row]
             return statsValueCell
         }
     }

@@ -29,8 +29,6 @@
 		3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */; };
 		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
-		3B9DF11A289DF588007CADA6 /* StatsLabelCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF119289DF588007CADA6 /* StatsLabelCellView.swift */; };
-		3B9DF11C289DF598007CADA6 /* StatsValueCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF11B289DF598007CADA6 /* StatsValueCellView.swift */; };
 		3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7632856F7CB00566000 /* GameScene+Input.swift */; };
 		3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A789285ED78F00566000 /* GeneralViewController.swift */; };
 		3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */; };
@@ -63,8 +61,6 @@
 		3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryViewController.swift; sourceTree = "<group>"; };
 		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
 		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
-		3B9DF119289DF588007CADA6 /* StatsLabelCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsLabelCellView.swift; sourceTree = "<group>"; };
-		3B9DF11B289DF598007CADA6 /* StatsValueCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsValueCellView.swift; sourceTree = "<group>"; };
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BF1A7632856F7CB00566000 /* GameScene+Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Input.swift"; sourceTree = "<group>"; };
 		3BF1A789285ED78F00566000 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -92,8 +88,6 @@
 				3B9DF110289CAD00007CADA6 /* Stats.swift */,
 				3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */,
 				3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */,
-				3B9DF119289DF588007CADA6 /* StatsLabelCellView.swift */,
-				3B9DF11B289DF598007CADA6 /* StatsValueCellView.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -254,13 +248,11 @@
 				3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */,
 				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
 				3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */,
-				3B9DF11C289DF598007CADA6 /* StatsValueCellView.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
 				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,
 				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
 				3B46A3F3296D2FF300C26502 /* AboutViewController.swift in Sources */,
 				3B98639728448DF10017FAA0 /* Util.swift in Sources */,
-				3B9DF11A289DF588007CADA6 /* StatsLabelCellView.swift in Sources */,
 				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,
 				3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */,
 				3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */,

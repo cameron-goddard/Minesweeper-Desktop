@@ -12,6 +12,11 @@ class WindowController: NSWindowController {
     
     @IBOutlet weak var toolbar: NSToolbar!
     
+    private var statsController: StatsWindowController = {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateController(withIdentifier: "Stats") as! StatsWindowController
+    }()
+    
     var viewController : ViewController {
         self.contentViewController as! ViewController
     }
@@ -22,9 +27,16 @@ class WindowController: NSWindowController {
     }
     
     @objc func showStatsWindow() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateController(withIdentifier: "Stats") as! StatsWindowController
-        controller.showWindow(self)
+        if statsController.window!.isVisible {
+            statsController.window?.close()
+            statsController.dismissController(self)
+        } else {
+            statsController.showWindow(self)
+            let x = self.window!.frame.origin.x + self.window!.frame.width + 25
+            let y = self.window!.frame.origin.y + self.window!.frame.height
+            statsController.window!.setFrameTopLeftPoint(.init(x: x, y: y))
+        }
+        
     }
     
     @objc func changeTheme(sender: NSMenuItem) {

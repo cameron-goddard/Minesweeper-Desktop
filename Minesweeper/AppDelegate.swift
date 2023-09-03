@@ -36,15 +36,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func newGame(_ sender: NSMenuItem) {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+        
         if sender.title != "New Game" {
-            let storyboard = NSStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
             controller.difficulty = sender.title
             Defaults[.difficulty] = sender.title
-            //Util.setUserDefault(forKey: .CurrentDifficulty, sender: sender.title)
-            if let window = NSApplication.shared.mainWindow {
-                window.contentViewController = controller
-            }
+        } else {
+            controller.difficulty = Defaults[.difficulty]
+        }
+        
+        if let window = NSApplication.shared.mainWindow {
+            window.contentViewController = controller
         }
     }
     
@@ -62,7 +65,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller.difficulty = "Custom"
         Defaults[.difficulty] = "Custom"
         
-        //Util.setUserDefault(forKey: .CurrentDifficulty, sender: "Custom")
         Util.difficulties["Custom"]![0] = (notification.object as! [Int])[0]
         Util.difficulties["Custom"]![1] = (notification.object as! [Int])[1]
         Util.difficulties["Custom"]![2] = (notification.object as! [Int])[2]

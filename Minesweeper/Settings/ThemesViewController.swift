@@ -7,16 +7,14 @@
 
 import Cocoa
 import GameplayKit
+import Defaults
 
 class ThemesViewController: NSViewController {
 
-    
     @IBOutlet weak var tabView: NSTabView!
     
     @IBOutlet weak var tableView: NSTableView!
     var themes: [Theme] = Util.themes
-    
-    
     
     @IBOutlet weak var themePreview: SKView!
     @IBOutlet weak var themeName: NSTextField!
@@ -82,6 +80,10 @@ class ThemesViewController: NSViewController {
             })
         }
     }
+    
+    @IBAction func setThemeButtonPressed(_ sender: Any) {
+        Defaults[.theme] = themes[tableView.selectedRow].name
+    }
 }
 
 extension ThemesViewController: NSTableViewDataSource {
@@ -118,7 +120,6 @@ extension ThemesViewController: NSTableViewDataSource {
                 assetImages += m.children.map({ $0.value as! SKTexture })
             }
             
-            
             //let assetLabels = mirror.children.map({ $0.label! })
             //let assetImages = mirror.children.map({ $0.value as! SKTexture })
             //print(assetImages)
@@ -150,6 +151,5 @@ extension ThemesViewController: NSTabViewDelegate {
         if tabViewItem!.label == "Assets" {
             assetsTableView.reloadData()
         }
-        //print(tabViewItem!.label)
     }
 }

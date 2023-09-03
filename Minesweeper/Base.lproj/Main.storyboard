@@ -251,7 +251,7 @@
         <!--Window Controller-->
         <scene sceneID="veP-kG-IOg">
             <objects>
-                <windowController id="fmA-Dd-Pvy" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="fmA-Dd-Pvy" sceneMemberID="viewController">
                     <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="ok8-Ob-xlf">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
@@ -983,6 +983,9 @@ Gw
 DQ
 </string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="setThemeButtonPressed:" target="Ge2-3w-6y4" id="V2K-rY-yPw"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>
@@ -1006,7 +1009,7 @@ DQ
         <!--Window Controller-->
         <scene sceneID="HeU-gg-9Z5">
             <objects>
-                <windowController storyboardIdentifier="Stats" id="lvH-yg-yl7" customClass="StatsWindowController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Stats" showSeguePresentationStyle="single" id="lvH-yg-yl7" customClass="StatsWindowController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Game Stats" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="compact" id="Xse-Kk-Qm9" customClass="NSPanel">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>

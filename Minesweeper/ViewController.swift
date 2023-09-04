@@ -26,8 +26,8 @@ class ViewController: NSViewController {
             // Consider changing fullSizeContentView in the future
             view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
             
-            // TODO: Add current theme to user defaults
-            let scene = GameScene(size: self.skView.frame.size, theme: Util.currentTheme, rows: rows, cols: cols, mines: mines)
+            Util.currentTheme = Util.theme(withName: Defaults[.theme])
+            let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines)
             view.presentScene(scene)
             
             //view.showsFPS = true

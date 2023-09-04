@@ -49,7 +49,6 @@ class Util {
     
     static let defaultThemes = [normalClassicTheme, darkClassicTheme,classic95Theme, monoClassicTheme]
     static var themes = defaultThemes + [testTheme, blueClassicTheme]
-    //static var currentTheme = userDefault(withKey: .CurrentTheme)
     static var currentTheme = normalClassicTheme //todo
     //var currentTheme : Theme
     static var difficulties = ["Beginner": [8, 8, 10], "Intermediate": [16, 16, 40], "Hard": [16, 30, 99], "Custom": [8, 8, 1]]
@@ -90,6 +89,7 @@ class Util {
         }
     }
     
+    // make nonstatic
     static func theme(withName: String) -> Theme {
         for theme in themes {
             if theme.name == withName {

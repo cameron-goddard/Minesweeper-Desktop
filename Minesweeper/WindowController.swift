@@ -32,6 +32,7 @@ class WindowController: NSWindowController {
             statsController.dismissController(self)
         } else {
             statsController.showWindow(self)
+            // TODO: Handle edge cases for screen edge
             let x = self.window!.frame.origin.x + self.window!.frame.width + 25
             let y = self.window!.frame.origin.y + self.window!.frame.height
             statsController.window!.setFrameTopLeftPoint(.init(x: x, y: y))
@@ -90,10 +91,13 @@ extension WindowController: NSToolbarDelegate {
             titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
             
             for item in Util.themes {
+                // TODO: Create delegate for settings theme changes
                 let menuItem = themesMenu.addItem(withTitle: item.name, action: nil, keyEquivalent: "")
                 menuItem.action = #selector(changeTheme(sender:))
+                if Util.currentTheme == Util.theme(withName: item.name) {
+                    menuItem.state = .on
+                }
             }
-            themesMenu.items[1].state = .on
             item.menu = themesMenu
             
             return item

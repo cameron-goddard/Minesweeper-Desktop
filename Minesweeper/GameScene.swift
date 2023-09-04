@@ -10,7 +10,6 @@ import GameplayKit
 
 class GameScene: SKScene {
     var scale = Util.scale
-    var theme: Theme
     
     var board: Board!
     var mainButton: SKSpriteNode!
@@ -41,8 +40,7 @@ class GameScene: SKScene {
     
     var currentTile: String? = nil
     
-    init(size: CGSize, theme: Theme, rows: Int, cols: Int, mines: Int) {
-        self.theme = theme
+    init(size: CGSize, rows: Int, cols: Int, mines: Int) {
         self.rows = rows
         self.cols = cols
         self.mines = mines
@@ -57,35 +55,35 @@ class GameScene: SKScene {
     }
     
     func setNodes() {
-        topLeftCorner = SKSpriteNode(texture: theme.borders.cornerTopLeft)
+        topLeftCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerTopLeft)
         topLeftCorner.anchorPoint = CGPoint(x: 0, y: 1)
         topLeftCorner.setScale(scale)
         topLeftCorner.position = CGPoint(x: self.frame.minX, y: self.frame.maxY)
         topLeftCorner.zPosition = 2
         self.addChild(topLeftCorner)
 
-        topRightCorner = SKSpriteNode(texture: theme.borders.cornerTopRight)
+        topRightCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerTopRight)
         topRightCorner.anchorPoint = CGPoint(x: 1, y: 1)
         topRightCorner.setScale(scale)
         topRightCorner.position = CGPoint(x: self.frame.maxX, y: self.frame.maxY)
         topRightCorner.zPosition = 2
         self.addChild(topRightCorner)
 
-        topBorder = SKSpriteNode(texture: theme.borders.borderTop)
+        topBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderTop)
         topBorder.setScale(scale)
         topBorder.xScale = (self.frame.maxX - self.frame.minX)
         topBorder.anchorPoint = CGPoint(x: 0, y: 1)
         topBorder.position = CGPoint(x: CGFloat(self.frame.minX), y: self.frame.maxY)
         self.addChild(topBorder)
         
-        mainButton = SKSpriteNode(texture: theme.mainButton.happy)
+        mainButton = SKSpriteNode(texture: Util.currentTheme.mainButton.happy)
         mainButton.name = "Main Button"
         mainButton.setScale(scale)
         mainButton.position = CGPoint(x: 0, y: topBorder.position.y-topBorder.size.height-(scale*4))
         mainButton.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addChild(mainButton)
         
-        middleBorder = SKSpriteNode(texture: theme.borders.borderMiddle)
+        middleBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderMiddle)
         middleBorder.setScale(scale)
         middleBorder.xScale = (self.frame.maxX - self.frame.minX)
         middleBorder.anchorPoint = CGPoint(x: 0, y: 1)
@@ -93,21 +91,21 @@ class GameScene: SKScene {
         middleBorder.zPosition = 2
         self.addChild(middleBorder)
 
-        bottomBorder = SKSpriteNode(texture: theme.borders.borderBottom)
+        bottomBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderBottom)
         bottomBorder.setScale(scale)
         bottomBorder.xScale = (self.frame.maxX - self.frame.minX)
         bottomBorder.anchorPoint = CGPoint(x: 0, y: 0)
         bottomBorder.position = CGPoint(x: CGFloat(self.frame.minX), y: self.frame.minY)
         self.addChild(bottomBorder)
 
-        middleLeftCorner = SKSpriteNode(texture: theme.borders.cornerMiddleLeft)
+        middleLeftCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerMiddleLeft)
         middleLeftCorner.anchorPoint = CGPoint(x: 0, y: 1)
         middleLeftCorner.setScale(scale)
         middleLeftCorner.position = CGPoint(x: self.frame.minX, y: middleBorder.position.y)
         middleLeftCorner.zPosition = 3
         self.addChild(middleLeftCorner)
         
-        middleRightCorner = SKSpriteNode(texture: theme.borders.cornerMiddleRight)
+        middleRightCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerMiddleRight)
         middleRightCorner.anchorPoint = CGPoint(x: 1, y: 1)
         middleRightCorner.setScale(scale)
         middleRightCorner.position = CGPoint(x: self.frame.maxX, y: middleBorder.position.y)
@@ -122,28 +120,28 @@ class GameScene: SKScene {
         filler.zPosition = 4
         self.addChild(filler)
         
-        topLeftBorder = SKSpriteNode(texture: theme.borders.borderTopLeft)
+        topLeftBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderTopLeft)
         topLeftBorder.anchorPoint = CGPoint(x: 0, y: 1)
         topLeftBorder.setScale(scale)
         topLeftBorder.yScale = (self.frame.maxY - middleLeftCorner.position.y)
         topLeftBorder.position = CGPoint(x: self.frame.minX, y: self.frame.maxY)
         self.addChild(topLeftBorder)
 
-        topRightBorder = SKSpriteNode(texture: theme.borders.borderTopRight)
+        topRightBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderTopRight)
         topRightBorder.anchorPoint = CGPoint(x: 1, y: 1)
         topRightBorder.setScale(scale)
         topRightBorder.yScale = (self.frame.maxY - middleRightCorner.position.y)
         topRightBorder.position = CGPoint(x: self.frame.maxX, y: self.frame.maxY)
         self.addChild(topRightBorder)
         
-        leftBorder = SKSpriteNode(texture: theme.borders.borderLeft)
+        leftBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderLeft)
         leftBorder.anchorPoint = CGPoint(x: 0, y: 1)
         leftBorder.setScale(scale)
         leftBorder.yScale = (middleLeftCorner.position.y - self.frame.minY)
         leftBorder.position = CGPoint(x: self.frame.minX, y: self.frame.maxY - topLeftBorder.size.height)
         self.addChild(leftBorder)
 
-        rightBorder = SKSpriteNode(texture: theme.borders.borderRight)
+        rightBorder = SKSpriteNode(texture: Util.currentTheme.borders.borderRight)
         rightBorder.anchorPoint = CGPoint(x: 1, y: 1)
         rightBorder.setScale(scale)
         rightBorder.yScale = (middleRightCorner.position.y - self.frame.minY)
@@ -159,14 +157,14 @@ class GameScene: SKScene {
         //board.node.position = CGPoint(x: board.node.position.x, y: middleBorder.position.y-150)
         self.addChild(board.node)
         
-        bottomLeftCorner = SKSpriteNode(texture: theme.borders.cornerBottomLeft)
+        bottomLeftCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerBottomLeft)
         bottomLeftCorner.anchorPoint = CGPoint(x: 0, y: 0)
         bottomLeftCorner.setScale(scale)
         bottomLeftCorner.position = CGPoint(x: self.frame.minX, y: bottomBorder.position.y)
         bottomLeftCorner.zPosition = 2
         self.addChild(bottomLeftCorner)
 
-        bottomRightCorner = SKSpriteNode(texture: theme.borders.cornerBottomRight)
+        bottomRightCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerBottomRight)
         bottomRightCorner.anchorPoint = CGPoint(x: 1, y: 0)
         bottomRightCorner.setScale(scale)
         bottomRightCorner.position = CGPoint(x: self.frame.maxX, y: bottomBorder.position.y)

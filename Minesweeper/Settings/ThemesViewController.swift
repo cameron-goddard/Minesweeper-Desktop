@@ -82,6 +82,7 @@ class ThemesViewController: NSViewController {
     }
     
     @IBAction func setThemeButtonPressed(_ sender: Any) {
+        Util.currentTheme = themes[tableView.selectedRow]
         Defaults[.theme] = themes[tableView.selectedRow].name
     }
 }

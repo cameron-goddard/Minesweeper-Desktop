@@ -108,21 +108,21 @@ import SpriteKit
     }
     
     struct Borders {
-        let cornerTopLeft: SKTexture
-        let cornerTopRight: SKTexture
-        let cornerMiddleLeft: SKTexture
-        let cornerMiddleRight: SKTexture
-        let cornerBottomLeft: SKTexture
-        let cornerBottomRight: SKTexture
+        let cornerTopLeft,
+            cornerTopRight,
+            cornerMiddleLeft,
+            cornerMiddleRight,
+            cornerBottomLeft,
+            cornerBottomRight: SKTexture
         
-        let borderTopLeft: SKTexture
-        let borderTopRight: SKTexture
-        let borderLeft: SKTexture
-        let borderRight: SKTexture
+        let borderTopLeft,
+            borderTopRight,
+            borderLeft,
+            borderRight: SKTexture
         
-        let borderTop: SKTexture
-        let borderMiddle: SKTexture
-        let borderBottom: SKTexture
+        let borderTop,
+            borderMiddle,
+            borderBottom: SKTexture
         
         let numberBorderLeft, numberBorderRight, numberBorderBottom, numberBorderTop: SKTexture
         

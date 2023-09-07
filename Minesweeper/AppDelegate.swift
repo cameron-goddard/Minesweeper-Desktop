@@ -65,9 +65,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller.difficulty = "Custom"
         Defaults[.difficulty] = "Custom"
         
-        Util.difficulties["Custom"]![0] = (notification.object as! [Int])[0]
-        Util.difficulties["Custom"]![1] = (notification.object as! [Int])[1]
-        Util.difficulties["Custom"]![2] = (notification.object as! [Int])[2]
+        Defaults[.customDifficulty][0] = (notification.object as! [Int])[1]
+        Defaults[.customDifficulty][1] = (notification.object as! [Int])[0]
+        Defaults[.customDifficulty][2] = (notification.object as! [Int])[2]
+        
         if let window = NSApplication.shared.mainWindow {
             window.contentViewController = controller
         }
@@ -76,5 +77,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension Defaults.Keys {
     static let difficulty = Key<String>("difficulty", default: "Beginner")
-    static let customDifficulty = Key<Array<Int>>("customDifficulty", default: [-1, -1])
+    static let customDifficulty = Key<Array<Int>>("customDifficulty", default: [-1, -1, -1])
 }

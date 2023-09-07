@@ -19,9 +19,17 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         if let view = self.skView {
-            let rows = Util.difficulties[difficulty]![0]
-            let cols = Util.difficulties[difficulty]![1]
-            let mines = Util.difficulties[difficulty]![2]
+            let rows, cols, mines: Int
+            
+            if difficulty != "Custom" {
+                rows = Util.difficulties[difficulty]![0]
+                cols = Util.difficulties[difficulty]![1]
+                mines = Util.difficulties[difficulty]![2]
+            } else {
+                rows = Defaults[.customDifficulty][0]
+                cols = Defaults[.customDifficulty][1]
+                mines = Defaults[.customDifficulty][2]
+            }
             
             // Consider changing fullSizeContentView in the future
             view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))

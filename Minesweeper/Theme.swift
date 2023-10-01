@@ -21,12 +21,12 @@ import SpriteKit
     let borders : Borders
     let backgroundColor : NSColor
     
-    var isDefault = true
+    var isDefault : Bool
     let style : String
     let mode : String
     var isCurrent = false
     
-    init(name: String, desc: String = "User-generated theme", style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture, backgroundColor: NSColor) {
+    init(name: String, desc: String = "User-generated theme", isDefault: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture, backgroundColor: NSColor) {
         self.spriteSheetTexture = spriteSheetTexture
         
         mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 0, columns: 5))
@@ -36,6 +36,7 @@ import SpriteKit
         borders = Borders(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 0, columns: 4))
         self.name = name
         self.desc = desc
+        self.isDefault = isDefault
         self.style = style
         self.mode = mode
         self.backgroundColor = backgroundColor

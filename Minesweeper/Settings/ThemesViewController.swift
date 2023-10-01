@@ -53,6 +53,8 @@ class ThemesViewController: NSViewController {
         
         if theme.isDefault {
             addDeleteControl.setEnabled(false, forSegment: 1)
+        } else {
+            addDeleteControl.setEnabled(true, forSegment: 1)
         }
     }
     
@@ -68,19 +70,50 @@ class ThemesViewController: NSViewController {
 //    }
     
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
+        let fileManager = FileManager.default
+        
+        // TODO: Move directoryURL to Util
+        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let directoryURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
+        // Add
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
             
             openPanel.beginSheetModal(for: self.view.window!, completionHandler: { num in
                 if num == .OK {
                     let path = openPanel.url
+                    let file = NSData(contentsOf: path!)
+                    do {
+                        let documentURL = directoryURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
+                        print(documentURL)
+                        try file!.write(to: documentURL)
+                    } catch {
+                        print("could not write to file")
+                    }
                 } else {
                     print("nothing chosen")
                 }
             })
+        } else {
+            do {
+                let name = "\(themes[tableView.selectedRow].name).png"
+                let fileURL = directoryURL.appendingPathComponent(name)
+                try fileManager.removeItem(atPath: fileURL.path)
+                
+                let oldRow = tableView.selectedRow
+                print("removing \(themes.firstIndex(of: themes[tableView.selectedRow])!)")
+                themes.remove(at: themes.firstIndex(of: themes[tableView.selectedRow])!)
+                Util.themes.remove(at: Util.themes.firstIndex(of: themes[tableView.selectedRow])!)
+                tableView.reloadData()
+                // This shouldn't be an issue since there are non-removable default themes, but be wary of this
+                tableView.selectRowIndexes([oldRow - 1], byExtendingSelection: false)
+            } catch {
+                print("could not delete file")
+            }
         }
     }
     
+    // TODO: Create delegate for automatically updating theme
     @IBAction func setThemeButtonPressed(_ sender: Any) {
         Util.currentTheme = themes[tableView.selectedRow]
         Defaults[.theme] = themes[tableView.selectedRow].name

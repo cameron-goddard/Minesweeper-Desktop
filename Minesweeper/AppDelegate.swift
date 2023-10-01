@@ -9,6 +9,7 @@
 import Cocoa
 import Sparkle
 import Defaults
+import SpriteKit
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -24,7 +25,60 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         checkForUpdatesItem.target = updaterController
         checkForUpdatesItem.action = #selector(SPUStandardUpdaterController.checkForUpdates(_:))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.newCustomGame(notification:)), name: Notification.Name("NewCustomGame"), object: nil)
+        
+        let fileManager = FileManager.default
+        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let msSupportURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
+        var isDir = ObjCBool(true)
+        
+        if fileManager.fileExists(atPath: msSupportURL.path, isDirectory: &isDir) {
+            do {
+                let items = try fileManager.contentsOfDirectory(atPath: msSupportURL.path)
+                
+                for item in items {
+                    if item == ".DS_Store" { continue }
+                    if item == "Themes" {
+                        let absoluteThemesPath = msSupportURL.appendingPathComponent(item)
+                        let themes = try fileManager.contentsOfDirectory(atPath: absoluteThemesPath.path)
+                        for theme in themes {
+                            if theme == ".DS_Store" { continue }
+                                
+                            let absoluteThemePath = absoluteThemesPath.appendingPathComponent(theme)
+                            print(absoluteThemePath)
+                            let image = NSImage(contentsOf: absoluteThemePath)!
+                            let theme = Theme(
+                                name: Util.toTheme(name: absoluteThemePath.deletingPathExtension().lastPathComponent),
+                                spriteSheetTexture: SKTexture(image: image),
+                                backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+                            )
+                            Util.themes.append(theme)
+                            
+                        }
+                    }
+                    else if item == "Scores" {
+                        
+                    }
+                        
+
+                    
+                }
+            } catch {
+                
+            }
+            
+        } else {
+            do {
+                try fileManager.createDirectory(at: msSupportURL, withIntermediateDirectories: true, attributes: nil)
+                
+                try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Themes"), withIntermediateDirectories: true, attributes: nil)
+                
+                try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Scores"), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("could not create directory")
+            }
+        }
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

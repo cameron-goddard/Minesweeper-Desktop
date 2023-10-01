@@ -7,48 +7,52 @@
 
 import Foundation
 import SpriteKit
+import NaturalLanguage
 
 class Util {
     static let scale = CGFloat(1.5)
     
     //maybe offload these to separate files
-    static let monoClassicTheme = Theme(
-        name: "Classic Mono",
-        spriteSheetTexture: SKTexture(imageNamed: "monochrome_spritesheet"),
-        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
-    )
+//    static let monoClassicTheme = Theme(
+//        name: "Classic Mono",
+//        spriteSheetTexture: SKTexture(imageNamed: "monochrome_spritesheet"),
+//        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+//    )
     static let normalClassicTheme = Theme(
         name: "Classic",
         desc: "The original Minesweeper theme",
+        isDefault: true,
         spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet"),
         backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
     )
     static let classic95Theme = Theme(
         name: "Classic 95",
         desc: "The default theme from Windows 95",
+        isDefault: true,
         spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_95"),
         backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
     )
     static let darkClassicTheme = Theme(
         name: "Classic Dark",
+        isDefault: true,
         mode: "Dark",
         spriteSheetTexture: SKTexture(imageNamed: "default_dark_spritesheet"),
         backgroundColor: NSColor(red: 173, green: 173, blue: 173, alpha: 1)
     )
-    static let blueClassicTheme = Theme(
-        name: "Classic Blue",
-        desc: "The original Minesweeper theme",
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_blue"),
-        backgroundColor: NSColor(red: 256, green: 128, blue: 1, alpha: 0)
-    )
-    static let testTheme = Theme(
-        name: "Test",
-        spriteSheetTexture: SKTexture(imageNamed: "test_spritesheet"),
-        backgroundColor: NSColor(red: 173, green: 173, blue: 173, alpha: 1)
-    )
+//    static let blueClassicTheme = Theme(
+//        name: "Classic Blue",
+//        desc: "The original Minesweeper theme",
+//        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_blue"),
+//        backgroundColor: NSColor(red: 256, green: 128, blue: 1, alpha: 0)
+//    )
+//    static let testTheme = Theme(
+//        name: "Test",
+//        spriteSheetTexture: SKTexture(imageNamed: "test_spritesheet"),
+//        backgroundColor: NSColor(red: 173, green: 173, blue: 173, alpha: 1)
+//    )
     
-    static let defaultThemes = [normalClassicTheme, darkClassicTheme,classic95Theme, monoClassicTheme]
-    static var themes = defaultThemes + [testTheme, blueClassicTheme]
+    static let defaultThemes = [normalClassicTheme, darkClassicTheme,classic95Theme]
+    static var themes = defaultThemes
     static var currentTheme = normalClassicTheme //todo
     //var currentTheme : Theme
     static var difficulties = ["Beginner": [8, 8, 10], "Intermediate": [16, 16, 40], "Hard": [16, 30, 99], "Custom": [8, 8, 1]]
@@ -97,5 +101,31 @@ class Util {
             }
         }
         return themes[0]
+    }
+    
+    static func toTheme(name: String) -> String {
+        let spaced = name.components(separatedBy: "_").joined(separator: " ")
+        
+        let prepositions = [""]
+        
+        let tagger = NLTagger(tagSchemes: [.lexicalClass])
+        tagger.string = spaced
+        let options: NLTagger.Options = [.omitPunctuation, .omitWhitespace]
+        
+        var ret = [String]()
+        
+        tagger.enumerateTags(in: spaced.startIndex..<spaced.endIndex, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange in
+            if let tag {
+                if tag == .preposition {
+                    ret.append("\(spaced[tokenRange])")
+                } else {
+                    ret.append("\(spaced[tokenRange])".capitalized)
+                }
+            }
+            return true
+        }
+        
+        return ret.joined(separator: " ")
+        
     }
 }

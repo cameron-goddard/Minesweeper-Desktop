@@ -18,6 +18,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setSubtitle(notification:)), name: Notification.Name("SetSubtitle"), object: nil)
+        
         if let view = self.skView {
             let rows, cols, mines: Int
             
@@ -46,6 +48,14 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         if Defaults[.toolbarDifficulty] {
             view.window!.subtitle = difficulty
+        }
+    }
+    
+    @objc func setSubtitle(notification: Notification) {
+        if Defaults[.toolbarDifficulty] {
+            view.window!.subtitle = difficulty
+        } else {
+            view.window!.subtitle = ""
         }
     }
 }

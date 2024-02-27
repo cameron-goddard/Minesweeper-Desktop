@@ -49,6 +49,7 @@ class GeneralViewController: NSViewController {
     
     @IBAction func toolbarDifficultyCheckboxClicked(_ sender: NSButton) {
         Defaults[.toolbarDifficulty].toggle()
+        NotificationCenter.default.post(name: Notification.Name("SetSubtitle"), object: nil)
     }
     
     @IBAction func appearancePopUpChanged(_ sender: NSPopUpButton) {

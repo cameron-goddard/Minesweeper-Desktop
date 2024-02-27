@@ -29,6 +29,7 @@
 		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
 		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
+		3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3BD95C772B8D99AA00D9BC3B /* Credits.rtf */; };
 		3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7632856F7CB00566000 /* GameScene+Input.swift */; };
 		3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A789285ED78F00566000 /* GeneralViewController.swift */; };
 		3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */; };
@@ -61,6 +62,7 @@
 		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
 		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3BD95C772B8D99AA00D9BC3B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		3BF1A7632856F7CB00566000 /* GameScene+Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Input.swift"; sourceTree = "<group>"; };
 		3BF1A789285ED78F00566000 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				3B98639628448DF10017FAA0 /* Util.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
+				3BD95C772B8D99AA00D9BC3B /* Credits.rtf */,
 				3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */,
 			);
 			path = Minesweeper;
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B5AB54627F96F720059BB0A /* Assets.xcassets in Resources */,
+				3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */,
 				3B5AB54927F96F720059BB0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,7 +412,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Minesweeper/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2024 Cameron Goddard";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -416,7 +420,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -442,7 +446,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Minesweeper/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2024 Cameron Goddard";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -450,7 +454,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

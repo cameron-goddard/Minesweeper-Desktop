@@ -35,35 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if fileManager.fileExists(atPath: msSupportURL.path, isDirectory: &isDir) {
             do {
-                let items = try fileManager.contentsOfDirectory(atPath: msSupportURL.path)
-                
-                for item in items {
-                    if item == ".DS_Store" { continue }
-                    if item == "Themes" {
-                        let absoluteThemesPath = msSupportURL.appendingPathComponent(item)
-                        let themes = try fileManager.contentsOfDirectory(atPath: absoluteThemesPath.path)
-                        for theme in themes {
-                            if theme == ".DS_Store" { continue }
-                                
-                            let absoluteThemePath = absoluteThemesPath.appendingPathComponent(theme)
-                            print(absoluteThemePath)
-                            let image = NSImage(contentsOf: absoluteThemePath)!
-                            let theme = Theme(
-                                name: Util.toTheme(name: absoluteThemePath.deletingPathExtension().lastPathComponent),
-                                spriteSheetTexture: SKTexture(image: image),
-                                backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
-                            )
-                            Util.themes.append(theme)
-                            
-                        }
-                    }
-                    else if item == "Scores" {
-                        
-                    }
-                        
-
-                    
-                }
+                try Util.readThemes()
             } catch {
                 
             }

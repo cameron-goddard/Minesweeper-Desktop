@@ -25,8 +25,9 @@ import SpriteKit
     let style : String
     let mode : String
     var isCurrent = false
+    var isFavorite : Bool
     
-    init(name: String, desc: String = "User-generated theme", isDefault: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture, backgroundColor: NSColor) {
+    init(name: String, desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture, backgroundColor: NSColor) {
         self.spriteSheetTexture = spriteSheetTexture
         
         mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 0, columns: 5))
@@ -40,6 +41,7 @@ import SpriteKit
         self.style = style
         self.mode = mode
         self.backgroundColor = backgroundColor
+        self.isFavorite = isFavorite
     }
     
     struct Tiles {

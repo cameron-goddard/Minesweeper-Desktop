@@ -19,7 +19,6 @@ class ThemesViewController: NSViewController {
     @IBOutlet weak var themePreview: SKView!
     @IBOutlet weak var themeName: NSTextField!
     @IBOutlet weak var themeDesc: NSTextField!
-    //@IBOutlet weak var themeFavorite: NSButton!
     @IBOutlet weak var themeDefault: NSTextField!
     @IBOutlet weak var themeStyle: NSTextField!
     @IBOutlet weak var themeMode: NSTextField!
@@ -58,23 +57,13 @@ class ThemesViewController: NSViewController {
         }
     }
     
-//    @IBAction func favoriteButtonPressed(_ sender: NSButton) {
-//        let unpressedConfig = NSImage.SymbolConfiguration(paletteColors: [.controlAccentColor, .tertiaryLabelColor, .quaternaryLabelColor])
-//        let pressedConfig = NSImage.SymbolConfiguration(paletteColors: [.white, .tertiaryLabelColor, .controlAccentColor])
-//
-//        if sender.state == .on {
-//            sender.image = sender.image!.withSymbolConfiguration(pressedConfig)
-//        } else {
-//            sender.image = sender.image!.withSymbolConfiguration(unpressedConfig)
-//        }
-//    }
-    
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
         let fileManager = FileManager.default
         
         // TODO: Move directoryURL to Util
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let directoryURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
+        let themesURL = directoryURL.appendingPathComponent("Themes")
         // Add
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
@@ -84,9 +73,15 @@ class ThemesViewController: NSViewController {
                     let path = openPanel.url
                     let file = NSData(contentsOf: path!)
                     do {
-                        let documentURL = directoryURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
+                        let documentURL = themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
                         print(documentURL)
                         try file!.write(to: documentURL)
+                        try Util.readThemes()
+                        
+                        NotificationCenter.default.post(name: Notification.Name("AddTheme"), object: "test", userInfo: ["3BV": Int.random(in: 0...10)])
+                        self.themes = Util.themes
+                        self.tableView.reloadData()
+                        
                     } catch {
                         print("could not write to file")
                     }
@@ -97,13 +92,13 @@ class ThemesViewController: NSViewController {
         } else {
             do {
                 let name = "\(themes[tableView.selectedRow].name).png"
-                let fileURL = directoryURL.appendingPathComponent(name)
+                let fileURL = themesURL.appendingPathComponent(name)
                 try fileManager.removeItem(atPath: fileURL.path)
                 
                 let oldRow = tableView.selectedRow
-                print("removing \(themes.firstIndex(of: themes[tableView.selectedRow])!)")
-                themes.remove(at: themes.firstIndex(of: themes[tableView.selectedRow])!)
-                Util.themes.remove(at: Util.themes.firstIndex(of: themes[tableView.selectedRow])!)
+                Util.themes.remove(at: Util.themes.firstIndex(of: themes[oldRow])!)
+                themes.remove(at: themes.firstIndex(of: themes[oldRow])!)
+                
                 tableView.reloadData()
                 // This shouldn't be an issue since there are non-removable default themes, but be wary of this
                 tableView.selectRowIndexes([oldRow - 1], byExtendingSelection: false)
@@ -113,10 +108,11 @@ class ThemesViewController: NSViewController {
         }
     }
     
-    // TODO: Create delegate for automatically updating theme
     @IBAction func setThemeButtonPressed(_ sender: Any) {
         Util.currentTheme = themes[tableView.selectedRow]
         Defaults[.theme] = themes[tableView.selectedRow].name
+        
+        NotificationCenter.default.post(name: Notification.Name("SetTheme"), object: themes[tableView.selectedRow].name, userInfo: ["3BV": Int.random(in: 0...10)])
     }
 }
 
@@ -131,8 +127,13 @@ extension ThemesViewController: NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableView == self.tableView {
-            guard let themeCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "themeCell"), owner: self) as? NSTableCellView else { return nil }
-            themeCell.textField?.stringValue = themes[row].name
+            guard let themeCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "themeCell"), owner: self) as? ThemeCellView else { return nil }
+            themeCell.themeName.stringValue = themes[row].name
+            
+            if themes[row].isFavorite {
+                themeCell.setFavorite()
+            }
+            
             return themeCell
         } else {
             guard let assetCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "assetCell"), owner: self) as? AssetCellView else { return nil }

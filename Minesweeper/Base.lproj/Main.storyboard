@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -833,26 +833,40 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="themeCell" id="JHM-N0-cEf">
+                                                        <tableCellView identifier="themeCell" id="JHM-N0-cEf" customClass="ThemeCellView" customModule="Minesweeper" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="0.0" width="151" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QWB-TV-v6s">
-                                                                    <rect key="frame" x="0.0" y="4" width="151" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="135" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ztK-HJ-DM4">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94U-cV-87R">
+                                                                    <rect key="frame" x="134" y="3" width="16.5" height="23"/>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="star" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="xKy-cF-elq">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <color key="contentTintColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
+                                                                    <connections>
+                                                                        <action selector="favoriteButtonPressed:" target="JHM-N0-cEf" id="JgM-54-Qnc"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstItem="94U-cV-87R" firstAttribute="leading" secondItem="QWB-TV-v6s" secondAttribute="trailing" constant="1" id="BmA-VM-W91"/>
                                                                 <constraint firstItem="QWB-TV-v6s" firstAttribute="leading" secondItem="JHM-N0-cEf" secondAttribute="leading" constant="2" id="NI6-0d-TmE"/>
                                                                 <constraint firstItem="QWB-TV-v6s" firstAttribute="centerY" secondItem="JHM-N0-cEf" secondAttribute="centerY" id="biv-DI-hnP"/>
-                                                                <constraint firstItem="QWB-TV-v6s" firstAttribute="centerX" secondItem="JHM-N0-cEf" secondAttribute="centerX" id="mpE-Jb-ksZ"/>
+                                                                <constraint firstItem="QWB-TV-v6s" firstAttribute="centerX" secondItem="JHM-N0-cEf" secondAttribute="centerX" constant="-8" id="mpE-Jb-ksZ"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="QWB-TV-v6s" id="ITf-K2-PcU"/>
+                                                                <outlet property="themeFavorite" destination="94U-cV-87R" id="K9i-eg-lGo"/>
+                                                                <outlet property="themeName" destination="QWB-TV-v6s" id="X9M-zU-lFc"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -1078,6 +1092,15 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubb-fO-l50">
+                                <rect key="frame" x="163" y="272" width="69" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Difficulty" id="M7g-L7-BpO">
+                                    <font key="font" metaFont="systemSemibold" size="13"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -1123,5 +1146,6 @@ DQ
         <image name="minus" catalog="system" width="14" height="4"/>
         <image name="paintbrush" catalog="system" width="17" height="18"/>
         <image name="plus" catalog="system" width="14" height="13"/>
+        <image name="star" catalog="system" width="17" height="16"/>
     </resources>
 </document>

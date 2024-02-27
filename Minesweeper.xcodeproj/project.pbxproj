@@ -11,6 +11,7 @@
 		3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F42970EE5C00C26502 /* AssetCellView.swift */; };
 		3B46A3F72970F44100C26502 /* AssetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F62970F44100C26502 /* AssetScene.swift */; };
 		3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberView.swift */; };
+		3B48DBCD2AD2060D00E54243 /* ThemeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
 		3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54327F96F710059BB0A /* ViewController.swift */; };
@@ -42,6 +43,7 @@
 		3B46A3F42970EE5C00C26502 /* AssetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCellView.swift; sourceTree = "<group>"; };
 		3B46A3F62970F44100C26502 /* AssetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetScene.swift; sourceTree = "<group>"; };
 		3B4830592842C76F0060FCFD /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
+		3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCellView.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B5AB54127F96F710059BB0A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				3BF1A789285ED78F00566000 /* GeneralViewController.swift */,
 				3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */,
+				3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */,
 				3BF1A794286037CA00566000 /* ThemeScene.swift */,
 				3BF1A790285ED7CF00566000 /* BindingsViewController.swift */,
 				3B46A3F42970EE5C00C26502 /* AssetCellView.swift */,
@@ -248,6 +251,7 @@
 				3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */,
 				3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */,
 				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
+				3B48DBCD2AD2060D00E54243 /* ThemeCellView.swift in Sources */,
 				3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
 				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,

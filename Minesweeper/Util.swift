@@ -45,13 +45,6 @@ class Util {
     //var currentTheme : Theme
     static var difficulties = ["Beginner": [8, 8, 10], "Intermediate": [16, 16, 40], "Hard": [16, 30, 99], "Custom": [8, 8, 1]]
     
-    static func convertLocation(name: String) -> Array<Int> {
-        let coords = name.components(separatedBy: ",")
-        let r = Int(String(coords[0]))!
-        let c = Int(String(coords[1]))!
-        return [r, c]
-    }
-    
     static func textureLookup(value: Value) -> SKTexture {
         switch value {
         case .Mine:
@@ -101,7 +94,7 @@ class Util {
                     let image = NSImage(contentsOf: absoluteThemePath)!
                     let name = absoluteThemePath.deletingPathExtension().lastPathComponent
                     let isFavorite = Defaults[.favorites].contains(name)
-                    print("\(name): \(isFavorite)")
+                    
                     let theme = Theme(
                         name: Util.toTheme(name: name),
                         isFavorite: isFavorite,
@@ -112,6 +105,7 @@ class Util {
                 }
             }
         }
+        NotificationCenter.default.post(name: Notification.Name("UpdateThemeMenu"), object: nil)
     }
     
     // make nonstatic

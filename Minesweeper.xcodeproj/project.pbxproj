@@ -26,7 +26,6 @@
 		3B9DF10928971939007CADA6 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3B9DF10828971939007CADA6 /* Sparkle */; };
 		3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */; };
 		3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF110289CAD00007CADA6 /* Stats.swift */; };
-		3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */; };
 		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
 		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
@@ -59,7 +58,6 @@
 		3B98639628448DF10017FAA0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameViewController.swift; sourceTree = "<group>"; };
 		3B9DF110289CAD00007CADA6 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
-		3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryViewController.swift; sourceTree = "<group>"; };
 		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
 		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				3B5AB54127F96F710059BB0A /* GameScene.swift */,
 				3BF1A7632856F7CB00566000 /* GameScene+Input.swift */,
 				3B5AB55427F974AE0059BB0A /* Tile.swift */,
-				3B9DF112289CADE6007CADA6 /* AccessoryViewController.swift */,
 				3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */,
 				3B34CCBB2869FE3800B76AE6 /* Theme.swift */,
 				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
@@ -248,7 +245,6 @@
 				3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */,
 				3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */,
 				3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */,
-				3B9DF113289CADE6007CADA6 /* AccessoryViewController.swift in Sources */,
 				3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */,
 				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
 				3B48DBCD2AD2060D00E54243 /* ThemeCellView.swift in Sources */,

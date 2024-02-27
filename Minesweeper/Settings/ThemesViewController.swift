@@ -45,7 +45,7 @@ class ThemesViewController: NSViewController {
         
         themeName.stringValue = theme.name
         themeDesc.stringValue = theme.desc
-        //themeDefault.stringValue = theme.isDefault.
+        themeDefault.stringValue = theme.isDefault ? "Yes" : "No"
         themeStyle.stringValue = theme.style
         themeMode.stringValue = theme.mode
         themePreview.presentScene(ThemeScene(theme: theme))
@@ -78,7 +78,7 @@ class ThemesViewController: NSViewController {
                         try file!.write(to: documentURL)
                         try Util.readThemes()
                         
-                        NotificationCenter.default.post(name: Notification.Name("AddTheme"), object: "test", userInfo: ["3BV": Int.random(in: 0...10)])
+                        
                         self.themes = Util.themes
                         self.tableView.reloadData()
                         
@@ -112,7 +112,7 @@ class ThemesViewController: NSViewController {
         Util.currentTheme = themes[tableView.selectedRow]
         Defaults[.theme] = themes[tableView.selectedRow].name
         
-        NotificationCenter.default.post(name: Notification.Name("SetTheme"), object: themes[tableView.selectedRow].name, userInfo: ["3BV": Int.random(in: 0...10)])
+        NotificationCenter.default.post(name: Notification.Name("SetTheme"), object: themes[tableView.selectedRow].name)
     }
 }
 

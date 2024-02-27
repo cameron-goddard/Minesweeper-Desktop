@@ -12,7 +12,7 @@ class WindowController: NSWindowController {
     
     @IBOutlet weak var toolbar: NSToolbar!
     
-    // There is a bug in the way macOS handles adding to NSMenu, see addTheme
+    // There is a bug in the way macOS handles adding to NSMenu, see updateThemeMenu
     let themesItem: NSMenuToolbarItem = {
         let temp = NSMenuToolbarItem(itemIdentifier: .toolbarThemesMenuItem)
         temp.toolTip = "Themes"
@@ -33,7 +33,7 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.addTheme(notification:)), name: Notification.Name("AddTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateThemeMenu(notification:)), name: Notification.Name("UpdateThemeMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setTheme(notification:)), name: Notification.Name("SetTheme"), object: nil)
     }
     
@@ -64,12 +64,10 @@ class WindowController: NSWindowController {
         (viewController.skView.scene as! GameScene).setTextures()
     }
     
-    @objc func addTheme(notification: Notification) {
+    @objc func updateThemeMenu(notification: Notification) {
         // There is a bug in the way macOS handles menu updates. When it is fixed,
         // this method should be as simple as this:
         //themesMenu.items.append(NSMenuItem(title: Util.themes[Util.themes.count - 1].name, action: #selector(changeTheme(sender:)), keyEquivalent: ""))
-        
-        //TODO: Update so that only favorited themes are display in the menu
         let tempMenu = NSMenu()
         tempMenu.autoenablesItems = false
         
@@ -78,10 +76,12 @@ class WindowController: NSWindowController {
         let font = NSFont.systemFont(ofSize: 11, weight: .semibold)
         titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
         
-        for item in Util.themes {
-            let menuItem = tempMenu.addItem(withTitle: item.name, action: #selector(changeTheme(sender:)), keyEquivalent: "")
-            if Util.currentTheme == Util.theme(withName: item.name) {
-                menuItem.state = .on
+        for theme in Util.themes {
+            if Defaults[.favorites].contains(theme.name) {
+                let menuItem = tempMenu.addItem(withTitle: theme.name, action: #selector(changeTheme(sender:)), keyEquivalent: "")
+                if Util.currentTheme == Util.theme(withName: theme.name) {
+                    menuItem.state = .on
+                }
             }
         }
         themesItem.menu = tempMenu
@@ -114,10 +114,12 @@ extension WindowController: NSToolbarDelegate {
             let font = NSFont.systemFont(ofSize: 11, weight: .semibold)
             titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
             
-            for item in Util.themes {
-                let menuItem = themesMenu.addItem(withTitle: item.name, action: #selector(changeTheme(sender:)), keyEquivalent: "")
-                if Util.currentTheme == Util.theme(withName: item.name) {
-                    menuItem.state = .on
+            for theme in Util.themes {
+                if Defaults[.favorites].contains(theme.name) {
+                    let menuItem = themesMenu.addItem(withTitle: theme.name, action: #selector(changeTheme(sender:)), keyEquivalent: "")
+                    if Util.currentTheme == Util.theme(withName: theme.name) {
+                        menuItem.state = .on
+                    }
                 }
             }
             //themesMenu.addItem(.init(title: "Show All...", action: nil, keyEquivalent: ""))

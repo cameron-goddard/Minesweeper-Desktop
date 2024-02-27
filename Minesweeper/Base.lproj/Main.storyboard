@@ -669,7 +669,7 @@ Gw
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLd-mg-BZN">
-                                                    <rect key="frame" x="148" y="213" width="22" height="16"/>
+                                                    <rect key="frame" x="148" y="213" width="37" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="No" id="cWc-ia-VM7">
                                                         <font key="font" metaFont="systemSemibold" size="13"/>

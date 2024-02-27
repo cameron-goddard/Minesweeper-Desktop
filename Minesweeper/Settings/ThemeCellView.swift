@@ -59,7 +59,7 @@ class ThemeCellView: NSTableCellView {
             themeFavorite.image = .init(systemSymbolName: "star.fill", accessibilityDescription: nil)
             Defaults[.favorites].append(themeName.stringValue)
         }
-        print("defaults: \(Defaults[.favorites])")
+        NotificationCenter.default.post(name: Notification.Name("UpdateThemeMenu"), object: nil)
     }
     
     func setFavorite() {

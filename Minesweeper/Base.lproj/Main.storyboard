@@ -309,7 +309,7 @@
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2qP-qn-TrN">
                                 <rect key="frame" x="214" y="174" width="148" height="28"/>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="uoQ-XU-AQf"/>
+                                <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="uoQ-XU-AQf"/>
                             </slider>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5MQ-nV-FfO">
                                 <rect key="frame" x="131" y="235" width="76" height="16"/>
@@ -321,7 +321,7 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sPf-P2-7BR">
                                 <rect key="frame" x="213" y="256" width="162" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="System" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ntg-G4-Ecx" id="SZ4-bA-Xz0">
+                                <popUpButtonCell key="cell" type="push" title="System" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ntg-G4-Ecx" id="SZ4-bA-Xz0">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="feD-Ak-D8I">
@@ -357,7 +357,7 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ROl-s5-xB9">
                                 <rect key="frame" x="213" y="228" width="162" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Classic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Eax-mX-PU7" id="DMZ-4R-sZs">
+                                <popUpButtonCell key="cell" type="push" title="Classic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Eax-mX-PU7" id="DMZ-4R-sZs">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="umx-2a-gwq">
@@ -393,7 +393,7 @@
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8y4-8e-c5f">
                                 <rect key="frame" x="214" y="111" width="139" height="18"/>
-                                <buttonCell key="cell" type="check" title="Keep game history" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ZgO-1E-GME">
+                                <buttonCell key="cell" type="check" title="Keep game history" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="ZgO-1E-GME">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

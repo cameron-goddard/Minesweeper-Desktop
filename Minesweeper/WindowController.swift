@@ -14,11 +14,11 @@ class WindowController: NSWindowController {
     
     // There is a bug in the way macOS handles adding to NSMenu, see updateThemeMenu
     let themesItem: NSMenuToolbarItem = {
-        let temp = NSMenuToolbarItem(itemIdentifier: .toolbarThemesMenuItem)
-        temp.toolTip = "Themes"
-        temp.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)
-        temp.label = "Themes"
-        return temp
+        let item = NSMenuToolbarItem(itemIdentifier: .toolbarThemesMenuItem)
+        item.toolTip = "Themes"
+        item.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)
+        item.label = "Themes"
+        return item
     }()
     
     private var statsController: StatsWindowController = {
@@ -48,7 +48,6 @@ class WindowController: NSWindowController {
             let y = self.window!.frame.origin.y + self.window!.frame.height
             statsController.window!.setFrameTopLeftPoint(.init(x: x, y: y))
         }
-        
     }
     
     @objc func changeTheme(sender: NSMenuItem) {
@@ -98,14 +97,14 @@ class WindowController: NSWindowController {
 extension WindowController: NSToolbarDelegate {
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         
-        if itemIdentifier == NSToolbarItem.Identifier.toolbarShareButtonItem {
+        if itemIdentifier == .toolbarShareButtonItem {
             let item = NSSharingServicePickerToolbarItem(itemIdentifier: itemIdentifier)
             item.delegate = self
             item.menuFormRepresentation?.image = NSImage(systemSymbolName: "square.and.arrow.up", accessibilityDescription: nil)
             return item
         }
         
-        if itemIdentifier == NSToolbarItem.Identifier.toolbarThemesMenuItem {
+        if itemIdentifier == .toolbarThemesMenuItem {
             let themesMenu = NSMenu(title: "Themes")
             themesMenu.autoenablesItems = false
             
@@ -127,7 +126,7 @@ extension WindowController: NSToolbarDelegate {
             
             return themesItem
         }
-        if itemIdentifier == NSToolbarItem.Identifier.toolbarStatsItem {
+        if itemIdentifier == .toolbarStatsItem {
             let item = NSToolbarItem(itemIdentifier: itemIdentifier)
             item.label = "Stats"
             item.toolTip = "Stats"

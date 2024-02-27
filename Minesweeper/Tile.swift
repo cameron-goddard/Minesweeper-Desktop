@@ -61,7 +61,7 @@ class Tile {
         
         switch state {
         case .Uncovered:
-            self.node.texture = Util.textureLookup(value: self.value)
+            self.node.texture = textureLookup(value: self.value)
         case .Covered:
             self.node.texture = Util.currentTheme.tiles.covered
         case .Flagged:
@@ -85,6 +85,35 @@ class Tile {
     
     func raised() {
         self.setState(state: self.state)
+    }
+    
+    func textureLookup(value: Value) -> SKTexture {
+        switch value {
+        case .Mine:
+            return Util.currentTheme.tiles.mine
+        case .MineRed:
+            return Util.currentTheme.tiles.mineRed
+        case .MineWrong:
+            return Util.currentTheme.tiles.mineWrong
+        case .One:
+            return Util.currentTheme.tiles.one
+        case .Two:
+            return Util.currentTheme.tiles.two
+        case .Three:
+            return Util.currentTheme.tiles.three
+        case .Four:
+            return Util.currentTheme.tiles.four
+        case .Five:
+            return Util.currentTheme.tiles.five
+        case .Six:
+            return Util.currentTheme.tiles.six
+        case .Seven:
+            return Util.currentTheme.tiles.seven
+        case .Eight:
+            return Util.currentTheme.tiles.eight
+        default:
+            return Util.currentTheme.tiles.empty
+        }
     }
 }
 

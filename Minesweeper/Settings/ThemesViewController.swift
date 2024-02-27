@@ -64,7 +64,7 @@ class ThemesViewController: NSViewController {
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let directoryURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
         let themesURL = directoryURL.appendingPathComponent("Themes")
-        // Add
+        
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
             
@@ -74,10 +74,8 @@ class ThemesViewController: NSViewController {
                     let file = NSData(contentsOf: path!)
                     do {
                         let documentURL = themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
-                        print(documentURL)
                         try file!.write(to: documentURL)
                         try Util.readThemes()
-                        
                         
                         self.themes = Util.themes
                         self.tableView.reloadData()
@@ -91,12 +89,17 @@ class ThemesViewController: NSViewController {
             })
         } else {
             do {
-                let name = "\(themes[tableView.selectedRow].name).png"
+                let name = "\(themes[tableView.selectedRow].pathName).png"
                 let fileURL = themesURL.appendingPathComponent(name)
                 try fileManager.removeItem(atPath: fileURL.path)
                 
                 let oldRow = tableView.selectedRow
+                // TODO: Investigate this bug: Delete a favorited item, add any other back in
                 Util.themes.remove(at: Util.themes.firstIndex(of: themes[oldRow])!)
+                if let index = Defaults[.favorites].firstIndex(of: themes[oldRow].name) {
+                    Defaults[.favorites].remove(at: index)
+                }
+                NotificationCenter.default.post(name: Notification.Name("UpdateThemeMenu"), object: nil)
                 themes.remove(at: themes.firstIndex(of: themes[oldRow])!)
                 
                 tableView.reloadData()
@@ -141,7 +144,7 @@ extension ThemesViewController: NSTableViewDataSource {
             let current = themes[self.tableView.selectedRow]
             let tilesMirror = Mirror(reflecting: current.tiles)
             let mainButtonMirror = Mirror(reflecting: current.mainButton)
-            let numbersMirror = Mirror(reflecting: current.numbers)
+            // let numbersMirror = Mirror(reflecting: current.numbers)
             let bordersMirror = Mirror(reflecting: current.borders)
             
             

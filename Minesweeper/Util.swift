@@ -32,6 +32,7 @@ class Util {
     )
     static let darkClassicTheme = Theme(
         name: "Classic Dark",
+        desc: "A dark twist on the original theme",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic Dark"),
         mode: "Dark",
@@ -41,44 +42,19 @@ class Util {
     
     static let defaultThemes = [normalClassicTheme, darkClassicTheme, classic95Theme]
     static var themes = defaultThemes
-    static var currentTheme = normalClassicTheme //todo
-    //var currentTheme : Theme
-    static var difficulties = ["Beginner": [8, 8, 10], "Intermediate": [16, 16, 40], "Hard": [16, 30, 99], "Custom": [8, 8, 1]]
+    static var currentTheme = normalClassicTheme
     
-    static func textureLookup(value: Value) -> SKTexture {
-        switch value {
-        case .Mine:
-            return Util.currentTheme.tiles.mine
-        case .MineRed:
-            return Util.currentTheme.tiles.mineRed
-        case .MineWrong:
-            return Util.currentTheme.tiles.mineWrong
-        case .One:
-            return Util.currentTheme.tiles.one
-        case .Two:
-            return Util.currentTheme.tiles.two
-        case .Three:
-            return Util.currentTheme.tiles.three
-        case .Four:
-            return Util.currentTheme.tiles.four
-        case .Five:
-            return Util.currentTheme.tiles.five
-        case .Six:
-            return Util.currentTheme.tiles.six
-        case .Seven:
-            return Util.currentTheme.tiles.seven
-        case .Eight:
-            return Util.currentTheme.tiles.eight
-        default:
-            return Util.currentTheme.tiles.empty
-        }
-    }
+    static var difficulties = [
+        "Beginner": [8, 8, 10],
+        "Intermediate": [16, 16, 40],
+        "Hard": [16, 30, 99],
+        "Custom": [8, 8, 10]
+    ]
     
     static func readThemes() throws {
         let fileManager = FileManager.default
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let msSupportURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
-        var isDir = ObjCBool(true)
         
         let items = try fileManager.contentsOfDirectory(atPath: msSupportURL.path)
         
@@ -97,6 +73,7 @@ class Util {
                     
                     let theme = Theme(
                         name: Util.toTheme(name: name),
+                        pathName: name,
                         isFavorite: isFavorite,
                         spriteSheetTexture: SKTexture(image: image),
                         backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
@@ -137,9 +114,7 @@ class Util {
             }
             return true
         }
-        
         return ret.joined(separator: " ")
-        
     }
 }
 

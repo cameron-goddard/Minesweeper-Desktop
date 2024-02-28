@@ -19,16 +19,14 @@ class Util {
         desc: "The original Minesweeper theme",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic"),
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet"),
-        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet")
     )
     static let classic95Theme = Theme(
         name: "Classic 95",
         desc: "The default theme from Windows 95",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic 95"),
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_95"),
-        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_95")
     )
     static let darkClassicTheme = Theme(
         name: "Classic Dark",
@@ -36,8 +34,7 @@ class Util {
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic Dark"),
         mode: "Dark",
-        spriteSheetTexture: SKTexture(imageNamed: "default_dark_spritesheet"),
-        backgroundColor: NSColor(red: 173, green: 173, blue: 173, alpha: 1)
+        spriteSheetTexture: SKTexture(imageNamed: "default_dark_spritesheet")
     )
     
     static let defaultThemes = [normalClassicTheme, darkClassicTheme, classic95Theme]
@@ -68,6 +65,8 @@ class Util {
                         
                     let absoluteThemePath = absoluteThemesPath.appendingPathComponent(theme)
                     let image = NSImage(contentsOf: absoluteThemePath)!
+                    image.size = NSSize(width: 144, height: 122) // Account for different DPIs
+                    
                     let name = absoluteThemePath.deletingPathExtension().lastPathComponent
                     let isFavorite = Defaults[.favorites].contains(name)
                     
@@ -75,8 +74,7 @@ class Util {
                         name: Util.toTheme(name: name),
                         pathName: name,
                         isFavorite: isFavorite,
-                        spriteSheetTexture: SKTexture(image: image),
-                        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+                        spriteSheetTexture: SKTexture(image: image)
                     )
                     Util.themes.append(theme)
                 }

@@ -16,11 +16,9 @@ import SpriteKit
     let desc: String
     
     let mainButton : MainButton
-    let flagNumbers : Numbers
     let numbers : Numbers
     let tiles : Tiles
     let borders : Borders
-    let backgroundColor : NSColor
     
     var isDefault : Bool
     let style : String
@@ -28,21 +26,19 @@ import SpriteKit
     var isCurrent = false
     var isFavorite : Bool
     
-    init(name: String, pathName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture, backgroundColor: NSColor) {
+    init(name: String, pathName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture) {
         self.spriteSheetTexture = spriteSheetTexture
         
-        mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 0, columns: 5))
-        flagNumbers = Numbers(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 1, columns: 12))
-        numbers = Numbers(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 2, columns: 12))
-        tiles = Tiles(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 3, columns: 15))
-        borders = Borders(tileSheet: SpriteSheet(atlas: spriteSheetTexture, row: 0, columns: 4))
+        mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
+        numbers = Numbers(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
+        tiles = Tiles(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
+        borders = Borders(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         self.name = name
         self.pathName = pathName
         self.desc = desc
         self.isDefault = isDefault
         self.style = style
         self.mode = mode
-        self.backgroundColor = backgroundColor
         self.isFavorite = isFavorite
     }
     
@@ -66,23 +62,24 @@ import SpriteKit
         let mineWrong: SKTexture
         
         init(tileSheet: SpriteSheet) {
-            covered = tileSheet.textureFor(col: 0)
-            flagged = tileSheet.textureFor(col: 1)
-            question = tileSheet.textureFor(col: 2)
-            empty = tileSheet.textureFor(col: 3)
-            one = tileSheet.textureFor(col: 4)
-            two = tileSheet.textureFor(col: 5)
-            three = tileSheet.textureFor(col: 6)
-            four = tileSheet.textureFor(col: 7)
-            five = tileSheet.textureFor(col: 8)
-            six = tileSheet.textureFor(col: 9)
-            seven = tileSheet.textureFor(col: 10)
-            eight = tileSheet.textureFor(col: 11)
+            covered = tileSheet.textureAt(x: 0, y: 90, w: 16, h: 16)
+            flagged = tileSheet.textureAt(x: 48, y: 90, w: 16, h: 16)
+            question = tileSheet.textureAt(x: 96, y: 90, w: 16, h: 16)
+            empty = tileSheet.textureAt(x: 16, y: 90, w: 16, h: 16)
             
-            mine = tileSheet.textureFor(col: 12)
+            one = tileSheet.textureAt(x: 16, y: 106, w: 16, h: 16)
+            two = tileSheet.textureAt(x: 32, y: 106, w: 16, h: 16)
+            three = tileSheet.textureAt(x: 48, y: 106, w: 16, h: 16)
+            four = tileSheet.textureAt(x: 64, y: 106, w: 16, h: 16)
+            five = tileSheet.textureAt(x: 80, y: 106, w: 16, h: 16)
+            six = tileSheet.textureAt(x: 96, y: 106, w: 16, h: 16)
+            seven = tileSheet.textureAt(x: 112, y: 106, w: 16, h: 16)
+            eight = tileSheet.textureAt(x: 128, y: 106, w: 16, h: 16)
+            
+            mine = tileSheet.textureAt(x: 32, y: 90, w: 16, h: 16)
             mine.filteringMode = .nearest
-            mineRed = tileSheet.textureFor(col: 13)
-            mineWrong = tileSheet.textureFor(col: 14)
+            mineRed = tileSheet.textureAt(x: 80, y: 90, w: 16, h: 16)
+            mineWrong = tileSheet.textureAt(x: 64, y: 90, w: 16, h: 16)
         }
     }
     
@@ -94,11 +91,11 @@ import SpriteKit
         let dead: SKTexture
         
         init(tileSheet: SpriteSheet) {
-            happy = tileSheet.textureFor(col: 0)
-            happyPressed = tileSheet.textureFor(col: 1)
-            cautious = tileSheet.textureFor(col: 2)
-            cool = tileSheet.textureFor(col: 3)
-            dead = tileSheet.textureFor(col: 4)
+            happy = tileSheet.textureAt(x: 0, y: 41, w: 26, h: 26)
+            cautious = tileSheet.textureAt(x: 27, y: 41, w: 26, h: 26)
+            dead = tileSheet.textureAt(x: 54, y: 41, w: 26, h: 26)
+            cool = tileSheet.textureAt(x: 81, y: 41, w: 26, h: 26)
+            happyPressed = tileSheet.textureAt(x: 108, y: 41, w: 26, h: 26)
         }
     }
     
@@ -107,7 +104,7 @@ import SpriteKit
         
         init(tileSheet: SpriteSheet) {
             for i in 0..<12 {
-                digits.append(tileSheet.textureFor(col: i))
+                digits.append(tileSheet.textureAt(x: i + (i * 11), y: 68, w: 11, h: 21))
             }
         }
     }
@@ -129,29 +126,30 @@ import SpriteKit
             borderMiddle,
             borderBottom: SKTexture
         
-        let numberBorderLeft, numberBorderRight, numberBorderBottom, numberBorderTop: SKTexture
+        let borderNumbers: SKTexture
+        
+        let filler: SKTexture
         
         init(tileSheet: SpriteSheet) {
-            cornerTopLeft = tileSheet.textureForBorder(row: 0, col: 0)
-            cornerTopRight = tileSheet.textureForBorder(row: 0, col: 1)
-            cornerMiddleLeft = tileSheet.textureForBorder(row: 0, col: 2)
-            cornerMiddleRight = tileSheet.textureForBorder(row: 0, col: 3)
-            cornerBottomLeft = tileSheet.textureForBorder(row: 1, col: 0)
-            cornerBottomRight = tileSheet.textureForBorder(row: 1, col: 1)
+            cornerTopLeft = tileSheet.textureAt(x: 0, y: 29, w: 12, h: 11)
+            cornerTopRight = tileSheet.textureAt(x: 15, y: 29, w: 12, h: 11)
+            cornerMiddleLeft = tileSheet.textureAt(x: 0, y: 15, w: 11, h: 11)
+            cornerMiddleRight = tileSheet.textureAt(x: 16, y: 15, w: 11, h: 11)
+            cornerBottomLeft = tileSheet.textureAt(x: 0, y: 0, w: 12, h: 12)
+            cornerBottomRight = tileSheet.textureAt(x: 15, y: 0, w: 12, h: 12)
             
-            borderTopLeft = tileSheet.textureForBorder(row: 2, col: 0)
-            borderTopRight = tileSheet.textureForBorder(row: 2, col: 1)
-            borderLeft = tileSheet.textureForBorder(row: 3, col: 0)
-            borderRight = tileSheet.textureForBorder(row: 3, col: 0)
+            borderTopLeft = tileSheet.textureAt(x: 0, y: 27, w: 12, h: 1)
+            borderTopRight = tileSheet.textureAt(x: 15, y: 27, w: 12, h: 1)
+            borderLeft = tileSheet.textureAt(x: 15, y: 13, w: 12, h: 1)
+            borderRight = tileSheet.textureAt(x: 15, y: 13, w: 12, h: 1)
             
-            borderTop = tileSheet.textureForBorder(row: 4, col: 0)
-            borderMiddle = tileSheet.textureForBorder(row: 4, col: 1)
-            borderBottom = tileSheet.textureForBorder(row: 5, col: 0)
+            borderTop = tileSheet.textureAt(x: 13, y: 29, w: 1, h: 11)
+            borderMiddle = tileSheet.textureAt(x: 13, y: 15, w: 1, h: 11)
+            borderBottom = tileSheet.textureAt(x: 13, y: 0, w: 1, h: 12)
             
-            numberBorderLeft = tileSheet.textureForBorder(row: 6, col: 0)
-            numberBorderRight = tileSheet.textureForBorder(row: 6, col: 1)
-            numberBorderBottom = tileSheet.textureForBorder(row: 7, col: 0)
-            numberBorderTop = tileSheet.textureForBorder(row: 7, col: 1)
+            borderNumbers = tileSheet.textureAt(x: 28, y: 15, w: 41, h: 25)
+            
+            filler = tileSheet.textureAt(x: 70, y: 39, w: 1, h: 1)
         }
     }
 }

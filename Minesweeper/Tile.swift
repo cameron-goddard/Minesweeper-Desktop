@@ -80,7 +80,7 @@ class Tile {
     }
     
     func pressed() {
-        self.node.texture = SKTexture(imageNamed: "filler")
+        self.node.texture = Util.currentTheme.borders.filler
     }
     
     func raised() {

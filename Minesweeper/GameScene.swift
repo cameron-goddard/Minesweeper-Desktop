@@ -38,6 +38,8 @@ class GameScene: SKScene {
 
     var filler: SKSpriteNode!
     
+    var background: SKSpriteNode!
+    
     var currentTile: String? = nil
     
     init(size: CGSize, rows: Int, cols: Int, mines: Int) {
@@ -55,6 +57,13 @@ class GameScene: SKScene {
     }
     
     func setNodes() {
+        background = SKSpriteNode(texture: Util.currentTheme.borders.filler)
+        background.anchorPoint = CGPoint(x: 0, y: 1)
+        background.position = CGPoint(x: self.frame.minX, y: self.frame.maxY)
+        background.xScale = self.frame.width
+        background.yScale = 66 * scale
+        self.addChild(background)
+        
         topLeftCorner = SKSpriteNode(texture: Util.currentTheme.borders.cornerTopLeft)
         topLeftCorner.anchorPoint = CGPoint(x: 0, y: 1)
         topLeftCorner.setScale(scale)
@@ -112,8 +121,7 @@ class GameScene: SKScene {
         middleRightCorner.zPosition = 3
         self.addChild(middleRightCorner)
 
-        filler = SKSpriteNode(imageNamed: "filler")
-        filler.texture?.filteringMode = .nearest
+        filler = SKSpriteNode(texture: Util.currentTheme.borders.filler)
         filler.anchorPoint = CGPoint(x: 1, y: 1)
         filler.setScale(scale)
         filler.position = CGPoint(x: middleRightCorner.position.x-middleRightCorner.size.width, y: middleBorder.position.y-middleBorder.size.height+2)
@@ -148,10 +156,10 @@ class GameScene: SKScene {
         rightBorder.position = CGPoint(x: self.frame.maxX, y: self.frame.maxY - topRightBorder.size.height)
         self.addChild(rightBorder)
         
-        counterView.node.position = CGPoint(x: topLeftBorder.position.x+topLeftBorder.size.width+6*scale, y: mainButton.position.y-scale)
+        counterView.node.position = CGPoint(x: topLeftBorder.position.x+topLeftBorder.size.width+4*scale, y: mainButton.position.y)
         self.addChild(counterView.node)
 
-        timerView.node.position = CGPoint(x: topRightBorder.position.x-topRightBorder.size.width-45*scale, y: mainButton.position.y-scale)
+        timerView.node.position = CGPoint(x: topRightBorder.position.x-topRightBorder.size.width-45*scale, y: mainButton.position.y)
         self.addChild(timerView.node)
         
         //board.node.position = CGPoint(x: board.node.position.x, y: middleBorder.position.y-150)
@@ -187,12 +195,12 @@ class GameScene: SKScene {
         rightBorder.texture = Util.currentTheme.borders.borderRight
         bottomLeftCorner.texture = Util.currentTheme.borders.cornerBottomLeft
         bottomRightCorner.texture = Util.currentTheme.borders.cornerBottomRight
+        filler.texture = Util.currentTheme.borders.filler
+        background.texture = Util.currentTheme.borders.filler
         
         board.setTextures()
         timerView.setTextures()
         counterView.setTextures()
-        
-        self.backgroundColor = Util.currentTheme.backgroundColor
     }
     
     override func didMove(to view: SKView) {

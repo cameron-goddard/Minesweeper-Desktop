@@ -89,7 +89,7 @@ class ThemesViewController: NSViewController {
             })
         } else {
             do {
-                let name = "\(themes[tableView.selectedRow].pathName).png"
+                let name = "\(themes[tableView.selectedRow].pathName).jpeg"
                 let fileURL = themesURL.appendingPathComponent(name)
                 try fileManager.removeItem(atPath: fileURL.path)
                 

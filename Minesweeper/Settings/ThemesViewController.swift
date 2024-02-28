@@ -58,13 +58,6 @@ class ThemesViewController: NSViewController {
     }
     
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
-        let fileManager = FileManager.default
-        
-        // TODO: Move directoryURL to Util
-        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let directoryURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
-        let themesURL = directoryURL.appendingPathComponent("Themes")
-        
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
             
@@ -73,9 +66,14 @@ class ThemesViewController: NSViewController {
                     let path = openPanel.url
                     let file = NSData(contentsOf: path!)
                     do {
-                        let documentURL = themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
+                        let documentURL = Util.themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
                         try file!.write(to: documentURL)
-                        try Util.readThemes()
+                        
+                        let fileName = documentURL.lastPathComponent
+                        
+                        if !Util.themes.contains(where: {$0.fileName == fileName}) {
+                            try Util.addTheme(fileName: fileName)
+                        }
                         
                         self.themes = Util.themes
                         self.tableView.reloadData()
@@ -89,9 +87,9 @@ class ThemesViewController: NSViewController {
             })
         } else {
             do {
-                let name = "\(themes[tableView.selectedRow].pathName).jpeg"
-                let fileURL = themesURL.appendingPathComponent(name)
-                try fileManager.removeItem(atPath: fileURL.path)
+                let name = themes[tableView.selectedRow].fileName
+                let fileURL = Util.themesURL.appendingPathComponent(name)
+                try FileManager.default.removeItem(atPath: fileURL.path)
                 
                 let oldRow = tableView.selectedRow
                 // TODO: Investigate this bug: Delete a favorited item, add any other back in

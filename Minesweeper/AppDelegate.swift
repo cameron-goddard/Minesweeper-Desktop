@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             do {
                 try fileManager.createDirectory(at: msSupportURL, withIntermediateDirectories: true, attributes: nil)
                 
-                try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Themes"), withIntermediateDirectories: true, attributes: nil)
+                try fileManager.createDirectory(at: Util.themesURL, withIntermediateDirectories: true, attributes: nil)
                 
                 try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Scores"), withIntermediateDirectories: true, attributes: nil)
             } catch {

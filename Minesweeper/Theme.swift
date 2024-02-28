@@ -12,7 +12,7 @@ import SpriteKit
     
     let spriteSheetTexture: SKTexture
     let name: String
-    let pathName: String
+    let fileName: String
     let desc: String
     
     let mainButton : MainButton
@@ -26,7 +26,7 @@ import SpriteKit
     var isCurrent = false
     var isFavorite : Bool
     
-    init(name: String, pathName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture) {
+    init(name: String, fileName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture) {
         self.spriteSheetTexture = spriteSheetTexture
         
         mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
@@ -34,7 +34,7 @@ import SpriteKit
         tiles = Tiles(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         borders = Borders(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         self.name = name
-        self.pathName = pathName
+        self.fileName = fileName
         self.desc = desc
         self.isDefault = isDefault
         self.style = style

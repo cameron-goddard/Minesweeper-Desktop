@@ -74,6 +74,8 @@ extension GameScene {
         let clickedNode = self.nodes(at: event.location(in: scene!))
         
         if let name = clickedNode[0].name {
+            if name == "Main Button" { return }
+            
             let coords = convertLocation(name: name)
             let tile = board.tileAt(r: coords[0], c: coords[1])
             

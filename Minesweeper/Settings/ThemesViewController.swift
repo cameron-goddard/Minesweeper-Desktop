@@ -60,19 +60,24 @@ class ThemesViewController: NSViewController {
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
-            
+
             openPanel.beginSheetModal(for: self.view.window!, completionHandler: { num in
                 if num == .OK {
                     let path = openPanel.url
                     let file = NSData(contentsOf: path!)
                     do {
-                        let documentURL = Util.themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
-                        try file!.write(to: documentURL)
+                        let themeURL = Util.themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
+                        try file!.write(to: themeURL)
                         
-                        let fileName = documentURL.lastPathComponent
+                        let fileName = themeURL.lastPathComponent
                         
                         if !Util.themes.contains(where: {$0.fileName == fileName}) {
                             try Util.addTheme(fileName: fileName)
+                        } else {
+                            let alert = NSAlert()
+                            alert.messageText = "Duplicate theme"
+                            alert.informativeText = "A theme with this name already exists!"
+                            alert.runModal()
                         }
                         
                         self.themes = Util.themes

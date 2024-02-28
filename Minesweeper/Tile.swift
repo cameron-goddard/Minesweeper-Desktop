@@ -80,7 +80,11 @@ class Tile {
     }
     
     func pressed() {
-        self.node.texture = Util.currentTheme.borders.filler
+        if self.state == .Question {
+            self.node.texture = Util.currentTheme.tiles.questionPressed
+        } else {
+            self.node.texture = Util.currentTheme.tiles.pressed
+        }
     }
     
     func raised() {

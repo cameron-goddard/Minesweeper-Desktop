@@ -10,7 +10,6 @@ import SpriteKit
 
 @objc class Theme: NSObject {
     
-    let spriteSheetTexture: SKTexture
     let name: String
     let fileName: String
     let desc: String
@@ -27,12 +26,12 @@ import SpriteKit
     var isFavorite : Bool
     
     init(name: String, fileName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, style: String = "Classic", mode: String = "Light", spriteSheetTexture: SKTexture) {
-        self.spriteSheetTexture = spriteSheetTexture
         
         mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         numbers = Numbers(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         tiles = Tiles(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         borders = Borders(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
+        
         self.name = name
         self.fileName = fileName
         self.desc = desc
@@ -44,7 +43,6 @@ import SpriteKit
     
     struct Tiles {
         let empty: SKTexture
-        let covered: SKTexture
         let one: SKTexture
         let two: SKTexture
         let three: SKTexture
@@ -54,19 +52,17 @@ import SpriteKit
         let seven: SKTexture
         let eight: SKTexture
 
+        let covered: SKTexture
+        let pressed: SKTexture
         let flagged: SKTexture
         let question: SKTexture
-
+        let questionPressed: SKTexture
         let mine: SKTexture
         let mineRed: SKTexture
         let mineWrong: SKTexture
         
         init(tileSheet: SpriteSheet) {
-            covered = tileSheet.textureAt(x: 0, y: 90, w: 16, h: 16)
-            flagged = tileSheet.textureAt(x: 48, y: 90, w: 16, h: 16)
-            question = tileSheet.textureAt(x: 96, y: 90, w: 16, h: 16)
-            empty = tileSheet.textureAt(x: 16, y: 90, w: 16, h: 16)
-            
+            empty = tileSheet.textureAt(x: 0, y: 106, w: 16, h: 16)
             one = tileSheet.textureAt(x: 16, y: 106, w: 16, h: 16)
             two = tileSheet.textureAt(x: 32, y: 106, w: 16, h: 16)
             three = tileSheet.textureAt(x: 48, y: 106, w: 16, h: 16)
@@ -76,8 +72,12 @@ import SpriteKit
             seven = tileSheet.textureAt(x: 112, y: 106, w: 16, h: 16)
             eight = tileSheet.textureAt(x: 128, y: 106, w: 16, h: 16)
             
+            covered = tileSheet.textureAt(x: 0, y: 90, w: 16, h: 16)
+            pressed = tileSheet.textureAt(x: 16, y: 90, w: 16, h: 16)
+            flagged = tileSheet.textureAt(x: 48, y: 90, w: 16, h: 16)
+            question = tileSheet.textureAt(x: 96, y: 90, w: 16, h: 16)
+            questionPressed = tileSheet.textureAt(x: 112, y: 90, w: 16, h: 16)
             mine = tileSheet.textureAt(x: 32, y: 90, w: 16, h: 16)
-            mine.filteringMode = .nearest
             mineRed = tileSheet.textureAt(x: 80, y: 90, w: 16, h: 16)
             mineWrong = tileSheet.textureAt(x: 64, y: 90, w: 16, h: 16)
         }

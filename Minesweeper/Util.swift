@@ -19,16 +19,14 @@ class Util {
         desc: "The original Minesweeper theme",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic"),
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet"),
-        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+        spriteSheetTexture: SKTexture(imageNamed: "classic")
     )
     static let classic95Theme = Theme(
         name: "Classic 95",
         desc: "The default theme from Windows 95",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic 95"),
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_95"),
-        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
+        spriteSheetTexture: SKTexture(imageNamed: "classic_95")
     )
     static let darkClassicTheme = Theme(
         name: "Classic Dark",
@@ -36,13 +34,20 @@ class Util {
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic Dark"),
         mode: "Dark",
-        spriteSheetTexture: SKTexture(imageNamed: "default_dark_spritesheet"),
-        backgroundColor: NSColor(red: 173, green: 173, blue: 173, alpha: 1)
+        spriteSheetTexture: SKTexture(imageNamed: "classic_dark")
     )
     
     static let defaultThemes = [normalClassicTheme, darkClassicTheme, classic95Theme]
     static var themes = defaultThemes
     static var currentTheme = normalClassicTheme
+    
+    static let themesURL: URL = {
+        let fileManager = FileManager.default
+        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let msSupportURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
+        let themesPath = msSupportURL.appendingPathComponent("Themes")
+        return themesPath
+    }()
     
     static var difficulties = [
         "Beginner": [8, 8, 10],
@@ -51,36 +56,43 @@ class Util {
         "Custom": [8, 8, 10]
     ]
     
+    static func addTheme(fileName: String) throws {
+        let themePath = themesURL.appendingPathComponent(fileName)
+        
+        let name = themePath.deletingPathExtension().lastPathComponent
+        let image = NSImage(contentsOf: themePath)!
+        image.size = NSSize(width: 144, height: 122) // Account for different DPIs
+        
+        let theme = Theme(
+            name: Util.toTheme(name: name),
+            fileName: fileName,
+            isFavorite: Defaults[.favorites].contains(name),
+            spriteSheetTexture: SKTexture(image: image)
+        )
+        Util.themes.append(theme)
+    }
+    
     static func readThemes() throws {
-        let fileManager = FileManager.default
-        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let msSupportURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
+        let themes = try FileManager.default.contentsOfDirectory(atPath: themesURL.path)
         
-        let items = try fileManager.contentsOfDirectory(atPath: msSupportURL.path)
-        
-        for item in items {
-            if item == ".DS_Store" { continue }
-            if item == "Themes" {
-                let absoluteThemesPath = msSupportURL.appendingPathComponent(item)
-                let themes = try fileManager.contentsOfDirectory(atPath: absoluteThemesPath.path)
-                for theme in themes {
-                    if theme == ".DS_Store" { continue }
-                        
-                    let absoluteThemePath = absoluteThemesPath.appendingPathComponent(theme)
-                    let image = NSImage(contentsOf: absoluteThemePath)!
-                    let name = absoluteThemePath.deletingPathExtension().lastPathComponent
-                    let isFavorite = Defaults[.favorites].contains(name)
-                    
-                    let theme = Theme(
-                        name: Util.toTheme(name: name),
-                        pathName: name,
-                        isFavorite: isFavorite,
-                        spriteSheetTexture: SKTexture(image: image),
-                        backgroundColor: NSColor(red: 61, green: 61, blue: 61, alpha: 1)
-                    )
-                    Util.themes.append(theme)
-                }
-            }
+        for theme in themes {
+            if theme == ".DS_Store" { continue }
+            
+            let themePath = themesURL.appendingPathComponent(theme)
+            
+            let name = themePath.deletingPathExtension().lastPathComponent
+            let fileName = themePath.lastPathComponent
+            
+            let image = NSImage(contentsOf: themePath)!
+            image.size = NSSize(width: 144, height: 122) // Account for different DPIs
+            
+            let theme = Theme(
+                name: toTheme(name: name),
+                fileName: fileName,
+                isFavorite: Defaults[.favorites].contains(name),
+                spriteSheetTexture: SKTexture(image: image)
+            )
+            Util.themes.append(theme)
         }
         NotificationCenter.default.post(name: Notification.Name("UpdateThemeMenu"), object: nil)
     }

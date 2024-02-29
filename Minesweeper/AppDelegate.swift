@@ -20,14 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override init() {
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
-    }
-    
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        checkForUpdatesItem.target = updaterController
-        checkForUpdatesItem.action = #selector(SPUStandardUpdaterController.checkForUpdates(_:))
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newCustomGame(notification:)), name: Notification.Name("NewCustomGame"), object: nil)
-        
+        // This block of code must happen before the ViewController's viewDidLoad()
         let fileManager = FileManager.default
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let msSupportURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
@@ -39,18 +33,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             } catch {
                 
             }
-            
         } else {
             do {
                 try fileManager.createDirectory(at: msSupportURL, withIntermediateDirectories: true, attributes: nil)
-                
-                try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Themes"), withIntermediateDirectories: true, attributes: nil)
-                
+                try fileManager.createDirectory(at: Util.themesURL, withIntermediateDirectories: true, attributes: nil)
                 try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Scores"), withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print("could not create directory")
             }
         }
+    }
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        checkForUpdatesItem.target = updaterController
+        checkForUpdatesItem.action = #selector(SPUStandardUpdaterController.checkForUpdates(_:))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newCustomGame(notification:)), name: Notification.Name("NewCustomGame"), object: nil)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

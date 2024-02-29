@@ -58,24 +58,27 @@ class ThemesViewController: NSViewController {
     }
     
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
-        let fileManager = FileManager.default
-        
-        // TODO: Move directoryURL to Util
-        let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let directoryURL = appSupportURL.appendingPathComponent("Minesweeper Desktop")
-        let themesURL = directoryURL.appendingPathComponent("Themes")
-        
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
-            
+
             openPanel.beginSheetModal(for: self.view.window!, completionHandler: { num in
                 if num == .OK {
                     let path = openPanel.url
                     let file = NSData(contentsOf: path!)
                     do {
-                        let documentURL = themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
-                        try file!.write(to: documentURL)
-                        try Util.readThemes()
+                        let themeURL = Util.themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
+                        try file!.write(to: themeURL)
+                        
+                        let fileName = themeURL.lastPathComponent
+                        
+                        if !Util.themes.contains(where: {$0.fileName == fileName}) {
+                            try Util.addTheme(fileName: fileName)
+                        } else {
+                            let alert = NSAlert()
+                            alert.messageText = "Duplicate theme"
+                            alert.informativeText = "A theme with this name already exists!"
+                            alert.runModal()
+                        }
                         
                         self.themes = Util.themes
                         self.tableView.reloadData()
@@ -89,9 +92,9 @@ class ThemesViewController: NSViewController {
             })
         } else {
             do {
-                let name = "\(themes[tableView.selectedRow].pathName).png"
-                let fileURL = themesURL.appendingPathComponent(name)
-                try fileManager.removeItem(atPath: fileURL.path)
+                let name = themes[tableView.selectedRow].fileName
+                let fileURL = Util.themesURL.appendingPathComponent(name)
+                try FileManager.default.removeItem(atPath: fileURL.path)
                 
                 let oldRow = tableView.selectedRow
                 // TODO: Investigate this bug: Delete a favorited item, add any other back in

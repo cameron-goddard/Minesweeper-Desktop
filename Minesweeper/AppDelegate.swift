@@ -69,17 +69,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             controller.difficulty = Defaults[.difficulty]
         }
-        
         if let window = NSApplication.shared.mainWindow {
-            window.contentViewController = controller
+            if window.identifier?.rawValue == "Main" {
+                window.contentViewController = controller
+            }
         }
     }
     
     @IBAction func customGame(_ sender: Any) {
         if let window = NSApplication.shared.mainWindow {
-            let storyboard = NSStoryboard(name: "Main", bundle: nil)
-            let custom = storyboard.instantiateController(withIdentifier: "customGameViewController")
-            window.contentViewController?.presentAsSheet(custom as! CustomGameViewController)
+            if window.identifier?.rawValue == "Main" {
+                let storyboard = NSStoryboard(name: "Main", bundle: nil)
+                let custom = storyboard.instantiateController(withIdentifier: "customGameViewController")
+                window.contentViewController?.presentAsSheet(custom as! CustomGameViewController)
+            }
         }
     }
     

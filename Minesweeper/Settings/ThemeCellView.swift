@@ -59,6 +59,7 @@ class ThemeCellView: NSTableCellView {
             themeFavorite.image = .init(systemSymbolName: "star.fill", accessibilityDescription: nil)
             Defaults[.favorites].append(themeName.stringValue)
         }
+        Util.theme(withName: themeName.stringValue).isFavorite.toggle()
         NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
     }
     

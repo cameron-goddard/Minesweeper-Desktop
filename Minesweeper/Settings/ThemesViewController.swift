@@ -33,6 +33,7 @@ class ThemesViewController: NSViewController {
         assetsTableView.enclosingScrollView?.wantsLayer = true
         assetsTableView.enclosingScrollView?.layer?.cornerRadius = 5
         showThemeInfo()
+        print(Defaults[.favorites])
     }
     
     override func viewDidAppear() {

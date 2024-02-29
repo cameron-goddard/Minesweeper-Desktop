@@ -80,14 +80,14 @@ class Util {
             
             let themePath = themesURL.appendingPathComponent(theme)
             
-            let name = themePath.deletingPathExtension().lastPathComponent
+            let name = toTheme(name: themePath.deletingPathExtension().lastPathComponent)
             let fileName = themePath.lastPathComponent
             
             let image = NSImage(contentsOf: themePath)!
             image.size = NSSize(width: 144, height: 122) // Account for different DPIs
             
             let theme = Theme(
-                name: toTheme(name: name),
+                name: name,
                 fileName: fileName,
                 isFavorite: Defaults[.favorites].contains(name),
                 spriteSheetTexture: SKTexture(image: image)

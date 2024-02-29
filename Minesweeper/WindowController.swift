@@ -89,8 +89,7 @@ class WindowController: NSWindowController {
                 }
             }
         }
-        // TODO: Look into and fix isFavorite
-        if !tempMenu.items.contains(where: { $0.title == Util.currentTheme.name }) {
+        if !Util.currentTheme.isFavorite {
             tempMenu.addItem(.separator())
             let menuItem = tempMenu.addItem(withTitle: Util.currentTheme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
             menuItem.state = .on

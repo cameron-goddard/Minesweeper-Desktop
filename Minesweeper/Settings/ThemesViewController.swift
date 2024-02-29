@@ -33,7 +33,6 @@ class ThemesViewController: NSViewController {
         assetsTableView.enclosingScrollView?.wantsLayer = true
         assetsTableView.enclosingScrollView?.layer?.cornerRadius = 5
         showThemeInfo()
-        print(Defaults[.favorites])
     }
     
     override func viewDidAppear() {
@@ -80,10 +79,9 @@ class ThemesViewController: NSViewController {
                             alert.informativeText = "A theme with this name already exists!"
                             alert.runModal()
                         }
-                        
+                        // tableView.reloadData() messes up the favorite buttons - possibly investigate
                         self.themes = Util.themes
-                        self.tableView.reloadData()
-                        
+                        self.tableView.insertRows(at: IndexSet(integer: Util.themes.count - 1))
                     } catch {
                         print("could not write to file")
                     }
@@ -103,12 +101,11 @@ class ThemesViewController: NSViewController {
                 if let index = Defaults[.favorites].firstIndex(of: themes[oldRow].name) {
                     Defaults[.favorites].remove(at: index)
                 }
-                NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
                 themes.remove(at: themes.firstIndex(of: themes[oldRow])!)
-                
-                tableView.reloadData()
+                NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
                 // This shouldn't be an issue since there are non-removable default themes, but be wary of this
                 tableView.selectRowIndexes([oldRow - 1], byExtendingSelection: false)
+                tableView.removeRows(at: IndexSet(integer: oldRow))
             } catch {
                 print("could not delete file")
             }

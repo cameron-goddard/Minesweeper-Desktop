@@ -77,7 +77,6 @@ class Util {
         
         for theme in themes {
             if theme == ".DS_Store" { continue }
-            
             let themePath = themesURL.appendingPathComponent(theme)
             
             let name = toTheme(name: themePath.deletingPathExtension().lastPathComponent)

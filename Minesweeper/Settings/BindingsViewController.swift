@@ -19,5 +19,4 @@ class BindingsViewController: NSViewController {
         self.view.window?.title = "Key Bindings"
     }
     
-    
 }

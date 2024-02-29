@@ -114,7 +114,6 @@ class ThemesViewController: NSViewController {
     
     @IBAction func setThemeButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: Notification.Name("SetTheme"), object: themes[tableView.selectedRow].name)
-        
     }
 }
 
@@ -145,7 +144,6 @@ extension ThemesViewController: NSTableViewDataSource {
             let mainButtonMirror = Mirror(reflecting: current.mainButton)
             // let numbersMirror = Mirror(reflecting: current.numbers)
             let bordersMirror = Mirror(reflecting: current.borders)
-            
             
             let mirrors = [tilesMirror, mainButtonMirror, bordersMirror]
             

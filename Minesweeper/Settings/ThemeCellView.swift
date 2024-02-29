@@ -19,8 +19,6 @@ class ThemeCellView: NSTableCellView {
         if themeFavorite.state == .off {
             themeFavorite.isHidden = true
         }
-        
-        // Drawing code here.
     }
     
     override func mouseEntered(with theEvent: NSEvent) {

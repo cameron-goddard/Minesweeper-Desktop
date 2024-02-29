@@ -19,14 +19,14 @@ class Util {
         desc: "The original Minesweeper theme",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic"),
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet")
+        spriteSheetTexture: SKTexture(imageNamed: "classic")
     )
     static let classic95Theme = Theme(
         name: "Classic 95",
         desc: "The default theme from Windows 95",
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic 95"),
-        spriteSheetTexture: SKTexture(imageNamed: "default_spritesheet_95")
+        spriteSheetTexture: SKTexture(imageNamed: "classic_95")
     )
     static let darkClassicTheme = Theme(
         name: "Classic Dark",
@@ -34,7 +34,7 @@ class Util {
         isDefault: true,
         isFavorite: Defaults[.favorites].contains("Classic Dark"),
         mode: "Dark",
-        spriteSheetTexture: SKTexture(imageNamed: "default_dark_spritesheet")
+        spriteSheetTexture: SKTexture(imageNamed: "classic_dark")
     )
     
     static let defaultThemes = [normalClassicTheme, darkClassicTheme, classic95Theme]

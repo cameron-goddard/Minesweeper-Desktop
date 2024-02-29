@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "default_spritesheet.jpeg",
+      "filename" : "classic.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

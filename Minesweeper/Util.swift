@@ -94,7 +94,7 @@ class Util {
             )
             Util.themes.append(theme)
         }
-        NotificationCenter.default.post(name: Notification.Name("UpdateThemeMenu"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
     }
     
     // make nonstatic

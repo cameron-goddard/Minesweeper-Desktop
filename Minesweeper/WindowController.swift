@@ -12,7 +12,7 @@ class WindowController: NSWindowController {
     
     @IBOutlet weak var toolbar: NSToolbar!
     
-    // There is a bug in the way macOS handles adding to NSMenu, see updateThemeMenu
+    // There is a bug in the way macOS handles adding to NSMenu, see updateThemesMenu
     let themesItem: NSMenuToolbarItem = {
         let item = NSMenuToolbarItem(itemIdentifier: .toolbarThemesMenuItem)
         item.toolTip = "Themes"
@@ -33,7 +33,7 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateThemeMenu(notification:)), name: Notification.Name("UpdateThemeMenu"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavorites(notification:)), name: Notification.Name("UpdateFavorites"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setTheme(notification:)), name: Notification.Name("SetTheme"), object: nil)
     }
     
@@ -50,23 +50,29 @@ class WindowController: NSWindowController {
         }
     }
     
-    @objc func changeTheme(sender: NSMenuItem) {
+    @objc func setTheme(sender: NSMenuItem) {
         Util.currentTheme = Util.theme(withName: sender.title)
         Defaults[.theme] = sender.title
-        
-        for item in sender.menu!.items {
-            if item.state == .on {
-                item.state = .off
-            }
-        }
-        sender.state = .on
         (viewController.skView.scene as! GameScene).setTextures()
+        
+        updateThemesMenu()
     }
     
-    @objc func updateThemeMenu(notification: Notification) {
+    @objc func setTheme(notification: Notification) {
+        Util.currentTheme = Util.theme(withName: notification.object as! String)
+        Defaults[.theme] = notification.object as! String
+        (viewController.skView.scene as! GameScene).setTextures()
+        
+        updateThemesMenu()
+    }
+    
+    @objc func updateFavorites(notification: Notification) {
+        updateThemesMenu()
+    }
+    
+    func updateThemesMenu() {
         // There is a bug in the way macOS handles menu updates. When it is fixed,
-        // this method should be as simple as this:
-        //themesMenu.items.append(NSMenuItem(title: Util.themes[Util.themes.count - 1].name, action: #selector(changeTheme(sender:)), keyEquivalent: ""))
+        // this method should probably just modify the existing menu instead of copying it
         let tempMenu = NSMenu()
         tempMenu.autoenablesItems = false
         
@@ -77,20 +83,20 @@ class WindowController: NSWindowController {
         
         for theme in Util.themes {
             if Defaults[.favorites].contains(theme.name) {
-                let menuItem = tempMenu.addItem(withTitle: theme.name, action: #selector(changeTheme(sender:)), keyEquivalent: "")
+                let menuItem = tempMenu.addItem(withTitle: theme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
                 if Util.currentTheme == Util.theme(withName: theme.name) {
                     menuItem.state = .on
                 }
             }
         }
+        // TODO: Look into and fix isFavorite
+        if !tempMenu.items.contains(where: { $0.title == Util.currentTheme.name }) {
+            tempMenu.addItem(.separator())
+            let menuItem = tempMenu.addItem(withTitle: Util.currentTheme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
+            menuItem.state = .on
+        }
+        //themesMenu.addItem(.init(title: "Show All...", action: nil, keyEquivalent: ""))
         themesItem.menu = tempMenu
-    }
-    
-    @objc func setTheme(notification: Notification) {
-        Util.currentTheme = Util.theme(withName: notification.object as! String)
-        Defaults[.theme] = notification.object as! String
-        
-        (viewController.skView.scene as! GameScene).setTextures()
     }
 }
 
@@ -105,25 +111,7 @@ extension WindowController: NSToolbarDelegate {
         }
         
         if itemIdentifier == .toolbarThemesMenuItem {
-            let themesMenu = NSMenu(title: "Themes")
-            themesMenu.autoenablesItems = false
-            
-            let titleItem = themesMenu.addItem(withTitle: "Themes", action: nil, keyEquivalent: "")
-            titleItem.isEnabled = false
-            let font = NSFont.systemFont(ofSize: 11, weight: .semibold)
-            titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
-            
-            for theme in Util.themes {
-                if Defaults[.favorites].contains(theme.name) {
-                    let menuItem = themesMenu.addItem(withTitle: theme.name, action: #selector(changeTheme(sender:)), keyEquivalent: "")
-                    if Util.currentTheme == Util.theme(withName: theme.name) {
-                        menuItem.state = .on
-                    }
-                }
-            }
-            //themesMenu.addItem(.init(title: "Show All...", action: nil, keyEquivalent: ""))
-            themesItem.menu = themesMenu
-            
+            updateThemesMenu()
             return themesItem
         }
         if itemIdentifier == .toolbarStatsItem {

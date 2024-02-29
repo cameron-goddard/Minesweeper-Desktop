@@ -102,7 +102,7 @@ class ThemesViewController: NSViewController {
                 if let index = Defaults[.favorites].firstIndex(of: themes[oldRow].name) {
                     Defaults[.favorites].remove(at: index)
                 }
-                NotificationCenter.default.post(name: Notification.Name("UpdateThemeMenu"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
                 themes.remove(at: themes.firstIndex(of: themes[oldRow])!)
                 
                 tableView.reloadData()
@@ -115,10 +115,8 @@ class ThemesViewController: NSViewController {
     }
     
     @IBAction func setThemeButtonPressed(_ sender: Any) {
-        Util.currentTheme = themes[tableView.selectedRow]
-        Defaults[.theme] = themes[tableView.selectedRow].name
-        
         NotificationCenter.default.post(name: Notification.Name("SetTheme"), object: themes[tableView.selectedRow].name)
+        
     }
 }
 

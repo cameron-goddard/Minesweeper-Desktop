@@ -14,7 +14,6 @@ class StatsViewController: NSViewController {
     
     var stats = ["3BV", "3BV/s", "IOS", "RQP", "IOE", "Correctness"]
     var values = [0, 0, 0, 0, 0, 0]
-    let timer = Timer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +21,7 @@ class StatsViewController: NSViewController {
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor(red: 226, green: 226, blue: 226, alpha: 1).cgColor //change to default value
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateStat(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTime(notification:)), name: Notification.Name("UpdateTime"), object: nil)
     }
     
     @objc func updateStat(notification: Notification) {
@@ -33,6 +33,13 @@ class StatsViewController: NSViewController {
         tableView.reloadData()
     }
     
+    @objc func updateTime(notification: Notification) {
+        let elapsedTime = notification.object as! TimeInterval
+        let seconds = Int(elapsedTime)
+        let hundredths = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 100)
+        
+        timerField.stringValue = String(format: "%d.%02d", seconds, hundredths)
+    }
 }
 
 extension StatsViewController: NSTableViewDataSource {

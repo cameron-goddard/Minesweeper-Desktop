@@ -10,37 +10,40 @@ import SpriteKit
 
 class TimerView: NumberView {
     
-    var timer = Timer()
-    var seconds = 0
+    var gameTimer = Timer()
+    var startTime: Date?
     
     override init() {}
     
     func startTimer() {
-        seconds = 0
+        startTime = Date()
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        RunLoop.current.add(gameTimer, forMode: .common)
         self.set(value: 0)
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        
     }
     
     func stopTimer() {
-        timer.invalidate()
+        gameTimer.invalidate()
     }
     
     func reset() {
-        timer.invalidate()
+        gameTimer.invalidate()
+        NotificationCenter.default.post(name: Notification.Name("UpdateTime"), object: TimeInterval())
         self.set(value: 0)
     }
     
     @objc func fireTimer() {
-        seconds += 1
-        if seconds == 999 {
-            timer.invalidate()
-        }
-        set(value: seconds)
+        guard let startTime = self.startTime else { return }
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        
+        NotificationCenter.default.post(name: Notification.Name("UpdateTime"), object: elapsedTime)
+        self.set(value: Int(elapsedTime))
     }
     
     override func setTextures() {
         super.setTextures()
-        if !timer.isValid {
+        if !gameTimer.isValid {
             self.set(value: 0)
         }
     }

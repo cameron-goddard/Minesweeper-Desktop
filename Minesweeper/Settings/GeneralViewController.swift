@@ -70,7 +70,7 @@ class GeneralViewController: NSViewController {
 }
 
 extension Defaults.Keys {
-    static let appearance = Key<String>("appearance", default: "System")
+    static let appearance = Key<String>("appearance", default: "Light")
     static let style = Key<String>("style", default: "Classic")
     static let toolbarDifficulty = Key<Bool>("toolbarDifficulty", default: false)
     static let questions = Key<Bool>("questions", default: false)

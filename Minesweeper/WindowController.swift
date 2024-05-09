@@ -35,6 +35,31 @@ class WindowController: NSWindowController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavorites(notification:)), name: Notification.Name("UpdateFavorites"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setTheme(notification:)), name: Notification.Name("SetTheme"), object: nil)
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(interfaceThemeChanged), name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"), object: nil)
+    }
+    
+    @objc func interfaceThemeChanged() {
+        if Defaults[.appearance] != "System" {
+            return
+        }
+        
+        if UserDefaults.standard.string(forKey: "AppleInterfaceStyle") != nil {
+            if Util.currentTheme.name == "Classic" {
+                Util.currentTheme = Util.theme(withName: "Classic Dark")
+                Defaults[.theme] = "Classic Dark"
+                (viewController.skView.scene as! GameScene).setTextures()
+                
+                updateThemesMenu()
+            }
+        } else {
+            if Util.currentTheme.name == "Classic Dark" {
+                Util.currentTheme = Util.theme(withName: "Classic")
+                Defaults[.theme] = "Classic"
+                (viewController.skView.scene as! GameScene).setTextures()
+                
+                updateThemesMenu()
+            }
+        }
     }
     
     @objc func showStatsWindow() {

@@ -32,6 +32,7 @@ class ThemesViewController: NSViewController {
         themePreview.layer?.cornerRadius = 5
         assetsTableView.enclosingScrollView?.wantsLayer = true
         assetsTableView.enclosingScrollView?.layer?.cornerRadius = 5
+        tableView.doubleAction = #selector(setThemeButtonPressed(_:))
         showThemeInfo()
     }
     

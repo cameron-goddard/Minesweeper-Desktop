@@ -25,7 +25,6 @@
 		3B98639728448DF10017FAA0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B98639628448DF10017FAA0 /* Util.swift */; };
 		3B9DF10928971939007CADA6 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3B9DF10828971939007CADA6 /* Sparkle */; };
 		3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */; };
-		3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF110289CAD00007CADA6 /* Stats.swift */; };
 		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
 		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
@@ -36,6 +35,7 @@
 		3BF1A791285ED7CF00566000 /* BindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A790285ED7CF00566000 /* BindingsViewController.swift */; };
 		3BF1A795286037CA00566000 /* ThemeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A794286037CA00566000 /* ThemeScene.swift */; };
 		3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7CD2866AAD600566000 /* WindowController.swift */; };
+		3BF1D9B02BC0E5A70005200A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 3BF1D9AF2BC0E5A70005200A /* Collections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +58,6 @@
 		3B88CEA528023695008C84E2 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		3B98639628448DF10017FAA0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameViewController.swift; sourceTree = "<group>"; };
-		3B9DF110289CAD00007CADA6 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
 		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BF1D9B02BC0E5A70005200A /* Collections in Frameworks */,
 				3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */,
 				3B9DF10928971939007CADA6 /* Sparkle in Frameworks */,
 			);
@@ -87,7 +87,6 @@
 		3B1BDB04286BBDD000A36569 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				3B9DF110289CAD00007CADA6 /* Stats.swift */,
 				3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */,
 				3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */,
 			);
@@ -179,6 +178,7 @@
 			packageProductDependencies = (
 				3B9DF10828971939007CADA6 /* Sparkle */,
 				3BB04F032AA3F01A00893F21 /* Defaults */,
+				3BF1D9AF2BC0E5A70005200A /* Collections */,
 			);
 			productName = Minesweeper;
 			productReference = 3B5AB53827F96F710059BB0A /* Minesweeper.app */;
@@ -211,6 +211,7 @@
 			packageReferences = (
 				3B9DF10728971939007CADA6 /* XCRemoteSwiftPackageReference "Sparkle" */,
 				3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */,
+				3BF1D9AE2BC0E5A70005200A /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 3B5AB53927F96F710059BB0A /* Products */;
 			projectDirPath = "";
@@ -252,7 +253,6 @@
 				3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */,
 				3B5AB55327F970D30059BB0A /* Board.swift in Sources */,
 				3B48DBCD2AD2060D00E54243 /* ThemeCellView.swift in Sources */,
-				3B9DF111289CAD00007CADA6 /* Stats.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
 				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,
 				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
@@ -504,6 +504,14 @@
 				kind = branch;
 			};
 		};
+		3BF1D9AE2BC0E5A70005200A /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -516,6 +524,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
+		};
+		3BF1D9AF2BC0E5A70005200A /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3BF1D9AE2BC0E5A70005200A /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

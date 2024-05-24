@@ -226,6 +226,7 @@ class GameScene: SKScene {
         board.revealedTiles = 0
         gameOver = false
         gameStarted = false
+        NotificationCenter.default.post(name: Notification.Name("ResetStats"), object: nil)
         board.reset()
         timerView.reset()
         counterView.reset(mines: self.mines)

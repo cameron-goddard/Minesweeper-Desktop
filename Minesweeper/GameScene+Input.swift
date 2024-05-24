@@ -45,8 +45,6 @@ extension GameScene {
                     gameStarted = true
                 }
                 
-                NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: "test", userInfo: ["3BV": Int.random(in: 0...10)])
-                
                 mainButton.texture = Util.currentTheme.mainButton.happy
                 let coords = convertLocation(name: name)
                 let tile = board.tileAt(r: coords[0], c: coords[1])!
@@ -94,6 +92,8 @@ extension GameScene {
             else if tile!.state == .Question {
                 board.setAt(r: coords[0], c: coords[1], state: .Covered)
             }
+            
+            NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "Effective", userInfo: ["Effective": 0])
         }
     }
     

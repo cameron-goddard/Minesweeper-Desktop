@@ -77,6 +77,8 @@ class Board {
         
         // set adjacency numbers
         setNumbers()
+        
+        NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "test", userInfo: ["Total3BV": calculate3BV()])
     }
     
     func setTextures() {
@@ -145,6 +147,12 @@ class Board {
         print("[" + String(r) + ", " + String(c) + "]")
         
         if tile.state != .Uncovered {
+            NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "Effective", userInfo: ["Effective": 0])
+            
+            if tileAt(r: r, c: c)?.value == .Empty || !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty }) {
+                NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "3BV", userInfo: ["3BV": 0])
+            }
+            
             if tile.value == .Empty {
                 reveal(r: r, c: c)
             } else {
@@ -162,6 +170,8 @@ class Board {
                     revealedTiles += 1
                 }
             }
+        } else {
+            NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: 0, userInfo: ["NonEffective": 0])
         }
         
         if tile.value == .Mine {
@@ -254,5 +264,51 @@ class Board {
             new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
         }
         new.setValue(val: .Mine)
+    }
+}
+
+extension Board {
+    
+    func floodFill(marked: inout [[Bool]], x: Int, y: Int, m: Int, n: Int) {
+        if x < 0 || x >= m || y < 0 || y >= n || marked[x][y] {
+            return
+        }
+
+        marked[x][y] = true
+
+        if tiles[x][y].value != .Empty  {
+            return
+        }
+
+        let directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+        for (dx, dy) in directions {
+            floodFill(marked: &marked, x: x + dx, y: y + dy, m: m, n: n)
+        }
+    }
+    
+    func calculate3BV() -> Int {
+        let m = tiles.count
+        let n = tiles[0].count
+        var marked = Array(repeating: Array(repeating: false, count: n), count: m)
+        var bvCount = 0
+
+        for x in 0..<m {
+            for y in 0..<n {
+                if tiles[x][y].value == .Empty && !marked[x][y] {
+                    bvCount += 1
+                    floodFill(marked: &marked, x: x, y: y, m: m, n: n)
+                }
+            }
+        }
+
+        for x in 0..<m {
+            for y in 0..<n {
+                if !marked[x][y] && tiles[x][y].value != .Mine {
+                    bvCount += 1
+                }
+            }
+        }
+
+        return bvCount
     }
 }

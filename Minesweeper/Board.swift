@@ -78,7 +78,7 @@ class Board {
         // set adjacency numbers
         setNumbers()
         
-        NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "test", userInfo: ["Total3BV": calculate3BV()])
+        NotificationCenter.default.post(name: .updateStat, object: "test", userInfo: ["Total3BV": calculate3BV()])
     }
     
     func setTextures() {
@@ -147,10 +147,10 @@ class Board {
         print("[" + String(r) + ", " + String(c) + "]")
         
         if tile.state != .Uncovered {
-            NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "Effective", userInfo: ["Effective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])
             
             if tileAt(r: r, c: c)?.value == .Empty || !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty }) {
-                NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "3BV", userInfo: ["3BV": 0])
+                NotificationCenter.default.post(name: .updateStat, object: "3BV", userInfo: ["3BV": 0])
             }
             
             if tile.value == .Empty {
@@ -171,7 +171,7 @@ class Board {
                 }
             }
         } else {
-            NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: 0, userInfo: ["NonEffective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: 0, userInfo: ["NonEffective": 0])
         }
         
         if tile.value == .Mine {

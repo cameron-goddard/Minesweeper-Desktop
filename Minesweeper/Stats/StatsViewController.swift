@@ -31,12 +31,12 @@ class StatsViewController: NSViewController {
         
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor(red: 226, green: 226, blue: 226, alpha: 1).cgColor //change to default value
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateStat(notification:)), name: Notification.Name("UpdateStat"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTime(notification:)), name: Notification.Name("UpdateTime"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.resetStats(notification:)), name: Notification.Name("ResetStats"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateStat(_:)), name: .updateStat, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTime(_:)), name: .updateTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.resetStats(_:)), name: .resetStats, object: nil)
     }
     
-    @objc func updateStat(notification: Notification) {
+    @objc func updateStat(_ notification: Notification) {
         let statName = notification.userInfo!.keys.first! as! String
         let statValue = notification.userInfo!.values.first! as! Int
         
@@ -67,7 +67,7 @@ class StatsViewController: NSViewController {
         tableView.reloadData()
     }
     
-    @objc func updateTime(notification: Notification) {
+    @objc func updateTime(_ notification: Notification) {
         let elapsedTime = notification.object as! TimeInterval
         let seconds = Int(elapsedTime)
         let hundredths = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 100)
@@ -87,7 +87,7 @@ class StatsViewController: NSViewController {
         tableView.reloadData()
     }
     
-    @objc func resetStats(notification: Notification) {
+    @objc func resetStats(_ notification: Notification) {
         totalClicks = 0
         effectiveClicks = 0
         
@@ -123,4 +123,10 @@ extension StatsViewController: NSTableViewDataSource {
 
 extension StatsViewController: NSTableViewDelegate {
     
+}
+
+extension Notification.Name {
+    static let updateStat = Notification.Name("UpdateStats")
+    static let updateTime = Notification.Name("UpdateTime")
+    static let resetStats = Notification.Name("ResetStats")
 }

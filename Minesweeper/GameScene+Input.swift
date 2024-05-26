@@ -93,7 +93,7 @@ extension GameScene {
                 board.setAt(r: coords[0], c: coords[1], state: .Covered)
             }
             
-            NotificationCenter.default.post(name: Notification.Name("UpdateStat"), object: "Effective", userInfo: ["Effective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])
         }
     }
     

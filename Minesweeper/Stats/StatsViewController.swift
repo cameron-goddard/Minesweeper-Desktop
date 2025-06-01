@@ -16,10 +16,10 @@ class StatsViewController: NSViewController {
     var stats: OrderedDictionary = [
         "3BV": 0,
         "3BV/s": 0.0,
-        "IOS": 0,
-        "RQP": 0,
-        "IOE": 0,
-        "Throughput": 0
+        "Left": 0,
+        "Right": 0,
+        "Middle": 0,
+        "Estimated": 0
     ]
     
     var total3BV: Int = 0
@@ -56,13 +56,22 @@ class StatsViewController: NSViewController {
             stats["3BV"]! += Double(1)
         }
         
-        if (totalClicks == 0) {
-            stats["IOE"] = 0
-            stats["Throughput"] = 0
-        } else {
-            stats["IOE"] = Double(round(stats["3BV"]! / Double(totalClicks)) / 1000)
-            stats["Throughput"] = Double(round(stats["3BV"]! / Double(effectiveClicks)) / 1000)
+        if statName == "Left" {
+            stats["Left"]! += 1
         }
+        
+        if statName == "Right" {
+            stats["Right"]! += 1
+        }
+        
+//        TODO: Add back in
+//        if (totalClicks == 0) {
+//            stats["IOE"] = 0
+//            stats["Throughput"] = 0
+//        } else {
+//            stats["IOE"] = Double(round(stats["3BV"]! / Double(totalClicks)) / 1000)
+//            stats["Throughput"] = Double(round(stats["3BV"]! / Double(effectiveClicks)) / 1000)
+//        }
         
         tableView.reloadData()
     }
@@ -76,12 +85,18 @@ class StatsViewController: NSViewController {
         
         if (elapsedTime.magnitude == 0) {
             stats["3BV/s"] = 0
-            stats["IOS"] = 0
-            stats["RQP"] = 0
+            
+            // TODO: Add back in
+            // stats["IOS"] = 0
+            // stats["RQP"] = 0
         } else {
             stats["3BV/s"] = Double(round(1000 * (Double(effectiveClicks) / elapsedTime.magnitude)) / 1000)
-            stats["IOS"] = Double(round(1000 * log(stats["3BV"]!) / log(elapsedTime.magnitude)) / 1000)
-            stats["RQP"] = Double(round(1000 * elapsedTime.magnitude / stats["3BV/s"]!) / 1000)
+            
+            // TODO: Add back in
+            // stats["IOS"] = Double(round(1000 * log(stats["3BV"]!) / log(elapsedTime.magnitude)) / 1000)
+            // stats["RQP"] = Double(round(1000 * elapsedTime.magnitude / stats["3BV/s"]!) / 1000)
+            
+//            stats[
         }
         
         tableView.reloadData()
@@ -112,8 +127,14 @@ extension StatsViewController: NSTableViewDataSource {
             
             if stats.elements[row].key == "3BV" {
                 statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))/\(total3BV)"
+            } else if stats.elements[row].key == "Left" {
+                statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))"
+            } else if stats.elements[row].key == "Middle" {
+                statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))"
+            } else if stats.elements[row].key == "Right" {
+                statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))"
             } else {
-                statsValueCell.textField!.stringValue = String(format: "%.3f", stats.elements[row].value)
+                statsValueCell.textField!.stringValue = String(format: "%.2f", stats.elements[row].value)
             }
             
             return statsValueCell

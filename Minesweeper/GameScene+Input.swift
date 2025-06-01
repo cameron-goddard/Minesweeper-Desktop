@@ -94,6 +94,7 @@ extension GameScene {
             }
             
             NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: "Right", userInfo: ["Right": 0])
         }
     }
     

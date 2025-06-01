@@ -149,7 +149,7 @@ class Board {
         if tile.state != .Uncovered {
             NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])
             
-            if tileAt(r: r, c: c)?.value == .Empty || !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty }) {
+            if tileAt(r: r, c: c)?.value == .Empty || (tileAt(r: r, c: c)?.value != .Mine && !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty })) {
                 NotificationCenter.default.post(name: .updateStat, object: "3BV", userInfo: ["3BV": 0])
             }
             
@@ -173,6 +173,8 @@ class Board {
         } else {
             NotificationCenter.default.post(name: .updateStat, object: 0, userInfo: ["NonEffective": 0])
         }
+        
+        NotificationCenter.default.post(name: .updateStat, object: "Left", userInfo: ["Left": 0])
         
         if tile.value == .Mine {
             tile.setValue(val: .MineRed)
@@ -292,6 +294,7 @@ extension Board {
         var marked = Array(repeating: Array(repeating: false, count: n), count: m)
         var bvCount = 0
 
+        // Count regions of empty tiles
         for x in 0..<m {
             for y in 0..<n {
                 if tiles[x][y].value == .Empty && !marked[x][y] {
@@ -301,9 +304,10 @@ extension Board {
             }
         }
 
+        // Count individually revealed numbered tiles
         for x in 0..<m {
             for y in 0..<n {
-                if !marked[x][y] && tiles[x][y].value != .Mine {
+                if !marked[x][y] && tiles[x][y].isNumber() {
                     bvCount += 1
                 }
             }

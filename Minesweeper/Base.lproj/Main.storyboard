@@ -72,6 +72,7 @@
                                                 <action selector="newGame:" target="Voe-Tx-rLC" id="m0b-0G-Lji"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Restart Game" keyEquivalent="r" id="Kre-DC-zEh"/>
                                         <menuItem isSeparatorItem="YES" id="x6k-d3-XE6"/>
                                         <menuItem title="Beginner" keyEquivalent="1" id="189-jk-hOQ">
                                             <connections>
@@ -88,9 +89,31 @@
                                                 <action selector="newGame:" target="Voe-Tx-rLC" id="gtG-C1-8rP"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Custom..." keyEquivalent="4" id="U5c-xf-mhO" userLabel="Custom...">
+                                        <menuItem title="Custom..." id="U5c-xf-mhO" userLabel="Custom...">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="customGame:" target="Voe-Tx-rLC" id="Soy-yX-0r0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="xY9-uv-FvY"/>
+                                        <menuItem title="Best Times..." id="0fi-BC-OMd">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Board" id="QqH-9Z-H5P">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Board" id="LjP-Rb-xDe">
+                                    <items>
+                                        <menuItem title="Save Board..." keyEquivalent="s" id="Lq0-Fd-cuC">
+                                            <connections>
+                                                <action selector="saveBoard:" target="Voe-Tx-rLC" id="rUT-Ys-OoS"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open Board..." keyEquivalent="o" id="rN3-BN-MT3">
+                                            <connections>
+                                                <action selector="openBoard:" target="Voe-Tx-rLC" id="tBM-nh-Mnh"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -1025,11 +1048,11 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="statsLabelCell" id="DrZ-Vt-IvX">
-                                                            <rect key="frame" x="18" y="0.0" width="98" height="24"/>
+                                                            <rect key="frame" x="18" y="0.0" width="114" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVl-U3-VJS">
-                                                                    <rect key="frame" x="0.0" y="4" width="98" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="114" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Stat Label" id="HMT-Y2-Fcf">
                                                                         <font key="font" usesAppearanceFont="YES"/>

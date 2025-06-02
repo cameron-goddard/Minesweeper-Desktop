@@ -14,6 +14,7 @@ class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
     var difficulty = Defaults[.difficulty]
+    var minesLayout: [(Int,Int)]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,21 +24,21 @@ class ViewController: NSViewController {
         if let view = self.skView {
             let rows, cols, mines: Int
             
-            if difficulty != "Custom" {
-                rows = Util.difficulties[difficulty]![0]
-                cols = Util.difficulties[difficulty]![1]
-                mines = Util.difficulties[difficulty]![2]
-            } else {
+            if difficulty == "Custom" || difficulty == "Loaded Custom" {
                 rows = Defaults[.customDifficulty][0]
                 cols = Defaults[.customDifficulty][1]
                 mines = Defaults[.customDifficulty][2]
+            } else {
+                rows = Util.difficulties[difficulty]![0]
+                cols = Util.difficulties[difficulty]![1]
+                mines = Util.difficulties[difficulty]![2]
             }
             
             // Consider changing fullSizeContentView in the future
             view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
             
             Util.currentTheme = Util.theme(withName: Defaults[.theme])
-            let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines)
+            let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
             view.presentScene(scene)
             
             //view.showsFPS = true

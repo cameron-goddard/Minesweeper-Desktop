@@ -18,8 +18,6 @@ class GameScene: SKScene {
     var gameOver = false
     var gameStarted = false
     
-    var difficulty = "Intermediate"
-    
     var rows, cols, mines : Int
     
     var topBorder,
@@ -37,16 +35,15 @@ class GameScene: SKScene {
         bottomRightCorner: SKSpriteNode!
 
     var filler: SKSpriteNode!
-    
     var background: SKSpriteNode!
     
     var currentTile: String? = nil
     
-    init(size: CGSize, rows: Int, cols: Int, mines: Int) {
+    init(size: CGSize, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
         self.rows = rows
         self.cols = cols
         self.mines = mines
-        board = Board(rows: rows, cols: cols, mines: mines)
+        board = Board(rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
         timerView = TimerView()
         counterView = CounterView(mines: self.mines)
         super.init(size: size)

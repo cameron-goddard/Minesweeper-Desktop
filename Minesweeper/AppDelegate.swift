@@ -100,6 +100,58 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.contentViewController = controller
         }
     }
+    
+    @IBAction func saveBoard(_ sender: NSMenuItem) {
+        
+    }
+    
+    @IBAction func openBoard(_ sender: NSMenuItem) {
+        let openPanel = NSOpenPanel()
+        
+        guard let window = NSApplication.shared.mainWindow else { return }
+
+        openPanel.beginSheetModal(for: window, completionHandler: { num in
+            
+            if num == .OK, let path = openPanel.url {
+                do {
+                    let file = try Data(contentsOf: path)
+                    print("File size: \(file.count) bytes")
+                    
+                    let rows = Int(file[1])
+                    let cols = Int(file[0])
+                    let mines = Int(file[3]) | Int(file[2]) << 8
+                    
+                    Defaults[.customDifficulty][0] = rows
+                    Defaults[.customDifficulty][1] = cols
+                    Defaults[.customDifficulty][2] = mines
+                    
+                    let storyboard = NSStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+                    
+                    controller.difficulty = "Loaded Custom"
+                    
+                    var minesLayout: [(Int, Int)] = []
+                    let minesData = file[4...]
+                    
+                    for i in stride(from: minesData.startIndex, to: minesData.endIndex, by: 2) {
+                        if i + 1 < minesData.endIndex {
+                            minesLayout.append((Int(minesData[i]), Int(minesData[i + 1])))
+                        }
+                    }
+                    controller.minesLayout = minesLayout
+                    
+                    print("minesLayout: \(minesLayout)")
+                    
+                    window.contentViewController = controller
+                    
+                    print("Rows: \(Int(file[1])), Columns: \(Int(file[0])), Bombs: \(Int(file[3]) | Int(file[2]) << 8)")
+                    
+                } catch {
+                    
+                }
+            }
+        })
+    }
 }
 
 extension Defaults.Keys {

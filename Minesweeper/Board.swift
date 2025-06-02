@@ -13,71 +13,80 @@ class Board {
     let node: SKShapeNode
     
     let rows, cols, mines : Int
+    let minesLayout: [(Int, Int)]?
     
     var revealedTiles = 0
     var availableTiles : Int
     
-    var tiles : [[Tile]] //may change this
+    var tiles : [[Tile]] // May change this
     
     private var tileSize: CGSize {
         CGSize(
-            width: 16*Util.scale,
-            height: 16*Util.scale
+            width: 16 * Util.scale,
+            height: 16 * Util.scale
         )
     }
     
-    init(rows: Int, cols: Int, mines: Int) {
+    init(rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
         self.node = SKShapeNode(path: CGPath(rect: CGRect(x: 0, y: 0, width: cols*16*Int(Util.scale), height: rows*16*Int(Util.scale)), transform: nil), centered: true)
         self.node.lineWidth = 0
         
-        self.availableTiles = rows*cols - mines
+        self.availableTiles = rows * cols - mines
         
         self.rows = rows
         self.cols = cols
         self.mines = mines
+        self.minesLayout = minesLayout
         
         self.tiles = [[Tile]](repeating: [Tile](repeating: Tile(), count: cols), count: rows)
         initBoard()
     }
     
     private func initBoard() {
-        // init tiles
-        for r in 0...rows-1 {
-            for c in 0...cols-1 {
+        // Init tiles
+        for r in 0...rows - 1 {
+            for c in 0...cols - 1 {
                 let tile = Tile(r: r, c: c, state: .Covered)
                 self.tiles[r][c] = tile
                 node.addChild(tile.node)
             }
         }
         
-        // set tile sizes and positions
-        for r in 0...rows-1 {
-            for c in 0...cols-1 {
+        // Set tile sizes and positions
+        for r in 0...rows - 1 {
+            for c in 0...cols - 1 {
                 tiles[r][c].node.size = tileSize
                 
                 let x = node.frame.minX + CGFloat(c) * tileSize.width
                 let y = node.frame.maxY - CGFloat(r) * tileSize.height
                 
-                tiles[r][c].node.position = CGPoint(x: x-CGFloat((4*cols)), y: y+CGFloat((4*rows))-(Util.scale*21.5)) //Temporary fix
+                tiles[r][c].node.position = CGPoint(x: x-CGFloat((4*cols)), y: y+CGFloat((4*rows))-(Util.scale*21.5)) // Temporary fix
             }
         }
         
-        // add mines
-        var addedMines = 0
-        while addedMines < mines {
-            for r in 0...rows-1 {
-                for c in 0...cols-1 {
-                    if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty && addedMines < mines {
-                        tiles[r][c].setValue(val: .Mine)
-                        addedMines += 1
+        // Add mines
+        if minesLayout != nil {
+            for (c, r) in minesLayout! {
+                tiles[r][c].setValue(val: .Mine)
+            }
+        } else {
+            var addedMines = 0
+            while addedMines < mines {
+                for r in 0...rows-1 {
+                    for c in 0...cols-1 {
+                        if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty && addedMines < mines {
+                            tiles[r][c].setValue(val: .Mine)
+                            addedMines += 1
+                        }
                     }
                 }
             }
         }
         
-        // set adjacency numbers
+        // Set adjacency numbers
         setNumbers()
         
+        // Calculate total 3BV and send to Stats
         NotificationCenter.default.post(name: .updateStat, object: "test", userInfo: ["Total3BV": calculate3BV()])
     }
     

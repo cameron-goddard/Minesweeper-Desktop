@@ -212,6 +212,8 @@ class GameScene: SKScene {
     func finishGame(won: Bool) {
         gameOver = true
         gameStarted = false
+        NotificationCenter.default.post(name: Notification.Name("RevealStats"), object: nil)
+        
         if won {
             board.flagMines()
             mainButton.texture = Util.currentTheme.mainButton.cool

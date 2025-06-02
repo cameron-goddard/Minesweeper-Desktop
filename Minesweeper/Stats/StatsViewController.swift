@@ -22,6 +22,8 @@ class StatsViewController: NSViewController {
         "Estimated": 0
     ]
     
+    var revealStats: Bool = false
+    var elapsedTime: TimeInterval = 0
     var total3BV: Int = 0
     var totalClicks: Int = 0
     var effectiveClicks: Int = 0
@@ -31,9 +33,11 @@ class StatsViewController: NSViewController {
         
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor(red: 226, green: 226, blue: 226, alpha: 1).cgColor //change to default value
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateStat(_:)), name: .updateStat, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTime(_:)), name: .updateTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.resetStats(_:)), name: .resetStats, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.revealStats(_:)), name: .revealStats, object: nil)
     }
     
     @objc func updateStat(_ notification: Notification) {
@@ -77,26 +81,35 @@ class StatsViewController: NSViewController {
     }
     
     @objc func updateTime(_ notification: Notification) {
-        let elapsedTime = notification.object as! TimeInterval
+        elapsedTime = notification.object as! TimeInterval
         let seconds = Int(elapsedTime)
         let hundredths = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 100)
         
         timerField.stringValue = String(format: "%d.%02d", seconds, hundredths)
         
+        // Update (non hidden) time-based stat values
+        // TODO: Add back in
+//        if (elapsedTime.magnitude == 0) {
+//             stats["IOS"] = 0
+//             stats["RQP"] = 0
+//        } else {
+//             stats["IOS"] = Double(round(1000 * log(stats["3BV"]!) / log(elapsedTime.magnitude)) / 1000)
+//             stats["RQP"] = Double(round(1000 * elapsedTime.magnitude / stats["3BV/s"]!) / 1000)
+//        }
+        
+        tableView.reloadData()
+    }
+    
+    @objc func revealStats(_ notification: Notification) {
+        revealStats = true
+        
+        // Calculate time-based stats
         if (elapsedTime.magnitude == 0) {
             stats["3BV/s"] = 0
-            
-            // TODO: Add back in
-            // stats["IOS"] = 0
-            // stats["RQP"] = 0
+            stats["Estimated"] = 0
         } else {
             stats["3BV/s"] = Double(round(1000 * (Double(effectiveClicks) / elapsedTime.magnitude)) / 1000)
-            
-            // TODO: Add back in
-            // stats["IOS"] = Double(round(1000 * log(stats["3BV"]!) / log(elapsedTime.magnitude)) / 1000)
-            // stats["RQP"] = Double(round(1000 * elapsedTime.magnitude / stats["3BV/s"]!) / 1000)
-            
-//            stats[
+            stats["Estimated"] = Double(total3BV) / (Double(totalClicks) / elapsedTime.magnitude)
         }
         
         tableView.reloadData()
@@ -109,6 +122,8 @@ class StatsViewController: NSViewController {
         for i in 0..<stats.values.count {
             stats.values[i] = 0
         }
+        
+        revealStats = false
     }
 }
 
@@ -125,16 +140,28 @@ extension StatsViewController: NSTableViewDataSource {
         } else {
             guard let statsValueCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsValueCell"), owner: self) as? NSTableCellView else { return nil }
             
-            if stats.elements[row].key == "3BV" {
-                statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))/\(total3BV)"
-            } else if stats.elements[row].key == "Left" {
+            switch stats.elements[row].key {
+            case "3BV":
+                if revealStats {
+                    statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))/\(total3BV)"
+                } else {
+                    statsValueCell.textField!.stringValue = "•/•"
+                }
+            case "3BV/s":
+                fallthrough
+            case "Estimated":
+                if revealStats {
+                    statsValueCell.textField!.stringValue = String(format: "%.2f", stats.elements[row].value)
+                } else {
+                    statsValueCell.textField!.stringValue = "•••"
+                }
+            case "Left":
+                fallthrough
+            case "Middle":
+                fallthrough
+            case "Right":
                 statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))"
-            } else if stats.elements[row].key == "Middle" {
-                statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))"
-            } else if stats.elements[row].key == "Right" {
-                statsValueCell.textField!.stringValue = "\(Int(stats.elements[row].value))"
-            } else {
-                statsValueCell.textField!.stringValue = String(format: "%.2f", stats.elements[row].value)
+            default: break
             }
             
             return statsValueCell
@@ -150,4 +177,5 @@ extension Notification.Name {
     static let updateStat = Notification.Name("UpdateStats")
     static let updateTime = Notification.Name("UpdateTime")
     static let resetStats = Notification.Name("ResetStats")
+    static let revealStats = Notification.Name("RevealStats")
 }

@@ -20,7 +20,6 @@ class TimerView: NumberView {
         gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         RunLoop.current.add(gameTimer, forMode: .common)
         self.set(value: 0)
-        
     }
     
     func stopTimer() {

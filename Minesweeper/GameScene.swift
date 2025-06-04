@@ -47,6 +47,8 @@ class GameScene: SKScene {
         timerView = TimerView()
         counterView = CounterView(mines: self.mines)
         super.init(size: size)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.restartGame(_:)), name: .restartGame, object: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -226,7 +228,19 @@ class GameScene: SKScene {
         gameOver = false
         gameStarted = false
         NotificationCenter.default.post(name: Notification.Name("ResetStats"), object: nil)
+        
         board.reset()
+        timerView.reset()
+        counterView.reset(mines: self.mines)
+    }
+    
+    @objc func restartGame(_ notification: Notification) {
+        board.revealedTiles = 0
+        gameOver = false
+        gameStarted = false
+        NotificationCenter.default.post(name: Notification.Name("ResetStats"), object: nil)
+        
+        board.restart()
         timerView.reset()
         counterView.reset(mines: self.mines)
     }
@@ -234,4 +248,8 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+}
+
+extension Notification.Name {
+    static let restartGame = Notification.Name("RestartGame")
 }

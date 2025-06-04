@@ -72,7 +72,12 @@
                                                 <action selector="newGame:" target="Voe-Tx-rLC" id="m0b-0G-Lji"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Restart Game" keyEquivalent="r" id="Kre-DC-zEh"/>
+                                        <menuItem title="Restart Game" id="Kre-DC-zEh">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="restartGame:" target="Voe-Tx-rLC" id="f9r-zI-K7N"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="x6k-d3-XE6"/>
                                         <menuItem title="Beginner" keyEquivalent="1" id="189-jk-hOQ">
                                             <connections>

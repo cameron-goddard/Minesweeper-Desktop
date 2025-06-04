@@ -76,6 +76,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    @IBAction func restartGame(_ sender: NSMenuItem) {
+        NotificationCenter.default.post(name: .restartGame, object: nil)
+    }
+    
     @IBAction func customGame(_ sender: Any) {
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
@@ -135,7 +139,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     for i in stride(from: minesData.startIndex, to: minesData.endIndex, by: 2) {
                         if i + 1 < minesData.endIndex {
-                            minesLayout.append((Int(minesData[i]), Int(minesData[i + 1])))
+                            minesLayout.append((Int(minesData[i + 1]), Int(minesData[i])))
                         }
                     }
                     controller.minesLayout = minesLayout

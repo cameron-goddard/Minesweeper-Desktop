@@ -13,7 +13,9 @@ class Board {
     let node: SKShapeNode
     
     let rows, cols, mines : Int
-    let minesLayout: [(Int, Int)]?
+    var minesLayout: [(Int, Int)] = []
+    
+    var loadedBoard: Bool = false
     
     var revealedTiles = 0
     var availableTiles : Int
@@ -28,7 +30,7 @@ class Board {
     }
     
     init(rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
-        self.node = SKShapeNode(path: CGPath(rect: CGRect(x: 0, y: 0, width: cols*16*Int(Util.scale), height: rows*16*Int(Util.scale)), transform: nil), centered: true)
+        self.node = SKShapeNode(path: CGPath(rect: CGRect(x: 0, y: 0, width: cols * 16 * Int(Util.scale), height: rows * 16 * Int(Util.scale)), transform: nil), centered: true)
         self.node.lineWidth = 0
         
         self.availableTiles = rows * cols - mines
@@ -36,13 +38,17 @@ class Board {
         self.rows = rows
         self.cols = cols
         self.mines = mines
-        self.minesLayout = minesLayout
+        
+        if minesLayout != nil {
+            self.minesLayout = minesLayout!
+            self.loadedBoard = true
+        }
         
         self.tiles = [[Tile]](repeating: [Tile](repeating: Tile(), count: cols), count: rows)
         initBoard()
     }
     
-    private func initBoard() {
+    private func initBoard(restart: Bool = false) {
         // Init tiles
         for r in 0...rows - 1 {
             for c in 0...cols - 1 {
@@ -65,17 +71,20 @@ class Board {
         }
         
         // Add mines
-        if minesLayout != nil {
-            for (c, r) in minesLayout! {
+        if loadedBoard || restart {
+            for (r, c) in minesLayout {
                 tiles[r][c].setValue(val: .Mine)
             }
         } else {
+            minesLayout = []
+            
             var addedMines = 0
             while addedMines < mines {
-                for r in 0...rows-1 {
-                    for c in 0...cols-1 {
+                for r in 0...rows - 1 {
+                    for c in 0...cols - 1 {
                         if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty && addedMines < mines {
                             tiles[r][c].setValue(val: .Mine)
+                            minesLayout.append((r, c))
                             addedMines += 1
                         }
                     }
@@ -165,7 +174,7 @@ class Board {
             if tile.value == .Empty {
                 reveal(r: r, c: c)
             } else {
-                if revealedTiles == 0 && Defaults[.safeFirstClick] && tile.value == .Mine {
+                if revealedTiles == 0 && Defaults[.safeFirstClick] && tile.value == .Mine && !loadedBoard {
                     
                     let allTiles = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
                     
@@ -249,7 +258,12 @@ class Board {
     }
     
     func reset() {
+        loadedBoard = false
         initBoard()
+    }
+    
+    func restart() {
+        initBoard(restart: true)
     }
     
     func flagMines() {
@@ -275,6 +289,9 @@ class Board {
             new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
         }
         new.setValue(val: .Mine)
+        
+        minesLayout.removeAll(where: { $0 == (row, col) })
+        minesLayout.append((new.r, new.c))
     }
 }
 

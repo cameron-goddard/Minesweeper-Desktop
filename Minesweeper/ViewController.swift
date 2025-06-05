@@ -59,4 +59,8 @@ class ViewController: NSViewController {
             view.window!.subtitle = ""
         }
     }
+    
+    func getBoard() -> Board? {
+        return (skView.scene as? GameScene)?.board
+    }
 }

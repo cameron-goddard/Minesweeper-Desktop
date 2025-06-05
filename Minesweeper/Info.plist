@@ -2,11 +2,60 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mbf</string>
+			</array>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>1</integer>
+			<key>CFBundleTypeName</key>
+			<string>Minesweeper Board File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.camerongoddard.Minesweeper.mbf</string>
+			</array>
+		</dict>
+	</array>
 	<key>SUEnableInstallerLauncherService</key>
 	<string>YES</string>
 	<key>SUFeedURL</key>
 	<string>https://www.camerongoddard.com/ms-desktop/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>HmQyg39bIEZIiosUpTn3kLeNEbauNQI6bbYWOj5q0k0=</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.item</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Minesweeper Board File</string>
+			<key>UTTypeIcons</key>
+			<dict>
+				<key>UTTypeIconBadgeName</key>
+				<string></string>
+				<key>UTTypeIconText</key>
+				<string>MBF</string>
+			</dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.camerongoddard.Minesweeper.mbf</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mbf</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

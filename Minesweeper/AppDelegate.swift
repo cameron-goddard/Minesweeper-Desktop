@@ -10,6 +10,7 @@ import Cocoa
 import Sparkle
 import Defaults
 import SpriteKit
+import UniformTypeIdentifiers
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -106,20 +107,52 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func saveBoard(_ sender: NSMenuItem) {
+        guard let window = NSApplication.shared.mainWindow,
+              let vc = window.contentViewController as? ViewController,
+              let board = vc.getBoard() else { return }
+        
+        
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [.mbf]
+        savePanel.nameFieldStringValue = "board.mbf"
+        
+        savePanel.beginSheetModal(for: window, completionHandler: { num in
+            if num == .OK, let path = savePanel.url {
+                var data = Data()
+                
+                data.append(UInt8(board.cols))
+                data.append(UInt8(board.rows))
+                
+                let mines = UInt16(board.mines)
+                
+                data.append(UInt8((mines >> 8) & 0xFF))
+                data.append(UInt8(mines & 0xFF))
+                
+                for (r, c) in board.minesLayout {
+                    data.append(UInt8(c))
+                    data.append(UInt8(r))
+                }
+                
+                do {
+                    try data.write(to: path)
+                } catch {
+                    
+                }
+            }
+        })
         
     }
     
     @IBAction func openBoard(_ sender: NSMenuItem) {
-        let openPanel = NSOpenPanel()
-        
         guard let window = NSApplication.shared.mainWindow else { return }
+        
+        let openPanel = NSOpenPanel()
+        openPanel.allowedContentTypes = [.mbf]
 
         openPanel.beginSheetModal(for: window, completionHandler: { num in
-            
             if num == .OK, let path = openPanel.url {
                 do {
                     let file = try Data(contentsOf: path)
-                    print("File size: \(file.count) bytes")
                     
                     let rows = Int(file[1])
                     let cols = Int(file[0])
@@ -148,7 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     window.contentViewController = controller
                     
-                    print("Rows: \(Int(file[1])), Columns: \(Int(file[0])), Bombs: \(Int(file[3]) | Int(file[2]) << 8)")
+                    print("Rows: \(Int(file[1])), Columns: \(Int(file[0])), Mines: \(mines)")
                     
                 } catch {
                     
@@ -156,9 +189,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         })
     }
+    
+    func application(_ application: NSApplication, open urls: [URL]) {
+        // TODO
+    }
 }
 
 extension Defaults.Keys {
     static let difficulty = Key<String>("difficulty", default: "Beginner")
     static let customDifficulty = Key<Array<Int>>("customDifficulty", default: [-1, -1, -1])
+}
+
+extension UTType {
+    public static let mbf = UTType(exportedAs: "com.camerongoddard.Minesweeper.mbf")
 }

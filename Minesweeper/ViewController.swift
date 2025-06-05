@@ -60,6 +60,10 @@ class ViewController: NSViewController {
         }
     }
     
+    func getScene() -> GameScene? {
+        return skView.scene as? GameScene
+    }
+    
     func getBoard() -> Board? {
         return (skView.scene as? GameScene)?.board
     }

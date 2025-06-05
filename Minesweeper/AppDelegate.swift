@@ -81,7 +81,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.post(name: .restartGame, object: nil)
     }
     
-    @IBAction func customGame(_ sender: Any) {
+    @IBAction func customGame(_ sender: NSMenuItem) {
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
                 let storyboard = NSStoryboard(name: "Main", bundle: nil)
@@ -92,8 +92,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func newCustomGame(notification: Notification) {
+        guard let window = NSApplication.shared.mainWindow,
+              let oldController = window.contentViewController as? ViewController,
+              let oldScene = oldController.getScene() else { return }
+        
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+        
+        oldScene.timerView.reset()
+        
         controller.difficulty = "Custom"
         Defaults[.difficulty] = "Custom"
         
@@ -101,16 +108,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Defaults[.customDifficulty][1] = (notification.object as! [Int])[0]
         Defaults[.customDifficulty][2] = (notification.object as! [Int])[2]
         
-        if let window = NSApplication.shared.mainWindow {
-            window.contentViewController = controller
-        }
+        window.contentViewController = controller
     }
     
     @IBAction func saveBoard(_ sender: NSMenuItem) {
         guard let window = NSApplication.shared.mainWindow,
               let vc = window.contentViewController as? ViewController,
               let board = vc.getBoard() else { return }
-        
         
         let savePanel = NSSavePanel()
         savePanel.allowedContentTypes = [.mbf]
@@ -143,7 +147,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func openBoard(_ sender: NSMenuItem) {
-        guard let window = NSApplication.shared.mainWindow else { return }
+        guard let window = NSApplication.shared.mainWindow,
+              let oldController = window.contentViewController as? ViewController,
+              let oldScene = oldController.getScene() else { return }
         
         let openPanel = NSOpenPanel()
         openPanel.allowedContentTypes = [.mbf]
@@ -170,15 +176,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         return
                     }
                     
-                    Defaults[.customDifficulty][0] = rows
-                    Defaults[.customDifficulty][1] = cols
-                    Defaults[.customDifficulty][2] = mines
-                    
-                    let storyboard = NSStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
-                    
-                    controller.difficulty = "Loaded Custom"
-                    
                     var minesLayout: [(Int, Int)] = []
                     let minesData = file[4...]
                     if minesData.count != mines * 2 {
@@ -191,13 +188,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                             minesLayout.append((Int(minesData[i + 1]), Int(minesData[i])))
                         }
                     }
+                    
+                    oldScene.timerView.reset()
+                    
+                    Defaults[.customDifficulty][0] = rows
+                    Defaults[.customDifficulty][1] = cols
+                    Defaults[.customDifficulty][2] = mines
+                    
+                    let storyboard = NSStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+                    
+                    controller.difficulty = "Loaded Custom"
                     controller.minesLayout = minesLayout
+                    
                     window.contentViewController = controller
                 } catch {
                     self.showInvalidBoardAlert()
                 }
             }
         })
+        print("calling reset")
+        NotificationCenter.default.post(name: Notification.Name("ResetStats"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name("UpdateTime"), object: TimeInterval())
+        print("called reset")
     }
     
     func application(_ application: NSApplication, open urls: [URL]) {

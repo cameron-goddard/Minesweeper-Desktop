@@ -140,7 +140,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         })
-        
     }
     
     @IBAction func openBoard(_ sender: NSMenuItem) {
@@ -153,10 +152,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if num == .OK, let path = openPanel.url {
                 do {
                     let file = try Data(contentsOf: path)
+                    if file.count < 4 {
+                        self.showInvalidBoardAlert()
+                        return
+                    }
                     
                     let rows = Int(file[1])
                     let cols = Int(file[0])
+                    if rows == 0 || cols == 0 {
+                        self.showInvalidBoardAlert()
+                        return
+                    }
+                    
                     let mines = Int(file[3]) | Int(file[2]) << 8
+                    if mines > rows * cols {
+                        self.showInvalidBoardAlert()
+                        return
+                    }
                     
                     Defaults[.customDifficulty][0] = rows
                     Defaults[.customDifficulty][1] = cols
@@ -169,6 +181,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     var minesLayout: [(Int, Int)] = []
                     let minesData = file[4...]
+                    if minesData.count != mines * 2 {
+                        self.showInvalidBoardAlert()
+                        return
+                    }
                     
                     for i in stride(from: minesData.startIndex, to: minesData.endIndex, by: 2) {
                         if i + 1 < minesData.endIndex {
@@ -176,15 +192,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         }
                     }
                     controller.minesLayout = minesLayout
-                    
-                    print("minesLayout: \(minesLayout)")
-                    
                     window.contentViewController = controller
-                    
-                    print("Rows: \(Int(file[1])), Columns: \(Int(file[0])), Mines: \(mines)")
-                    
                 } catch {
-                    
+                    self.showInvalidBoardAlert()
                 }
             }
         })
@@ -192,6 +202,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func application(_ application: NSApplication, open urls: [URL]) {
         // TODO
+    }
+    
+    private func showInvalidBoardAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Invalid Board File"
+        alert.informativeText = "The selected file is not a valid Minesweeper board."
+        alert.alertStyle = .warning
+        alert.runModal()
     }
 }
 

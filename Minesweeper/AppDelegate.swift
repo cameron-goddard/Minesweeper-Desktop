@@ -207,10 +207,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         })
-        print("calling reset")
-        NotificationCenter.default.post(name: Notification.Name("ResetStats"), object: nil)
-        NotificationCenter.default.post(name: Notification.Name("UpdateTime"), object: TimeInterval())
-        print("called reset")
     }
     
     func application(_ application: NSApplication, open urls: [URL]) {

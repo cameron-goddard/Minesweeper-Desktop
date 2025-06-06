@@ -8,6 +8,7 @@
 import Cocoa
 import GameplayKit
 import Defaults
+import UniformTypeIdentifiers
 
 class ThemesViewController: NSViewController {
 
@@ -61,6 +62,12 @@ class ThemesViewController: NSViewController {
     @IBAction func addDeleteControlPressed(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 {
             let openPanel = NSOpenPanel()
+            openPanel.allowedContentTypes = [
+                UTType(filenameExtension: "bmp")!,
+                UTType(filenameExtension: "png")!,
+                UTType(filenameExtension: "jpg")!,
+                UTType(filenameExtension: "jpeg")!,
+            ]
 
             openPanel.beginSheetModal(for: self.view.window!, completionHandler: { num in
                 if num == .OK {

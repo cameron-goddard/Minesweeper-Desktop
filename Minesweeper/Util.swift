@@ -82,7 +82,11 @@ class Util {
             let name = toTheme(name: themePath.deletingPathExtension().lastPathComponent)
             let fileName = themePath.lastPathComponent
             
-            let image = NSImage(contentsOf: themePath)!
+            guard let image = NSImage(contentsOf: themePath) else {
+                throw NSError(domain: "Invalid Theme", code: 0, userInfo: [
+                    NSLocalizedDescriptionKey: "Failed to load theme from file: \(theme)"
+                ])
+            }
             image.size = NSSize(width: 144, height: 122) // Account for different DPIs
             
             let theme = Theme(

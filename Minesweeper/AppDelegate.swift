@@ -22,6 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     override init() {
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
         
+        super.init()
+        
         // This block of code must happen before the ViewController's viewDidLoad()
         let fileManager = FileManager.default
         let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
@@ -32,7 +34,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             do {
                 try Util.readThemes()
             } catch {
+                let alert = NSAlert()
+                alert.messageText = "Invalid Theme File"
+                alert.informativeText = error.localizedDescription
+                alert.runModal()
                 
+                NSApplication.shared.terminate(self)
             }
         } else {
             do {

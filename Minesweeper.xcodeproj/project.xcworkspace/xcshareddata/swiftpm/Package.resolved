@@ -1,4 +1,5 @@
 {
+  "originHash" : "00300c2ae30f58417f2919c17f8d3445c577e0304d0862a517758ef44f86f615",
   "pins" : [
     {
       "identity" : "defaults",
@@ -6,7 +7,7 @@
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
         "branch" : "main",
-        "revision" : "bd14dae265091c5fb1ba1123a52861ae9f2ede84"
+        "revision" : "d88a5c8cdb498e7536ef5ff88e7120e9b5874806"
       }
     },
     {
@@ -15,7 +16,7 @@
       "location" : "https://github.com/sparkle-project/Sparkle",
       "state" : {
         "branch" : "2.x",
-        "revision" : "56e365d050c0fa8c09f2808afe687beaa7847a55"
+        "revision" : "5f9ee137966607e3f775b22a095cd60e49b91655"
       }
     },
     {
@@ -26,7 +27,16 @@
         "revision" : "94cf62b3ba8d4bed62680a282d4c25f9c63c2efb",
         "version" : "1.1.0"
       }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax",
+      "state" : {
+        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
+        "version" : "601.0.1"
+      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

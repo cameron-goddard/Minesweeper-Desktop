@@ -9,18 +9,26 @@ import Foundation
 import SpriteKit
 import Defaults
 
+/// Representation of a Minesweeper board
 class Board {
+    
+    /// The anchor node for the board
     let node: SKShapeNode
     
+    /// Board size and density
     let rows, cols, mines : Int
+    
+    /// Tiles representation
+    var tiles : [[Tile]]
+    
+    /// Coordinates for all mines on the board
     var minesLayout: [(Int, Int)] = []
     
-    var loadedBoard: Bool = false
-    
+    /// Counter to keep track of game progress
     var revealedTiles = 0
-    var availableTiles : Int
     
-    var tiles : [[Tile]] // May change this
+    /// Whether this board layout was specifically loaded vs randomly generated
+    var loadedBoard: Bool = false
     
     private var tileSize: CGSize {
         CGSize(
@@ -33,12 +41,11 @@ class Board {
         self.node = SKShapeNode(path: CGPath(rect: CGRect(x: 0, y: 0, width: cols * 16 * Int(Util.scale), height: rows * 16 * Int(Util.scale)), transform: nil), centered: true)
         self.node.lineWidth = 0
         
-        self.availableTiles = rows * cols - mines
-        
         self.rows = rows
         self.cols = cols
         self.mines = mines
         
+        // Mark this as a custom loaded board if given a mine layout
         if minesLayout != nil {
             self.minesLayout = minesLayout!
             self.loadedBoard = true
@@ -48,10 +55,12 @@ class Board {
         initBoard()
     }
     
+    /// Adds tiles to the anchor node. Sets mines and numbers. Calculates total 3BV
+    /// - Parameter restart: Whether the previously played board is being reloaded
     private func initBoard(restart: Bool = false) {
         // Init tiles
-        for r in 0...rows - 1 {
-            for c in 0...cols - 1 {
+        for r in 0..<rows {
+            for c in 0..<cols {
                 let tile = Tile(r: r, c: c, state: .Covered)
                 self.tiles[r][c] = tile
                 node.addChild(tile.node)
@@ -59,14 +68,17 @@ class Board {
         }
         
         // Set tile sizes and positions
-        for r in 0...rows - 1 {
-            for c in 0...cols - 1 {
+        let originX = -(CGFloat(cols) * tileSize.width) / 2
+        let originY = (CGFloat(rows) * tileSize.height) / 2
+
+        for r in 0..<rows {
+            for c in 0..<cols {
                 tiles[r][c].node.size = tileSize
-                
-                let x = node.frame.minX + CGFloat(c) * tileSize.width
-                let y = node.frame.maxY - CGFloat(r) * tileSize.height
-                
-                tiles[r][c].node.position = CGPoint(x: x-CGFloat((4*cols)), y: y+CGFloat((4*rows))-(Util.scale*21.5)) // Temporary fix
+
+                let x = originX + CGFloat(c) * tileSize.width
+                let y = originY - CGFloat(r) * tileSize.height - (21.5 * Util.scale)
+
+                tiles[r][c].node.position = CGPoint(x: x, y: y)
             }
         }
         
@@ -80,8 +92,8 @@ class Board {
             
             var addedMines = 0
             while addedMines < mines {
-                for r in 0...rows - 1 {
-                    for c in 0...cols - 1 {
+                for r in 0..<rows {
+                    for c in 0..<cols {
                         if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty && addedMines < mines {
                             tiles[r][c].setValue(val: .Mine)
                             minesLayout.append((r, c))
@@ -100,8 +112,8 @@ class Board {
     }
     
     func setTextures() {
-        for r in 0...rows-1 {
-            for c in 0...cols-1 {
+        for r in 0..<rows {
+            for c in 0..<cols {
                 let tile = tileAt(r: r, c: c)!
                 tile.setState(state: tile.state)
             }
@@ -221,18 +233,9 @@ class Board {
     }
     
     func setAt(r: Int, c: Int, state: State) {
-        let tile = tiles[r][c]
-        
-        switch state {
-        case .Covered:
-            tile.setState(state: .Covered)
-        case .Uncovered:
-            tile.setState(state: .Uncovered)
+        tiles[r][c].setState(state: state)
+        if state == .Uncovered {
             revealedTiles += 1
-        case .Flagged:
-            tile.setState(state: .Flagged)
-        case .Question:
-            tile.setState(state: .Question)
         }
     }
     

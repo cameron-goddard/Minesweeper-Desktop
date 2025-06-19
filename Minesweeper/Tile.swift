@@ -32,7 +32,7 @@ enum Value {
 
 class Tile {
     
-    let node = SKSpriteNode()
+    let node : SKSpriteNode
     
     var r : Int
     var c : Int
@@ -40,6 +40,7 @@ class Tile {
     var value : Value
     
     init(r: Int, c: Int, state: State, val: Value = .Empty) {
+        self.node = SKSpriteNode()
         self.r = r
         self.c = c
         self.state = state
@@ -50,6 +51,7 @@ class Tile {
     }
     
     init() {
+        self.node = SKSpriteNode()
         self.r = 0
         self.c = 0
         self.state = .Question

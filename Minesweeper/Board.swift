@@ -19,7 +19,7 @@ class Board {
     let rows, cols, mines : Int
     
     /// Tiles representation
-    var tiles : [[Tile]]
+    private var tiles : [[Tile]]
     
     /// Coordinates for all mines on the board
     var minesLayout: [(Int, Int)] = []
@@ -28,7 +28,7 @@ class Board {
     var revealedTiles = 0
     
     /// Whether this board layout was specifically loaded vs randomly generated
-    var loadedBoard: Bool = false
+    private var loadedBoard: Bool = false
     
     private var tileSize: CGSize {
         CGSize(
@@ -45,7 +45,7 @@ class Board {
         self.cols = cols
         self.mines = mines
         
-        // Mark this as a custom loaded board if given a mine layout
+        // Mark this as a loaded board if given a predefined mine layout
         if minesLayout != nil {
             self.minesLayout = minesLayout!
             self.loadedBoard = true
@@ -73,11 +73,10 @@ class Board {
 
         for r in 0..<rows {
             for c in 0..<cols {
-                tiles[r][c].node.size = tileSize
-
                 let x = originX + CGFloat(c) * tileSize.width
                 let y = originY - CGFloat(r) * tileSize.height - (21.5 * Util.scale)
 
+                tiles[r][c].node.size = tileSize
                 tiles[r][c].node.position = CGPoint(x: x, y: y)
             }
         }
@@ -111,6 +110,7 @@ class Board {
         NotificationCenter.default.post(name: .updateStat, object: "test", userInfo: ["Total3BV": calculate3BV()])
     }
     
+    /// Force update tile textures. Called when a theme is changed
     func setTextures() {
         for r in 0..<rows {
             for c in 0..<cols {
@@ -120,16 +120,11 @@ class Board {
         }
     }
     
-    private func numberOfAdjacentMines(r: Int, c: Int) -> Int {
-        var ret = 0
-        for tile in getAdjacentTiles(r: r, c: c) {
-            if tile.value == .Mine {
-                ret += 1
-            }
-        }
-        return ret
-    }
-
+    /// Returns a list of the adjacent tiles to a target tile
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    /// - Returns: A list of the adjacent tiles
     private func getAdjacentTiles(r: Int, c: Int) -> [Tile] {
         var ret = [Tile]()
         if let tile = tileAt(r: r-1, c: c) { ret.append(tile)}
@@ -143,9 +138,25 @@ class Board {
         return ret
     }
     
+    /// Returns the number of adjacent mines to a target tile
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    /// - Returns: The number of adjacent mines
+    private func numberOfAdjacentMines(r: Int, c: Int) -> Int {
+        var ret = 0
+        for tile in getAdjacentTiles(r: r, c: c) {
+            if tile.value == .Mine {
+                ret += 1
+            }
+        }
+        return ret
+    }
+    
+    /// Sets the adjacency numbers for every tile on the board
     private func setNumbers() {
-        for r in 0...rows-1 {
-            for c in 0...cols-1 {
+        for r in 0..<rows {
+            for c in 0..<cols {
                 if (tileAt(r: r, c: c)!.value != .Mine) {
                     switch numberOfAdjacentMines(r: r, c: c) {
                     case 1:

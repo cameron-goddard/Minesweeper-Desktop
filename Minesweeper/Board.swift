@@ -183,6 +183,11 @@ class Board {
         }
     }
     
+    /// Reveals the tile at the specified target, including any adjacent blanks
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    /// - Returns: True if the revelaed tile is a mine, false otherwise
     func revealAt(r: Int, c: Int) -> Bool {
         let tile = tiles[r][c]
         print("[" + String(r) + ", " + String(c) + "]")
@@ -226,6 +231,10 @@ class Board {
         return false
     }
     
+    /// Recursively reveals a blank section of tiles
+    /// - Parameters:
+    ///   - r: The row of the current file to reveal at
+    ///   - c: The column of the current tile to reveal at
     private func reveal(r: Int, c: Int) {
         tiles[r][c].setState(state: .Uncovered)
         revealedTiles += 1
@@ -243,6 +252,11 @@ class Board {
         }
     }
     
+    /// Sets the state of the specified tile. Updates the number of revealed tiles if necessary
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    ///   - state: The new state of the tile
     func setAt(r: Int, c: Int, state: State) {
         tiles[r][c].setState(state: state)
         if state == .Uncovered {
@@ -250,6 +264,11 @@ class Board {
         }
     }
     
+    /// Returns the tile at a specified position, if it exists
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    /// - Returns: The specified tile if it exists, or nil otherwise
     func tileAt(r: Int, c: Int) -> Tile? {
         if r < 0 || r > rows-1 || c < 0 || c > cols-1 {
             return nil
@@ -257,9 +276,10 @@ class Board {
         return tiles[r][c]
     }
     
+    /// Uncovers all mines and marks incorrectly flagged mines. Called when a player loses a game
     func lostGame() {
-        for r in 0...rows-1 {
-            for c in 0...cols-1 {
+        for r in 0..<rows {
+            for c in 0..<cols {
                 let tile = tiles[r][c]
                 if tile.state == .Flagged && tile.value != .Mine {
                     tile.setValue(val: .MineWrong)
@@ -271,18 +291,21 @@ class Board {
         }
     }
     
+    /// Re-initializes the board in a randomly generated way
     func reset() {
         loadedBoard = false
         initBoard()
     }
     
+    /// Restarts the last played board
     func restart() {
         initBoard(restart: true)
     }
     
+    /// Flags all mines that are not already flagged. Called when a player wins a games
     func flagMines() {
-        for r in 0...rows-1 {
-            for c in 0...cols-1 {
+        for r in 0..<rows {
+            for c in 0..<cols {
                 let tile = tiles[r][c]
                 
                 if tile.value == .Mine && tile.state != .Flagged {
@@ -292,16 +315,22 @@ class Board {
         }
     }
     
+    /// Creates a new blank space from a tile with a mine on it. Called when the "Guarantee safe first click" setting is enabled
+    /// - Parameters:
+    ///   - row: The row of the target tile
+    ///   - col: The column of the target tile
+    ///   - avoid: A list of tiles to avoid putting a mine on
     private func createBlankFrom(row: Int, col: Int, avoid: [Tile]) {
         if tiles[row][col].value != .Mine {
             return
         }
         tiles[row][col].setValue(val: .Empty)
-        var new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
         
+        var new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
         while new.value != .Empty || avoid.contains(new) {
             new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
         }
+        
         new.setValue(val: .Mine)
         
         minesLayout.removeAll(where: { $0 == (row, col) })
@@ -311,43 +340,48 @@ class Board {
 
 extension Board {
     
-    func floodFill(marked: inout [[Bool]], x: Int, y: Int, m: Int, n: Int) {
-        if x < 0 || x >= m || y < 0 || y >= n || marked[x][y] {
+    /// Helper method for calculating 3BV
+    /// - Parameters:
+    ///   - marked: The list of already-marked tiles
+    ///   - x: The row of the current tile to flood fill at
+    ///   - y: The column of the current tile to flood fill at
+    private func floodFill(marked: inout [[Bool]], r: Int, c: Int) {
+        if r < 0 || r >= rows || c < 0 || c >= cols || marked[r][c] {
             return
         }
 
-        marked[x][y] = true
+        marked[r][c] = true
 
-        if tiles[x][y].value != .Empty  {
+        if tiles[r][c].value != .Empty  {
             return
         }
 
         let directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-        for (dx, dy) in directions {
-            floodFill(marked: &marked, x: x + dx, y: y + dy, m: m, n: n)
+        for (dr, dc) in directions {
+            floodFill(marked: &marked, r: r + dr, c: c + dc)
         }
     }
     
-    func calculate3BV() -> Int {
-        let m = tiles.count
-        let n = tiles[0].count
-        var marked = Array(repeating: Array(repeating: false, count: n), count: m)
+    /// Calculates the 3BV of the current board
+    /// - Returns: The total 3BV value
+    private func calculate3BV() -> Int {
+        var marked = Array(repeating: Array(repeating: false, count: cols), count: rows)
         var bvCount = 0
 
         // Count regions of empty tiles
-        for x in 0..<m {
-            for y in 0..<n {
-                if tiles[x][y].value == .Empty && !marked[x][y] {
+        for r in 0..<rows {
+            for c in 0..<cols {
+                if tiles[r][c].value == .Empty && !marked[r][c] {
                     bvCount += 1
-                    floodFill(marked: &marked, x: x, y: y, m: m, n: n)
+                    floodFill(marked: &marked, r: r, c: c)
                 }
             }
         }
 
         // Count individually revealed numbered tiles
-        for x in 0..<m {
-            for y in 0..<n {
-                if !marked[x][y] && tiles[x][y].isNumber() {
+        for r in 0..<rows {
+            for c in 0..<cols {
+                if !marked[r][c] && tiles[r][c].isNumber() {
                     bvCount += 1
                 }
             }

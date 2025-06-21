@@ -111,7 +111,7 @@ class Board {
     }
     
     /// Force update tile textures. Called when a theme is changed
-    func setTextures() {
+    func updateTextures() {
         for r in 0..<rows {
             for c in 0..<cols {
                 let tile = tileAt(r: r, c: c)!

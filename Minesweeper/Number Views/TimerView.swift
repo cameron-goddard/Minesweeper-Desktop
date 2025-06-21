@@ -28,7 +28,7 @@ class TimerView: NumberView {
     
     func reset() {
         gameTimer.invalidate()
-        NotificationCenter.default.post(name: Notification.Name("UpdateTime"), object: TimeInterval())
+        NotificationCenter.default.post(name: .updateTime, object: TimeInterval())
         self.set(value: 0)
     }
     
@@ -36,12 +36,12 @@ class TimerView: NumberView {
         guard let startTime = self.startTime else { return }
         let elapsedTime = Date().timeIntervalSince(startTime)
         
-        NotificationCenter.default.post(name: Notification.Name("UpdateTime"), object: elapsedTime)
+        NotificationCenter.default.post(name: .updateTime, object: elapsedTime)
         self.set(value: Int(elapsedTime))
     }
     
-    override func setTextures() {
-        super.setTextures()
+    override func updateTextures() {
+        super.updateTextures()
         if !gameTimer.isValid {
             self.set(value: 0)
         }

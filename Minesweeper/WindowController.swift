@@ -47,7 +47,7 @@ class WindowController: NSWindowController {
             if Util.currentTheme.name == "Classic" {
                 Util.currentTheme = Util.theme(withName: "Classic Dark")
                 Defaults[.theme] = "Classic Dark"
-                (viewController.skView.scene as! GameScene).setTextures()
+                (viewController.skView.scene as! GameScene).updateTextures()
                 
                 updateThemesMenu()
             }
@@ -55,7 +55,7 @@ class WindowController: NSWindowController {
             if Util.currentTheme.name == "Classic Dark" {
                 Util.currentTheme = Util.theme(withName: "Classic")
                 Defaults[.theme] = "Classic"
-                (viewController.skView.scene as! GameScene).setTextures()
+                (viewController.skView.scene as! GameScene).updateTextures()
                 
                 updateThemesMenu()
             }
@@ -78,7 +78,7 @@ class WindowController: NSWindowController {
     @objc func setTheme(sender: NSMenuItem) {
         Util.currentTheme = Util.theme(withName: sender.title)
         Defaults[.theme] = sender.title
-        (viewController.skView.scene as! GameScene).setTextures()
+        (viewController.skView.scene as! GameScene).updateTextures()
         
         updateThemesMenu()
     }
@@ -86,7 +86,7 @@ class WindowController: NSWindowController {
     @objc func setTheme(notification: Notification) {
         Util.currentTheme = Util.theme(withName: notification.object as! String)
         Defaults[.theme] = notification.object as! String
-        (viewController.skView.scene as! GameScene).setTextures()
+        (viewController.skView.scene as! GameScene).updateTextures()
         
         updateThemesMenu()
     }

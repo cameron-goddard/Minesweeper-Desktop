@@ -50,7 +50,7 @@ class NumberView {
         }
     }
     
-    func setTextures() {
+    func updateTextures() {
         self.borders.texture = Util.currentTheme.borders.borderNumbers
     }
 }

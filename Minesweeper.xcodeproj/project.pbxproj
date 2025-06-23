@@ -20,6 +20,7 @@
 		3B5AB55327F970D30059BB0A /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55227F970D30059BB0A /* Board.swift */; };
 		3B5AB55527F974AE0059BB0A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55427F974AE0059BB0A /* Tile.swift */; };
 		3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */; };
+		3B5B1CB12E0729A600A84348 /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B1CB02E0729A600A84348 /* Borders.swift */; };
 		3B6AB6A52C03FA4000297AA8 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6AB6A42C03FA4000297AA8 /* Stats.swift */; };
 		3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* TimerView.swift */; };
 		3B88CEA628023695008C84E2 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* CounterView.swift */; };
@@ -55,6 +56,7 @@
 		3B5AB55227F970D30059BB0A /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		3B5AB55427F974AE0059BB0A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSheet.swift; sourceTree = "<group>"; };
+		3B5B1CB02E0729A600A84348 /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
 		3B6AB6A42C03FA4000297AA8 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		3B88CEA32800EEA8008C84E2 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		3B88CEA528023695008C84E2 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				3BF1A7CD2866AAD600566000 /* WindowController.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
 				3B5AB55227F970D30059BB0A /* Board.swift */,
+				3B5B1CB02E0729A600A84348 /* Borders.swift */,
 				3B5AB54127F96F710059BB0A /* GameScene.swift */,
 				3BF1A7632856F7CB00566000 /* GameScene+Input.swift */,
 				3B5AB55427F974AE0059BB0A /* Tile.swift */,
@@ -261,6 +264,7 @@
 				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,
 				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
 				3B98639728448DF10017FAA0 /* Util.swift in Sources */,
+				3B5B1CB12E0729A600A84348 /* Borders.swift in Sources */,
 				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,
 				3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */,
 				3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */,

@@ -13,7 +13,7 @@ import Defaults
 class Board {
     
     /// The anchor node for the board
-    let node: SKShapeNode
+    let node: SKNode
     
     /// Board size and density
     let rows, cols, mines : Int
@@ -39,7 +39,6 @@ class Board {
     
     init(rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
         self.node = SKShapeNode(path: CGPath(rect: CGRect(x: 0, y: 0, width: cols * 16 * Int(Util.scale), height: rows * 16 * Int(Util.scale)), transform: nil), centered: true)
-        self.node.lineWidth = 0
         
         self.rows = rows
         self.cols = cols

@@ -12,30 +12,17 @@ class GameScene: SKScene {
     var scale = Util.scale
     
     var board: Board!
-    var mainButton: SKSpriteNode!
+    var borders: Borders!
     var timerView: TimerView!
     var counterView: CounterView!
-    var gameOver = false
-    var gameStarted = false
+    
+    var mainButton: SKSpriteNode!
+    var background: SKSpriteNode!
     
     var rows, cols, mines : Int
     
-    var topBorder,
-        topLeftCorner,
-        topRightCorner,
-        leftBorder,
-        rightBorder,
-        bottomBorder,
-        middleBorder,
-        middleLeftCorner,
-        middleRightCorner,
-        topLeftBorder,
-        topRightBorder,
-        bottomLeftCorner,
-        bottomRightCorner: SKSpriteNode!
-
-    var filler: SKSpriteNode!
-    var background: SKSpriteNode!
+    var gameOver = false
+    var gameStarted = false
     
     var currentTile: String? = nil
     
@@ -43,9 +30,12 @@ class GameScene: SKScene {
         self.rows = rows
         self.cols = cols
         self.mines = mines
+        
+        borders = Borders(size: size)
         board = Board(rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
         timerView = TimerView()
         counterView = CounterView(mines: self.mines)
+        
         super.init(size: size)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.restartGame(_:)), name: .restartGame, object: nil)
@@ -83,157 +73,30 @@ class GameScene: SKScene {
         background.yScale = 66 * scale
         self.addChild(background)
         
-        topLeftCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerTopLeft,
-            position: CGPoint(x: self.frame.minX, y: self.frame.maxY),
-            zPosition: 2
-        )
-        self.addChild(topLeftCorner)
-
-        topRightCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerTopRight,
-            position: CGPoint(
-                x: self.frame.maxX - Util.currentTheme.borders.cornerTopRight.size().width * scale,
-                y: self.frame.maxY),
-            zPosition: 2
-        )
-        self.addChild(topRightCorner)
-
-        topBorder = makeNode(
-            texture: Util.currentTheme.borders.borderTop,
-            position: CGPoint(x: CGFloat(self.frame.minX), y: self.frame.maxY)
-        )
-        topBorder.xScale = (self.frame.maxX - self.frame.minX)
-        self.addChild(topBorder)
-        
         mainButton = makeNode(
             texture: Util.currentTheme.mainButton.happy,
             position: CGPoint(
                 x: -Util.currentTheme.mainButton.happy.size().width/2 * scale,
-                y: topBorder.position.y-topBorder.size.height-(scale*4))
+                y: self.frame.maxY-(scale * 15))
         )
         mainButton.name = "Main Button"
+        
+        
+        counterView.node.position = CGPoint(x: self.frame.minX + 16 * scale, y: mainButton.position.y)
+        
+        timerView.node.position = CGPoint(x: self.frame.maxX - 57 * scale, y: mainButton.position.y)
+        
         self.addChild(mainButton)
-        
-        middleBorder = makeNode(
-            texture: Util.currentTheme.borders.borderMiddle,
-            position: CGPoint(
-                x: CGFloat(self.frame.minX),
-                y: mainButton.position.y-mainButton.size.height-(scale * 3)),
-            zPosition: 2
-        )
-        middleBorder.xScale = (self.frame.maxX - self.frame.minX)
-        self.addChild(middleBorder)
-
-        bottomBorder = makeNode(
-            texture: Util.currentTheme.borders.borderBottom,
-            position: CGPoint(
-                x: CGFloat(self.frame.minX),
-                y: self.frame.minY + Util.currentTheme.borders.borderBottom.size().height * scale)
-        )
-        bottomBorder.xScale = (self.frame.maxX - self.frame.minX)
-        self.addChild(bottomBorder)
-
-        middleLeftCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerMiddleLeft,
-            position: CGPoint(x: self.frame.minX, y: middleBorder.position.y),
-            zPosition: 3
-        )
-        self.addChild(middleLeftCorner)
-        
-        middleRightCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerMiddleRight,
-            position: CGPoint(
-                x: self.frame.maxX - Util.currentTheme.borders.cornerMiddleRight.size().width * scale,
-                y: middleBorder.position.y),
-            zPosition: 3
-        )
-        self.addChild(middleRightCorner)
-
-        // TODO
-        filler = SKSpriteNode(texture: Util.currentTheme.borders.filler)
-        filler.anchorPoint = CGPoint(x: 1, y: 1)
-        filler.setScale(scale)
-        filler.position = CGPoint(x: middleRightCorner.position.x-middleRightCorner.size.width, y: middleBorder.position.y-middleBorder.size.height+2)
-//        filler.zPosition = 4
-        self.addChild(filler)
-        
-        topLeftBorder = makeNode(
-            texture: Util.currentTheme.borders.borderTopLeft,
-            position: CGPoint(x: self.frame.minX, y: self.frame.maxY)
-        )
-        topLeftBorder.yScale = (self.frame.maxY - middleLeftCorner.position.y)
-        self.addChild(topLeftBorder)
-
-        topRightBorder = makeNode(
-            texture: Util.currentTheme.borders.borderTopRight,
-            position: CGPoint(
-                x: self.frame.maxX - Util.currentTheme.borders.borderTopRight.size().width * scale,
-                y: self.frame.maxY
-            )
-        )
-        topRightBorder.yScale = (self.frame.maxY - middleRightCorner.position.y)
-        self.addChild(topRightBorder)
-        
-        leftBorder = makeNode(
-            texture: Util.currentTheme.borders.borderLeft,
-            position: CGPoint(x: self.frame.minX, y: self.frame.maxY - topLeftBorder.size.height)
-        )
-        leftBorder.yScale = (middleLeftCorner.position.y - self.frame.minY)
-        self.addChild(leftBorder)
-
-        rightBorder = makeNode(
-            texture: Util.currentTheme.borders.borderRight,
-            position: CGPoint(
-                x: self.frame.maxX - Util.currentTheme.borders.borderRight.size().width * scale,
-                y: self.frame.maxY - topRightBorder.size.height
-            )
-        )
-        rightBorder.yScale = (middleRightCorner.position.y - self.frame.minY)
-        self.addChild(rightBorder)
-        
-        counterView.node.position = CGPoint(x: topLeftBorder.position.x+topLeftBorder.size.width+4*scale, y: mainButton.position.y)
         self.addChild(counterView.node)
-
-        timerView.node.position = CGPoint(x: topRightBorder.position.x-45*scale, y: mainButton.position.y)
         self.addChild(timerView.node)
-        
+        self.addChild(borders)
         self.addChild(board.node)
-        
-        bottomLeftCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerBottomLeft,
-            position: CGPoint(x: self.frame.minX, y: bottomBorder.position.y)
-        )
-        self.addChild(bottomLeftCorner)
-
-        bottomRightCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerBottomRight,
-            position: CGPoint(
-                x: self.frame.maxX - Util.currentTheme.borders.cornerBottomRight.size().width * scale,
-                y: bottomBorder.position.y
-            )
-        )
-        self.addChild(bottomRightCorner)
     }
     
     func updateTextures() {
-        topLeftCorner.texture = Util.currentTheme.borders.cornerTopLeft
-        topRightCorner.texture = Util.currentTheme.borders.cornerTopRight
-        topBorder.texture = Util.currentTheme.borders.borderTop
-        mainButton.texture = Util.currentTheme.mainButton.happy
-        middleBorder.texture = Util.currentTheme.borders.borderMiddle
-        bottomBorder.texture = Util.currentTheme.borders.borderBottom
-        middleLeftCorner.texture = Util.currentTheme.borders.cornerMiddleLeft
-        middleRightCorner.texture = Util.currentTheme.borders.cornerMiddleRight
-        topLeftBorder.texture = Util.currentTheme.borders.borderTopLeft
-        topRightBorder.texture = Util.currentTheme.borders.borderTopRight
-        leftBorder.texture = Util.currentTheme.borders.borderLeft
-        rightBorder.texture = Util.currentTheme.borders.borderRight
-        bottomLeftCorner.texture = Util.currentTheme.borders.cornerBottomLeft
-        bottomRightCorner.texture = Util.currentTheme.borders.cornerBottomRight
-        filler.texture = Util.currentTheme.borders.filler
         background.texture = Util.currentTheme.borders.filler
         
+        borders.updateTextures()
         board.updateTextures()
         timerView.updateTextures()
         counterView.updateTextures()

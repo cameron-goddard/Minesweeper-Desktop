@@ -10,7 +10,7 @@ import SpriteKit
 
 class NumberView {
     
-    var node = SKSpriteNode()
+    var node = SKNode()
     var nodeHundreds = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
     var nodeTens = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
     var nodeOnes = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])

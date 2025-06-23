@@ -38,5 +38,9 @@ class CounterView: NumberView {
         self.set(value: mines)
     }
     
+    @MainActor required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 

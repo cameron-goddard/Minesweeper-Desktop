@@ -13,7 +13,9 @@ class TimerView: NumberView {
     var gameTimer = Timer()
     var startTime: Date?
     
-    override init() {}
+    override init() {
+        super.init()
+    }
     
     func startTimer() {
         startTime = Date()
@@ -45,5 +47,9 @@ class TimerView: NumberView {
         if !gameTimer.isValid {
             self.set(value: 0)
         }
+    }
+    
+    @MainActor required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -8,34 +8,35 @@
 import Foundation
 import SpriteKit
 
-class NumberView {
+class NumberView: SKNode {
     
-    var node = SKNode()
     var nodeHundreds = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
     var nodeTens = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
     var nodeOnes = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
     
     var borders = SKSpriteNode(texture: Util.currentTheme.borders.borderNumbers)
     
-    init() {
+    override init() {
+        super.init()
+        
         borders.anchorPoint = CGPoint(x: 0, y: 1)
         borders.setScale(Util.scale)
-        node.addChild(borders)
+        self.addChild(borders)
         
         nodeHundreds.anchorPoint = CGPoint(x: 0, y: 1)
         nodeHundreds.setScale(Util.scale)
         nodeHundreds.position = CGPoint(x: 2 * Util.scale, y: -2 * Util.scale)
-        node.addChild(nodeHundreds)
+        self.addChild(nodeHundreds)
         
         nodeTens.anchorPoint = CGPoint(x: 0, y: 1)
         nodeTens.setScale(Util.scale)
         nodeTens.position = CGPoint(x: nodeHundreds.size.width + 4 * Util.scale, y: -2 * Util.scale)
-        node.addChild(nodeTens)
+        self.addChild(nodeTens)
         
         nodeOnes.anchorPoint = CGPoint(x: 0, y: 1)
         nodeOnes.setScale(Util.scale)
         nodeOnes.position = CGPoint(x: (2 * nodeHundreds.size.width) + 6 * Util.scale, y: -2 * Util.scale)
-        node.addChild(nodeOnes)
+        self.addChild(nodeOnes)
     }
     
     func set(value: Int) {
@@ -52,5 +53,9 @@ class NumberView {
     
     func updateTextures() {
         self.borders.texture = Util.currentTheme.borders.borderNumbers
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

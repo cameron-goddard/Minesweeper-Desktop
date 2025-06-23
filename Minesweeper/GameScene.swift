@@ -9,7 +9,6 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var scale = Util.scale
     
     var board: Board!
     var borders: Borders!
@@ -17,7 +16,6 @@ class GameScene: SKScene {
     var counterView: CounterView!
     
     var mainButton: SKSpriteNode!
-    var background: SKSpriteNode!
     
     var rows, cols, mines : Int
     
@@ -40,61 +38,30 @@ class GameScene: SKScene {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.restartGame(_:)), name: .restartGame, object: nil)
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    /// Factory method for creating nodes for the game border
-    /// - Parameters:
-    ///   - texture: The current theme's texture for this node
-    ///   - position: A specified 2D position for this node
-    ///   - zPosition: The node's optional Z position
-    /// - Returns: A properly scaled SKSpriteNode with the given texture and position
-    private func makeNode(texture: SKTexture, position: CGPoint, zPosition: CGFloat = 0) -> SKSpriteNode {
-        let node = SKSpriteNode(texture: texture)
-        node.anchorPoint = CGPoint(x: 0, y: 1)
-        node.position = position
-        node.setScale(scale)
-        if zPosition != 0 {
-            node.zPosition = zPosition
-        }
-        
-        return node
-    }
     
     /// Creates the game board, counters, and borders with the current theme. Adds all to this game scene
     func addNodes() {
-        background = makeNode(
-            texture: Util.currentTheme.borders.filler,
-            position: CGPoint(x: self.frame.minX, y: self.frame.maxY)
-        )
-        background.xScale = self.frame.width
-        background.yScale = 66 * scale
-        self.addChild(background)
-        
-        mainButton = makeNode(
-            texture: Util.currentTheme.mainButton.happy,
-            position: CGPoint(
-                x: -Util.currentTheme.mainButton.happy.size().width/2 * scale,
-                y: self.frame.maxY-(scale * 15))
+        mainButton = SKSpriteNode(texture: Util.currentTheme.mainButton.happy)
+        mainButton.anchorPoint = CGPoint(x: 0, y: 1)
+        mainButton.setScale(Util.scale)
+        mainButton.position = CGPoint(
+            x: -Util.currentTheme.mainButton.happy.size().width/2 * Util.scale,
+            y: self.frame.maxY - (Util.scale * 15)
         )
         mainButton.name = "Main Button"
         
+        counterView.position = CGPoint(x: self.frame.minX + 16 * Util.scale, y: mainButton.position.y)
+        timerView.position = CGPoint(x: self.frame.maxX - 57 * Util.scale, y: mainButton.position.y)
         
-        counterView.node.position = CGPoint(x: self.frame.minX + 16 * scale, y: mainButton.position.y)
-        
-        timerView.node.position = CGPoint(x: self.frame.maxX - 57 * scale, y: mainButton.position.y)
-        
-        self.addChild(mainButton)
-        self.addChild(counterView.node)
-        self.addChild(timerView.node)
         self.addChild(borders)
+        self.addChild(mainButton)
+        self.addChild(counterView)
+        self.addChild(timerView)
         self.addChild(board.node)
     }
     
     func updateTextures() {
-        background.texture = Util.currentTheme.borders.filler
+        mainButton.texture = Util.currentTheme.mainButton.happy
         
         borders.updateTextures()
         board.updateTextures()
@@ -146,6 +113,10 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

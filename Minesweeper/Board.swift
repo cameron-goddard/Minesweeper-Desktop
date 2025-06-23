@@ -38,7 +38,7 @@ class Board {
     }
     
     init(rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
-        self.node = SKShapeNode(path: CGPath(rect: CGRect(x: 0, y: 0, width: cols * 16 * Int(Util.scale), height: rows * 16 * Int(Util.scale)), transform: nil), centered: true)
+        self.node = SKNode()
         
         self.rows = rows
         self.cols = cols

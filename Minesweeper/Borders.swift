@@ -26,6 +26,7 @@ class Borders: SKNode {
         bottomLeftCorner,
         bottomRightCorner: SKSpriteNode!
     
+    var background: SKSpriteNode!
     var filler: SKSpriteNode!
     
     init(size: CGSize) {
@@ -35,6 +36,14 @@ class Borders: SKNode {
         let maxX = size.width/2
         let minY = -size.height/2
         let maxY = size.height/2
+        
+        background = makeNode(
+            texture: Util.currentTheme.borders.filler,
+            position: CGPoint(x: minX, y: maxY)
+        )
+        background.xScale = size.width
+        background.yScale = 66 * scale
+        self.addChild(background)
         
         topLeftCorner = makeNode(
             texture: Util.currentTheme.borders.cornerTopLeft,
@@ -142,10 +151,16 @@ class Borders: SKNode {
             )
         )
         self.addChild(bottomRightCorner)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        filler = makeNode(
+            texture: Util.currentTheme.borders.filler,
+            position: CGPoint(
+                x: middleRightCorner.position.x - scale,
+                y: middleBorder.position.y-middleBorder.size.height + scale
+            ),
+            zPosition: 4
+        )
+        self.addChild(filler)
     }
     
     /// Factory method for creating nodes for the game border
@@ -166,7 +181,9 @@ class Borders: SKNode {
         return node
     }
     
+    /// Force update border textures. Called when a theme is changed
     func updateTextures() {
+        background.texture = Util.currentTheme.borders.filler
         topLeftCorner.texture = Util.currentTheme.borders.cornerTopLeft
         topRightCorner.texture = Util.currentTheme.borders.cornerTopRight
         topBorder.texture = Util.currentTheme.borders.borderTop
@@ -180,7 +197,10 @@ class Borders: SKNode {
         rightBorder.texture = Util.currentTheme.borders.borderRight
         bottomLeftCorner.texture = Util.currentTheme.borders.cornerBottomLeft
         bottomRightCorner.texture = Util.currentTheme.borders.cornerBottomRight
-//        filler.texture = Util.currentTheme.borders.filler
+        filler.texture = Util.currentTheme.borders.filler
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

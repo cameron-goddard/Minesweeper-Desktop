@@ -93,7 +93,6 @@ class GameScene: SKScene {
     }
     
     func newGame(restart: Bool = false) {
-        board.revealedTiles = 0
         gameState = .Unstarted
         NotificationCenter.default.post(name: .resetStats, object: nil)
         

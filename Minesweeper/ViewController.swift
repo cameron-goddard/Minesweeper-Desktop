@@ -14,7 +14,7 @@ class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
     var difficulty = Defaults[.difficulty]
-    var minesLayout: [(Int,Int)]?
+    var minesLayout: [(Int, Int)]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +41,8 @@ class ViewController: NSViewController {
             let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
             view.presentScene(scene)
             
-            //view.showsFPS = true
-            //view.showsNodeCount = true
+            // view.showsFPS = true
+            // view.showsNodeCount = true
         }
     }
     

@@ -57,6 +57,9 @@ class Board {
     /// Adds tiles to the anchor node. Sets mines and numbers. Calculates total 3BV
     /// - Parameter restart: Whether the previously played board is being reloaded
     private func initBoard(restart: Bool = false) {
+        // Remove all old tile nodes
+        node.removeAllChildren()
+        
         // Init tiles
         for r in 0..<rows {
             for c in 0..<cols {
@@ -291,7 +294,9 @@ class Board {
     }
     
     /// Re-initializes the board
+    /// - Parameter restart: Whether to replay the current board
     func reset(restart: Bool = false) {
+        revealedTiles = 0
         loadedBoard = false
         initBoard(restart: restart)
     }
@@ -337,8 +342,8 @@ extension Board {
     /// Helper method for calculating 3BV
     /// - Parameters:
     ///   - marked: The list of already-marked tiles
-    ///   - x: The row of the current tile to flood fill at
-    ///   - y: The column of the current tile to flood fill at
+    ///   - r: The row of the current tile to flood fill at
+    ///   - c: The column of the current tile to flood fill at
     private func floodFill(marked: inout [[Bool]], r: Int, c: Int) {
         if r < 0 || r >= rows || c < 0 || c >= cols || marked[r][c] {
             return

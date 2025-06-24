@@ -121,17 +121,13 @@
 				3B5AB53B27F96F710059BB0A /* AppDelegate.swift */,
 				3BF1A7CD2866AAD600566000 /* WindowController.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
-				3B5AB55227F970D30059BB0A /* Board.swift */,
-				3B5B1CB02E0729A600A84348 /* Borders.swift */,
-				3B5AB54127F96F710059BB0A /* GameScene.swift */,
-				3BF1A7632856F7CB00566000 /* GameScene+Input.swift */,
-				3B5AB55427F974AE0059BB0A /* Tile.swift */,
 				3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */,
-				3B34CCBB2869FE3800B76AE6 /* Theme.swift */,
-				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
+				3B5B08242E0A352D0067FAE5 /* Game */,
 				3B9DF114289DBBE1007CADA6 /* Number Displays */,
 				3B1BDB04286BBDD000A36569 /* Stats */,
 				3BF1A78B285ED79900566000 /* Settings */,
+				3B34CCBB2869FE3800B76AE6 /* Theme.swift */,
+				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
 				3B98639628448DF10017FAA0 /* Util.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
@@ -139,6 +135,18 @@
 				3B5AB54A27F96F720059BB0A /* Minesweeper.entitlements */,
 			);
 			path = Minesweeper;
+			sourceTree = "<group>";
+		};
+		3B5B08242E0A352D0067FAE5 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				3B5AB54127F96F710059BB0A /* GameScene.swift */,
+				3BF1A7632856F7CB00566000 /* GameScene+Input.swift */,
+				3B5AB55227F970D30059BB0A /* Board.swift */,
+				3B5B1CB02E0729A600A84348 /* Borders.swift */,
+				3B5AB55427F974AE0059BB0A /* Tile.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		3B9DF114289DBBE1007CADA6 /* Number Displays */ = {

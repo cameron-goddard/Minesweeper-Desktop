@@ -17,7 +17,7 @@ extension GameScene {
             if (name == "Main Button") {
                 mainButton.texture = Util.currentTheme.mainButton.happyPressed
             } else {
-                if gameOver { return }
+                if gameState == .Won || gameState == .Lost { return }
                 mainButton.texture = Util.currentTheme.mainButton.cautious
                 
                 currentTile = clickedNode[0].name
@@ -39,10 +39,10 @@ extension GameScene {
                 mainButton.texture = Util.currentTheme.mainButton.happy
                 newGame()
             } else {
-                if gameOver { return }
-                if !gameStarted {
+                if gameState == .Won || gameState == .Lost { return }
+                if gameState == .Unstarted {
                     gameTimer.startTimer()
-                    gameStarted = true
+                    gameState = .InProgress
                 }
                 
                 mainButton.texture = Util.currentTheme.mainButton.happy
@@ -68,7 +68,7 @@ extension GameScene {
     }
     
     override func rightMouseDown(with event: NSEvent) {
-        if gameOver == true { return }
+        if gameState == .Won || gameState == .Lost { return }
         let clickedNode = self.nodes(at: event.location(in: scene!))
         
         if let name = clickedNode[0].name {
@@ -105,7 +105,7 @@ extension GameScene {
         
         if clickedNode.count != 0, let name = clickedNode[0].name {
             if name == "Main Button" { return }
-            if gameOver { return }
+            if gameState == .Won || gameState == .Lost { return }
             
             if currentTile == clickedNode[0].name {
                 let coords = convertLocation(name: name)

@@ -8,7 +8,16 @@
 import SpriteKit
 import GameplayKit
 
+enum GameState {
+    case Unstarted
+    case InProgress
+    case Won
+    case Lost
+}
+
 class GameScene: SKScene {
+    
+    var gameState: GameState = .Unstarted
     
     var board: Board
     var borders: Borders
@@ -17,9 +26,6 @@ class GameScene: SKScene {
     var mainButton: SKSpriteNode
     
     var rows, cols, mines : Int
-    
-    var gameOver = false
-    var gameStarted = false
     
     var currentTile: String? = nil
     
@@ -77,40 +83,32 @@ class GameScene: SKScene {
     }
     
     func finishGame(won: Bool) {
-        gameOver = true
-        gameStarted = false
         NotificationCenter.default.post(name: .revealStats, object: nil)
         
         if won {
+            gameState = .Won
             board.flagMines()
             mainButton.texture = Util.currentTheme.mainButton.cool
         } else {
+            gameState = .Lost
             board.lostGame()
             mainButton.texture = Util.currentTheme.mainButton.dead
         }
         gameTimer.stopTimer()
     }
     
-    func newGame() {
+    func newGame(restart: Bool = false) {
         board.revealedTiles = 0
-        gameOver = false
-        gameStarted = false
+        gameState = .Unstarted
         NotificationCenter.default.post(name: .resetStats, object: nil)
         
-        board.reset()
+        board.reset(restart: restart)
         gameTimer.reset()
         mineCounter.reset(mines: self.mines)
     }
     
     @objc func restartGame(_ notification: Notification) {
-        board.revealedTiles = 0
-        gameOver = false
-        gameStarted = false
-        NotificationCenter.default.post(name: .resetStats, object: nil)
-        
-        board.restart()
-        gameTimer.reset()
-        mineCounter.reset(mines: self.mines)
+        newGame(restart: true)
     }
     
     override func update(_ currentTime: TimeInterval) {

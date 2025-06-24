@@ -290,15 +290,10 @@ class Board {
         }
     }
     
-    /// Re-initializes the board in a randomly generated way
-    func reset() {
+    /// Re-initializes the board
+    func reset(restart: Bool = false) {
         loadedBoard = false
-        initBoard()
-    }
-    
-    /// Restarts the last played board
-    func restart() {
-        initBoard(restart: true)
+        initBoard(restart: restart)
     }
     
     /// Flags all mines that are not already flagged. Called when a player wins a games

@@ -52,10 +52,10 @@ class ThemeCellView: NSTableCellView {
     @IBAction func favoriteButtonPressed(_ sender: NSButton) {
         if sender.state == .off {
             themeFavorite.image = .init(systemSymbolName: "star", accessibilityDescription: nil)
-            Defaults[.favorites].remove(at: Defaults[.favorites].firstIndex(of: themeName.stringValue)!)
+            Defaults[.Themes.favorites].remove(at: Defaults[.Themes.favorites].firstIndex(of: themeName.stringValue)!)
         } else {
             themeFavorite.image = .init(systemSymbolName: "star.fill", accessibilityDescription: nil)
-            Defaults[.favorites].append(themeName.stringValue)
+            Defaults[.Themes.favorites].append(themeName.stringValue)
         }
         ThemeManager.shared.theme(with: themeName.stringValue).isFavorite.toggle()
         NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)

@@ -22,6 +22,7 @@
 		3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */; };
 		3B5B08262E0A362F0067FAE5 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B08252E0A362F0067FAE5 /* MainButton.swift */; };
 		3B5B08282E0B18010067FAE5 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B08272E0B18010067FAE5 /* ThemeManager.swift */; };
+		3B5B082A2E0B1F060067FAE5 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B08292E0B1F060067FAE5 /* Defaults.swift */; };
 		3B5B1CB12E0729A600A84348 /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B1CB02E0729A600A84348 /* Borders.swift */; };
 		3B6AB6A52C03FA4000297AA8 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6AB6A42C03FA4000297AA8 /* Stats.swift */; };
 		3B88CEA42800EEA8008C84E2 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* GameTimer.swift */; };
@@ -60,6 +61,7 @@
 		3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSheet.swift; sourceTree = "<group>"; };
 		3B5B08252E0A362F0067FAE5 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		3B5B08272E0B18010067FAE5 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		3B5B08292E0B1F060067FAE5 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		3B5B1CB02E0729A600A84348 /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
 		3B6AB6A42C03FA4000297AA8 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		3B88CEA32800EEA8008C84E2 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				3BF1A78B285ED79900566000 /* Settings */,
 				3B34CCBB2869FE3800B76AE6 /* Theme.swift */,
 				3B5B08272E0B18010067FAE5 /* ThemeManager.swift */,
+				3B5B08292E0B1F060067FAE5 /* Defaults.swift */,
 				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
 				3B98639628448DF10017FAA0 /* Util.swift */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */,
+				3B5B082A2E0B1F060067FAE5 /* Defaults.swift in Sources */,
 				3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */,
 				3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */,
 				3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */,

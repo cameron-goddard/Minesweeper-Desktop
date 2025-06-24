@@ -39,14 +39,14 @@ class WindowController: NSWindowController {
     }
     
     @objc func interfaceThemeChanged() {
-        if Defaults[.appearance] != "System" {
+        if Defaults[.General.appearance] != "System" {
             return
         }
         
         if UserDefaults.standard.string(forKey: "AppleInterfaceStyle") != nil {
             if ThemeManager.shared.currentTheme.name == "Classic" {
                 ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: "Classic Dark")
-                Defaults[.theme] = "Classic Dark"
+                Defaults[.Themes.theme] = "Classic Dark"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
                 updateThemesMenu()
@@ -54,7 +54,7 @@ class WindowController: NSWindowController {
         } else {
             if ThemeManager.shared.currentTheme.name == "Classic Dark" {
                 ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: "Classic")
-                Defaults[.theme] = "Classic"
+                Defaults[.Themes.theme] = "Classic"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
                 updateThemesMenu()
@@ -77,7 +77,7 @@ class WindowController: NSWindowController {
     
     @objc func setTheme(sender: NSMenuItem) {
         ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: sender.title)
-        Defaults[.theme] = sender.title
+        Defaults[.Themes.theme] = sender.title
         (viewController.skView.scene as! GameScene).updateTextures()
         
         updateThemesMenu()
@@ -85,7 +85,7 @@ class WindowController: NSWindowController {
     
     @objc func setTheme(notification: Notification) {
         ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: notification.object as! String)
-        Defaults[.theme] = notification.object as! String
+        Defaults[.Themes.theme] = notification.object as! String
         (viewController.skView.scene as! GameScene).updateTextures()
         
         updateThemesMenu()
@@ -107,7 +107,7 @@ class WindowController: NSWindowController {
         titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
         
         for theme in ThemeManager.shared.themes {
-            if Defaults[.favorites].contains(theme.name) {
+            if Defaults[.Themes.favorites].contains(theme.name) {
                 let menuItem = tempMenu.addItem(withTitle: theme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
                 if ThemeManager.shared.currentTheme == ThemeManager.shared.theme(with: theme.name) {
                     menuItem.state = .on
@@ -183,8 +183,4 @@ extension NSToolbarItem.Identifier {
     static let toolbarShareButtonItem = NSToolbarItem.Identifier(rawValue: "ToolbarShareButtonItem")
     static let toolbarThemesMenuItem = NSToolbarItem.Identifier(rawValue: "ToolbarThemesMenuItem")
     static let toolbarStatsItem = NSToolbarItem.Identifier(rawValue: "ToolbarStatsItem")
-}
-
-extension Defaults.Keys {
-    static let theme = Key<String>("theme", default: "Classic")
 }

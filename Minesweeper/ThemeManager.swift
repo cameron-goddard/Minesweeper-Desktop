@@ -22,21 +22,21 @@ class ThemeManager {
             name: "Classic",
             desc: "The original Minesweeper theme",
             isDefault: true,
-            isFavorite: Defaults[.favorites].contains("Classic"),
+            isFavorite: Defaults[.Themes.favorites].contains("Classic"),
             spriteSheetTexture: SKTexture(imageNamed: "classic")
         ),
         Theme(
             name: "Classic 95",
             desc: "The default theme from Windows 95",
             isDefault: true,
-            isFavorite: Defaults[.favorites].contains("Classic 95"),
+            isFavorite: Defaults[.Themes.favorites].contains("Classic 95"),
             spriteSheetTexture: SKTexture(imageNamed: "classic_95")
         ),
         Theme(
             name: "Classic Dark",
             desc: "A dark twist on the original theme",
             isDefault: true,
-            isFavorite: Defaults[.favorites].contains("Classic Dark"),
+            isFavorite: Defaults[.Themes.favorites].contains("Classic Dark"),
             mode: "Dark",
             spriteSheetTexture: SKTexture(imageNamed: "classic_dark")
         )
@@ -62,7 +62,7 @@ class ThemeManager {
         let theme = Theme(
             name: toTheme(name: name),
             fileName: fileName,
-            isFavorite: Defaults[.favorites].contains(name),
+            isFavorite: Defaults[.Themes.favorites].contains(name),
             spriteSheetTexture: SKTexture(image: image)
         )
         themes.append(theme)
@@ -88,7 +88,7 @@ class ThemeManager {
             let theme = Theme(
                 name: name,
                 fileName: fileName,
-                isFavorite: Defaults[.favorites].contains(name),
+                isFavorite: Defaults[.Themes.favorites].contains(name),
                 spriteSheetTexture: SKTexture(image: image)
             )
             self.themes.append(theme)

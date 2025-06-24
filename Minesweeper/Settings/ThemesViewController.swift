@@ -106,8 +106,8 @@ class ThemesViewController: NSViewController {
                 let oldRow = tableView.selectedRow
                 // TODO: Investigate this bug: Delete a favorited item, add any other back in
                 ThemeManager.shared.themes.remove(at: ThemeManager.shared.themes.firstIndex(of: themes[oldRow])!)
-                if let index = Defaults[.favorites].firstIndex(of: themes[oldRow].name) {
-                    Defaults[.favorites].remove(at: index)
+                if let index = Defaults[.Themes.favorites].firstIndex(of: themes[oldRow].name) {
+                    Defaults[.Themes.favorites].remove(at: index)
                 }
                 themes.remove(at: themes.firstIndex(of: themes[oldRow])!)
                 NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)

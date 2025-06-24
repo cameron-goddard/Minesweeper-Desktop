@@ -73,9 +73,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if sender.title != "New Game" {
             controller.difficulty = sender.title
-            Defaults[.difficulty] = sender.title
+            Defaults[.Game.difficulty] = sender.title
         } else {
-            controller.difficulty = Defaults[.difficulty]
+            controller.difficulty = Defaults[.Game.difficulty]
         }
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
@@ -109,11 +109,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         oldScene.gameTimer.reset()
         
         controller.difficulty = "Custom"
-        Defaults[.difficulty] = "Custom"
+        Defaults[.Game.difficulty] = "Custom"
         
-        Defaults[.customDifficulty][0] = (notification.object as! [Int])[1]
-        Defaults[.customDifficulty][1] = (notification.object as! [Int])[0]
-        Defaults[.customDifficulty][2] = (notification.object as! [Int])[2]
+        Defaults[.Game.customDifficulty][0] = (notification.object as! [Int])[1]
+        Defaults[.Game.customDifficulty][1] = (notification.object as! [Int])[0]
+        Defaults[.Game.customDifficulty][2] = (notification.object as! [Int])[2]
         
         window.contentViewController = controller
     }
@@ -198,9 +198,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     oldScene.gameTimer.reset()
                     
-                    Defaults[.customDifficulty][0] = rows
-                    Defaults[.customDifficulty][1] = cols
-                    Defaults[.customDifficulty][2] = mines
+                    Defaults[.Game.customDifficulty][0] = rows
+                    Defaults[.Game.customDifficulty][1] = cols
+                    Defaults[.Game.customDifficulty][2] = mines
                     
                     let storyboard = NSStoryboard(name: "Main", bundle: nil)
                     let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
@@ -227,11 +227,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.alertStyle = .warning
         alert.runModal()
     }
-}
-
-extension Defaults.Keys {
-    static let difficulty = Key<String>("difficulty", default: "Beginner")
-    static let customDifficulty = Key<Array<Int>>("customDifficulty", default: [-1, -1, -1])
 }
 
 extension UTType {

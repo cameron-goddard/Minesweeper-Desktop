@@ -19,7 +19,3 @@ class Util {
         "Custom": [8, 8, 10]
     ]
 }
-
-extension Defaults.Keys {
-    static let favorites = Key<Array<String>>("favorites", default: ["Classic", "Classic Dark", "Classic 95"])
-}

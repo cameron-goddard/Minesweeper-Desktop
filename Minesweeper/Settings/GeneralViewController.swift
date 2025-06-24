@@ -20,22 +20,22 @@ class GeneralViewController: NSViewController {
         super.viewDidLoad()
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height)
         
-        appearancePopUp.selectItem(withTitle: Defaults[.appearance])
-        stylePopUp.selectItem(withTitle: Defaults[.style])
+        appearancePopUp.selectItem(withTitle: Defaults[.General.appearance])
+        stylePopUp.selectItem(withTitle: Defaults[.General.style])
         
-        if Defaults[.toolbarDifficulty] {
+        if Defaults[.General.toolbarDifficulty] {
             toolbarDifficultyCheckbox.state = .on
         } else {
             toolbarDifficultyCheckbox.state = .off
         }
         
-        if Defaults[.safeFirstClick] {
+        if Defaults[.General.safeFirstClick] {
             safeFirstClickCheckbox.state = .on
         } else {
             safeFirstClickCheckbox.state = .off
         }
         
-        if Defaults[.questions] {
+        if Defaults[.General.questions] {
             useQuestionsCheckbox.state = .on
         } else {
             useQuestionsCheckbox.state = .off
@@ -48,31 +48,23 @@ class GeneralViewController: NSViewController {
     }
     
     @IBAction func toolbarDifficultyCheckboxClicked(_ sender: NSButton) {
-        Defaults[.toolbarDifficulty].toggle()
+        Defaults[.General.toolbarDifficulty].toggle()
         NotificationCenter.default.post(name: Notification.Name("SetSubtitle"), object: nil)
     }
     
     @IBAction func appearancePopUpChanged(_ sender: NSPopUpButton) {
-        Defaults[.appearance] = sender.selectedItem!.title
+        Defaults[.General.appearance] = sender.selectedItem!.title
     }
     
     @IBAction func stylePopUpChanged(_ sender: NSPopUpButton) {
-        Defaults[.style] = sender.selectedItem!.title
+        Defaults[.General.style] = sender.selectedItem!.title
     }
     
     @IBAction func safeFirstClickCheckboxClicked(_ sender: NSButton) {
-        Defaults[.safeFirstClick].toggle()
+        Defaults[.General.safeFirstClick].toggle()
     }
     
     @IBAction func useQuestionsCheckboxClicked(_ sender: NSButton) {
-        Defaults[.questions].toggle()
+        Defaults[.General.questions].toggle()
     }
-}
-
-extension Defaults.Keys {
-    static let appearance = Key<String>("appearance", default: "Light")
-    static let style = Key<String>("style", default: "Classic")
-    static let toolbarDifficulty = Key<Bool>("toolbarDifficulty", default: false)
-    static let questions = Key<Bool>("questions", default: false)
-    static let safeFirstClick = Key<Bool>("safeFirstClick", default: true)
 }

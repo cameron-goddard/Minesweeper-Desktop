@@ -204,7 +204,7 @@ class Board {
             if tile.value == .Empty {
                 reveal(r: r, c: c)
             } else {
-                if revealedTiles == 0 && Defaults[.safeFirstClick] && tile.value == .Mine && !loadedBoard {
+                if revealedTiles == 0 && Defaults[.General.safeFirstClick] && tile.value == .Mine && !loadedBoard {
                     
                     let allTiles = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
                     

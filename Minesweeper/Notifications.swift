@@ -8,6 +8,7 @@
 import Foundation
 
 extension Notification.Name {
+    static let appleInterfaceThemeChanged = Notification.Name(rawValue: "AppleInterfaceThemeChangedNotification")
     static let restartGame = Notification.Name("RestartGame")
     static let updateStat = Notification.Name("UpdateStats")
     static let updateTime = Notification.Name("UpdateTime")

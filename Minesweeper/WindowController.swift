@@ -35,7 +35,21 @@ class WindowController: NSWindowController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavorites(notification:)), name: .updateFavorites, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setTheme(notification:)), name: .setTheme, object: nil)
-        DistributedNotificationCenter.default().addObserver(self, selector: #selector(interfaceThemeChanged), name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"), object: nil)
+        DistributedNotificationCenter.default().addObserver(self, selector: #selector(interfaceThemeChanged), name: .appleInterfaceThemeChanged, object: nil)
+        
+        if let zoomButton = window?.standardWindowButton(.zoomButton) {
+            zoomButton.target = self
+            zoomButton.action = #selector(zoomButtonClicked(_:))
+        }
+    }
+    
+    @objc func zoomButtonClicked(_ sender: Any?) {
+        if Defaults[.General.scale] == 1 || Defaults[.General.scale] == 1.5 {
+            Defaults[.General.scale] = 2
+        } else {
+            Defaults[.General.scale] = 1.5
+        }
+        NotificationCenter.default.post(name: .setScale, object: nil)
     }
     
     @objc func interfaceThemeChanged() {

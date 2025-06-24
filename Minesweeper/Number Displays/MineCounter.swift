@@ -12,10 +12,11 @@ class MineCounter: NumberDisplay {
     
     var mines: Int
     
-    init(scale: CGFloat, mines: Int) {
+    init(sceneSize: CGSize, scale: CGFloat, mines: Int) {
         self.mines = mines
-        super.init(scale: scale)
+        super.init(sceneSize: sceneSize, scale: scale)
         self.set(value: mines)
+        self.position = CGPoint(x: -sceneSize.width/2 + 16 * scale, y: sceneSize.height/2 - (scale * 15))
     }
     
     func increment() {
@@ -37,6 +38,11 @@ class MineCounter: NumberDisplay {
     override func updateTextures() {
         super.updateTextures()
         self.set(value: mines)
+    }
+    
+    override func updateScale(sceneSize: CGSize, scale: CGFloat) {
+        super.updateScale(sceneSize: sceneSize, scale: scale)
+        self.position = CGPoint(x: -sceneSize.width/2 + 16 * scale, y: sceneSize.height/2 - (scale * 15))
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -125,6 +125,23 @@ class Board {
         }
     }
     
+    func updateScale(scale: CGFloat) {
+        // Update tile sizes and positions
+        self.scale = scale
+        let originX = -(CGFloat(cols) * tileSize.width) / 2
+        let originY = (CGFloat(rows) * tileSize.height) / 2
+        
+        for r in 0..<rows {
+            for c in 0..<cols {
+                let x = originX + CGFloat(c) * tileSize.width
+                let y = originY - CGFloat(r) * tileSize.height - (21.5 * scale)
+
+                tiles[r][c].node.size = tileSize
+                tiles[r][c].node.position = CGPoint(x: x, y: y)
+            }
+        }
+    }
+    
     /// Returns a list of the adjacent tiles to a target tile
     /// - Parameters:
     ///   - r: The row of the target tile

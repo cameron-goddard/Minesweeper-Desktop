@@ -17,4 +17,5 @@ extension Notification.Name {
     static let updateFavorites = Notification.Name("UpdateFavorites")
     static let setTheme = Notification.Name("SetTheme")
     static let setSubtitle = Notification.Name("SetSubtitle")
+    static let setScale = Notification.Name("SetScale")
 }

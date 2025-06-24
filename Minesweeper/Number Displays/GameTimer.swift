@@ -13,8 +13,9 @@ class GameTimer: NumberDisplay {
     var gameTimer = Timer()
     var startTime: Date?
     
-    override init(scale: CGFloat) {
-        super.init(scale: scale)
+    override init(sceneSize: CGSize, scale: CGFloat) {
+        super.init(sceneSize: sceneSize, scale: scale)
+        self.position = CGPoint(x: sceneSize.width/2 - 57 * scale, y: sceneSize.height/2 - (scale * 15))
     }
     
     func startTimer() {
@@ -48,6 +49,11 @@ class GameTimer: NumberDisplay {
         if !gameTimer.isValid {
             self.set(value: 0)
         }
+    }
+    
+    override func updateScale(sceneSize: CGSize, scale: CGFloat) {
+        super.updateScale(sceneSize: sceneSize, scale: scale)
+        self.position = CGPoint(x: sceneSize.width/2 - 57 * scale, y: sceneSize.height/2 - (scale * 15))
     }
     
     required init?(coder aDecoder: NSCoder) {

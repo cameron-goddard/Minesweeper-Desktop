@@ -15,12 +15,23 @@ class NumberDisplay: SKNode {
     var nodeTens: SKSpriteNode
     var nodeOnes: SKSpriteNode
     
-    init(scale: CGFloat) {
+    var sceneSize: CGSize
+    var scale: CGFloat
+    
+    init(sceneSize: CGSize, scale: CGFloat) {
+        self.sceneSize = sceneSize
+        self.scale = scale
+        
         borders = SKSpriteNode(texture: ThemeManager.shared.currentTheme.borders.borderNumbers)
         nodeHundreds = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
         nodeTens = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
         nodeOnes = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
         
+        super.init()
+        addNodes()
+    }
+    
+    func addNodes() {
         [borders, nodeHundreds, nodeTens, nodeOnes].forEach {
             $0.anchorPoint = CGPoint(x: 0, y: 1)
             $0.setScale(scale)
@@ -29,8 +40,6 @@ class NumberDisplay: SKNode {
         nodeHundreds.position = CGPoint(x: 2 * scale, y: -2 * scale)
         nodeTens.position = CGPoint(x: nodeHundreds.size.width + 4 * scale, y: -2 * scale)
         nodeOnes.position = CGPoint(x: (2 * nodeHundreds.size.width) + 6 * scale, y: -2 * scale)
-
-        super.init()
         
         self.addChild(borders)
         self.addChild(nodeHundreds)
@@ -53,6 +62,14 @@ class NumberDisplay: SKNode {
     /// Force update all textures. Called when a theme is changed
     func updateTextures() {
         self.borders.texture = ThemeManager.shared.currentTheme.borders.borderNumbers
+    }
+    
+    func updateScale(sceneSize: CGSize, scale: CGFloat) {
+        self.sceneSize = sceneSize
+        self.scale = scale
+        
+        self.removeAllChildren()
+        addNodes()
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -37,11 +37,11 @@ class GameScene: SKScene {
         self.mines = mines
         self.scale = scale
         
-        borders = Borders(size: size, scale: scale)
+        borders = Borders(sceneSize: size, scale: scale)
         board = Board(scale: scale, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
-        mainButton = MainButton(scale: scale)
-        gameTimer = GameTimer(scale: scale)
-        mineCounter = MineCounter(scale: scale, mines: mines)
+        mainButton = MainButton(sceneSize: size, scale: scale)
+        gameTimer = GameTimer(sceneSize: size, scale: scale)
+        mineCounter = MineCounter(sceneSize: size, scale: scale, mines: mines)
         
         super.init(size: size)
         
@@ -50,15 +50,6 @@ class GameScene: SKScene {
     
     /// Creates the game board, counters, and borders with the current theme. Adds all to this game scene
     func addNodes() {
-        
-        mainButton.position = CGPoint(
-            x: -ThemeManager.shared.currentTheme.mainButton.happy.size().width / 2 * scale,
-            y: self.frame.maxY - (scale * 15)
-        )
-        
-        mineCounter.position = CGPoint(x: self.frame.minX + 16 * scale, y: mainButton.position.y)
-        gameTimer.position = CGPoint(x: self.frame.maxX - 57 * scale, y: mainButton.position.y)
-        
         self.addChild(borders)
         self.addChild(mainButton)
         self.addChild(mineCounter)
@@ -73,6 +64,16 @@ class GameScene: SKScene {
         board.updateTextures()
         gameTimer.updateTextures()
         mineCounter.updateTextures()
+    }
+    
+    func updateScale(size: CGSize, scale: CGFloat) {
+        self.scale = scale
+        
+        borders.updateScale(sceneSize: size, scale: scale)
+        mainButton.updateScale(sceneSize: size, scale: scale)
+        board.updateScale(scale: scale)
+        gameTimer.updateScale(sceneSize: size, scale: scale)
+        mineCounter.updateScale(sceneSize: size, scale: scale)
     }
     
     override func didMove(to view: SKView) {

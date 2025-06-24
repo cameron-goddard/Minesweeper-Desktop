@@ -15,6 +15,7 @@ class ViewController: NSViewController {
     @IBOutlet var skView: SKView!
     var difficulty = Defaults[.Game.difficulty]
     var minesLayout: [(Int, Int)]?
+    var rows, cols, mines: Int!
     
     var difficulties = [
         "Beginner": [8, 8, 10],
@@ -27,9 +28,9 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.setSubtitle(notification:)), name: .setSubtitle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setScale(notification:)), name: .setScale, object: nil)
         
         if let view = self.skView {
-            let rows, cols, mines: Int
             let scale = Defaults[.General.scale]
             
             if difficulty == "Custom" || difficulty == "Loaded Custom" {
@@ -65,6 +66,22 @@ class ViewController: NSViewController {
             view.window!.subtitle = difficulty
         } else {
             view.window!.subtitle = ""
+        }
+    }
+    
+    @objc func setScale(notification: Notification) {
+        let scale = Defaults[.General.scale]
+        
+        let newSize = NSSize(
+            width: scale * CGFloat(24 + cols * 16),
+            height: scale * CGFloat(67 + rows * 16)
+        )
+        view.setFrameSize(newSize)
+        skView.setFrameSize(newSize)
+        
+        if let scene = getScene() {
+            scene.size = newSize
+            scene.updateScale(size: newSize, scale: scale)
         }
     }
     

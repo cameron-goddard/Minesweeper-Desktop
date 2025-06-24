@@ -11,8 +11,8 @@ import Defaults
 
 class Borders: SKNode {
     
-    // TODO: Clean this up
-    var scale = Defaults[.General.scale]
+    var sceneSize: CGSize
+    var scale: CGFloat
     
     var topBorder,
         topLeftCorner,
@@ -31,18 +31,24 @@ class Borders: SKNode {
     var background: SKSpriteNode!
     var filler: SKSpriteNode!
     
-    init(size: CGSize, scale: CGFloat) {
+    init(sceneSize: CGSize, scale: CGFloat) {
+        self.sceneSize = sceneSize
+        self.scale = scale
         super.init()
         
-        let minX = -size.width / 2
-        let maxX = size.width / 2
-        let minY = -size.height / 2
-        let maxY = size.height / 2
+        addNodes()
+    }
+    
+    private func addNodes() {
+        let minX = -sceneSize.width / 2
+        let maxX = sceneSize.width / 2
+        let minY = -sceneSize.height / 2
+        let maxY = sceneSize.height / 2
         
         background = makeNode(
             texture: ThemeManager.shared.currentTheme.borders.filler,
             position: CGPoint(x: minX, y: maxY),
-            xScale: size.width,
+            xScale: sceneSize.width,
             yScale: 66 * scale
         )
         
@@ -64,7 +70,7 @@ class Borders: SKNode {
         topBorder = makeNode(
             texture: ThemeManager.shared.currentTheme.borders.borderTop,
             position: CGPoint(x: minX, y: maxY),
-            xScale: size.width
+            xScale: sceneSize.width
         )
         
         middleBorder = makeNode(
@@ -73,7 +79,7 @@ class Borders: SKNode {
                 x: minX,
                 y: topBorder.frame.minY - scale * 33
             ),
-            xScale: size.width,
+            xScale: sceneSize.width,
             zPosition: 2
         )
         
@@ -83,7 +89,7 @@ class Borders: SKNode {
                 x: minX,
                 y: minY + ThemeManager.shared.currentTheme.borders.borderBottom.size().height * scale
             ),
-            xScale: size.width
+            xScale: sceneSize.width
         )
         
         middleLeftCorner = makeNode(
@@ -214,6 +220,14 @@ class Borders: SKNode {
         bottomLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerBottomLeft
         bottomRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerBottomRight
         filler.texture = ThemeManager.shared.currentTheme.borders.filler
+    }
+    
+    func updateScale(sceneSize: CGSize, scale: CGFloat) {
+        self.sceneSize = sceneSize
+        self.scale = scale
+        
+        self.removeAllChildren()
+        addNodes()
     }
     
     required init?(coder aDecoder: NSCoder) {

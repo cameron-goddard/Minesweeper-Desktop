@@ -64,6 +64,7 @@ class GeneralViewController: NSViewController {
     
     @IBAction func scaleSliderChanged(_ sender: NSSlider) {
         Defaults[.General.scale] = sender.doubleValue
+        NotificationCenter.default.post(name: .setScale, object: nil)
     }
     
     @IBAction func safeFirstClickCheckboxClicked(_ sender: NSButton) {

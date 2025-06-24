@@ -39,35 +39,35 @@ class Borders: SKNode {
         let maxY = size.height / 2
         
         background = makeNode(
-            texture: Util.currentTheme.borders.filler,
+            texture: ThemeManager.shared.currentTheme.borders.filler,
             position: CGPoint(x: minX, y: maxY),
             xScale: size.width,
             yScale: 66 * scale
         )
         
         topLeftCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerTopLeft,
+            texture: ThemeManager.shared.currentTheme.borders.cornerTopLeft,
             position: CGPoint(x: minX, y: maxY),
             zPosition: 2
         )
 
         topRightCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerTopRight,
+            texture: ThemeManager.shared.currentTheme.borders.cornerTopRight,
             position: CGPoint(
-                x: maxX - Util.currentTheme.borders.cornerTopRight.size().width * scale,
+                x: maxX - ThemeManager.shared.currentTheme.borders.cornerTopRight.size().width * scale,
                 y: maxY
             ),
             zPosition: 2
         )
 
         topBorder = makeNode(
-            texture: Util.currentTheme.borders.borderTop,
+            texture: ThemeManager.shared.currentTheme.borders.borderTop,
             position: CGPoint(x: minX, y: maxY),
             xScale: size.width
         )
         
         middleBorder = makeNode(
-            texture: Util.currentTheme.borders.borderMiddle,
+            texture: ThemeManager.shared.currentTheme.borders.borderMiddle,
             position: CGPoint(
                 x: minX,
                 y: topBorder.frame.minY - scale * 33
@@ -77,74 +77,74 @@ class Borders: SKNode {
         )
         
         bottomBorder = makeNode(
-            texture: Util.currentTheme.borders.borderBottom,
+            texture: ThemeManager.shared.currentTheme.borders.borderBottom,
             position: CGPoint(
                 x: minX,
-                y: minY + Util.currentTheme.borders.borderBottom.size().height * scale
+                y: minY + ThemeManager.shared.currentTheme.borders.borderBottom.size().height * scale
             ),
             xScale: size.width
         )
         
         middleLeftCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerMiddleLeft,
+            texture: ThemeManager.shared.currentTheme.borders.cornerMiddleLeft,
             position: CGPoint(x: minX, y: middleBorder.position.y),
             zPosition: 3
         )
 
         middleRightCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerMiddleRight,
+            texture: ThemeManager.shared.currentTheme.borders.cornerMiddleRight,
             position: CGPoint(
-                x: maxX - Util.currentTheme.borders.cornerMiddleRight.size().width * scale,
+                x: maxX - ThemeManager.shared.currentTheme.borders.cornerMiddleRight.size().width * scale,
                 y: middleBorder.position.y
             ),
             zPosition: 3
         )
         
         topLeftBorder = makeNode(
-            texture: Util.currentTheme.borders.borderTopLeft,
+            texture: ThemeManager.shared.currentTheme.borders.borderTopLeft,
             position: CGPoint(x: minX, y: maxY),
             yScale: maxY - middleLeftCorner.position.y
         )
 
         topRightBorder = makeNode(
-            texture: Util.currentTheme.borders.borderTopRight,
+            texture: ThemeManager.shared.currentTheme.borders.borderTopRight,
             position: CGPoint(
-                x: maxX - Util.currentTheme.borders.borderTopRight.size().width * scale,
+                x: maxX - ThemeManager.shared.currentTheme.borders.borderTopRight.size().width * scale,
                 y: maxY
             ),
             yScale: maxY - middleRightCorner.position.y
         )
 
         leftBorder = makeNode(
-            texture: Util.currentTheme.borders.borderLeft,
+            texture: ThemeManager.shared.currentTheme.borders.borderLeft,
             position: CGPoint(x: minX, y: maxY - topLeftBorder.size.height),
             yScale: middleLeftCorner.position.y - minY
         )
 
         rightBorder = makeNode(
-            texture: Util.currentTheme.borders.borderRight,
+            texture: ThemeManager.shared.currentTheme.borders.borderRight,
             position: CGPoint(
-                x: maxX - Util.currentTheme.borders.borderRight.size().width * scale,
+                x: maxX - ThemeManager.shared.currentTheme.borders.borderRight.size().width * scale,
                 y: maxY - topRightBorder.size.height
             ),
             yScale: middleRightCorner.position.y - minY
         )
         
         bottomLeftCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerBottomLeft,
+            texture: ThemeManager.shared.currentTheme.borders.cornerBottomLeft,
             position: CGPoint(x: minX, y: bottomBorder.position.y)
         )
 
         bottomRightCorner = makeNode(
-            texture: Util.currentTheme.borders.cornerBottomRight,
+            texture: ThemeManager.shared.currentTheme.borders.cornerBottomRight,
             position: CGPoint(
-                x: maxX - Util.currentTheme.borders.cornerBottomRight.size().width * scale,
+                x: maxX - ThemeManager.shared.currentTheme.borders.cornerBottomRight.size().width * scale,
                 y: bottomBorder.position.y
             )
         )
         
         filler = makeNode(
-            texture: Util.currentTheme.borders.filler,
+            texture: ThemeManager.shared.currentTheme.borders.filler,
             position: CGPoint(
                 x: middleRightCorner.position.x - scale,
                 y: middleBorder.position.y-middleBorder.size.height + scale
@@ -198,21 +198,21 @@ class Borders: SKNode {
     
     /// Force update border textures. Called when a theme is changed
     func updateTextures() {
-        background.texture = Util.currentTheme.borders.filler
-        topLeftCorner.texture = Util.currentTheme.borders.cornerTopLeft
-        topRightCorner.texture = Util.currentTheme.borders.cornerTopRight
-        topBorder.texture = Util.currentTheme.borders.borderTop
-        middleBorder.texture = Util.currentTheme.borders.borderMiddle
-        bottomBorder.texture = Util.currentTheme.borders.borderBottom
-        middleLeftCorner.texture = Util.currentTheme.borders.cornerMiddleLeft
-        middleRightCorner.texture = Util.currentTheme.borders.cornerMiddleRight
-        topLeftBorder.texture = Util.currentTheme.borders.borderTopLeft
-        topRightBorder.texture = Util.currentTheme.borders.borderTopRight
-        leftBorder.texture = Util.currentTheme.borders.borderLeft
-        rightBorder.texture = Util.currentTheme.borders.borderRight
-        bottomLeftCorner.texture = Util.currentTheme.borders.cornerBottomLeft
-        bottomRightCorner.texture = Util.currentTheme.borders.cornerBottomRight
-        filler.texture = Util.currentTheme.borders.filler
+        background.texture = ThemeManager.shared.currentTheme.borders.filler
+        topLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerTopLeft
+        topRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerTopRight
+        topBorder.texture = ThemeManager.shared.currentTheme.borders.borderTop
+        middleBorder.texture = ThemeManager.shared.currentTheme.borders.borderMiddle
+        bottomBorder.texture = ThemeManager.shared.currentTheme.borders.borderBottom
+        middleLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerMiddleLeft
+        middleRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerMiddleRight
+        topLeftBorder.texture = ThemeManager.shared.currentTheme.borders.borderTopLeft
+        topRightBorder.texture = ThemeManager.shared.currentTheme.borders.borderTopRight
+        leftBorder.texture = ThemeManager.shared.currentTheme.borders.borderLeft
+        rightBorder.texture = ThemeManager.shared.currentTheme.borders.borderRight
+        bottomLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerBottomLeft
+        bottomRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerBottomRight
+        filler.texture = ThemeManager.shared.currentTheme.borders.filler
     }
     
     required init?(coder aDecoder: NSCoder) {

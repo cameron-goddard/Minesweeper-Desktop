@@ -37,7 +37,7 @@ class ViewController: NSViewController {
             // Consider changing fullSizeContentView in the future
             view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
             
-            Util.currentTheme = Util.theme(withName: Defaults[.theme])
+            ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: Defaults[.theme])
             let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
             view.presentScene(scene)
             

@@ -16,10 +16,10 @@ class NumberDisplay: SKNode {
     var nodeOnes: SKSpriteNode
     
     override init() {
-        borders = SKSpriteNode(texture: Util.currentTheme.borders.borderNumbers)
-        nodeHundreds = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
-        nodeTens = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
-        nodeOnes = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
+        borders = SKSpriteNode(texture: ThemeManager.shared.currentTheme.borders.borderNumbers)
+        nodeHundreds = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
+        nodeTens = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
+        nodeOnes = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
         
         [borders, nodeHundreds, nodeTens, nodeOnes].forEach {
             $0.anchorPoint = CGPoint(x: 0, y: 1)
@@ -40,19 +40,19 @@ class NumberDisplay: SKNode {
     
     func set(value: Int) {
         if (value < 0) {
-            nodeHundreds.texture = Util.currentTheme.numbers.digits.last
-            nodeTens.texture = Util.currentTheme.numbers.digits[(abs(value)/10) % 10]
-            nodeOnes.texture = Util.currentTheme.numbers.digits[abs(value) % 10]
+            nodeHundreds.texture = ThemeManager.shared.currentTheme.numbers.digits.last
+            nodeTens.texture = ThemeManager.shared.currentTheme.numbers.digits[(abs(value)/10) % 10]
+            nodeOnes.texture = ThemeManager.shared.currentTheme.numbers.digits[abs(value) % 10]
         } else {
-            nodeHundreds.texture = Util.currentTheme.numbers.digits[(value/100) % 10]
-            nodeTens.texture = Util.currentTheme.numbers.digits[(value/10) % 10]
-            nodeOnes.texture = Util.currentTheme.numbers.digits[value % 10]
+            nodeHundreds.texture = ThemeManager.shared.currentTheme.numbers.digits[(value/100) % 10]
+            nodeTens.texture = ThemeManager.shared.currentTheme.numbers.digits[(value/10) % 10]
+            nodeOnes.texture = ThemeManager.shared.currentTheme.numbers.digits[value % 10]
         }
     }
     
     /// Force update all textures. Called when a theme is changed
     func updateTextures() {
-        self.borders.texture = Util.currentTheme.borders.borderNumbers
+        self.borders.texture = ThemeManager.shared.currentTheme.borders.borderNumbers
     }
     
     required init?(coder aDecoder: NSCoder) {

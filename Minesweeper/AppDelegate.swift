@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if fileManager.fileExists(atPath: msSupportURL.path, isDirectory: &isDir) {
             do {
-                try Util.readThemes()
+                try ThemeManager.shared.readThemes()
             } catch {
                 let alert = NSAlert()
                 alert.messageText = "Invalid Theme File"
@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             do {
                 try fileManager.createDirectory(at: msSupportURL, withIntermediateDirectories: true, attributes: nil)
-                try fileManager.createDirectory(at: Util.themesURL, withIntermediateDirectories: true, attributes: nil)
+                try fileManager.createDirectory(at: ThemeManager.shared.themesURL, withIntermediateDirectories: true, attributes: nil)
                 try fileManager.createDirectory(at: msSupportURL.appendingPathComponent("Scores"), withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print("could not create directory")

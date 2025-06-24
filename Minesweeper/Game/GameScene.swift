@@ -49,7 +49,7 @@ class GameScene: SKScene {
     func addNodes() {
         
         mainButton.position = CGPoint(
-            x: -Util.currentTheme.mainButton.happy.size().width / 2 * Util.scale,
+            x: -ThemeManager.shared.currentTheme.mainButton.happy.size().width / 2 * Util.scale,
             y: self.frame.maxY - (Util.scale * 15)
         )
         
@@ -83,11 +83,11 @@ class GameScene: SKScene {
         if won {
             gameState = .Won
             board.flagMines()
-            mainButton.set(texture: Util.currentTheme.mainButton.cool)
+            mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.cool)
         } else {
             gameState = .Lost
             board.lostGame()
-            mainButton.set(texture: Util.currentTheme.mainButton.dead)
+            mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.dead)
         }
         gameTimer.stopTimer()
     }

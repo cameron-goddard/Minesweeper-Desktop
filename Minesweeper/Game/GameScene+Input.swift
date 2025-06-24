@@ -15,10 +15,10 @@ extension GameScene {
         let clickedNode = self.nodes(at: event.location(in: scene!))
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
-                mainButton.set(texture: Util.currentTheme.mainButton.happyPressed)
+                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.happyPressed)
             } else {
                 if gameState == .Won || gameState == .Lost { return }
-                mainButton.set(texture: Util.currentTheme.mainButton.cautious)
+                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.cautious)
                 
                 currentTile = clickedNode[0].name
                 
@@ -36,7 +36,7 @@ extension GameScene {
         
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
-                mainButton.set(texture: Util.currentTheme.mainButton.happy)
+                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.happy)
                 newGame()
             } else {
                 if gameState == .Won || gameState == .Lost { return }
@@ -45,7 +45,7 @@ extension GameScene {
                     gameState = .InProgress
                 }
                 
-                mainButton.set(texture: Util.currentTheme.mainButton.happy)
+                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.happy)
                 let coords = convertLocation(name: name)
                 let tile = board.tileAt(r: coords[0], c: coords[1])!
                 

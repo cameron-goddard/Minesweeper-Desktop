@@ -44,16 +44,16 @@ class WindowController: NSWindowController {
         }
         
         if UserDefaults.standard.string(forKey: "AppleInterfaceStyle") != nil {
-            if Util.currentTheme.name == "Classic" {
-                Util.currentTheme = Util.theme(withName: "Classic Dark")
+            if ThemeManager.shared.currentTheme.name == "Classic" {
+                ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: "Classic Dark")
                 Defaults[.theme] = "Classic Dark"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
                 updateThemesMenu()
             }
         } else {
-            if Util.currentTheme.name == "Classic Dark" {
-                Util.currentTheme = Util.theme(withName: "Classic")
+            if ThemeManager.shared.currentTheme.name == "Classic Dark" {
+                ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: "Classic")
                 Defaults[.theme] = "Classic"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
@@ -76,7 +76,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func setTheme(sender: NSMenuItem) {
-        Util.currentTheme = Util.theme(withName: sender.title)
+        ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: sender.title)
         Defaults[.theme] = sender.title
         (viewController.skView.scene as! GameScene).updateTextures()
         
@@ -84,7 +84,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func setTheme(notification: Notification) {
-        Util.currentTheme = Util.theme(withName: notification.object as! String)
+        ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: notification.object as! String)
         Defaults[.theme] = notification.object as! String
         (viewController.skView.scene as! GameScene).updateTextures()
         
@@ -106,17 +106,17 @@ class WindowController: NSWindowController {
         let font = NSFont.systemFont(ofSize: 11, weight: .semibold)
         titleItem.attributedTitle = NSAttributedString(string: "Themes", attributes: [.font: font])
         
-        for theme in Util.themes {
+        for theme in ThemeManager.shared.themes {
             if Defaults[.favorites].contains(theme.name) {
                 let menuItem = tempMenu.addItem(withTitle: theme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
-                if Util.currentTheme == Util.theme(withName: theme.name) {
+                if ThemeManager.shared.currentTheme == ThemeManager.shared.theme(with: theme.name) {
                     menuItem.state = .on
                 }
             }
         }
-        if !Util.currentTheme.isFavorite {
+        if !ThemeManager.shared.currentTheme.isFavorite {
             tempMenu.addItem(.separator())
-            let menuItem = tempMenu.addItem(withTitle: Util.currentTheme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
+            let menuItem = tempMenu.addItem(withTitle: ThemeManager.shared.currentTheme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
             menuItem.state = .on
         }
         //themesMenu.addItem(.init(title: "Show All...", action: nil, keyEquivalent: ""))

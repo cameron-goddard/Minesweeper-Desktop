@@ -11,7 +11,7 @@ import GameplayKit
 class MainButton: SKSpriteNode {
     
     init() {
-        super.init(texture: Util.currentTheme.mainButton.happy, color: .clear, size: Util.currentTheme.mainButton.happy.size())
+        super.init(texture: ThemeManager.shared.currentTheme.mainButton.happy, color: .clear, size: ThemeManager.shared.currentTheme.mainButton.happy.size())
         
         self.anchorPoint = CGPoint(x: 0, y: 1)
         self.setScale(Util.scale)
@@ -23,7 +23,7 @@ class MainButton: SKSpriteNode {
     }
     
     func updateTextures() {
-        self.texture = Util.currentTheme.mainButton.happy
+        self.texture = ThemeManager.shared.currentTheme.mainButton.happy
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -45,7 +45,7 @@ class Tile {
         self.c = c
         self.state = state
         self.value = val
-        self.node.texture = Util.currentTheme.tiles.covered
+        self.node.texture = ThemeManager.shared.currentTheme.tiles.covered
         self.node.anchorPoint = CGPoint(x: 0, y: 1)
         self.node.name = String(r) + "," + String(c)
     }
@@ -65,11 +65,11 @@ class Tile {
         case .Uncovered:
             self.node.texture = textureLookup(value: self.value)
         case .Covered:
-            self.node.texture = Util.currentTheme.tiles.covered
+            self.node.texture = ThemeManager.shared.currentTheme.tiles.covered
         case .Flagged:
-            self.node.texture = Util.currentTheme.tiles.flagged
+            self.node.texture = ThemeManager.shared.currentTheme.tiles.flagged
         case .Question:
-            self.node.texture = Util.currentTheme.tiles.question
+            self.node.texture = ThemeManager.shared.currentTheme.tiles.question
         }
     }
     
@@ -83,9 +83,9 @@ class Tile {
     
     func pressed() {
         if self.state == .Question {
-            self.node.texture = Util.currentTheme.tiles.questionPressed
+            self.node.texture = ThemeManager.shared.currentTheme.tiles.questionPressed
         } else {
-            self.node.texture = Util.currentTheme.tiles.pressed
+            self.node.texture = ThemeManager.shared.currentTheme.tiles.pressed
         }
     }
     
@@ -96,29 +96,29 @@ class Tile {
     func textureLookup(value: Value) -> SKTexture {
         switch value {
         case .Mine:
-            return Util.currentTheme.tiles.mine
+            return ThemeManager.shared.currentTheme.tiles.mine
         case .MineRed:
-            return Util.currentTheme.tiles.mineRed
+            return ThemeManager.shared.currentTheme.tiles.mineRed
         case .MineWrong:
-            return Util.currentTheme.tiles.mineWrong
+            return ThemeManager.shared.currentTheme.tiles.mineWrong
         case .One:
-            return Util.currentTheme.tiles.one
+            return ThemeManager.shared.currentTheme.tiles.one
         case .Two:
-            return Util.currentTheme.tiles.two
+            return ThemeManager.shared.currentTheme.tiles.two
         case .Three:
-            return Util.currentTheme.tiles.three
+            return ThemeManager.shared.currentTheme.tiles.three
         case .Four:
-            return Util.currentTheme.tiles.four
+            return ThemeManager.shared.currentTheme.tiles.four
         case .Five:
-            return Util.currentTheme.tiles.five
+            return ThemeManager.shared.currentTheme.tiles.five
         case .Six:
-            return Util.currentTheme.tiles.six
+            return ThemeManager.shared.currentTheme.tiles.six
         case .Seven:
-            return Util.currentTheme.tiles.seven
+            return ThemeManager.shared.currentTheme.tiles.seven
         case .Eight:
-            return Util.currentTheme.tiles.eight
+            return ThemeManager.shared.currentTheme.tiles.eight
         default:
-            return Util.currentTheme.tiles.empty
+            return ThemeManager.shared.currentTheme.tiles.empty
         }
     }
 }

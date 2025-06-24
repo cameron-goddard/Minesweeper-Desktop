@@ -15,7 +15,7 @@ class ThemesViewController: NSViewController {
     @IBOutlet weak var tabView: NSTabView!
     
     @IBOutlet weak var tableView: NSTableView!
-    var themes: [Theme] = Util.themes
+    var themes: [Theme] = ThemeManager.shared.themes
     
     @IBOutlet weak var themePreview: SKView!
     @IBOutlet weak var themeName: NSTextField!
@@ -74,13 +74,13 @@ class ThemesViewController: NSViewController {
                     let path = openPanel.url
                     let file = NSData(contentsOf: path!)
                     do {
-                        let themeURL = Util.themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
+                        let themeURL = ThemeManager.shared.themesURL.appendingPathComponent((path?.absoluteString as! NSString).lastPathComponent)
                         try file!.write(to: themeURL)
                         
                         let fileName = themeURL.lastPathComponent
                         
-                        if !Util.themes.contains(where: {$0.fileName == fileName}) {
-                            try Util.addTheme(fileName: fileName)
+                        if !ThemeManager.shared.themes.contains(where: {$0.fileName == fileName}) {
+                            try ThemeManager.shared.addTheme(fileName: fileName)
                         } else {
                             let alert = NSAlert()
                             alert.messageText = "Duplicate theme"
@@ -88,8 +88,8 @@ class ThemesViewController: NSViewController {
                             alert.runModal()
                         }
                         // tableView.reloadData() messes up the favorite buttons - possibly investigate
-                        self.themes = Util.themes
-                        self.tableView.insertRows(at: IndexSet(integer: Util.themes.count - 1))
+                        self.themes = ThemeManager.shared.themes
+                        self.tableView.insertRows(at: IndexSet(integer: ThemeManager.shared.themes.count - 1))
                     } catch {
                         print("could not write to file")
                     }
@@ -100,12 +100,12 @@ class ThemesViewController: NSViewController {
         } else {
             do {
                 let name = themes[tableView.selectedRow].fileName
-                let fileURL = Util.themesURL.appendingPathComponent(name)
+                let fileURL = ThemeManager.shared.themesURL.appendingPathComponent(name)
                 try FileManager.default.removeItem(atPath: fileURL.path)
                 
                 let oldRow = tableView.selectedRow
                 // TODO: Investigate this bug: Delete a favorited item, add any other back in
-                Util.themes.remove(at: Util.themes.firstIndex(of: themes[oldRow])!)
+                ThemeManager.shared.themes.remove(at: ThemeManager.shared.themes.firstIndex(of: themes[oldRow])!)
                 if let index = Defaults[.favorites].firstIndex(of: themes[oldRow].name) {
                     Defaults[.favorites].remove(at: index)
                 }

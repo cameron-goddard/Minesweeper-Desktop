@@ -106,7 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
         
-        oldScene.timerView.reset()
+        oldScene.gameTimer.reset()
         
         controller.difficulty = "Custom"
         Defaults[.difficulty] = "Custom"
@@ -196,7 +196,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         }
                     }
                     
-                    oldScene.timerView.reset()
+                    oldScene.gameTimer.reset()
                     
                     Defaults[.customDifficulty][0] = rows
                     Defaults[.customDifficulty][1] = cols

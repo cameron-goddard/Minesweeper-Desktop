@@ -1,5 +1,5 @@
 //
-//  NumberView.swift
+//  NumberDisplay.swift
 //  Minesweeper
 //
 //  Created by Cameron Goddard on 5/28/22.
@@ -8,34 +8,33 @@
 import Foundation
 import SpriteKit
 
-class NumberView: SKNode {
+class NumberDisplay: SKNode {
     
-    var nodeHundreds = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
-    var nodeTens = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
-    var nodeOnes = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
-    
-    var borders = SKSpriteNode(texture: Util.currentTheme.borders.borderNumbers)
+    var borders: SKSpriteNode
+    var nodeHundreds: SKSpriteNode
+    var nodeTens: SKSpriteNode
+    var nodeOnes: SKSpriteNode
     
     override init() {
+        borders = SKSpriteNode(texture: Util.currentTheme.borders.borderNumbers)
+        nodeHundreds = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
+        nodeTens = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
+        nodeOnes = SKSpriteNode(texture: Util.currentTheme.numbers.digits[0])
+        
+        [borders, nodeHundreds, nodeTens, nodeOnes].forEach {
+            $0.anchorPoint = CGPoint(x: 0, y: 1)
+            $0.setScale(Util.scale)
+        }
+        
+        nodeHundreds.position = CGPoint(x: 2 * Util.scale, y: -2 * Util.scale)
+        nodeTens.position = CGPoint(x: nodeHundreds.size.width + 4 * Util.scale, y: -2 * Util.scale)
+        nodeOnes.position = CGPoint(x: (2 * nodeHundreds.size.width) + 6 * Util.scale, y: -2 * Util.scale)
+
         super.init()
         
-        borders.anchorPoint = CGPoint(x: 0, y: 1)
-        borders.setScale(Util.scale)
         self.addChild(borders)
-        
-        nodeHundreds.anchorPoint = CGPoint(x: 0, y: 1)
-        nodeHundreds.setScale(Util.scale)
-        nodeHundreds.position = CGPoint(x: 2 * Util.scale, y: -2 * Util.scale)
         self.addChild(nodeHundreds)
-        
-        nodeTens.anchorPoint = CGPoint(x: 0, y: 1)
-        nodeTens.setScale(Util.scale)
-        nodeTens.position = CGPoint(x: nodeHundreds.size.width + 4 * Util.scale, y: -2 * Util.scale)
         self.addChild(nodeTens)
-        
-        nodeOnes.anchorPoint = CGPoint(x: 0, y: 1)
-        nodeOnes.setScale(Util.scale)
-        nodeOnes.position = CGPoint(x: (2 * nodeHundreds.size.width) + 6 * Util.scale, y: -2 * Util.scale)
         self.addChild(nodeOnes)
     }
     
@@ -51,6 +50,7 @@ class NumberView: SKNode {
         }
     }
     
+    /// Force update all textures. Called when a theme is changed
     func updateTextures() {
         self.borders.texture = Util.currentTheme.borders.borderNumbers
     }

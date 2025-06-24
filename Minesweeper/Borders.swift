@@ -9,6 +9,7 @@ import Foundation
 import GameplayKit
 
 class Borders: SKNode {
+    
     // TODO: Clean this up
     var scale = Util.scale
     
@@ -32,116 +33,107 @@ class Borders: SKNode {
     init(size: CGSize) {
         super.init()
         
-        let minX = -size.width/2
-        let maxX = size.width/2
-        let minY = -size.height/2
-        let maxY = size.height/2
+        let minX = -size.width / 2
+        let maxX = size.width / 2
+        let minY = -size.height / 2
+        let maxY = size.height / 2
         
         background = makeNode(
             texture: Util.currentTheme.borders.filler,
-            position: CGPoint(x: minX, y: maxY)
+            position: CGPoint(x: minX, y: maxY),
+            xScale: size.width,
+            yScale: 66 * scale
         )
-        background.xScale = size.width
-        background.yScale = 66 * scale
-        self.addChild(background)
         
         topLeftCorner = makeNode(
             texture: Util.currentTheme.borders.cornerTopLeft,
             position: CGPoint(x: minX, y: maxY),
             zPosition: 2
         )
-        self.addChild(topLeftCorner)
 
         topRightCorner = makeNode(
             texture: Util.currentTheme.borders.cornerTopRight,
             position: CGPoint(
                 x: maxX - Util.currentTheme.borders.cornerTopRight.size().width * scale,
-                y: maxY),
+                y: maxY
+            ),
             zPosition: 2
         )
-        self.addChild(topRightCorner)
 
         topBorder = makeNode(
             texture: Util.currentTheme.borders.borderTop,
-            position: CGPoint(x: minX, y: maxY)
+            position: CGPoint(x: minX, y: maxY),
+            xScale: size.width
         )
-        topBorder.xScale = size.width
-        self.addChild(topBorder)
         
         middleBorder = makeNode(
             texture: Util.currentTheme.borders.borderMiddle,
             position: CGPoint(
                 x: minX,
-                y: (topBorder.frame.minY - scale * 33)),
+                y: topBorder.frame.minY - scale * 33
+            ),
+            xScale: size.width,
             zPosition: 2
         )
-        middleBorder.xScale = size.width
-        self.addChild(middleBorder)
         
         bottomBorder = makeNode(
             texture: Util.currentTheme.borders.borderBottom,
             position: CGPoint(
                 x: minX,
-                y: minY + Util.currentTheme.borders.borderBottom.size().height * scale)
+                y: minY + Util.currentTheme.borders.borderBottom.size().height * scale
+            ),
+            xScale: size.width
         )
-        bottomBorder.xScale = size.width
-        self.addChild(bottomBorder)
         
         middleLeftCorner = makeNode(
             texture: Util.currentTheme.borders.cornerMiddleLeft,
             position: CGPoint(x: minX, y: middleBorder.position.y),
             zPosition: 3
         )
-        self.addChild(middleLeftCorner)
 
         middleRightCorner = makeNode(
             texture: Util.currentTheme.borders.cornerMiddleRight,
             position: CGPoint(
                 x: maxX - Util.currentTheme.borders.cornerMiddleRight.size().width * scale,
-                y: middleBorder.position.y),
+                y: middleBorder.position.y
+            ),
             zPosition: 3
         )
-        self.addChild(middleRightCorner)
         
         topLeftBorder = makeNode(
             texture: Util.currentTheme.borders.borderTopLeft,
-            position: CGPoint(x: minX, y: maxY)
+            position: CGPoint(x: minX, y: maxY),
+            yScale: maxY - middleLeftCorner.position.y
         )
-        topLeftBorder.yScale = (size.height/2 - middleLeftCorner.position.y)
-        self.addChild(topLeftBorder)
 
         topRightBorder = makeNode(
             texture: Util.currentTheme.borders.borderTopRight,
             position: CGPoint(
                 x: maxX - Util.currentTheme.borders.borderTopRight.size().width * scale,
                 y: maxY
-            )
+            ),
+            yScale: maxY - middleRightCorner.position.y
         )
-        topRightBorder.yScale = (maxY - middleRightCorner.position.y)
-        self.addChild(topRightBorder)
 
         leftBorder = makeNode(
             texture: Util.currentTheme.borders.borderLeft,
-            position: CGPoint(x: minX, y: maxY - topLeftBorder.size.height)
+            position: CGPoint(x: minX, y: maxY - topLeftBorder.size.height),
+            yScale: middleLeftCorner.position.y - minY
         )
-        leftBorder.yScale = (middleLeftCorner.position.y - minY)
-        self.addChild(leftBorder)
 
         rightBorder = makeNode(
             texture: Util.currentTheme.borders.borderRight,
             position: CGPoint(
                 x: maxX - Util.currentTheme.borders.borderRight.size().width * scale,
                 y: maxY - topRightBorder.size.height
-            )
+            ),
+            yScale: middleRightCorner.position.y - minY
         )
-        rightBorder.yScale = (middleRightCorner.position.y - minY)
-        self.addChild(rightBorder)
         
         bottomLeftCorner = makeNode(
             texture: Util.currentTheme.borders.cornerBottomLeft,
             position: CGPoint(x: minX, y: bottomBorder.position.y)
         )
-        self.addChild(bottomLeftCorner)
 
         bottomRightCorner = makeNode(
             texture: Util.currentTheme.borders.cornerBottomRight,
@@ -150,7 +142,6 @@ class Borders: SKNode {
                 y: bottomBorder.position.y
             )
         )
-        self.addChild(bottomRightCorner)
         
         filler = makeNode(
             texture: Util.currentTheme.borders.filler,
@@ -160,6 +151,21 @@ class Borders: SKNode {
             ),
             zPosition: 4
         )
+        
+        self.addChild(background)
+        self.addChild(topLeftCorner)
+        self.addChild(topRightCorner)
+        self.addChild(topBorder)
+        self.addChild(middleBorder)
+        self.addChild(bottomBorder)
+        self.addChild(middleLeftCorner)
+        self.addChild(middleRightCorner)
+        self.addChild(topLeftBorder)
+        self.addChild(topRightBorder)
+        self.addChild(leftBorder)
+        self.addChild(rightBorder)
+        self.addChild(bottomLeftCorner)
+        self.addChild(bottomRightCorner)
         self.addChild(filler)
     }
     
@@ -167,13 +173,22 @@ class Borders: SKNode {
     /// - Parameters:
     ///   - texture: The current theme's texture for this node
     ///   - position: A specified 2D position for this node
+    ///   - xScale: The node's optional x scaling
+    ///   - yScale: The node's optional y scaling
     ///   - zPosition: The node's optional Z position
     /// - Returns: A properly scaled SKSpriteNode with the given texture and position
-    private func makeNode(texture: SKTexture, position: CGPoint, zPosition: CGFloat = 0) -> SKSpriteNode {
+    private func makeNode(texture: SKTexture, position: CGPoint, xScale: CGFloat = 1, yScale: CGFloat = 1, zPosition: CGFloat = 0) -> SKSpriteNode {
+        
         let node = SKSpriteNode(texture: texture)
         node.anchorPoint = CGPoint(x: 0, y: 1)
         node.position = position
         node.setScale(scale)
+        if xScale != 1 {
+            node.xScale = xScale
+        }
+        if yScale != 1 {
+            node.yScale = yScale
+        }
         if zPosition != 0 {
             node.zPosition = zPosition
         }

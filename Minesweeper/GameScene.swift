@@ -10,12 +10,11 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var board: Board!
-    var borders: Borders!
-    var timerView: TimerView!
-    var counterView: CounterView!
-    
-    var mainButton: SKSpriteNode!
+    var board: Board
+    var borders: Borders
+    var gameTimer: GameTimer
+    var mineCounter: MineCounter
+    var mainButton: SKSpriteNode
     
     var rows, cols, mines : Int
     
@@ -29,10 +28,15 @@ class GameScene: SKScene {
         self.cols = cols
         self.mines = mines
         
+        mainButton = SKSpriteNode(texture: Util.currentTheme.mainButton.happy)
+        mainButton.anchorPoint = CGPoint(x: 0, y: 1)
+        mainButton.setScale(Util.scale)
+        mainButton.name = "Main Button"
+        
         borders = Borders(size: size)
         board = Board(rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
-        timerView = TimerView()
-        counterView = CounterView(mines: self.mines)
+        gameTimer = GameTimer()
+        mineCounter = MineCounter(mines: self.mines)
         
         super.init(size: size)
         
@@ -41,32 +45,30 @@ class GameScene: SKScene {
     
     /// Creates the game board, counters, and borders with the current theme. Adds all to this game scene
     func addNodes() {
-        mainButton = SKSpriteNode(texture: Util.currentTheme.mainButton.happy)
-        mainButton.anchorPoint = CGPoint(x: 0, y: 1)
-        mainButton.setScale(Util.scale)
+        
         mainButton.position = CGPoint(
-            x: -Util.currentTheme.mainButton.happy.size().width/2 * Util.scale,
+            x: -Util.currentTheme.mainButton.happy.size().width / 2 * Util.scale,
             y: self.frame.maxY - (Util.scale * 15)
         )
-        mainButton.name = "Main Button"
         
-        counterView.position = CGPoint(x: self.frame.minX + 16 * Util.scale, y: mainButton.position.y)
-        timerView.position = CGPoint(x: self.frame.maxX - 57 * Util.scale, y: mainButton.position.y)
+        mineCounter.position = CGPoint(x: self.frame.minX + 16 * Util.scale, y: mainButton.position.y)
+        gameTimer.position = CGPoint(x: self.frame.maxX - 57 * Util.scale, y: mainButton.position.y)
         
         self.addChild(borders)
         self.addChild(mainButton)
-        self.addChild(counterView)
-        self.addChild(timerView)
+        self.addChild(mineCounter)
+        self.addChild(gameTimer)
         self.addChild(board.node)
     }
     
+    /// Force update all game textures. Called when a theme is changed
     func updateTextures() {
         mainButton.texture = Util.currentTheme.mainButton.happy
         
         borders.updateTextures()
         board.updateTextures()
-        timerView.updateTextures()
-        counterView.updateTextures()
+        gameTimer.updateTextures()
+        mineCounter.updateTextures()
     }
     
     override func didMove(to view: SKView) {
@@ -86,7 +88,7 @@ class GameScene: SKScene {
             board.lostGame()
             mainButton.texture = Util.currentTheme.mainButton.dead
         }
-        timerView.stopTimer()
+        gameTimer.stopTimer()
     }
     
     func newGame() {
@@ -96,8 +98,8 @@ class GameScene: SKScene {
         NotificationCenter.default.post(name: .resetStats, object: nil)
         
         board.reset()
-        timerView.reset()
-        counterView.reset(mines: self.mines)
+        gameTimer.reset()
+        mineCounter.reset(mines: self.mines)
     }
     
     @objc func restartGame(_ notification: Notification) {
@@ -107,8 +109,8 @@ class GameScene: SKScene {
         NotificationCenter.default.post(name: .resetStats, object: nil)
         
         board.restart()
-        timerView.reset()
-        counterView.reset(mines: self.mines)
+        gameTimer.reset()
+        mineCounter.reset(mines: self.mines)
     }
     
     override func update(_ currentTime: TimeInterval) {

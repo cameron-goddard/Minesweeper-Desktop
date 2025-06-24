@@ -10,7 +10,7 @@
 		3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B34CCBB2869FE3800B76AE6 /* Theme.swift */; };
 		3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F42970EE5C00C26502 /* AssetCellView.swift */; };
 		3B46A3F72970F44100C26502 /* AssetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B46A3F62970F44100C26502 /* AssetScene.swift */; };
-		3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberView.swift */; };
+		3B48305A2842C76F0060FCFD /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberDisplay.swift */; };
 		3B48DBCD2AD2060D00E54243 /* ThemeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
@@ -22,8 +22,8 @@
 		3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */; };
 		3B5B1CB12E0729A600A84348 /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5B1CB02E0729A600A84348 /* Borders.swift */; };
 		3B6AB6A52C03FA4000297AA8 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6AB6A42C03FA4000297AA8 /* Stats.swift */; };
-		3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* TimerView.swift */; };
-		3B88CEA628023695008C84E2 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* CounterView.swift */; };
+		3B88CEA42800EEA8008C84E2 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* GameTimer.swift */; };
+		3B88CEA628023695008C84E2 /* MineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* MineCounter.swift */; };
 		3B98639728448DF10017FAA0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B98639628448DF10017FAA0 /* Util.swift */; };
 		3B9DF10928971939007CADA6 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3B9DF10828971939007CADA6 /* Sparkle */; };
 		3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */; };
@@ -44,7 +44,7 @@
 		3B34CCBB2869FE3800B76AE6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3B46A3F42970EE5C00C26502 /* AssetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCellView.swift; sourceTree = "<group>"; };
 		3B46A3F62970F44100C26502 /* AssetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetScene.swift; sourceTree = "<group>"; };
-		3B4830592842C76F0060FCFD /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
+		3B4830592842C76F0060FCFD /* NumberDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDisplay.swift; sourceTree = "<group>"; };
 		3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCellView.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,8 +58,8 @@
 		3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSheet.swift; sourceTree = "<group>"; };
 		3B5B1CB02E0729A600A84348 /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
 		3B6AB6A42C03FA4000297AA8 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
-		3B88CEA32800EEA8008C84E2 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		3B88CEA528023695008C84E2 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		3B88CEA32800EEA8008C84E2 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
+		3B88CEA528023695008C84E2 /* MineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineCounter.swift; sourceTree = "<group>"; };
 		3B98639628448DF10017FAA0 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameViewController.swift; sourceTree = "<group>"; };
 		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 				3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */,
 				3B34CCBB2869FE3800B76AE6 /* Theme.swift */,
 				3B5AB55A27F9789C0059BB0A /* SpriteSheet.swift */,
-				3B9DF114289DBBE1007CADA6 /* Number Views */,
+				3B9DF114289DBBE1007CADA6 /* Number Displays */,
 				3B1BDB04286BBDD000A36569 /* Stats */,
 				3BF1A78B285ED79900566000 /* Settings */,
 				3B98639628448DF10017FAA0 /* Util.swift */,
@@ -141,14 +141,14 @@
 			path = Minesweeper;
 			sourceTree = "<group>";
 		};
-		3B9DF114289DBBE1007CADA6 /* Number Views */ = {
+		3B9DF114289DBBE1007CADA6 /* Number Displays */ = {
 			isa = PBXGroup;
 			children = (
-				3B4830592842C76F0060FCFD /* NumberView.swift */,
-				3B88CEA528023695008C84E2 /* CounterView.swift */,
-				3B88CEA32800EEA8008C84E2 /* TimerView.swift */,
+				3B4830592842C76F0060FCFD /* NumberDisplay.swift */,
+				3B88CEA528023695008C84E2 /* MineCounter.swift */,
+				3B88CEA32800EEA8008C84E2 /* GameTimer.swift */,
 			);
-			path = "Number Views";
+			path = "Number Displays";
 			sourceTree = "<group>";
 		};
 		3BF1A78B285ED79900566000 /* Settings */ = {
@@ -265,12 +265,12 @@
 				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
 				3B98639728448DF10017FAA0 /* Util.swift in Sources */,
 				3B5B1CB12E0729A600A84348 /* Borders.swift in Sources */,
-				3B88CEA42800EEA8008C84E2 /* TimerView.swift in Sources */,
-				3B48305A2842C76F0060FCFD /* NumberView.swift in Sources */,
+				3B88CEA42800EEA8008C84E2 /* GameTimer.swift in Sources */,
+				3B48305A2842C76F0060FCFD /* NumberDisplay.swift in Sources */,
 				3B46A3F52970EE5C00C26502 /* AssetCellView.swift in Sources */,
 				3BF1A795286037CA00566000 /* ThemeScene.swift in Sources */,
 				3B46A3F72970F44100C26502 /* AssetScene.swift in Sources */,
-				3B88CEA628023695008C84E2 /* CounterView.swift in Sources */,
+				3B88CEA628023695008C84E2 /* MineCounter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

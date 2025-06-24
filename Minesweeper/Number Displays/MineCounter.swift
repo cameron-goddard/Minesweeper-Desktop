@@ -1,5 +1,5 @@
 //
-//  CounterView.swift
+//  MineCounter.swift
 //  Minesweeper
 //
 //  Created by Cameron Goddard on 4/9/22.
@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class CounterView: NumberView {
+class MineCounter: NumberDisplay {
     
     var mines: Int
     
@@ -33,6 +33,7 @@ class CounterView: NumberView {
         self.set(value: mines)
     }
     
+    /// Force update all textures. Called when a theme is changed
     override func updateTextures() {
         super.updateTextures()
         self.set(value: mines)

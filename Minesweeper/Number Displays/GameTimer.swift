@@ -1,5 +1,5 @@
 //
-//  Timer.swift
+//  GameTimer.swift
 //  Minesweeper
 //
 //  Created by Cameron Goddard on 4/8/22.
@@ -8,7 +8,7 @@
 import Cocoa
 import SpriteKit
 
-class TimerView: NumberView {
+class GameTimer: NumberDisplay {
     
     var gameTimer = Timer()
     var startTime: Date?
@@ -42,6 +42,7 @@ class TimerView: NumberView {
         self.set(value: Int(elapsedTime))
     }
     
+    /// Force update all textures. Called when a theme is changed
     override func updateTextures() {
         super.updateTextures()
         if !gameTimer.isValid {

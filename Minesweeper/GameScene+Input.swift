@@ -41,7 +41,7 @@ extension GameScene {
             } else {
                 if gameOver { return }
                 if !gameStarted {
-                    timerView.startTimer()
+                    gameTimer.startTimer()
                     gameStarted = true
                 }
                 
@@ -51,7 +51,7 @@ extension GameScene {
                 
                 
                 if tile.state == .Flagged {
-                    counterView.increment()
+                    mineCounter.increment()
                 }
                 if board.revealAt(r: coords[0], c: coords[1]) {
                     finishGame(won: false)
@@ -83,11 +83,11 @@ extension GameScene {
                 } else {
                     board.setAt(r: coords[0], c: coords[1], state: .Covered)
                 }
-                counterView.increment()
+                mineCounter.increment()
             }
             else if tile!.state == .Covered {
                 board.setAt(r: coords[0], c: coords[1], state: .Flagged)
-                counterView.decrement()
+                mineCounter.decrement()
             }
             else if tile!.state == .Question {
                 board.setAt(r: coords[0], c: coords[1], state: .Covered)
@@ -135,7 +135,7 @@ extension GameScene {
         }
     }
     
-    func convertLocation(name: String) -> Array<Int> {
+    private func convertLocation(name: String) -> Array<Int> {
         let coords = name.components(separatedBy: ",")
         let r = Int(String(coords[0]))!
         let c = Int(String(coords[1]))!

@@ -16,29 +16,37 @@ class ViewController: NSViewController {
     var difficulty = Defaults[.Game.difficulty]
     var minesLayout: [(Int, Int)]?
     
+    var difficulties = [
+        "Beginner": [8, 8, 10],
+        "Intermediate": [16, 16, 40],
+        "Hard": [16, 30, 99],
+        "Custom": [8, 8, 10]
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.setSubtitle(notification:)), name: Notification.Name("SetSubtitle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setSubtitle(notification:)), name: .setSubtitle, object: nil)
         
         if let view = self.skView {
             let rows, cols, mines: Int
+            let scale = Defaults[.General.scale]
             
             if difficulty == "Custom" || difficulty == "Loaded Custom" {
                 rows = Defaults[.Game.customDifficulty][0]
                 cols = Defaults[.Game.customDifficulty][1]
                 mines = Defaults[.Game.customDifficulty][2]
             } else {
-                rows = Util.difficulties[difficulty]![0]
-                cols = Util.difficulties[difficulty]![1]
-                mines = Util.difficulties[difficulty]![2]
+                rows = difficulties[difficulty]![0]
+                cols = difficulties[difficulty]![1]
+                mines = difficulties[difficulty]![2]
             }
             
             // Consider changing fullSizeContentView in the future
-            view.setFrameSize(NSSize(width: Util.scale*CGFloat(24+cols*16), height: Util.scale*CGFloat(67+rows*16)))
+            view.setFrameSize(NSSize(width: scale*CGFloat(24+cols*16), height: scale*CGFloat(67+rows*16)))
             
             ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: Defaults[.Themes.theme])
-            let scene = GameScene(size: self.skView.frame.size, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
+            let scene = GameScene(size: self.skView.frame.size, scale: scale, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
             view.presentScene(scene)
             
             // view.showsFPS = true

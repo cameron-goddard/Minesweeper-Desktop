@@ -12,9 +12,9 @@ class MineCounter: NumberDisplay {
     
     var mines: Int
     
-    init(mines: Int) {
+    init(scale: CGFloat, mines: Int) {
         self.mines = mines
-        super.init()
+        super.init(scale: scale)
         self.set(value: mines)
     }
     

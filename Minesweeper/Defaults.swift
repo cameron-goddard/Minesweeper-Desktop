@@ -19,6 +19,7 @@ extension Defaults.Keys {
         static let appearance = Key<String>("appearance", default: "Light")
         static let style = Key<String>("style", default: "Classic")
         static let toolbarDifficulty = Key<Bool>("toolbarDifficulty", default: false)
+        static let scale = Key<CGFloat>("scale", default: 1.5)
         static let questions = Key<Bool>("questions", default: false)
         static let safeFirstClick = Key<Bool>("safeFirstClick", default: true)
     }
@@ -30,5 +31,9 @@ extension Defaults.Keys {
             "Classic Dark",
             "Classic 95"
         ])
+    }
+    
+    enum Keys {
+        
     }
 }

@@ -10,11 +10,11 @@ import GameplayKit
 
 class MainButton: SKSpriteNode {
     
-    init() {
+    init(scale: CGFloat) {
         super.init(texture: ThemeManager.shared.currentTheme.mainButton.happy, color: .clear, size: ThemeManager.shared.currentTheme.mainButton.happy.size())
         
         self.anchorPoint = CGPoint(x: 0, y: 1)
-        self.setScale(Util.scale)
+        self.setScale(scale)
         self.name = "Main Button"
     }
     

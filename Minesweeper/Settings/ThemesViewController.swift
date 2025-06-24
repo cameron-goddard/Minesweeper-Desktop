@@ -110,7 +110,7 @@ class ThemesViewController: NSViewController {
                     Defaults[.Themes.favorites].remove(at: index)
                 }
                 themes.remove(at: themes.firstIndex(of: themes[oldRow])!)
-                NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
+                NotificationCenter.default.post(name: .updateFavorites, object: nil)
                 // This shouldn't be an issue since there are non-removable default themes, but be wary of this
                 tableView.selectRowIndexes([oldRow - 1], byExtendingSelection: false)
                 tableView.removeRows(at: IndexSet(integer: oldRow))
@@ -121,7 +121,7 @@ class ThemesViewController: NSViewController {
     }
     
     @IBAction func setThemeButtonPressed(_ sender: Any) {
-        NotificationCenter.default.post(name: Notification.Name("SetTheme"), object: themes[tableView.selectedRow].name)
+        NotificationCenter.default.post(name: .setTheme, object: themes[tableView.selectedRow].name)
     }
 }
 

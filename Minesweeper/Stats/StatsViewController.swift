@@ -173,9 +173,3 @@ extension StatsViewController: NSTableViewDelegate {
     
 }
 
-extension Notification.Name {
-    static let updateStat = Notification.Name("UpdateStats")
-    static let updateTime = Notification.Name("UpdateTime")
-    static let resetStats = Notification.Name("ResetStats")
-    static let revealStats = Notification.Name("RevealStats")
-}

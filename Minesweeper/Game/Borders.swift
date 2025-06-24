@@ -7,11 +7,12 @@
 
 import Foundation
 import GameplayKit
+import Defaults
 
 class Borders: SKNode {
     
     // TODO: Clean this up
-    var scale = Util.scale
+    var scale = Defaults[.General.scale]
     
     var topBorder,
         topLeftCorner,
@@ -30,7 +31,7 @@ class Borders: SKNode {
     var background: SKSpriteNode!
     var filler: SKSpriteNode!
     
-    init(size: CGSize) {
+    init(size: CGSize, scale: CGFloat) {
         super.init()
         
         let minX = -size.width / 2

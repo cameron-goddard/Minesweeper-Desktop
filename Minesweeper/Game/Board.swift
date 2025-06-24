@@ -27,18 +27,21 @@ class Board {
     /// Counter to keep track of game progress
     var revealedTiles = 0
     
+    private var scale: CGFloat
+    
     /// Whether this board layout was specifically loaded vs randomly generated
     private var loadedBoard: Bool = false
     
     private var tileSize: CGSize {
         CGSize(
-            width: 16 * Util.scale,
-            height: 16 * Util.scale
+            width: 16 * scale,
+            height: 16 * scale
         )
     }
     
-    init(rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
+    init(scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
         self.node = SKNode()
+        self.scale = scale
         
         self.rows = rows
         self.cols = cols
@@ -76,7 +79,7 @@ class Board {
         for r in 0..<rows {
             for c in 0..<cols {
                 let x = originX + CGFloat(c) * tileSize.width
-                let y = originY - CGFloat(r) * tileSize.height - (21.5 * Util.scale)
+                let y = originY - CGFloat(r) * tileSize.height - (21.5 * scale)
 
                 tiles[r][c].node.size = tileSize
                 tiles[r][c].node.position = CGPoint(x: x, y: y)

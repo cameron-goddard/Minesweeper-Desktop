@@ -15,7 +15,7 @@ class NumberDisplay: SKNode {
     var nodeTens: SKSpriteNode
     var nodeOnes: SKSpriteNode
     
-    override init() {
+    init(scale: CGFloat) {
         borders = SKSpriteNode(texture: ThemeManager.shared.currentTheme.borders.borderNumbers)
         nodeHundreds = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
         nodeTens = SKSpriteNode(texture: ThemeManager.shared.currentTheme.numbers.digits[0])
@@ -23,12 +23,12 @@ class NumberDisplay: SKNode {
         
         [borders, nodeHundreds, nodeTens, nodeOnes].forEach {
             $0.anchorPoint = CGPoint(x: 0, y: 1)
-            $0.setScale(Util.scale)
+            $0.setScale(scale)
         }
         
-        nodeHundreds.position = CGPoint(x: 2 * Util.scale, y: -2 * Util.scale)
-        nodeTens.position = CGPoint(x: nodeHundreds.size.width + 4 * Util.scale, y: -2 * Util.scale)
-        nodeOnes.position = CGPoint(x: (2 * nodeHundreds.size.width) + 6 * Util.scale, y: -2 * Util.scale)
+        nodeHundreds.position = CGPoint(x: 2 * scale, y: -2 * scale)
+        nodeTens.position = CGPoint(x: nodeHundreds.size.width + 4 * scale, y: -2 * scale)
+        nodeOnes.position = CGPoint(x: (2 * nodeHundreds.size.width) + 6 * scale, y: -2 * scale)
 
         super.init()
         

@@ -33,8 +33,8 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavorites(notification:)), name: Notification.Name("UpdateFavorites"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.setTheme(notification:)), name: Notification.Name("SetTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavorites(notification:)), name: .updateFavorites, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setTheme(notification:)), name: .setTheme, object: nil)
         DistributedNotificationCenter.default().addObserver(self, selector: #selector(interfaceThemeChanged), name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"), object: nil)
     }
     

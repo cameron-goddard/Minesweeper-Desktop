@@ -58,7 +58,7 @@ class ThemeCellView: NSTableCellView {
             Defaults[.Themes.favorites].append(themeName.stringValue)
         }
         ThemeManager.shared.theme(with: themeName.stringValue).isFavorite.toggle()
-        NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
+        NotificationCenter.default.post(name: .updateFavorites, object: nil)
     }
     
     func setFavorite() {

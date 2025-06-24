@@ -45,7 +45,7 @@ class CustomGameViewController: NSViewController {
         }
         
         self.dismiss(self)
-        NotificationCenter.default.post(name: Notification.Name("NewCustomGame"), object: [widthTextField.integerValue, heightTextField.integerValue, minesTextField.integerValue], userInfo: nil)
+        NotificationCenter.default.post(name: .newCustomGame, object: [widthTextField.integerValue, heightTextField.integerValue, minesTextField.integerValue], userInfo: nil)
     }
     
     private func shake(textField: NSTextField) {

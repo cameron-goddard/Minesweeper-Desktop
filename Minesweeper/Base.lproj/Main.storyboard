@@ -337,7 +337,10 @@
                         <subviews>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2qP-qn-TrN">
                                 <rect key="frame" x="214" y="174" width="148" height="28"/>
-                                <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="uoQ-XU-AQf"/>
+                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2" doubleValue="1.5" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="uoQ-XU-AQf"/>
+                                <connections>
+                                    <action selector="scaleSliderChanged:" target="YbF-TN-xD3" id="3Cq-8H-IEA"/>
+                                </connections>
                             </slider>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5MQ-nV-FfO">
                                 <rect key="frame" x="131" y="235" width="76" height="16"/>
@@ -471,6 +474,7 @@
                     <connections>
                         <outlet property="appearancePopUp" destination="sPf-P2-7BR" id="ZDU-0U-tUO"/>
                         <outlet property="safeFirstClickCheckbox" destination="3er-hp-l3s" id="Uxb-Gg-aOq"/>
+                        <outlet property="scaleSlider" destination="2qP-qn-TrN" id="MFC-Di-rEY"/>
                         <outlet property="stylePopUp" destination="ROl-s5-xB9" id="NAB-SF-BQI"/>
                         <outlet property="toolbarDifficultyCheckbox" destination="H2u-p1-LZb" id="pKm-oJ-QNJ"/>
                         <outlet property="useQuestionsCheckbox" destination="6GT-JK-z6j" id="t7s-FP-INo"/>

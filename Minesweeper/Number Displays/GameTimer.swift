@@ -13,8 +13,8 @@ class GameTimer: NumberDisplay {
     var gameTimer = Timer()
     var startTime: Date?
     
-    override init() {
-        super.init()
+    override init(scale: CGFloat) {
+        super.init(scale: scale)
     }
     
     func startTimer() {

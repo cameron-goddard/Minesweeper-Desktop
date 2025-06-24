@@ -93,7 +93,7 @@ class ThemeManager {
             )
             self.themes.append(theme)
         }
-        NotificationCenter.default.post(name: Notification.Name("UpdateFavorites"), object: nil)
+        NotificationCenter.default.post(name: .updateFavorites, object: nil)
     }
     
     func theme(with name: String) -> Theme {

@@ -7,6 +7,7 @@
 
 import SpriteKit
 import GameplayKit
+import Defaults
 
 enum GameState {
     case Unstarted
@@ -25,20 +26,22 @@ class GameScene: SKScene {
     var mineCounter: MineCounter
     var mainButton: MainButton
     
-    var rows, cols, mines : Int
+    var rows, cols, mines: Int
+    var scale: CGFloat
     
     var currentTile: String? = nil
     
-    init(size: CGSize, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
+    init(size: CGSize, scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
         self.rows = rows
         self.cols = cols
         self.mines = mines
+        self.scale = scale
         
-        borders = Borders(size: size)
-        board = Board(rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
-        mainButton = MainButton()
-        gameTimer = GameTimer()
-        mineCounter = MineCounter(mines: mines)
+        borders = Borders(size: size, scale: scale)
+        board = Board(scale: scale, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
+        mainButton = MainButton(scale: scale)
+        gameTimer = GameTimer(scale: scale)
+        mineCounter = MineCounter(scale: scale, mines: mines)
         
         super.init(size: size)
         
@@ -49,12 +52,12 @@ class GameScene: SKScene {
     func addNodes() {
         
         mainButton.position = CGPoint(
-            x: -ThemeManager.shared.currentTheme.mainButton.happy.size().width / 2 * Util.scale,
-            y: self.frame.maxY - (Util.scale * 15)
+            x: -ThemeManager.shared.currentTheme.mainButton.happy.size().width / 2 * scale,
+            y: self.frame.maxY - (scale * 15)
         )
         
-        mineCounter.position = CGPoint(x: self.frame.minX + 16 * Util.scale, y: mainButton.position.y)
-        gameTimer.position = CGPoint(x: self.frame.maxX - 57 * Util.scale, y: mainButton.position.y)
+        mineCounter.position = CGPoint(x: self.frame.minX + 16 * scale, y: mainButton.position.y)
+        gameTimer.position = CGPoint(x: self.frame.maxX - 57 * scale, y: mainButton.position.y)
         
         self.addChild(borders)
         self.addChild(mainButton)
@@ -112,8 +115,4 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension Notification.Name {
-    static let restartGame = Notification.Name("RestartGame")
 }

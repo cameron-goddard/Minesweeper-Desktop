@@ -13,6 +13,7 @@ class GeneralViewController: NSViewController {
     @IBOutlet weak var toolbarDifficultyCheckbox: NSButton!
     @IBOutlet weak var appearancePopUp: NSPopUpButton!
     @IBOutlet weak var stylePopUp: NSPopUpButton!
+    @IBOutlet weak var scaleSlider: NSSlider!
     @IBOutlet weak var safeFirstClickCheckbox: NSButton!
     @IBOutlet weak var useQuestionsCheckbox: NSButton!
     
@@ -22,6 +23,7 @@ class GeneralViewController: NSViewController {
         
         appearancePopUp.selectItem(withTitle: Defaults[.General.appearance])
         stylePopUp.selectItem(withTitle: Defaults[.General.style])
+        scaleSlider.doubleValue = Defaults[.General.scale]
         
         if Defaults[.General.toolbarDifficulty] {
             toolbarDifficultyCheckbox.state = .on
@@ -49,7 +51,7 @@ class GeneralViewController: NSViewController {
     
     @IBAction func toolbarDifficultyCheckboxClicked(_ sender: NSButton) {
         Defaults[.General.toolbarDifficulty].toggle()
-        NotificationCenter.default.post(name: Notification.Name("SetSubtitle"), object: nil)
+        NotificationCenter.default.post(name: .setSubtitle, object: nil)
     }
     
     @IBAction func appearancePopUpChanged(_ sender: NSPopUpButton) {
@@ -58,6 +60,10 @@ class GeneralViewController: NSViewController {
     
     @IBAction func stylePopUpChanged(_ sender: NSPopUpButton) {
         Defaults[.General.style] = sender.selectedItem!.title
+    }
+    
+    @IBAction func scaleSliderChanged(_ sender: NSSlider) {
+        Defaults[.General.scale] = sender.doubleValue
     }
     
     @IBAction func safeFirstClickCheckboxClicked(_ sender: NSButton) {

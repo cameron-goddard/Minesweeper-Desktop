@@ -56,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         checkForUpdatesItem.target = updaterController
         checkForUpdatesItem.action = #selector(SPUStandardUpdaterController.checkForUpdates(_:))
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.newCustomGame(notification:)), name: Notification.Name("NewCustomGame"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newCustomGame(notification:)), name: .newCustomGame, object: nil)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -23,7 +23,7 @@ class GameScene: SKScene {
     var borders: Borders
     var gameTimer: GameTimer
     var mineCounter: MineCounter
-    var mainButton: SKSpriteNode
+    var mainButton: MainButton
     
     var rows, cols, mines : Int
     
@@ -34,15 +34,11 @@ class GameScene: SKScene {
         self.cols = cols
         self.mines = mines
         
-        mainButton = SKSpriteNode(texture: Util.currentTheme.mainButton.happy)
-        mainButton.anchorPoint = CGPoint(x: 0, y: 1)
-        mainButton.setScale(Util.scale)
-        mainButton.name = "Main Button"
-        
         borders = Borders(size: size)
         board = Board(rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
+        mainButton = MainButton()
         gameTimer = GameTimer()
-        mineCounter = MineCounter(mines: self.mines)
+        mineCounter = MineCounter(mines: mines)
         
         super.init(size: size)
         
@@ -69,9 +65,8 @@ class GameScene: SKScene {
     
     /// Force update all game textures. Called when a theme is changed
     func updateTextures() {
-        mainButton.texture = Util.currentTheme.mainButton.happy
-        
         borders.updateTextures()
+        mainButton.updateTextures()
         board.updateTextures()
         gameTimer.updateTextures()
         mineCounter.updateTextures()
@@ -88,11 +83,11 @@ class GameScene: SKScene {
         if won {
             gameState = .Won
             board.flagMines()
-            mainButton.texture = Util.currentTheme.mainButton.cool
+            mainButton.set(texture: Util.currentTheme.mainButton.cool)
         } else {
             gameState = .Lost
             board.lostGame()
-            mainButton.texture = Util.currentTheme.mainButton.dead
+            mainButton.set(texture: Util.currentTheme.mainButton.dead)
         }
         gameTimer.stopTimer()
     }

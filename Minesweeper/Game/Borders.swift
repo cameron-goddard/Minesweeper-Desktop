@@ -222,6 +222,7 @@ class Borders: SKNode {
         filler.texture = ThemeManager.shared.currentTheme.borders.filler
     }
     
+    /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed
     func updateScale(sceneSize: CGSize, scale: CGFloat) {
         self.sceneSize = sceneSize
         self.scale = scale

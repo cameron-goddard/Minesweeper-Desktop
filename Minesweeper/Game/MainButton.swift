@@ -36,10 +36,12 @@ class MainButton: SKSpriteNode {
         self.texture = texture
     }
     
+    /// Force update the node's texture. Called when a theme is changed
     func updateTextures() {
         self.texture = ThemeManager.shared.currentTheme.mainButton.happy
     }
     
+    /// Force update the size of the node. Called when the scale setting is changed, or the Zoom button is pressed
     func updateScale(sceneSize: CGSize, scale: CGFloat) {
         self.sceneSize = sceneSize
         self.scale = scale

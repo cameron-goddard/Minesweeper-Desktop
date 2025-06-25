@@ -48,7 +48,7 @@ class GameScene: SKScene {
         NotificationCenter.default.addObserver(self, selector: #selector(self.restartGame(_:)), name: .restartGame, object: nil)
     }
     
-    /// Creates the game board, counters, and borders with the current theme. Adds all to this game scene
+    /// Creates the game board, number displays, and borders with the current theme. Adds all to this game scene
     func addNodes() {
         self.addChild(borders)
         self.addChild(mainButton)
@@ -66,6 +66,10 @@ class GameScene: SKScene {
         mineCounter.updateTextures()
     }
     
+    /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed
+    /// - Parameters:
+    ///   - size: The new scene size to adapt to
+    ///   - scale: The new scaling for each node
     func updateScale(size: CGSize, scale: CGFloat) {
         self.scale = scale
         
@@ -76,11 +80,15 @@ class GameScene: SKScene {
         mineCounter.updateScale(sceneSize: size, scale: scale)
     }
     
+    /// Called when the scene is presented by a view
+    /// - Parameter view: The view that is presenting this scene
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         addNodes()
     }
     
+    /// Handle game ending logic for the board, main button, and stats
+    /// - Parameter won: Whether the player won the game
     func finishGame(won: Bool) {
         NotificationCenter.default.post(name: .revealStats, object: nil)
         
@@ -96,6 +104,8 @@ class GameScene: SKScene {
         gameTimer.stopTimer()
     }
     
+    /// Handles game reset logic for the board, stats, and number displays
+    /// - Parameter restart: Whether the previous board is being replayed
     func newGame(restart: Bool = false) {
         gameState = .Unstarted
         NotificationCenter.default.post(name: .resetStats, object: nil)
@@ -105,6 +115,8 @@ class GameScene: SKScene {
         mineCounter.reset(mines: self.mines)
     }
     
+    /// Called when the previous board should be replayed
+    /// - Parameter notification: The notification triggering this callback
     @objc func restartGame(_ notification: Notification) {
         newGame(restart: true)
     }

@@ -125,6 +125,7 @@ class Board {
         }
     }
     
+    /// Force update the size of all tiles. Called when the scale setting is changed, or the Zoom button is pressed
     func updateScale(scale: CGFloat) {
         // Update tile sizes and positions
         self.scale = scale

@@ -160,6 +160,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
                                     <items>
+                                        <menuItem title="Close" keyEquivalent="w" id="Y8R-CV-Vxc">
+                                            <connections>
+                                                <action selector="performClose:" target="Ady-hI-5gd" id="mzw-C7-hns"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
                                             <connections>
                                                 <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>

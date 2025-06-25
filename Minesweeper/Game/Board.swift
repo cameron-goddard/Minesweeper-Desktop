@@ -206,14 +206,44 @@ class Board {
         }
     }
     
+    private func chordAt(r: Int, c: Int) -> Bool {
+        let tile = tiles[r][c]
+        
+        NotificationCenter.default.post(name: .updateStat, object: "Middle", userInfo: ["Middle": 0])
+        if !tile.isNumber() {
+            return false
+        }
+        
+        let adjacentTiles = getAdjacentTiles(r: r, c: c)
+        let flaggedCount = adjacentTiles.filter { $0.state == .Flagged }.count
+        if flaggedCount != numberOfAdjacentMines(r: r, c: c) {
+            return false
+        }
+        
+        for tile in adjacentTiles {
+            if tile.state == .Covered {
+                if revealAt(r: tile.r, c: tile.c, isChord: false) {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
     /// Reveals the tile at the specified target, including any adjacent blanks
     /// - Parameters:
     ///   - r: The row of the target tile
     ///   - c: The column of the target tile
-    /// - Returns: True if the revelaed tile is a mine, false otherwise
-    func revealAt(r: Int, c: Int) -> Bool {
+    ///   - isChord: Whether this is a chord click
+    /// - Returns: True if the revealed tile is a mine, false otherwise
+    func revealAt(r: Int, c: Int, isChord: Bool) -> Bool {
         let tile = tiles[r][c]
         print("[" + String(r) + ", " + String(c) + "]")
+        
+        if isChord {
+            return chordAt(r: r, c: c)
+        }
         
         if tile.state != .Uncovered {
             NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])

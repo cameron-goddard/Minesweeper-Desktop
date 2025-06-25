@@ -68,6 +68,10 @@ class StatsViewController: NSViewController {
             stats["Right"]! += 1
         }
         
+        if statName == "Middle" {
+            stats["Middle"]! += 1
+        }
+        
 //        TODO: Add back in
 //        if (totalClicks == 0) {
 //            stats["IOE"] = 0

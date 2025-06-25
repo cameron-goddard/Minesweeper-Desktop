@@ -25,6 +25,9 @@ extension GameScene {
                 let coords = convertLocation(name: name)
                 let tile = board.tileAt(r: coords[0], c: coords[1])!
                 if tile.state != .Uncovered {
+                    if event.modifierFlags.contains(.command) {
+                        print("Chord down detected")
+                    }
                     tile.pressed()
                 }
             }
@@ -53,10 +56,16 @@ extension GameScene {
                 if tile.state == .Flagged {
                     mineCounter.increment()
                 }
-                if board.revealAt(r: coords[0], c: coords[1]) {
+                
+                var isChord = false
+                if event.modifierFlags.contains(.command) {
+                    isChord = true
+                }
+                
+                if board.revealAt(r: coords[0], c: coords[1], isChord: isChord) {
                     finishGame(won: false)
                 }
-                else if board.revealedTiles == rows*cols-mines {
+                else if board.revealedTiles == rows * cols - mines {
                     finishGame(won: true)
                 }
             }

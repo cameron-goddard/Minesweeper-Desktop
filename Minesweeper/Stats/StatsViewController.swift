@@ -35,7 +35,6 @@ class StatsViewController: NSViewController {
         view.layer?.backgroundColor = NSColor(red: 226, green: 226, blue: 226, alpha: 1).cgColor //change to default value
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateStat(_:)), name: .updateStat, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTime(_:)), name: .updateTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.resetStats(_:)), name: .resetStats, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.revealStats(_:)), name: .revealStats, object: nil)
     }
@@ -84,26 +83,6 @@ class StatsViewController: NSViewController {
         tableView.reloadData()
     }
     
-    @objc func updateTime(_ notification: Notification) {
-        elapsedTime = notification.object as! TimeInterval
-        let seconds = Int(elapsedTime)
-        let hundredths = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 100)
-        
-        timerField.stringValue = String(format: "%d.%02d", seconds, hundredths)
-        
-        // Update (non hidden) time-based stat values
-        // TODO: Add back in
-//        if (elapsedTime.magnitude == 0) {
-//             stats["IOS"] = 0
-//             stats["RQP"] = 0
-//        } else {
-//             stats["IOS"] = Double(round(1000 * log(stats["3BV"]!) / log(elapsedTime.magnitude)) / 1000)
-//             stats["RQP"] = Double(round(1000 * elapsedTime.magnitude / stats["3BV/s"]!) / 1000)
-//        }
-        
-        tableView.reloadData()
-    }
-    
     @objc func revealStats(_ notification: Notification) {
         revealStats = true
         
@@ -129,6 +108,29 @@ class StatsViewController: NSViewController {
         
         revealStats = false
     }
+}
+
+extension StatsViewController: GameTimerDelegate {
+    
+    func updateTime(_ time: TimeInterval) {
+        elapsedTime = time
+        let seconds = Int(elapsedTime)
+        let hundredths = Int((elapsedTime.truncatingRemainder(dividingBy: 1)) * 100)
+        
+        DispatchQueue.main.async {
+            self.timerField.stringValue = String(format: "%d.%02d", seconds, hundredths)
+        }
+        
+//         TODO: Add back in
+//        if (elapsedTime.magnitude == 0) {
+//             stats["IOS"] = 0
+//             stats["RQP"] = 0
+//        } else {
+//             stats["IOS"] = Double(round(1000 * log(stats["3BV"]!) / log(elapsedTime.magnitude)) / 1000)
+//             stats["RQP"] = Double(round(1000 * elapsedTime.magnitude / stats["3BV/s"]!) / 1000)
+//        }
+    }
+    
 }
 
 extension StatsViewController: NSTableViewDataSource {

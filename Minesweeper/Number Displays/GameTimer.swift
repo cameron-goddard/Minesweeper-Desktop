@@ -13,6 +13,8 @@ class GameTimer: NumberDisplay {
     var gameTimer = Timer()
     var startTime: Date?
     
+    weak var delegate: GameTimerDelegate?
+    
     override init(sceneSize: CGSize, scale: CGFloat) {
         super.init(sceneSize: sceneSize, scale: scale)
         self.position = CGPoint(x: sceneSize.width/2 - 57 * scale, y: sceneSize.height/2 - (scale * 15))
@@ -31,16 +33,17 @@ class GameTimer: NumberDisplay {
     
     func reset() {
         gameTimer.invalidate()
-        NotificationCenter.default.post(name: .updateTime, object: TimeInterval())
         self.set(value: 0)
+        
+        delegate?.updateTime(0)
     }
     
     @objc func fireTimer() {
         guard let startTime = self.startTime else { return }
         let elapsedTime = Date().timeIntervalSince(startTime)
-        
-        NotificationCenter.default.post(name: .updateTime, object: elapsedTime)
         self.set(value: Int(elapsedTime))
+        
+        delegate?.updateTime(elapsedTime)
     }
     
     /// Force update all textures. Called when a theme is changed
@@ -59,4 +62,8 @@ class GameTimer: NumberDisplay {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+protocol GameTimerDelegate: AnyObject {
+    func updateTime(_ time: TimeInterval)
 }

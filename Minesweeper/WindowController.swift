@@ -21,7 +21,7 @@ class WindowController: NSWindowController {
         return item
     }()
     
-    private var statsController: NSWindowController = {
+    private var statsWC: NSWindowController = {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateController(withIdentifier: "Stats") as! NSWindowController
     }()
@@ -44,7 +44,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func zoomButtonClicked(_ sender: Any?) {
-        if Defaults[.General.scale] == 1 || Defaults[.General.scale] == 1.5 {
+        if Defaults[.General.scale] != 2 {
             Defaults[.General.scale] = 2
         } else {
             Defaults[.General.scale] = 1.5
@@ -61,47 +61,61 @@ class WindowController: NSWindowController {
             if ThemeManager.shared.current.name == "Classic" {
                 ThemeManager.shared.setCurrent(with: "Classic Dark")
                 Defaults[.Themes.theme] = "Classic Dark"
-                (viewController.skView.scene as! GameScene).updateTextures()
                 
+                if let gameScene = viewController.getScene() {
+                    gameScene.updateTextures()
+                }
                 updateThemesMenu()
             }
         } else {
             if ThemeManager.shared.current.name == "Classic Dark" {
                 ThemeManager.shared.setCurrent(with: "Classic")
                 Defaults[.Themes.theme] = "Classic"
-                (viewController.skView.scene as! GameScene).updateTextures()
                 
+                if let gameScene = viewController.getScene() {
+                    gameScene.updateTextures()
+                }
                 updateThemesMenu()
             }
         }
     }
     
     @objc func showStatsWindow() {
-        if statsController.window!.isVisible {
-            statsController.window?.close()
-            statsController.dismissController(self)
+        if let statsVC = statsWC.contentViewController as? StatsViewController {
+            if let gameScene = viewController.getScene() {
+                gameScene.gameTimer.delegate = statsVC
+            }
+        }
+        
+        if statsWC.window!.isVisible {
+            statsWC.window?.close()
+            statsWC.dismissController(self)
         } else {
-            statsController.showWindow(self)
+            statsWC.showWindow(self)
             // TODO: Handle edge cases for screen edge
             let x = self.window!.frame.origin.x + self.window!.frame.width + 25
             let y = self.window!.frame.origin.y + self.window!.frame.height
-            statsController.window!.setFrameTopLeftPoint(.init(x: x, y: y))
+            statsWC.window!.setFrameTopLeftPoint(.init(x: x, y: y))
         }
     }
     
     @objc func setTheme(sender: NSMenuItem) {
         ThemeManager.shared.setCurrent(with: sender.title)
         Defaults[.Themes.theme] = sender.title
-        (viewController.skView.scene as! GameScene).updateTextures()
         
+        if let gameScene = viewController.getScene() {
+            gameScene.updateTextures()
+        }
         updateThemesMenu()
     }
     
     @objc func setTheme(notification: Notification) {
         ThemeManager.shared.setCurrent(with: notification.object as! String)
         Defaults[.Themes.theme] = notification.object as! String
-        (viewController.skView.scene as! GameScene).updateTextures()
         
+        if let gameScene = viewController.getScene() {
+            gameScene.updateTextures()
+        }
         updateThemesMenu()
     }
     

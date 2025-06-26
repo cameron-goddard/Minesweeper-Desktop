@@ -11,7 +11,6 @@ extension Notification.Name {
     static let appleInterfaceThemeChanged = Notification.Name(rawValue: "AppleInterfaceThemeChangedNotification")
     static let restartGame = Notification.Name("RestartGame")
     static let updateStat = Notification.Name("UpdateStats")
-    static let updateTime = Notification.Name("UpdateTime")
     static let resetStats = Notification.Name("ResetStats")
     static let revealStats = Notification.Name("RevealStats")
     static let newCustomGame = Notification.Name("NewCustomGame")

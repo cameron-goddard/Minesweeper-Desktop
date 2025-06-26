@@ -21,9 +21,9 @@ class WindowController: NSWindowController {
         return item
     }()
     
-    private var statsController: StatsWindowController = {
+    private var statsController: NSWindowController = {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateController(withIdentifier: "Stats") as! StatsWindowController
+        return storyboard.instantiateController(withIdentifier: "Stats") as! NSWindowController
     }()
     
     var viewController : ViewController {

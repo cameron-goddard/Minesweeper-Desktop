@@ -755,7 +755,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <clipView key="contentView" drawsBackground="NO" id="RU8-OH-BqP">
                                                         <rect key="frame" x="0.0" y="0.0" width="242" height="282"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" enabled="NO" rowHeight="36" viewBased="YES" id="OIO-0W-kk1">
                                                                 <rect key="frame" x="0.0" y="0.0" width="242" height="282"/>
@@ -985,7 +985,7 @@ DQ
         <!--Window Controller-->
         <scene sceneID="HeU-gg-9Z5">
             <objects>
-                <windowController storyboardIdentifier="Stats" showSeguePresentationStyle="single" id="lvH-yg-yl7" customClass="StatsWindowController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Stats" showSeguePresentationStyle="single" id="lvH-yg-yl7" sceneMemberID="viewController">
                     <window key="window" title="Game Stats" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="compact" id="Xse-Kk-Qm9" customClass="NSPanel">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -1231,7 +1231,7 @@ DQ
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="naq-W3-dbA">
-                                    <rect key="frame" x="1" y="243" width="450" height="16"/>
+                                    <rect key="frame" x="1" y="243" width="458" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="810-Hv-PLQ">

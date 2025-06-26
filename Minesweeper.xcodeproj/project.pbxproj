@@ -30,7 +30,6 @@
 		3B88CEA628023695008C84E2 /* MineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* MineCounter.swift */; };
 		3B9DF10928971939007CADA6 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3B9DF10828971939007CADA6 /* Sparkle */; };
 		3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */; };
-		3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
 		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
 		3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3BD95C772B8D99AA00D9BC3B /* Credits.rtf */; };
@@ -68,7 +67,6 @@
 		3B88CEA32800EEA8008C84E2 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 		3B88CEA528023695008C84E2 /* MineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineCounter.swift; sourceTree = "<group>"; };
 		3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameViewController.swift; sourceTree = "<group>"; };
-		3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWindowController.swift; sourceTree = "<group>"; };
 		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BD95C772B8D99AA00D9BC3B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 		3B1BDB04286BBDD000A36569 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				3B9DF115289DBEFB007CADA6 /* StatsWindowController.swift */,
 				3B6AB6A42C03FA4000297AA8 /* Stats.swift */,
 				3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */,
 			);
@@ -280,7 +277,6 @@
 				3BF1A791285ED7CF00566000 /* BindingsViewController.swift in Sources */,
 				3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */,
 				3B5B082D2E0B40EE0067FAE5 /* Notifications.swift in Sources */,
-				3B9DF116289DBEFB007CADA6 /* StatsWindowController.swift in Sources */,
 				3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */,
 				3BF1A78E285ED7BE00566000 /* ThemesViewController.swift in Sources */,
 				3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */,

@@ -12,7 +12,6 @@ class GeneralViewController: NSViewController {
 
     @IBOutlet weak var toolbarDifficultyCheckbox: NSButton!
     @IBOutlet weak var appearancePopUp: NSPopUpButton!
-    @IBOutlet weak var stylePopUp: NSPopUpButton!
     @IBOutlet weak var scaleSlider: NSSlider!
     @IBOutlet weak var safeFirstClickCheckbox: NSButton!
     @IBOutlet weak var useQuestionsCheckbox: NSButton!
@@ -22,7 +21,6 @@ class GeneralViewController: NSViewController {
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height)
         
         appearancePopUp.selectItem(withTitle: Defaults[.General.appearance])
-        stylePopUp.selectItem(withTitle: Defaults[.General.style])
         scaleSlider.doubleValue = Defaults[.General.scale]
         
         if Defaults[.General.toolbarDifficulty] {
@@ -56,10 +54,6 @@ class GeneralViewController: NSViewController {
     
     @IBAction func appearancePopUpChanged(_ sender: NSPopUpButton) {
         Defaults[.General.appearance] = sender.selectedItem!.title
-    }
-    
-    @IBAction func stylePopUpChanged(_ sender: NSPopUpButton) {
-        Defaults[.General.style] = sender.selectedItem!.title
     }
     
     @IBAction func scaleSliderChanged(_ sender: NSSlider) {

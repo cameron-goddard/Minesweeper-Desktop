@@ -28,7 +28,8 @@ extension GameScene {
                 if tile.state != .Uncovered {
                     tile.pressed()
                 }
-                if event.modifierFlags.contains(.command) {
+                if isMiddleClick() || event.modifierFlags.contains(.command) {
+                    // TODO: Decrement right clicks by 1
                     isChord = true
                     board.adjacentPressAt(r: tile.r, c: tile.c)
                 }
@@ -38,6 +39,14 @@ extension GameScene {
     
     override func mouseUp(with event: NSEvent) {
         let clickedNode = self.nodes(at: event.location(in: scene!))
+        
+        if clickedNode.isEmpty {
+            mainButton.set(state: .Happy)
+            if isChord {
+                isChord = false
+            }
+            return
+        }
         
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
@@ -81,9 +90,15 @@ extension GameScene {
             if name == "Main Button" { return }
             
             let coords = convertLocation(name: name)
-            let tile = board.tileAt(r: coords[0], c: coords[1])
+            let tile = board.tileAt(r: coords[0], c: coords[1])!
             
-            if tile!.state == .Flagged {
+            if isMiddleClick() {
+                isChord = true
+                board.adjacentPressAt(r: tile.r, c: tile.c)
+                return
+            }
+            
+            if tile.state == .Flagged {
                 if Defaults[.General.questions] {
                     board.setAt(r: coords[0], c: coords[1], state: .Question)
                 } else {
@@ -91,16 +106,16 @@ extension GameScene {
                 }
                 mineCounter.increment()
             }
-            else if tile!.state == .Covered {
+            else if tile.state == .Covered {
                 board.setAt(r: coords[0], c: coords[1], state: .Flagged)
                 mineCounter.decrement()
             }
-            else if tile!.state == .Question {
+            else if tile.state == .Question {
                 board.setAt(r: coords[0], c: coords[1], state: .Covered)
             }
             
-            NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])
-            NotificationCenter.default.post(name: .updateStat, object: "Right", userInfo: ["Right": 0])
+            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Effective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Right": 0])
         }
     }
     
@@ -138,16 +153,8 @@ extension GameScene {
         }
     }
     
-    override func mouseExited(with event: NSEvent) {
-        print("In mouseExited - Is this needed?")
-//        let clickedNode = self.nodes(at: event.location(in: scene!))
-//        if let name = clickedNode[0].name {
-//            let coords = convertLocation(name: name)
-//            let tile = board.tileAt(r: coords[0], c: coords[1])
-//            if tile?.state != .Uncovered {
-//                tile?.raised()
-//            }
-//        }
+    private func isMiddleClick() -> Bool {
+        return (NSEvent.pressedMouseButtons & 0b11) == 0b11
     }
     
     private func convertLocation(name: String) -> Array<Int> {

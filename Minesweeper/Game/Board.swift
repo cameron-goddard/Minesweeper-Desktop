@@ -112,7 +112,7 @@ class Board {
         setNumbers()
         
         // Calculate total 3BV and send to Stats
-        NotificationCenter.default.post(name: .updateStat, object: "test", userInfo: ["Total3BV": calculate3BV()])
+        NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Total3BV": calculate3BV()])
     }
     
     /// Force update tile textures. Called when a theme is changed
@@ -236,7 +236,7 @@ class Board {
     private func chordAt(r: Int, c: Int) -> Bool {
         let tile = tiles[r][c]
         
-        NotificationCenter.default.post(name: .updateStat, object: "Middle", userInfo: ["Middle": 0])
+        NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Middle": 0])
         if !tile.isNumber() {
             adjacentRaiseAt(r: r, c: c)
             return false
@@ -277,10 +277,10 @@ class Board {
         }
         
         if tile.state != .Uncovered {
-            NotificationCenter.default.post(name: .updateStat, object: "Effective", userInfo: ["Effective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Effective": 0])
             
             if tileAt(r: r, c: c)?.value == .Empty || (tileAt(r: r, c: c)?.value != .Mine && !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty })) {
-                NotificationCenter.default.post(name: .updateStat, object: "3BV", userInfo: ["3BV": 0])
+                NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["3BV": 0])
             }
             
             if tile.value == .Empty {
@@ -301,10 +301,10 @@ class Board {
                 }
             }
         } else {
-            NotificationCenter.default.post(name: .updateStat, object: 0, userInfo: ["NonEffective": 0])
+            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["NonEffective": 0])
         }
         
-        NotificationCenter.default.post(name: .updateStat, object: "Left", userInfo: ["Left": 0])
+        NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Left": 0])
         
         if tile.value == .Mine {
             tile.setValue(val: .MineRed)

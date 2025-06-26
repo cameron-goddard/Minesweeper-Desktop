@@ -206,29 +206,58 @@ class Board {
         }
     }
     
+    func adjacentPressAt(r: Int, c: Int) {
+        for tile in getAdjacentTiles(r: r, c: c) {
+            if tile.state == .Covered || tile.state == .Question {
+                tile.pressed()
+            }
+        }
+    }
+    
+    func adjacentRaiseAt(r: Int, c: Int, diffR: Int = -1, diffC: Int = -1) {
+        if diffR != -1 && diffC != -1 {
+            let fromTiles = getAdjacentTiles(r: r, c: c)
+            var toTiles = getAdjacentTiles(r: diffR, c: diffC)
+            toTiles.append(tileAt(r: diffR, c: diffC)!)
+            let diff = fromTiles.filter { !toTiles.contains($0) }
+            
+            for tile in diff {
+                tile.raised()
+            }
+            
+            return
+        }
+        tileAt(r: r, c: c)!.raised()
+        for tile in getAdjacentTiles(r: r, c: c) {
+            tile.raised()
+        }
+    }
+    
     private func chordAt(r: Int, c: Int) -> Bool {
         let tile = tiles[r][c]
         
         NotificationCenter.default.post(name: .updateStat, object: "Middle", userInfo: ["Middle": 0])
         if !tile.isNumber() {
+            adjacentRaiseAt(r: r, c: c)
             return false
         }
         
         let adjacentTiles = getAdjacentTiles(r: r, c: c)
         let flaggedCount = adjacentTiles.filter { $0.state == .Flagged }.count
         if flaggedCount != numberOfAdjacentMines(r: r, c: c) {
+            adjacentRaiseAt(r: r, c: c)
             return false
         }
         
+        var didHitMine = false
         for tile in adjacentTiles {
             if tile.state == .Covered {
                 if revealAt(r: tile.r, c: tile.c, isChord: false) {
-                    return true
+                    didHitMine = true
                 }
             }
         }
-        
-        return false
+        return didHitMine
     }
     
     /// Reveals the tile at the specified target, including any adjacent blanks

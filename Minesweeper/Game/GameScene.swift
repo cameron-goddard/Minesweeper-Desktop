@@ -30,6 +30,7 @@ class GameScene: SKScene {
     var scale: CGFloat
     
     var currentTile: String? = nil
+    var isChord = false
     
     init(size: CGSize, scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
         self.rows = rows

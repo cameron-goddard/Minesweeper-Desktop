@@ -24,11 +24,13 @@ extension GameScene {
                 
                 let coords = convertLocation(name: name)
                 let tile = board.tileAt(r: coords[0], c: coords[1])!
+                
                 if tile.state != .Uncovered {
-                    if event.modifierFlags.contains(.command) {
-                        print("Chord down detected")
-                    }
                     tile.pressed()
+                }
+                if event.modifierFlags.contains(.command) {
+                    isChord = true
+                    board.adjacentPressAt(r: tile.r, c: tile.c)
                 }
             }
         }
@@ -57,17 +59,13 @@ extension GameScene {
                     mineCounter.increment()
                 }
                 
-                var isChord = false
-                if event.modifierFlags.contains(.command) {
-                    isChord = true
-                }
-                
                 if board.revealAt(r: coords[0], c: coords[1], isChord: isChord) {
                     finishGame(won: false)
                 }
                 else if board.revealedTiles == rows * cols - mines {
                     finishGame(won: true)
                 }
+                isChord = false
             }
         }
     }
@@ -123,25 +121,35 @@ extension GameScene {
                 if tile?.state != .Uncovered {
                     tile?.pressed()
                 }
+                if isChord {
+                    board.adjacentPressAt(r: tile!.r, c: tile!.c)
+                }
             } else {
                 let coords = convertLocation(name: currentTile!)
                 let tile = board.tileAt(r: coords[0], c: coords[1])
                 
-                tile?.setState(state: tile!.state)
+                
+                if isChord {
+                    let coords = convertLocation(name: clickedNode[0].name!)
+                    board.adjacentRaiseAt(r: tile!.r, c: tile!.c, diffR: coords[0], diffC: coords[1])
+                } else {
+                    tile?.raised()
+                }
                 currentTile = clickedNode[0].name
             }
         }
     }
     
     override func mouseExited(with event: NSEvent) {
-        let clickedNode = self.nodes(at: event.location(in: scene!))
-        if let name = clickedNode[0].name {
-            let coords = convertLocation(name: name)
-            let tile = board.tileAt(r: coords[0], c: coords[1])
-            if tile?.state != .Uncovered {
-                tile?.raised()
-            }
-        }
+        print("In mouseExited - Is this needed?")
+//        let clickedNode = self.nodes(at: event.location(in: scene!))
+//        if let name = clickedNode[0].name {
+//            let coords = convertLocation(name: name)
+//            let tile = board.tileAt(r: coords[0], c: coords[1])
+//            if tile?.state != .Uncovered {
+//                tile?.raised()
+//            }
+//        }
     }
     
     private func convertLocation(name: String) -> Array<Int> {

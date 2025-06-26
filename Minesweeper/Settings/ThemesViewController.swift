@@ -48,7 +48,7 @@ class ThemesViewController: NSViewController {
         themeName.stringValue = theme.name
         themeDesc.stringValue = theme.desc
         themeDefault.stringValue = theme.isDefault ? "Yes" : "No"
-        themeStyle.stringValue = theme.style
+        themeStyle.stringValue = "Classic"
         themeMode.stringValue = theme.mode
         themePreview.presentScene(ThemeScene(theme: theme))
         

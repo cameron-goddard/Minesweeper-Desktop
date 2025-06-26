@@ -59,7 +59,7 @@ class WindowController: NSWindowController {
         
         if UserDefaults.standard.string(forKey: "AppleInterfaceStyle") != nil {
             if ThemeManager.shared.current.name == "Classic" {
-                ThemeManager.shared.current = ThemeManager.shared.theme(with: "Classic Dark")
+                ThemeManager.shared.setCurrent(with: "Classic Dark")
                 Defaults[.Themes.theme] = "Classic Dark"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
@@ -67,7 +67,7 @@ class WindowController: NSWindowController {
             }
         } else {
             if ThemeManager.shared.current.name == "Classic Dark" {
-                ThemeManager.shared.current = ThemeManager.shared.theme(with: "Classic")
+                ThemeManager.shared.setCurrent(with: "Classic")
                 Defaults[.Themes.theme] = "Classic"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
@@ -90,7 +90,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func setTheme(sender: NSMenuItem) {
-        ThemeManager.shared.current = ThemeManager.shared.theme(with: sender.title)
+        ThemeManager.shared.setCurrent(with: sender.title)
         Defaults[.Themes.theme] = sender.title
         (viewController.skView.scene as! GameScene).updateTextures()
         
@@ -98,7 +98,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func setTheme(notification: Notification) {
-        ThemeManager.shared.current = ThemeManager.shared.theme(with: notification.object as! String)
+        ThemeManager.shared.setCurrent(with: notification.object as! String)
         Defaults[.Themes.theme] = notification.object as! String
         (viewController.skView.scene as! GameScene).updateTextures()
         

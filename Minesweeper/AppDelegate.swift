@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if fileManager.fileExists(atPath: msSupportURL.path, isDirectory: &isDir) {
             do {
-                try ThemeManager.shared.readThemes()
+                try ThemeManager.shared.loadSavedThemes()
             } catch {
                 let alert = NSAlert()
                 alert.messageText = "Invalid Theme File"

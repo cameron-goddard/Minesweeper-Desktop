@@ -52,6 +52,10 @@ class ThemeManager {
         themes = defaultThemes
     }
     
+    func setCurrent(with name: String) {
+        current = theme(with: name)
+    }
+    
     func addTheme(fileName: String) throws {
         let themePath = themesURL.appendingPathComponent(fileName)
         
@@ -68,7 +72,7 @@ class ThemeManager {
         themes.append(theme)
     }
     
-    func readThemes() throws {
+    func loadSavedThemes() throws {
         let themes = try FileManager.default.contentsOfDirectory(atPath: themesURL.path)
         
         for theme in themes {

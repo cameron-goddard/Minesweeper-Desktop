@@ -341,7 +341,7 @@ class Board {
     ///   - r: The row of the target tile
     ///   - c: The column of the target tile
     ///   - state: The new state of the tile
-    func setAt(r: Int, c: Int, state: State) {
+    func setAt(r: Int, c: Int, state: Tile.State) {
         tiles[r][c].setState(state: state)
         if state == .Uncovered {
             revealedTiles += 1

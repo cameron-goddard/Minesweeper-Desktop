@@ -8,29 +8,29 @@
 import Foundation
 import SpriteKit
 
-enum State {
-    case Covered
-    case Uncovered
-    case Flagged
-    case Question
-}
-
-enum Value {
-    case Mine
-    case MineRed
-    case MineWrong
-    case Empty
-    case One
-    case Two
-    case Three
-    case Four
-    case Five
-    case Six
-    case Seven
-    case Eight
-}
-
 class Tile {
+    
+    enum State {
+        case Covered
+        case Uncovered
+        case Flagged
+        case Question
+    }
+
+    enum Value {
+        case Mine
+        case MineRed
+        case MineWrong
+        case Empty
+        case One
+        case Two
+        case Three
+        case Four
+        case Five
+        case Six
+        case Seven
+        case Eight
+    }
     
     let node : SKSpriteNode
     

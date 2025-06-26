@@ -45,7 +45,7 @@ class Tile {
         self.c = c
         self.state = state
         self.value = val
-        self.node.texture = ThemeManager.shared.currentTheme.tiles.covered
+        self.node.texture = ThemeManager.shared.current.tiles.covered
         self.node.anchorPoint = CGPoint(x: 0, y: 1)
         self.node.name = String(r) + "," + String(c)
     }
@@ -65,11 +65,11 @@ class Tile {
         case .Uncovered:
             self.node.texture = textureLookup(value: self.value)
         case .Covered:
-            self.node.texture = ThemeManager.shared.currentTheme.tiles.covered
+            self.node.texture = ThemeManager.shared.current.tiles.covered
         case .Flagged:
-            self.node.texture = ThemeManager.shared.currentTheme.tiles.flagged
+            self.node.texture = ThemeManager.shared.current.tiles.flagged
         case .Question:
-            self.node.texture = ThemeManager.shared.currentTheme.tiles.question
+            self.node.texture = ThemeManager.shared.current.tiles.question
         }
     }
     
@@ -83,9 +83,9 @@ class Tile {
     
     func pressed() {
         if self.state == .Question {
-            self.node.texture = ThemeManager.shared.currentTheme.tiles.questionPressed
+            self.node.texture = ThemeManager.shared.current.tiles.questionPressed
         } else {
-            self.node.texture = ThemeManager.shared.currentTheme.tiles.pressed
+            self.node.texture = ThemeManager.shared.current.tiles.pressed
         }
     }
     
@@ -96,29 +96,29 @@ class Tile {
     func textureLookup(value: Value) -> SKTexture {
         switch value {
         case .Mine:
-            return ThemeManager.shared.currentTheme.tiles.mine
+            return ThemeManager.shared.current.tiles.mine
         case .MineRed:
-            return ThemeManager.shared.currentTheme.tiles.mineRed
+            return ThemeManager.shared.current.tiles.mineRed
         case .MineWrong:
-            return ThemeManager.shared.currentTheme.tiles.mineWrong
+            return ThemeManager.shared.current.tiles.mineWrong
         case .One:
-            return ThemeManager.shared.currentTheme.tiles.one
+            return ThemeManager.shared.current.tiles.one
         case .Two:
-            return ThemeManager.shared.currentTheme.tiles.two
+            return ThemeManager.shared.current.tiles.two
         case .Three:
-            return ThemeManager.shared.currentTheme.tiles.three
+            return ThemeManager.shared.current.tiles.three
         case .Four:
-            return ThemeManager.shared.currentTheme.tiles.four
+            return ThemeManager.shared.current.tiles.four
         case .Five:
-            return ThemeManager.shared.currentTheme.tiles.five
+            return ThemeManager.shared.current.tiles.five
         case .Six:
-            return ThemeManager.shared.currentTheme.tiles.six
+            return ThemeManager.shared.current.tiles.six
         case .Seven:
-            return ThemeManager.shared.currentTheme.tiles.seven
+            return ThemeManager.shared.current.tiles.seven
         case .Eight:
-            return ThemeManager.shared.currentTheme.tiles.eight
+            return ThemeManager.shared.current.tiles.eight
         default:
-            return ThemeManager.shared.currentTheme.tiles.empty
+            return ThemeManager.shared.current.tiles.empty
         }
     }
 }

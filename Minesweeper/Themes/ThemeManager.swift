@@ -14,7 +14,7 @@ class ThemeManager {
     
     static let shared = ThemeManager()
     
-    var currentTheme: Theme
+    var current: Theme
     var themes: [Theme]
     
     let defaultThemes: [Theme] = [
@@ -48,7 +48,7 @@ class ThemeManager {
     }()
     
     private init() {
-        currentTheme = defaultThemes.first!
+        current = defaultThemes.first!
         themes = defaultThemes
     }
     

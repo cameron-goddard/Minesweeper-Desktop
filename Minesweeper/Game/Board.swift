@@ -249,6 +249,8 @@ class Board {
             return false
         }
         
+        tile.setState(state: .Uncovered)
+        
         var didHitMine = false
         for tile in adjacentTiles {
             if tile.state == .Covered {

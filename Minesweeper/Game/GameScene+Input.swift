@@ -15,10 +15,10 @@ extension GameScene {
         let clickedNode = self.nodes(at: event.location(in: scene!))
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
-                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.happyPressed)
+                mainButton.set(texture: ThemeManager.shared.current.mainButton.happyPressed)
             } else {
                 if gameState == .Won || gameState == .Lost { return }
-                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.cautious)
+                mainButton.set(texture: ThemeManager.shared.current.mainButton.cautious)
                 
                 currentTile = clickedNode[0].name
                 
@@ -41,7 +41,7 @@ extension GameScene {
         
         if let name = clickedNode[0].name {
             if (name == "Main Button") {
-                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.happy)
+                mainButton.set(texture: ThemeManager.shared.current.mainButton.happy)
                 newGame()
             } else {
                 if gameState == .Won || gameState == .Lost { return }
@@ -50,10 +50,9 @@ extension GameScene {
                     gameState = .InProgress
                 }
                 
-                mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.happy)
+                mainButton.set(texture: ThemeManager.shared.current.mainButton.happy)
                 let coords = convertLocation(name: name)
                 let tile = board.tileAt(r: coords[0], c: coords[1])!
-                
                 
                 if tile.state == .Flagged {
                     mineCounter.increment()
@@ -128,7 +127,6 @@ extension GameScene {
                 let coords = convertLocation(name: currentTile!)
                 let tile = board.tileAt(r: coords[0], c: coords[1])
                 
-                
                 if isChord {
                     let coords = convertLocation(name: clickedNode[0].name!)
                     board.adjacentRaiseAt(r: tile!.r, c: tile!.c, diffR: coords[0], diffC: coords[1])
@@ -158,5 +156,4 @@ extension GameScene {
         let c = Int(String(coords[1]))!
         return [r, c]
     }
-    
 }

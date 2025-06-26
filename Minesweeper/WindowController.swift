@@ -58,16 +58,16 @@ class WindowController: NSWindowController {
         }
         
         if UserDefaults.standard.string(forKey: "AppleInterfaceStyle") != nil {
-            if ThemeManager.shared.currentTheme.name == "Classic" {
-                ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: "Classic Dark")
+            if ThemeManager.shared.current.name == "Classic" {
+                ThemeManager.shared.current = ThemeManager.shared.theme(with: "Classic Dark")
                 Defaults[.Themes.theme] = "Classic Dark"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
                 updateThemesMenu()
             }
         } else {
-            if ThemeManager.shared.currentTheme.name == "Classic Dark" {
-                ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: "Classic")
+            if ThemeManager.shared.current.name == "Classic Dark" {
+                ThemeManager.shared.current = ThemeManager.shared.theme(with: "Classic")
                 Defaults[.Themes.theme] = "Classic"
                 (viewController.skView.scene as! GameScene).updateTextures()
                 
@@ -90,7 +90,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func setTheme(sender: NSMenuItem) {
-        ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: sender.title)
+        ThemeManager.shared.current = ThemeManager.shared.theme(with: sender.title)
         Defaults[.Themes.theme] = sender.title
         (viewController.skView.scene as! GameScene).updateTextures()
         
@@ -98,7 +98,7 @@ class WindowController: NSWindowController {
     }
     
     @objc func setTheme(notification: Notification) {
-        ThemeManager.shared.currentTheme = ThemeManager.shared.theme(with: notification.object as! String)
+        ThemeManager.shared.current = ThemeManager.shared.theme(with: notification.object as! String)
         Defaults[.Themes.theme] = notification.object as! String
         (viewController.skView.scene as! GameScene).updateTextures()
         
@@ -123,14 +123,14 @@ class WindowController: NSWindowController {
         for theme in ThemeManager.shared.themes {
             if Defaults[.Themes.favorites].contains(theme.name) {
                 let menuItem = tempMenu.addItem(withTitle: theme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
-                if ThemeManager.shared.currentTheme == ThemeManager.shared.theme(with: theme.name) {
+                if ThemeManager.shared.current == ThemeManager.shared.theme(with: theme.name) {
                     menuItem.state = .on
                 }
             }
         }
-        if !ThemeManager.shared.currentTheme.isFavorite {
+        if !ThemeManager.shared.current.isFavorite {
             tempMenu.addItem(.separator())
-            let menuItem = tempMenu.addItem(withTitle: ThemeManager.shared.currentTheme.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
+            let menuItem = tempMenu.addItem(withTitle: ThemeManager.shared.current.name, action: #selector(setTheme(sender:)), keyEquivalent: "")
             menuItem.state = .on
         }
         //themesMenu.addItem(.init(title: "Show All...", action: nil, keyEquivalent: ""))

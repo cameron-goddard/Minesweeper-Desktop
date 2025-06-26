@@ -16,14 +16,14 @@ class MainButton: SKSpriteNode {
     init(sceneSize: CGSize, scale: CGFloat) {
         self.sceneSize = sceneSize
         self.scale = scale
-        super.init(texture: ThemeManager.shared.currentTheme.mainButton.happy, color: .clear, size: ThemeManager.shared.currentTheme.mainButton.happy.size())
+        super.init(texture: ThemeManager.shared.current.mainButton.happy, color: .clear, size: ThemeManager.shared.current.mainButton.happy.size())
         
         addNodes()
     }
     
     private func addNodes() {
         self.position = CGPoint(
-            x: -ThemeManager.shared.currentTheme.mainButton.happy.size().width / 2 * scale,
+            x: -ThemeManager.shared.current.mainButton.happy.size().width / 2 * scale,
             y: sceneSize.height/2 - (scale * 15)
         )
         
@@ -38,7 +38,7 @@ class MainButton: SKSpriteNode {
     
     /// Force update the node's texture. Called when a theme is changed
     func updateTextures() {
-        self.texture = ThemeManager.shared.currentTheme.mainButton.happy
+        self.texture = ThemeManager.shared.current.mainButton.happy
     }
     
     /// Force update the size of the node. Called when the scale setting is changed, or the Zoom button is pressed

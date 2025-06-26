@@ -46,35 +46,35 @@ class Borders: SKNode {
         let maxY = sceneSize.height / 2
         
         background = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.filler,
+            texture: ThemeManager.shared.current.borders.filler,
             position: CGPoint(x: minX, y: maxY),
             xScale: sceneSize.width,
             yScale: 66 * scale
         )
         
         topLeftCorner = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.cornerTopLeft,
+            texture: ThemeManager.shared.current.borders.cornerTopLeft,
             position: CGPoint(x: minX, y: maxY),
             zPosition: 2
         )
 
         topRightCorner = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.cornerTopRight,
+            texture: ThemeManager.shared.current.borders.cornerTopRight,
             position: CGPoint(
-                x: maxX - ThemeManager.shared.currentTheme.borders.cornerTopRight.size().width * scale,
+                x: maxX - ThemeManager.shared.current.borders.cornerTopRight.size().width * scale,
                 y: maxY
             ),
             zPosition: 2
         )
 
         topBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderTop,
+            texture: ThemeManager.shared.current.borders.borderTop,
             position: CGPoint(x: minX, y: maxY),
             xScale: sceneSize.width
         )
         
         middleBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderMiddle,
+            texture: ThemeManager.shared.current.borders.borderMiddle,
             position: CGPoint(
                 x: minX,
                 y: topBorder.frame.minY - scale * 33
@@ -84,74 +84,74 @@ class Borders: SKNode {
         )
         
         bottomBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderBottom,
+            texture: ThemeManager.shared.current.borders.borderBottom,
             position: CGPoint(
                 x: minX,
-                y: minY + ThemeManager.shared.currentTheme.borders.borderBottom.size().height * scale
+                y: minY + ThemeManager.shared.current.borders.borderBottom.size().height * scale
             ),
             xScale: sceneSize.width
         )
         
         middleLeftCorner = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.cornerMiddleLeft,
+            texture: ThemeManager.shared.current.borders.cornerMiddleLeft,
             position: CGPoint(x: minX, y: middleBorder.position.y),
             zPosition: 3
         )
 
         middleRightCorner = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.cornerMiddleRight,
+            texture: ThemeManager.shared.current.borders.cornerMiddleRight,
             position: CGPoint(
-                x: maxX - ThemeManager.shared.currentTheme.borders.cornerMiddleRight.size().width * scale,
+                x: maxX - ThemeManager.shared.current.borders.cornerMiddleRight.size().width * scale,
                 y: middleBorder.position.y
             ),
             zPosition: 3
         )
         
         topLeftBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderTopLeft,
+            texture: ThemeManager.shared.current.borders.borderTopLeft,
             position: CGPoint(x: minX, y: maxY),
             yScale: maxY - middleLeftCorner.position.y
         )
 
         topRightBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderTopRight,
+            texture: ThemeManager.shared.current.borders.borderTopRight,
             position: CGPoint(
-                x: maxX - ThemeManager.shared.currentTheme.borders.borderTopRight.size().width * scale,
+                x: maxX - ThemeManager.shared.current.borders.borderTopRight.size().width * scale,
                 y: maxY
             ),
             yScale: maxY - middleRightCorner.position.y
         )
 
         leftBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderLeft,
+            texture: ThemeManager.shared.current.borders.borderLeft,
             position: CGPoint(x: minX, y: maxY - topLeftBorder.size.height),
             yScale: middleLeftCorner.position.y - minY
         )
 
         rightBorder = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.borderRight,
+            texture: ThemeManager.shared.current.borders.borderRight,
             position: CGPoint(
-                x: maxX - ThemeManager.shared.currentTheme.borders.borderRight.size().width * scale,
+                x: maxX - ThemeManager.shared.current.borders.borderRight.size().width * scale,
                 y: maxY - topRightBorder.size.height
             ),
             yScale: middleRightCorner.position.y - minY
         )
         
         bottomLeftCorner = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.cornerBottomLeft,
+            texture: ThemeManager.shared.current.borders.cornerBottomLeft,
             position: CGPoint(x: minX, y: bottomBorder.position.y)
         )
 
         bottomRightCorner = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.cornerBottomRight,
+            texture: ThemeManager.shared.current.borders.cornerBottomRight,
             position: CGPoint(
-                x: maxX - ThemeManager.shared.currentTheme.borders.cornerBottomRight.size().width * scale,
+                x: maxX - ThemeManager.shared.current.borders.cornerBottomRight.size().width * scale,
                 y: bottomBorder.position.y
             )
         )
         
         filler = makeNode(
-            texture: ThemeManager.shared.currentTheme.borders.filler,
+            texture: ThemeManager.shared.current.borders.filler,
             position: CGPoint(
                 x: middleRightCorner.position.x - scale,
                 y: middleBorder.position.y-middleBorder.size.height + scale
@@ -205,21 +205,21 @@ class Borders: SKNode {
     
     /// Force update border textures. Called when a theme is changed
     func updateTextures() {
-        background.texture = ThemeManager.shared.currentTheme.borders.filler
-        topLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerTopLeft
-        topRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerTopRight
-        topBorder.texture = ThemeManager.shared.currentTheme.borders.borderTop
-        middleBorder.texture = ThemeManager.shared.currentTheme.borders.borderMiddle
-        bottomBorder.texture = ThemeManager.shared.currentTheme.borders.borderBottom
-        middleLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerMiddleLeft
-        middleRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerMiddleRight
-        topLeftBorder.texture = ThemeManager.shared.currentTheme.borders.borderTopLeft
-        topRightBorder.texture = ThemeManager.shared.currentTheme.borders.borderTopRight
-        leftBorder.texture = ThemeManager.shared.currentTheme.borders.borderLeft
-        rightBorder.texture = ThemeManager.shared.currentTheme.borders.borderRight
-        bottomLeftCorner.texture = ThemeManager.shared.currentTheme.borders.cornerBottomLeft
-        bottomRightCorner.texture = ThemeManager.shared.currentTheme.borders.cornerBottomRight
-        filler.texture = ThemeManager.shared.currentTheme.borders.filler
+        background.texture = ThemeManager.shared.current.borders.filler
+        topLeftCorner.texture = ThemeManager.shared.current.borders.cornerTopLeft
+        topRightCorner.texture = ThemeManager.shared.current.borders.cornerTopRight
+        topBorder.texture = ThemeManager.shared.current.borders.borderTop
+        middleBorder.texture = ThemeManager.shared.current.borders.borderMiddle
+        bottomBorder.texture = ThemeManager.shared.current.borders.borderBottom
+        middleLeftCorner.texture = ThemeManager.shared.current.borders.cornerMiddleLeft
+        middleRightCorner.texture = ThemeManager.shared.current.borders.cornerMiddleRight
+        topLeftBorder.texture = ThemeManager.shared.current.borders.borderTopLeft
+        topRightBorder.texture = ThemeManager.shared.current.borders.borderTopRight
+        leftBorder.texture = ThemeManager.shared.current.borders.borderLeft
+        rightBorder.texture = ThemeManager.shared.current.borders.borderRight
+        bottomLeftCorner.texture = ThemeManager.shared.current.borders.cornerBottomLeft
+        bottomRightCorner.texture = ThemeManager.shared.current.borders.cornerBottomRight
+        filler.texture = ThemeManager.shared.current.borders.filler
     }
     
     /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed

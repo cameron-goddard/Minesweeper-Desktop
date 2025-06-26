@@ -96,11 +96,11 @@ class GameScene: SKScene {
         if won {
             gameState = .Won
             board.flagMines()
-            mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.cool)
+            mainButton.set(texture: ThemeManager.shared.current.mainButton.cool)
         } else {
             gameState = .Lost
             board.lostGame()
-            mainButton.set(texture: ThemeManager.shared.currentTheme.mainButton.dead)
+            mainButton.set(texture: ThemeManager.shared.current.mainButton.dead)
         }
         gameTimer.stopTimer()
     }

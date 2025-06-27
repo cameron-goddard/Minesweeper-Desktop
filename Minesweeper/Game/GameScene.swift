@@ -29,17 +29,20 @@ class GameScene: SKScene {
     var rows, cols, mines: Int
     var scale: CGFloat
     
+    let isThemePreview: Bool
+    
     var currentTile: String? = nil
     var isChord = false
     
-    init(size: CGSize, scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
+    init(size: CGSize, scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?, isThemePreview: Bool = false) {
         self.rows = rows
         self.cols = cols
         self.mines = mines
         self.scale = scale
+        self.isThemePreview = isThemePreview
         
         borders = Borders(sceneSize: size, scale: scale)
-        board = Board(scale: scale, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout)
+        board = Board(scale: scale, rows: rows, cols: cols, mines: mines, minesLayout: minesLayout, isThemePreview: isThemePreview)
         mainButton = MainButton(sceneSize: size, scale: scale)
         gameTimer = GameTimer(sceneSize: size, scale: scale)
         mineCounter = MineCounter(sceneSize: size, scale: scale, mines: mines)
@@ -56,15 +59,27 @@ class GameScene: SKScene {
         self.addChild(mineCounter)
         self.addChild(gameTimer)
         self.addChild(board.node)
+        
+        if isThemePreview {
+            // Add a transparent blocker to prevent user interaction in the themes settings window
+            let blocker = SKSpriteNode(color: .clear, size: self.size)
+            blocker.position = .zero
+            blocker.zPosition = 1000
+            self.addChild(blocker)
+            
+            mineCounter.mines = 7
+            gameTimer.elapsedTime = 42
+        }
     }
     
     /// Force update all game textures. Called when a theme is changed
-    func updateTextures() {
-        borders.updateTextures()
-        mainButton.updateTextures()
-        board.updateTextures()
-        gameTimer.updateTextures()
-        mineCounter.updateTextures()
+    /// - Parameter theme: The theme to update to
+    func updateTextures(to theme: Theme = ThemeManager.shared.current) {
+        borders.updateTextures(to: theme)
+        mainButton.updateTextures(to: theme)
+        board.updateTextures(to: theme)
+        gameTimer.updateTextures(to: theme)
+        mineCounter.updateTextures(to: theme)
     }
     
     /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed

@@ -35,9 +35,9 @@ class MineCounter: NumberDisplay {
     }
     
     /// Force update all textures. Called when a theme is changed
-    override func updateTextures() {
-        super.updateTextures()
-        self.set(value: mines)
+    override func updateTextures(to theme: Theme) {
+        super.updateTextures(to: theme)
+        self.set(value: mines, theme: theme)
     }
     
     override func updateScale(sceneSize: CGSize, scale: CGFloat) {

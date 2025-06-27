@@ -12,28 +12,33 @@ import UniformTypeIdentifiers
 
 class ThemesViewController: NSViewController {
 
-    @IBOutlet weak var tabView: NSTabView!
-    
     @IBOutlet weak var tableView: NSTableView!
     var themes: [Theme] = ThemeManager.shared.themes
     
     @IBOutlet weak var themePreview: SKView!
     @IBOutlet weak var themeName: NSTextField!
     @IBOutlet weak var themeDesc: NSTextField!
-    @IBOutlet weak var themeDefault: NSTextField!
-    @IBOutlet weak var themeStyle: NSTextField!
-    @IBOutlet weak var themeMode: NSTextField!
-    @IBOutlet weak var assetsTableView: NSTableView!
     @IBOutlet weak var addDeleteControl: NSSegmentedControl!
+    
+    var scenePreview: GameScene!
+    let previewMinesLayout = [(0,0), (0,1), (2,0), (1,5), (0,4), (5,5), (5,7), (7,6), (5,1), (7,1)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height)
-        themePreview.wantsLayer = true
-        themePreview.layer?.cornerRadius = 5
-        assetsTableView.enclosingScrollView?.wantsLayer = true
-        assetsTableView.enclosingScrollView?.layer?.cornerRadius = 5
         tableView.doubleAction = #selector(setThemeButtonPressed(_:))
+        
+        scenePreview = GameScene(
+            size: CGSize(width: themePreview.frame.width, height: themePreview.frame.height),
+            scale: 1.5,
+            rows: 8,
+            cols: 8,
+            mines: 10,
+            minesLayout: previewMinesLayout,
+            isThemePreview: true
+        )
+        themePreview.presentScene(scenePreview)
+        
         showThemeInfo()
     }
     
@@ -47,10 +52,8 @@ class ThemesViewController: NSViewController {
         
         themeName.stringValue = theme.name
         themeDesc.stringValue = theme.desc
-        themeDefault.stringValue = theme.isDefault ? "Yes" : "No"
-        themeStyle.stringValue = "Classic"
-        themeMode.stringValue = theme.mode
-        themePreview.presentScene(ThemeScene(theme: theme))
+        
+        scenePreview.updateTextures(to: theme)
         
         if theme.isDefault {
             addDeleteControl.setEnabled(false, forSegment: 1)
@@ -135,7 +138,6 @@ extension ThemesViewController: NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if tableView == self.tableView {
             guard let themeCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "themeCell"), owner: self) as? ThemeCellView else { return nil }
             themeCell.themeName.stringValue = themes[row].name
             
@@ -144,55 +146,15 @@ extension ThemesViewController: NSTableViewDataSource {
             }
             
             return themeCell
-        } else {
-            guard let assetCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "assetCell"), owner: self) as? AssetCellView else { return nil }
-            //print(self.tableView.selectedRow)
-            let current = themes[self.tableView.selectedRow]
-            let tilesMirror = Mirror(reflecting: current.tiles)
-            let mainButtonMirror = Mirror(reflecting: current.mainButton)
-            // let numbersMirror = Mirror(reflecting: current.numbers)
-            let bordersMirror = Mirror(reflecting: current.borders)
-            
-            let mirrors = [tilesMirror, mainButtonMirror, bordersMirror]
-            
-            var assetLabels : [String] = []
-            var assetImages : [SKTexture] = []
-            
-            for m in mirrors {
-                assetLabels += m.children.map({ $0.label! })
-                assetImages += m.children.map({ $0.value as! SKTexture })
-            }
-            
-            //let assetLabels = mirror.children.map({ $0.label! })
-            //let assetImages = mirror.children.map({ $0.value as! SKTexture })
-            //print(assetImages)
-            assetCell.assetName.stringValue = assetLabels[row]
-            assetCell.assetPreview.presentScene(AssetScene(asset: assetImages[row]))
-            
-            return assetCell
-        }
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if tableView == self.tableView {
-            return 20
-        } else {
-            return 36
-        }
+        return 20
     }
 }
 
 extension ThemesViewController: NSTableViewDelegate {
     func tableViewSelectionDidChange(_ notification: Notification) {
         showThemeInfo()
-    }
-}
-
-extension ThemesViewController: NSTabViewDelegate {
-    
-    func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        if tabViewItem!.label == "Assets" {
-            assetsTableView.reloadData()
-        }
     }
 }

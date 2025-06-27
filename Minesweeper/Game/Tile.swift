@@ -32,12 +32,12 @@ class Tile {
         case Eight
     }
     
-    let node : SKSpriteNode
+    let node: SKSpriteNode
     
-    var r : Int
-    var c : Int
-    var state : State
-    var value : Value
+    var r: Int
+    var c: Int
+    var state: State
+    var value: Value
     
     init(r: Int, c: Int, state: State, val: Value = .Empty) {
         self.node = SKSpriteNode()
@@ -58,18 +58,18 @@ class Tile {
         self.value = .Empty
     }
     
-    func setState(state: State) {
+    func setState(state: State, theme: Theme = ThemeManager.shared.current) {
         self.state = state
         
         switch state {
         case .Uncovered:
-            self.node.texture = textureLookup(value: self.value)
+            self.node.texture = textureLookup(value: self.value, theme: theme)
         case .Covered:
-            self.node.texture = ThemeManager.shared.current.tiles.covered
+            self.node.texture = theme.tiles.covered
         case .Flagged:
-            self.node.texture = ThemeManager.shared.current.tiles.flagged
+            self.node.texture = theme.tiles.flagged
         case .Question:
-            self.node.texture = ThemeManager.shared.current.tiles.question
+            self.node.texture = theme.tiles.question
         }
     }
     
@@ -93,32 +93,32 @@ class Tile {
         self.setState(state: self.state)
     }
     
-    func textureLookup(value: Value) -> SKTexture {
+    func textureLookup(value: Value, theme: Theme) -> SKTexture {
         switch value {
         case .Mine:
-            return ThemeManager.shared.current.tiles.mine
+            return theme.tiles.mine
         case .MineRed:
-            return ThemeManager.shared.current.tiles.mineRed
+            return theme.tiles.mineRed
         case .MineWrong:
-            return ThemeManager.shared.current.tiles.mineWrong
+            return theme.tiles.mineWrong
         case .One:
-            return ThemeManager.shared.current.tiles.one
+            return theme.tiles.one
         case .Two:
-            return ThemeManager.shared.current.tiles.two
+            return theme.tiles.two
         case .Three:
-            return ThemeManager.shared.current.tiles.three
+            return theme.tiles.three
         case .Four:
-            return ThemeManager.shared.current.tiles.four
+            return theme.tiles.four
         case .Five:
-            return ThemeManager.shared.current.tiles.five
+            return theme.tiles.five
         case .Six:
-            return ThemeManager.shared.current.tiles.six
+            return theme.tiles.six
         case .Seven:
-            return ThemeManager.shared.current.tiles.seven
+            return theme.tiles.seven
         case .Eight:
-            return ThemeManager.shared.current.tiles.eight
+            return theme.tiles.eight
         default:
-            return ThemeManager.shared.current.tiles.empty
+            return theme.tiles.empty
         }
     }
 }

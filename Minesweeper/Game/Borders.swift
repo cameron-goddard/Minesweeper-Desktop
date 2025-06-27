@@ -204,22 +204,22 @@ class Borders: SKNode {
     }
     
     /// Force update border textures. Called when a theme is changed
-    func updateTextures() {
-        background.texture = ThemeManager.shared.current.borders.filler
-        topLeftCorner.texture = ThemeManager.shared.current.borders.cornerTopLeft
-        topRightCorner.texture = ThemeManager.shared.current.borders.cornerTopRight
-        topBorder.texture = ThemeManager.shared.current.borders.borderTop
-        middleBorder.texture = ThemeManager.shared.current.borders.borderMiddle
-        bottomBorder.texture = ThemeManager.shared.current.borders.borderBottom
-        middleLeftCorner.texture = ThemeManager.shared.current.borders.cornerMiddleLeft
-        middleRightCorner.texture = ThemeManager.shared.current.borders.cornerMiddleRight
-        topLeftBorder.texture = ThemeManager.shared.current.borders.borderTopLeft
-        topRightBorder.texture = ThemeManager.shared.current.borders.borderTopRight
-        leftBorder.texture = ThemeManager.shared.current.borders.borderLeft
-        rightBorder.texture = ThemeManager.shared.current.borders.borderRight
-        bottomLeftCorner.texture = ThemeManager.shared.current.borders.cornerBottomLeft
-        bottomRightCorner.texture = ThemeManager.shared.current.borders.cornerBottomRight
-        filler.texture = ThemeManager.shared.current.borders.filler
+    func updateTextures(to theme: Theme) {
+        background.texture = theme.borders.filler
+        topLeftCorner.texture = theme.borders.cornerTopLeft
+        topRightCorner.texture = theme.borders.cornerTopRight
+        topBorder.texture = theme.borders.borderTop
+        middleBorder.texture = theme.borders.borderMiddle
+        bottomBorder.texture = theme.borders.borderBottom
+        middleLeftCorner.texture = theme.borders.cornerMiddleLeft
+        middleRightCorner.texture = theme.borders.cornerMiddleRight
+        topLeftBorder.texture = theme.borders.borderTopLeft
+        topRightBorder.texture = theme.borders.borderTopRight
+        leftBorder.texture = theme.borders.borderLeft
+        rightBorder.texture = theme.borders.borderRight
+        bottomLeftCorner.texture = theme.borders.cornerBottomLeft
+        bottomRightCorner.texture = theme.borders.cornerBottomRight
+        filler.texture = theme.borders.filler
     }
     
     /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed

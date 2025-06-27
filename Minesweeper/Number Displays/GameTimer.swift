@@ -12,6 +12,7 @@ class GameTimer: NumberDisplay {
     
     var gameTimer = Timer()
     var startTime: Date?
+    var elapsedTime: TimeInterval = 0
     
     weak var delegate: GameTimerDelegate?
     
@@ -40,18 +41,16 @@ class GameTimer: NumberDisplay {
     
     @objc func fireTimer() {
         guard let startTime = self.startTime else { return }
-        let elapsedTime = Date().timeIntervalSince(startTime)
+        elapsedTime = Date().timeIntervalSince(startTime)
         self.set(value: Int(elapsedTime))
         
         delegate?.updateTime(elapsedTime)
     }
     
     /// Force update all textures. Called when a theme is changed
-    override func updateTextures() {
-        super.updateTextures()
-        if !gameTimer.isValid {
-            self.set(value: 0)
-        }
+    override func updateTextures(to theme: Theme) {
+        super.updateTextures(to: theme)
+        self.set(value: Int(elapsedTime), theme: theme)
     }
     
     override func updateScale(sceneSize: CGSize, scale: CGFloat) {

@@ -47,21 +47,22 @@ class NumberDisplay: SKNode {
         self.addChild(nodeOnes)
     }
     
-    func set(value: Int) {
+    func set(value: Int, theme: Theme = ThemeManager.shared.current) {
         if (value < 0) {
-            nodeHundreds.texture = ThemeManager.shared.current.numbers.digits.last
-            nodeTens.texture = ThemeManager.shared.current.numbers.digits[(abs(value)/10) % 10]
-            nodeOnes.texture = ThemeManager.shared.current.numbers.digits[abs(value) % 10]
+            nodeHundreds.texture = theme.numbers.digits.last
+            nodeTens.texture = theme.numbers.digits[(abs(value)/10) % 10]
+            nodeOnes.texture = theme.numbers.digits[abs(value) % 10]
         } else {
-            nodeHundreds.texture = ThemeManager.shared.current.numbers.digits[(value/100) % 10]
-            nodeTens.texture = ThemeManager.shared.current.numbers.digits[(value/10) % 10]
-            nodeOnes.texture = ThemeManager.shared.current.numbers.digits[value % 10]
+            nodeHundreds.texture = theme.numbers.digits[(value/100) % 10]
+            nodeTens.texture = theme.numbers.digits[(value/10) % 10]
+            nodeOnes.texture = theme.numbers.digits[value % 10]
         }
     }
     
     /// Force update all textures. Called when a theme is changed
-    func updateTextures() {
-        self.borders.texture = ThemeManager.shared.current.borders.borderNumbers
+    /// - Parameter theme: The theme to update to
+    func updateTextures(to theme: Theme) {
+        self.borders.texture = theme.borders.borderNumbers
     }
     
     func updateScale(sceneSize: CGSize, scale: CGFloat) {

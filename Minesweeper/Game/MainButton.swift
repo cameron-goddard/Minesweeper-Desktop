@@ -45,22 +45,22 @@ class MainButton: SKSpriteNode {
     
     func set(state: State) {
         self.state = state
-        updateTextures()
+        updateTextures(to: ThemeManager.shared.current)
     }
     
     /// Force update the node's texture. Called when a theme is changed
-    func updateTextures() {
+    func updateTextures(to theme: Theme) {
         switch state {
         case .Happy:
-            self.texture = ThemeManager.shared.current.mainButton.happy
+            self.texture = theme.mainButton.happy
         case .HappyPressed:
-            self.texture = ThemeManager.shared.current.mainButton.happyPressed
+            self.texture = theme.mainButton.happyPressed
         case .Cautious:
-            self.texture = ThemeManager.shared.current.mainButton.cautious
+            self.texture = theme.mainButton.cautious
         case .Cool:
-            self.texture = ThemeManager.shared.current.mainButton.cool
+            self.texture = theme.mainButton.cool
         case .Dead:
-            self.texture = ThemeManager.shared.current.mainButton.dead
+            self.texture = theme.mainButton.dead
         }
     }
     

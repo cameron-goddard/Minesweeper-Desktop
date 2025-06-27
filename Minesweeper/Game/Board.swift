@@ -16,10 +16,10 @@ class Board {
     let node: SKNode
     
     /// Board size and density
-    let rows, cols, mines : Int
+    let rows, cols, mines: Int
     
     /// Tiles representation
-    private var tiles : [[Tile]]
+    private var tiles: [[Tile]]
     
     /// Coordinates for all mines on the board
     var minesLayout: [(Int, Int)] = []
@@ -32,6 +32,9 @@ class Board {
     /// Whether this board layout was specifically loaded vs randomly generated
     private var loadedBoard: Bool = false
     
+    /// Whether this board is being loaded as a preview for the settings window
+    private var isThemePreview: Bool
+    
     private var tileSize: CGSize {
         CGSize(
             width: 16 * scale,
@@ -39,13 +42,15 @@ class Board {
         )
     }
     
-    init(scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?) {
+    init(scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?, isThemePreview: Bool = false) {
         self.node = SKNode()
         self.scale = scale
         
         self.rows = rows
         self.cols = cols
         self.mines = mines
+        
+        self.isThemePreview = isThemePreview
         
         // Mark this as a loaded board if given a predefined mine layout
         if minesLayout != nil {
@@ -111,16 +116,20 @@ class Board {
         // Set adjacency numbers
         setNumbers()
         
-        // Calculate total 3BV and send to Stats
-        NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Total3BV": calculate3BV()])
+        if isThemePreview {
+            initThemePreview()
+        } else {
+            // Calculate total 3BV and send to Stats
+            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Total3BV": calculate3BV()])
+        }
     }
     
     /// Force update tile textures. Called when a theme is changed
-    func updateTextures() {
+    func updateTextures(to theme: Theme) {
         for r in 0..<rows {
             for c in 0..<cols {
                 let tile = tileAt(r: r, c: c)!
-                tile.setState(state: tile.state)
+                tile.setState(state: tile.state, theme: theme)
             }
         }
     }
@@ -416,6 +425,14 @@ class Board {
         
         minesLayout.removeAll(where: { $0 == (row, col) })
         minesLayout.append((new.r, new.c))
+    }
+    
+    func initThemePreview() {
+        let _ = revealAt(r: 2, c: 2, isChord: false)
+        tiles[2][0].setState(state: .Question)
+        tiles[1][5].setState(state: .Flagged)
+        tiles[5][1].setState(state: .Flagged)
+        tiles[7][1].setState(state: .Flagged)
     }
 }
 

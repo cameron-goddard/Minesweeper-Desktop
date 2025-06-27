@@ -117,6 +117,7 @@ class Board {
         setNumbers()
         
         if isThemePreview {
+            // Set up the board to act as a preview for themes
             initThemePreview()
         } else {
             // Calculate total 3BV and send to Stats
@@ -125,6 +126,7 @@ class Board {
     }
     
     /// Force update tile textures. Called when a theme is changed
+    /// - Parameter theme: The theme to update to
     func updateTextures(to theme: Theme) {
         for r in 0..<rows {
             for c in 0..<cols {
@@ -233,7 +235,6 @@ class Board {
             for tile in diff {
                 tile.raised()
             }
-            
             return
         }
         tileAt(r: r, c: c)!.raised()
@@ -242,6 +243,11 @@ class Board {
         }
     }
     
+    /// Perform a chord at the specified target
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    /// - Returns: True if any revealed tiles are mines, false otherwise
     private func chordAt(r: Int, c: Int) -> Bool {
         let tile = tiles[r][c]
         
@@ -264,6 +270,7 @@ class Board {
         for tile in adjacentTiles {
             if tile.state == .Covered {
                 if revealAt(r: tile.r, c: tile.c, isChord: false) {
+                    // Reveal everything from the chord before losing the game
                     didHitMine = true
                 }
             }

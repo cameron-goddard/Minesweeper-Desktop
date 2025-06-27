@@ -40,6 +40,10 @@ class MineCounter: NumberDisplay {
         self.set(value: mines, theme: theme)
     }
     
+    /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed
+    /// - Parameters:
+    ///   - sceneSize: The size of the parent scene. Needed for positioning
+    ///   - scale: The scale to update to
     override func updateScale(sceneSize: CGSize, scale: CGFloat) {
         super.updateScale(sceneSize: sceneSize, scale: scale)
         self.position = CGPoint(x: -sceneSize.width/2 + 16 * scale, y: sceneSize.height/2 - (scale * 15))

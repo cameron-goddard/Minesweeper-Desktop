@@ -37,7 +37,6 @@ class ThemeManager {
             desc: "A dark twist on the original theme",
             isDefault: true,
             isFavorite: Defaults[.Themes.favorites].contains("Classic Dark"),
-            mode: "Dark",
             spriteSheetTexture: SKTexture(imageNamed: "classic_dark")
         )
     ]

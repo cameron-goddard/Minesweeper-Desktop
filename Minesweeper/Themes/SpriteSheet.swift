@@ -9,7 +9,8 @@ import Foundation
 import SpriteKit
 
 struct SpriteSheet {
-    let atlas : SKTexture
+    
+    let atlas: SKTexture
 
     func textureAt(x: Int, y: Int, w: Int, h: Int) -> SKTexture {
         let atlasSize = atlas.size()

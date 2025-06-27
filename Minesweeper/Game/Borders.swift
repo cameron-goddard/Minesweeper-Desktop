@@ -204,6 +204,7 @@ class Borders: SKNode {
     }
     
     /// Force update border textures. Called when a theme is changed
+    /// - Parameter theme: The theme to update to
     func updateTextures(to theme: Theme) {
         background.texture = theme.borders.filler
         topLeftCorner.texture = theme.borders.cornerTopLeft
@@ -223,6 +224,9 @@ class Borders: SKNode {
     }
     
     /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed
+    /// - Parameters:
+    ///   - sceneSize: The size of the parent scene. Needed for positioning
+    ///   - scale: The scale to update to
     func updateScale(sceneSize: CGSize, scale: CGFloat) {
         self.sceneSize = sceneSize
         self.scale = scale

@@ -65,6 +65,10 @@ class NumberDisplay: SKNode {
         self.borders.texture = theme.borders.borderNumbers
     }
     
+    /// Force update the size of all nodes. Called when the scale setting is changed, or the Zoom button is pressed
+    /// - Parameters:
+    ///   - sceneSize: The size of the parent scene. Needed for positioning
+    ///   - scale: The scale to update to
     func updateScale(sceneSize: CGSize, scale: CGFloat) {
         self.sceneSize = sceneSize
         self.scale = scale

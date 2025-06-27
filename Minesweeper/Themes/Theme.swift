@@ -14,17 +14,16 @@ import SpriteKit
     let fileName: String
     let desc: String
     
-    let mainButton : MainButton
-    let numbers : Numbers
-    let tiles : Tiles
-    let borders : Borders
+    let mainButton: MainButton
+    let numbers: Numbers
+    let tiles: Tiles
+    let borders: Borders
     
-    var isDefault : Bool
-    let mode : String
-    var isCurrent = false
-    var isFavorite : Bool
+    var isDefault: Bool
+    var isCurrent: Bool = false
+    var isFavorite: Bool
     
-    init(name: String, fileName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, mode: String = "Light", spriteSheetTexture: SKTexture) {
+    init(name: String, fileName: String = "", desc: String = "User-generated theme", isDefault: Bool = false, isFavorite: Bool = false, spriteSheetTexture: SKTexture) {
         
         mainButton = MainButton(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
         numbers = Numbers(tileSheet: SpriteSheet(atlas: spriteSheetTexture))
@@ -35,7 +34,6 @@ import SpriteKit
         self.fileName = fileName
         self.desc = desc
         self.isDefault = isDefault
-        self.mode = mode
         self.isFavorite = isFavorite
     }
     

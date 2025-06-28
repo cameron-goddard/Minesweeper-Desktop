@@ -30,6 +30,25 @@ class WindowController: NSWindowController {
         self.contentViewController as! ViewController
     }
     
+    override var contentViewController: NSViewController? {
+        willSet {
+            // Invalidate the game timer before the view controller is killed
+            if let gameScene = viewController.getScene() {
+                gameScene.gameTimer.stop()
+            }
+        }
+        didSet {
+            // Reset the game timer and all stats when a new view controller is created
+            if let statsVC = statsWC.contentViewController as? StatsViewController {
+                if let gameScene = viewController.getScene() {
+                    gameScene.gameTimer.delegate = statsVC
+                    gameScene.gameTimer.reset()
+                    NotificationCenter.default.post(name: .resetStats, object: nil)
+                }
+            }
+        }
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         

@@ -78,8 +78,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             controller.difficulty = Defaults[.Game.difficulty]
         }
         if let window = NSApplication.shared.mainWindow {
-            if window.identifier?.rawValue == "Main" {
-                window.contentViewController = controller
+            if let windowController = window.windowController as? WindowController {
+                windowController.contentViewController = controller
             }
         }
     }

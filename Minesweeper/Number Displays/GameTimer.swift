@@ -21,14 +21,14 @@ class GameTimer: NumberDisplay {
         self.position = CGPoint(x: sceneSize.width/2 - 57 * scale, y: sceneSize.height/2 - (scale * 15))
     }
     
-    func startTimer() {
+    func start() {
         startTime = Date()
         gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         RunLoop.current.add(gameTimer, forMode: .common)
         self.set(value: 0)
     }
     
-    func stopTimer() {
+    func stop() {
         gameTimer.invalidate()
     }
     

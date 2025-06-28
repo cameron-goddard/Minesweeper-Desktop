@@ -55,7 +55,7 @@ extension GameScene {
             } else {
                 if gameState == .Won || gameState == .Lost { return }
                 if gameState == .Unstarted {
-                    gameTimer.startTimer()
+                    gameTimer.start()
                     gameState = .InProgress
                 }
                 

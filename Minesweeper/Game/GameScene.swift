@@ -117,7 +117,7 @@ class GameScene: SKScene {
             board.lostGame()
             mainButton.set(state: .Dead)
         }
-        gameTimer.stopTimer()
+        gameTimer.stop()
     }
     
     /// Handles game reset logic for the board, stats, and number displays

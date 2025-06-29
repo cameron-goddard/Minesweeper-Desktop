@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -219,7 +219,6 @@
 				};
 			};
 			buildConfigurationList = 3B5AB53327F96F710059BB0A /* Build configuration list for PBXProject "Minesweeper" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -232,6 +231,7 @@
 				3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */,
 				3BF1D9AE2BC0E5A70005200A /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 3B5AB53927F96F710059BB0A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

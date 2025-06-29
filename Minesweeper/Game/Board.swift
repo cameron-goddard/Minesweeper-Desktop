@@ -5,69 +5,73 @@
 //  Created by Cameron Goddard on 4/3/22.
 //
 
+import Defaults
 import Foundation
 import SpriteKit
-import Defaults
 
 /// Representation of a Minesweeper board
 class Board {
-    
+
     /// The anchor node for the board
     let node: SKNode
-    
+
     /// Board size and density
     let rows, cols, mines: Int
-    
+
     /// Tiles representation
     private var tiles: [[Tile]]
-    
+
     /// Coordinates for all mines on the board
     var minesLayout: [(Int, Int)] = []
-    
+
     /// Counter to keep track of game progress
     var revealedTiles = 0
-    
+
+    /// The scaled size of the board
     private var scale: CGFloat
-    
+
     /// Whether this board layout was specifically loaded vs randomly generated
     private var loadedBoard: Bool = false
-    
+
     /// Whether this board is being loaded as a preview for the settings window
     private var isThemePreview: Bool
-    
+
     private var tileSize: CGSize {
         CGSize(
             width: 16 * scale,
             height: 16 * scale
         )
     }
-    
-    init(scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?, isThemePreview: Bool = false) {
+
+    init(
+        scale: CGFloat, rows: Int, cols: Int, mines: Int, minesLayout: [(Int, Int)]?,
+        isThemePreview: Bool = false
+    ) {
         self.node = SKNode()
         self.scale = scale
-        
+
         self.rows = rows
         self.cols = cols
         self.mines = mines
-        
+
         self.isThemePreview = isThemePreview
-        
+
         // Mark this as a loaded board if given a predefined mine layout
         if minesLayout != nil {
             self.minesLayout = minesLayout!
             self.loadedBoard = true
         }
-        
+
         self.tiles = [[Tile]](repeating: [Tile](repeating: Tile(), count: cols), count: rows)
         initBoard()
     }
-    
+
     /// Adds tiles to the anchor node. Sets mines and numbers. Calculates total 3BV
     /// - Parameter restart: Whether the previously played board is being reloaded
     private func initBoard(restart: Bool = false) {
         // Remove all old tile nodes
         node.removeAllChildren()
-        
+
         // Init tiles
         for r in 0..<rows {
             for c in 0..<cols {
@@ -76,7 +80,7 @@ class Board {
                 node.addChild(tile.node)
             }
         }
-        
+
         // Set tile sizes and positions
         let originX = -(CGFloat(cols) * tileSize.width) / 2
         let originY = (CGFloat(rows) * tileSize.height) / 2
@@ -90,7 +94,7 @@ class Board {
                 tiles[r][c].node.position = CGPoint(x: x, y: y)
             }
         }
-        
+
         // Add mines
         if loadedBoard || restart {
             for (r, c) in minesLayout {
@@ -98,12 +102,14 @@ class Board {
             }
         } else {
             minesLayout = []
-            
+
             var addedMines = 0
             while addedMines < mines {
                 for r in 0..<rows {
                     for c in 0..<cols {
-                        if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty && addedMines < mines {
+                        if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty
+                            && addedMines < mines
+                        {
                             tiles[r][c].setValue(val: .Mine)
                             minesLayout.append((r, c))
                             addedMines += 1
@@ -112,19 +118,20 @@ class Board {
                 }
             }
         }
-        
+
         // Set adjacency numbers
         setNumbers()
-        
+
         if isThemePreview {
             // Set up the board to act as a preview for themes
             initThemePreview()
         } else {
             // Calculate total 3BV and send to Stats
-            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Total3BV": calculate3BV()])
+            NotificationCenter.default.post(
+                name: .updateStat, object: nil, userInfo: ["Total3BV": calculate3BV()])
         }
     }
-    
+
     /// Force update tile textures. Called when a theme is changed
     /// - Parameter theme: The theme to update to
     func updateTextures(to theme: Theme) {
@@ -135,14 +142,14 @@ class Board {
             }
         }
     }
-    
+
     /// Force update the size of all tiles. Called when the scale setting is changed, or the Zoom button is pressed
     func updateScale(scale: CGFloat) {
         // Update tile sizes and positions
         self.scale = scale
         let originX = -(CGFloat(cols) * tileSize.width) / 2
         let originY = (CGFloat(rows) * tileSize.height) / 2
-        
+
         for r in 0..<rows {
             for c in 0..<cols {
                 let x = originX + CGFloat(c) * tileSize.width
@@ -153,7 +160,7 @@ class Board {
             }
         }
     }
-    
+
     /// Returns a list of the adjacent tiles to a target tile
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -161,17 +168,17 @@ class Board {
     /// - Returns: A list of the adjacent tiles
     private func getAdjacentTiles(r: Int, c: Int) -> [Tile] {
         var ret = [Tile]()
-        if let tile = tileAt(r: r-1, c: c) { ret.append(tile)}
-        if let tile = tileAt(r: r-1, c: c-1) { ret.append(tile)}
-        if let tile = tileAt(r: r-1, c: c+1) { ret.append(tile)}
-        if let tile = tileAt(r: r, c: c-1) { ret.append(tile)}
-        if let tile = tileAt(r: r, c: c+1) { ret.append(tile)}
-        if let tile = tileAt(r: r+1, c: c) { ret.append(tile)}
-        if let tile = tileAt(r: r+1, c: c-1) { ret.append(tile)}
-        if let tile = tileAt(r: r+1, c: c+1) { ret.append(tile)}
+        if let tile = tileAt(r: r - 1, c: c) { ret.append(tile) }
+        if let tile = tileAt(r: r - 1, c: c - 1) { ret.append(tile) }
+        if let tile = tileAt(r: r - 1, c: c + 1) { ret.append(tile) }
+        if let tile = tileAt(r: r, c: c - 1) { ret.append(tile) }
+        if let tile = tileAt(r: r, c: c + 1) { ret.append(tile) }
+        if let tile = tileAt(r: r + 1, c: c) { ret.append(tile) }
+        if let tile = tileAt(r: r + 1, c: c - 1) { ret.append(tile) }
+        if let tile = tileAt(r: r + 1, c: c + 1) { ret.append(tile) }
         return ret
     }
-    
+
     /// Returns the number of adjacent mines to a target tile
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -186,12 +193,12 @@ class Board {
         }
         return ret
     }
-    
+
     /// Sets the adjacency numbers for every tile on the board
     private func setNumbers() {
         for r in 0..<rows {
             for c in 0..<cols {
-                if (tileAt(r: r, c: c)!.value != .Mine) {
+                if tileAt(r: r, c: c)!.value != .Mine {
                     switch numberOfAdjacentMines(r: r, c: c) {
                     case 1:
                         tiles[r][c].setValue(val: .One)
@@ -216,7 +223,7 @@ class Board {
             }
         }
     }
-    
+
     func adjacentPressAt(r: Int, c: Int) {
         for tile in getAdjacentTiles(r: r, c: c) {
             if tile.state == .Covered || tile.state == .Question {
@@ -224,14 +231,14 @@ class Board {
             }
         }
     }
-    
+
     func adjacentRaiseAt(r: Int, c: Int, diffR: Int = -1, diffC: Int = -1) {
         if diffR != -1 && diffC != -1 {
             let fromTiles = getAdjacentTiles(r: r, c: c)
             var toTiles = getAdjacentTiles(r: diffR, c: diffC)
             toTiles.append(tileAt(r: diffR, c: diffC)!)
             let diff = fromTiles.filter { !toTiles.contains($0) }
-            
+
             for tile in diff {
                 tile.raised()
             }
@@ -242,7 +249,7 @@ class Board {
             tile.raised()
         }
     }
-    
+
     /// Perform a chord at the specified target
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -250,22 +257,22 @@ class Board {
     /// - Returns: True if any revealed tiles are mines, false otherwise
     private func chordAt(r: Int, c: Int) -> Bool {
         let tile = tiles[r][c]
-        
+
         NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Middle": 0])
         if !tile.isNumber() {
             adjacentRaiseAt(r: r, c: c)
             return false
         }
-        
+
         let adjacentTiles = getAdjacentTiles(r: r, c: c)
         let flaggedCount = adjacentTiles.filter { $0.state == .Flagged }.count
         if flaggedCount != numberOfAdjacentMines(r: r, c: c) {
             adjacentRaiseAt(r: r, c: c)
             return false
         }
-        
+
         tile.setState(state: .Uncovered)
-        
+
         var didHitMine = false
         for tile in adjacentTiles {
             if tile.state == .Covered {
@@ -277,7 +284,7 @@ class Board {
         }
         return didHitMine
     }
-    
+
     /// Reveals the tile at the specified target, including any adjacent blanks
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -287,25 +294,30 @@ class Board {
     func revealAt(r: Int, c: Int, isChord: Bool) -> Bool {
         let tile = tiles[r][c]
         print("[" + String(r) + ", " + String(c) + "]")
-        
+
         if isChord {
             return chordAt(r: r, c: c)
         }
-        
+
         if tile.state != .Uncovered {
             NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Effective": 0])
-            
-            if tileAt(r: r, c: c)?.value == .Empty || (tileAt(r: r, c: c)?.value != .Mine && !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty })) {
+
+            if tileAt(r: r, c: c)?.value == .Empty
+                || (tileAt(r: r, c: c)?.value != .Mine
+                    && !getAdjacentTiles(r: r, c: c).contains(where: { $0.value == .Empty }))
+            {
                 NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["3BV": 0])
             }
-            
+
             if tile.value == .Empty {
                 reveal(r: r, c: c)
             } else {
-                if revealedTiles == 0 && Defaults[.General.safeFirstClick] && tile.value == .Mine && !loadedBoard {
-                    
+                if revealedTiles == 0 && Defaults[.General.safeFirstClick] && tile.value == .Mine
+                    && !loadedBoard
+                {
+
                     let allTiles = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
-                    
+
                     allTiles.forEach { adjTile in
                         createBlankFrom(row: adjTile.r, col: adjTile.c, avoid: allTiles)
                     }
@@ -317,11 +329,12 @@ class Board {
                 }
             }
         } else {
-            NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["NonEffective": 0])
+            NotificationCenter.default.post(
+                name: .updateStat, object: nil, userInfo: ["NonEffective": 0])
         }
-        
+
         NotificationCenter.default.post(name: .updateStat, object: nil, userInfo: ["Left": 0])
-        
+
         if tile.value == .Mine {
             tile.setValue(val: .MineRed)
             tile.setState(state: .Uncovered)
@@ -330,7 +343,7 @@ class Board {
         }
         return false
     }
-    
+
     /// Recursively reveals a blank section of tiles
     /// - Parameters:
     ///   - r: The row of the current file to reveal at
@@ -338,7 +351,7 @@ class Board {
     private func reveal(r: Int, c: Int) {
         tiles[r][c].setState(state: .Uncovered)
         revealedTiles += 1
-        
+
         for tile in getAdjacentTiles(r: r, c: c) {
             if tile.isNumber() {
                 if tiles[tile.r][tile.c].state != .Uncovered {
@@ -351,7 +364,7 @@ class Board {
             }
         }
     }
-    
+
     /// Sets the state of the specified tile. Updates the number of revealed tiles if necessary
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -363,19 +376,19 @@ class Board {
             revealedTiles += 1
         }
     }
-    
+
     /// Returns the tile at a specified position, if it exists
     /// - Parameters:
     ///   - r: The row of the target tile
     ///   - c: The column of the target tile
     /// - Returns: The specified tile if it exists, or nil otherwise
     func tileAt(r: Int, c: Int) -> Tile? {
-        if r < 0 || r > rows-1 || c < 0 || c > cols-1 {
+        if r < 0 || r > rows - 1 || c < 0 || c > cols - 1 {
             return nil
         }
         return tiles[r][c]
     }
-    
+
     /// Uncovers all mines and marks incorrectly flagged mines. Called when a player loses a game
     func lostGame() {
         for r in 0..<rows {
@@ -390,7 +403,7 @@ class Board {
             }
         }
     }
-    
+
     /// Re-initializes the board
     /// - Parameter restart: Whether to replay the current board
     func reset(restart: Bool = false) {
@@ -398,20 +411,20 @@ class Board {
         loadedBoard = false
         initBoard(restart: restart)
     }
-    
+
     /// Flags all mines that are not already flagged. Called when a player wins a games
     func flagMines() {
         for r in 0..<rows {
             for c in 0..<cols {
                 let tile = tiles[r][c]
-                
+
                 if tile.value == .Mine && tile.state != .Flagged {
                     tile.setState(state: .Flagged)
                 }
             }
         }
     }
-    
+
     /// Creates a new blank space from a tile with a mine on it. Called when the "Guarantee safe first click" setting is enabled
     /// - Parameters:
     ///   - row: The row of the target tile
@@ -422,18 +435,18 @@ class Board {
             return
         }
         tiles[row][col].setValue(val: .Empty)
-        
-        var new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
+
+        var new = tiles[Int.random(in: 0..<rows - 1)][Int.random(in: 0..<cols - 1)]
         while new.value != .Empty || avoid.contains(new) {
-            new = tiles[Int.random(in: 0..<rows-1)][Int.random(in: 0..<cols-1)]
+            new = tiles[Int.random(in: 0..<rows - 1)][Int.random(in: 0..<cols - 1)]
         }
-        
+
         new.setValue(val: .Mine)
-        
+
         minesLayout.removeAll(where: { $0 == (row, col) })
         minesLayout.append((new.r, new.c))
     }
-    
+
     func initThemePreview() {
         let _ = revealAt(r: 2, c: 2, isChord: false)
         tiles[2][0].setState(state: .Question)
@@ -444,7 +457,7 @@ class Board {
 }
 
 extension Board {
-    
+
     /// Helper method for calculating 3BV
     /// - Parameters:
     ///   - marked: The list of already-marked tiles
@@ -457,7 +470,7 @@ extension Board {
 
         marked[r][c] = true
 
-        if tiles[r][c].value != .Empty  {
+        if tiles[r][c].value != .Empty {
             return
         }
 
@@ -466,7 +479,7 @@ extension Board {
             floodFill(marked: &marked, r: r + dr, c: c + dc)
         }
     }
-    
+
     /// Calculates the 3BV of the current board
     /// - Returns: The total 3BV value
     private func calculate3BV() -> Int {

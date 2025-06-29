@@ -13,11 +13,11 @@ class CustomGameViewController: NSViewController {
     @IBOutlet weak var heightTextField: NSTextField!
     @IBOutlet weak var minesTextField: NSTextField!
     @IBOutlet weak var difficultyLabel: NSTextField!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     @IBAction func randomButtonPressed(_ sender: Any) {
         // TODO: Add dynamic maximums based on screen size
         widthTextField.integerValue = .random(in: 1..<75)
@@ -25,11 +25,11 @@ class CustomGameViewController: NSViewController {
         minesTextField.integerValue = .random(in: 1..<50)
         updateDifficulty()
     }
-    
+
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(self)
     }
-    
+
     @IBAction func generateButtonPressed(_ sender: Any) {
         if widthTextField.integerValue <= 0 {
             shake(textField: widthTextField)
@@ -39,15 +39,21 @@ class CustomGameViewController: NSViewController {
             shake(textField: heightTextField)
             return
         }
-        if minesTextField.integerValue <= 0 || widthTextField.integerValue * heightTextField.integerValue < minesTextField.integerValue {
+        if minesTextField.integerValue <= 0
+            || widthTextField.integerValue * heightTextField.integerValue < minesTextField.integerValue
+        {
             shake(textField: minesTextField)
             return
         }
-        
+
         self.dismiss(self)
-        NotificationCenter.default.post(name: .newCustomGame, object: [widthTextField.integerValue, heightTextField.integerValue, minesTextField.integerValue], userInfo: nil)
+        NotificationCenter.default.post(
+            name: .newCustomGame,
+            object: [
+                widthTextField.integerValue, heightTextField.integerValue, minesTextField.integerValue,
+            ], userInfo: nil)
     }
-    
+
     private func shake(textField: NSTextField) {
         let midX = textField.layer?.position.x ?? 0
         let midY = textField.layer?.position.y ?? 0
@@ -60,27 +66,28 @@ class CustomGameViewController: NSViewController {
         animation.toValue = CGPoint(x: midX + 10, y: midY)
         textField.layer?.add(animation, forKey: "position")
     }
-    
+
     private func updateDifficulty() {
-        if !widthTextField.stringValue.isEmpty && !heightTextField.stringValue.isEmpty && !minesTextField.stringValue.isEmpty {
-            
+        if !widthTextField.stringValue.isEmpty && !heightTextField.stringValue.isEmpty
+            && !minesTextField.stringValue.isEmpty
+        {
+
             let ratio: Int
             if minesTextField.integerValue == 0 {
-                ratio = 100 // little bit hacky
+                ratio = 100  // little bit hacky
             } else {
-                ratio = widthTextField.integerValue * heightTextField.integerValue / minesTextField.integerValue
+                ratio =
+                    widthTextField.integerValue * heightTextField.integerValue
+                    / minesTextField.integerValue
             }
-            
+
             if ratio <= 1 {
                 difficultyLabel.stringValue = "Difficulty: Impossible"
-            }
-            else if ratio < 5 {
+            } else if ratio < 5 {
                 difficultyLabel.stringValue = "Difficulty: Hard"
-            }
-            else if ratio < 8 {
+            } else if ratio < 8 {
                 difficultyLabel.stringValue = "Difficulty: Intermediate"
-            }
-            else {
+            } else {
                 difficultyLabel.stringValue = "Difficulty: Easy"
             }
         }
@@ -88,7 +95,7 @@ class CustomGameViewController: NSViewController {
 }
 
 extension CustomGameViewController: NSTextFieldDelegate {
-    
+
     func controlTextDidChange(_ obj: Notification) {
         updateDifficulty()
     }

@@ -10,11 +10,11 @@ import Foundation
 struct Stats {
     var bbbV: Int
     var bbbVs: Float
-    
+
     var leftClicks: Int
     var rightClicks: Int
     var middleClicks: Int
-    
+
     // TODO: Add back in at some point, maybe in a customizable settings menu
     var ios: Float
     var rqp: Float

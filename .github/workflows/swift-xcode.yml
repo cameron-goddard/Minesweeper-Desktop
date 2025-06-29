@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     name: Build and analyse default scheme using xcodebuild command
+    strategy:
+      matrix:
+        include:
+          - xcode: "16.0"
+            deployment_target: ""
     runs-on: macos-latest
 
     steps:

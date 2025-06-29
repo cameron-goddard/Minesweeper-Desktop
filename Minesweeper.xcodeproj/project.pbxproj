@@ -520,8 +520,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = 9.0.2;
 			};
 		};
 		3BF1D9AE2BC0E5A70005200A /* XCRemoteSwiftPackageReference "swift-collections" */ = {

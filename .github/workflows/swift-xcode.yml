@@ -1,4 +1,4 @@
-name: Build and Analyze
+name: Build
 
 on:
   push:
@@ -18,32 +18,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: List installed Xcodes
-        run: ls -1 /Applications | grep Xcode
-
-      - name: Build and Analyze
+      - name: Build
+        run: xcodebuild clean build analyze -project Minesweeper.xcodeproj -scheme Minesweeper -configuration Release
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
-        run: |
-          echo "Using Xcode version: ${{ matrix.xcode }}"
-          
-          # Detect scheme
-          scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo "Detected default scheme: $default"
-          
-          # Detect project/workspace
-          if ls *.xcworkspace >/dev/null 2>&1; then
-            filetype_parameter="workspace"
-            file_to_build="$(ls *.xcworkspace)"
-          else
-            filetype_parameter="project"
-            file_to_build="$(ls *.xcodeproj)"
-          fi
-          
-          echo "Building $file_to_build with scheme $default"
-          
-          # Build and analyze
-          xcodebuild clean build analyze \
-            -scheme "$default" \
-            -"$filetype_parameter" "$file_to_build" | xcpretty
+        

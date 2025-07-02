@@ -8,7 +8,6 @@
 import Cocoa
 import Defaults
 import Sparkle
-import SpriteKit
 import UniformTypeIdentifiers
 
 @main
@@ -16,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var checkForUpdatesItem: NSMenuItem!
     let updaterController: SPUStandardUpdaterController
-    let controller: ViewController = ViewController()
 
     override init() {
         updaterController = SPUStandardUpdaterController(
@@ -240,7 +238,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let alert = NSAlert()
         alert.messageText = "Invalid Board File"
         alert.informativeText = "The selected file is not a valid Minesweeper board."
-        alert.alertStyle = .warning
         alert.runModal()
     }
 }

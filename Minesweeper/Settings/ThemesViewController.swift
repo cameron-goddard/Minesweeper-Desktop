@@ -49,7 +49,7 @@ class ThemesViewController: NSViewController {
         self.view.window?.title = "Themes"
     }
 
-    func showThemeInfo() {
+    private func showThemeInfo() {
         let theme = themes[tableView.selectedRow]
 
         themeName.stringValue = theme.name

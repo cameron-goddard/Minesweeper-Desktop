@@ -34,12 +34,13 @@ class ThemeCellView: NSTableCellView {
         }
     }
 
-    func setUpTrackingArea() {
+    private func setUpTrackingArea() {
         let trackingArea = NSTrackingArea(
             rect: self.frame,
-            options: [
-                NSTrackingArea.Options.mouseEnteredAndExited, NSTrackingArea.Options.activeAlways,
-            ], owner: self, userInfo: nil)
+            options: [.mouseEnteredAndExited, .activeAlways],
+            owner: self,
+            userInfo: nil
+        )
         self.addTrackingArea(trackingArea)
     }
 

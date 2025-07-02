@@ -32,7 +32,7 @@ class StatsViewController: NSViewController {
         super.viewDidLoad()
 
         view.wantsLayer = true
-        //TODO: Change to default value
+        // TODO: Change to default value
         view.layer?.backgroundColor = NSColor(red: 226, green: 226, blue: 226, alpha: 1).cgColor
 
         NotificationCenter.default.addObserver(
@@ -147,7 +147,7 @@ extension StatsViewController: NSTableViewDataSource {
         if tableColumn == tableView.tableColumns[0] {
             guard
                 let statsLabelCell = tableView.makeView(
-                    withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsLabelCell"),
+                    withIdentifier: .init(rawValue: "statsLabelCell"),
                     owner: self) as? NSTableCellView
             else { return nil }
             statsLabelCell.textField!.stringValue = stats.elements[row].key
@@ -155,7 +155,7 @@ extension StatsViewController: NSTableViewDataSource {
         } else {
             guard
                 let statsValueCell = tableView.makeView(
-                    withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "statsValueCell"),
+                    withIdentifier: .init(rawValue: "statsValueCell"),
                     owner: self) as? NSTableCellView
             else { return nil }
 

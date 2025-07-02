@@ -25,7 +25,7 @@ class GameTimer: NumberDisplay {
     func start() {
         startTime = Date()
         gameTimer = Timer.scheduledTimer(
-            timeInterval: 0.01, target: self, selector: #selector(fireTimer), userInfo: nil,
+            timeInterval: 0.01, target: self, selector: #selector(fire), userInfo: nil,
             repeats: true)
         RunLoop.current.add(gameTimer, forMode: .common)
         self.set(value: 0)
@@ -37,12 +37,12 @@ class GameTimer: NumberDisplay {
 
     func reset() {
         gameTimer.invalidate()
-        self.set(value: 0)
 
+        self.set(value: 0)
         delegate?.updateTime(0)
     }
 
-    @objc func fireTimer() {
+    @objc func fire() {
         guard let startTime = self.startTime else { return }
         elapsedTime = Date().timeIntervalSince(startTime)
         self.set(value: Int(elapsedTime))

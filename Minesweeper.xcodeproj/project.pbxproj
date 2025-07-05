@@ -28,7 +28,6 @@
 		3B88CEA42800EEA8008C84E2 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA32800EEA8008C84E2 /* GameTimer.swift */; };
 		3B88CEA628023695008C84E2 /* MineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B88CEA528023695008C84E2 /* MineCounter.swift */; };
 		3B9DF10928971939007CADA6 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3B9DF10828971939007CADA6 /* Sparkle */; };
-		3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */; };
 		3B9DF118289DBF0C007CADA6 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */; };
 		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
 		3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3BD95C772B8D99AA00D9BC3B /* Credits.rtf */; };
@@ -63,7 +62,6 @@
 		3B6AB6A42C03FA4000297AA8 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		3B88CEA32800EEA8008C84E2 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 		3B88CEA528023695008C84E2 /* MineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineCounter.swift; sourceTree = "<group>"; };
-		3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameViewController.swift; sourceTree = "<group>"; };
 		3B9DF117289DBF0C007CADA6 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BD95C772B8D99AA00D9BC3B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 				3B5AB53B27F96F710059BB0A /* AppDelegate.swift */,
 				3BF1A7CD2866AAD600566000 /* WindowController.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
-				3B9DF10A2898D6AE007CADA6 /* CustomGameViewController.swift */,
 				3B402A122E15B1D600EB9ACE /* CustomGameView.swift */,
 				3B5B08242E0A352D0067FAE5 /* Game */,
 				3B9DF114289DBBE1007CADA6 /* Number Displays */,
@@ -274,7 +271,6 @@
 				3B5B08282E0B18010067FAE5 /* ThemeManager.swift in Sources */,
 				3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */,
 				3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */,
-				3B9DF10B2898D6AE007CADA6 /* CustomGameViewController.swift in Sources */,
 				3B5B1CB12E0729A600A84348 /* Borders.swift in Sources */,
 				3B88CEA42800EEA8008C84E2 /* GameTimer.swift in Sources */,
 				3B48305A2842C76F0060FCFD /* NumberDisplay.swift in Sources */,
@@ -438,7 +434,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -471,7 +467,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";

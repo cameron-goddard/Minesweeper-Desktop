@@ -9,12 +9,15 @@ import Cocoa
 import Defaults
 import Sparkle
 import UniformTypeIdentifiers
+import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var checkForUpdatesItem: NSMenuItem!
     let updaterController: SPUStandardUpdaterController
+    
+    private var customGameHostingController: NSHostingController<CustomGameView>?
 
     override init() {
         updaterController = SPUStandardUpdaterController(
@@ -95,11 +98,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func customGame(_ sender: NSMenuItem) {
+        
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
-                let storyboard = NSStoryboard(name: "Main", bundle: nil)
-                let custom = storyboard.instantiateController(withIdentifier: "customGameViewController")
-                window.contentViewController?.presentAsSheet(custom as! CustomGameViewController)
+                
+                let customGameView = CustomGameView(onDismiss: {
+                    self.customGameHostingController?.presentingViewController?.dismiss(self.customGameHostingController!)
+                    self.customGameHostingController = nil
+                })
+                let hostingController = NSHostingController(rootView: customGameView)
+                customGameHostingController = hostingController
+                
+                window.contentViewController?.presentAsSheet(hostingController)
             }
         }
     }

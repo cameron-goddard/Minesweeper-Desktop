@@ -17,7 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var checkForUpdatesItem: NSMenuItem!
     let updaterController: SPUStandardUpdaterController
     
-    private var customGameHostingController: NSHostingController<CustomGameView>?
+    
+    private lazy var hostingController: NSHostingController<CustomGameView> = {
+        let customGameView = CustomGameView(onDismiss: { [weak self] in
+            guard let self else { return }
+            self.hostingController.presentingViewController?.dismiss(self.hostingController)
+        })
+        return NSHostingController(rootView: customGameView)
+    }()
 
     override init() {
         updaterController = SPUStandardUpdaterController(
@@ -101,14 +108,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
-                
-                let customGameView = CustomGameView(onDismiss: {
-                    self.customGameHostingController?.presentingViewController?.dismiss(self.customGameHostingController!)
-                    self.customGameHostingController = nil
-                })
-                let hostingController = NSHostingController(rootView: customGameView)
-                customGameHostingController = hostingController
-                
                 window.contentViewController?.presentAsSheet(hostingController)
             }
         }

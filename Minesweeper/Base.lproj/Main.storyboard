@@ -103,6 +103,9 @@
                                         <menuItem isSeparatorItem="YES" id="xY9-uv-FvY"/>
                                         <menuItem title="Best Times..." id="0fi-BC-OMd">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="6f0-Zj-ETh" kind="show" id="5Aj-KS-Vc0"/>
+                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -492,6 +495,73 @@
                 <customObject id="NDO-56-dHO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1634" y="-193"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="byd-Ds-ro9">
+            <objects>
+                <windowController id="6f0-Zj-ETh" sceneMemberID="viewController">
+                    <window key="window" title="Fastest Mine Sweepers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="62C-gc-TJm">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="211" y="351" width="300" height="200"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
+                        <view key="contentView" id="c1a-wZ-sZR">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="6f0-Zj-ETh" id="rt1-tW-H6R"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="yzq-Sp-D8a" kind="relationship" relationship="window.shadowedContentViewController" id="IwB-78-xxe"/>
+                    </connections>
+                </windowController>
+                <customObject id="Uhs-fm-cXG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="758" y="-130"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="HxN-li-buv">
+            <objects>
+                <viewController id="yzq-Sp-D8a" sceneMemberID="viewController">
+                    <view key="view" id="4bW-kj-Gia">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETX-HD-pH4">
+                                <rect key="frame" x="18" y="92" width="73" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Beginner:" id="AOg-C4-gLo">
+                                    <font key="font" metaFont="systemSemibold" size="15"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3gv-j3-9XG">
+                                <rect key="frame" x="18" y="56" width="101" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Intermediate:" id="8Yu-aT-fl1">
+                                    <font key="font" metaFont="systemSemibold" size="15"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A7w-pD-efS">
+                                <rect key="frame" x="18" y="20" width="56" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Expert:" id="Z8V-L5-DMY">
+                                    <font key="font" metaFont="systemSemibold" size="15"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="vqd-Rc-M3n" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158" y="-166"/>
         </scene>
         <!--Themes-->
         <scene sceneID="mhV-eq-9bE">

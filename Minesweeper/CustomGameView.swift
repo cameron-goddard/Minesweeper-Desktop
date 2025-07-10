@@ -15,9 +15,17 @@ struct CustomGameView: View {
     @State private var columns: String = ""
     @State private var mines: Double = 0
     
+    @State private var rowsError: Bool = false
+    @State private var colsError: Bool = false
+    
     var maxMines: Double {
-        let r = Int(rows) ?? 0
-        let c = Int(columns) ?? 0
+        guard let r = Int(rows), let c = Int(columns) else {
+            return 0
+        }
+        
+        guard r > 0, c > 0 else {
+            return 0
+        }
         return Double(r * c)
     }
     
@@ -47,8 +55,24 @@ struct CustomGameView: View {
         VStack {
             Form {
                 Section {
-                    TextField("Rows", text: $rows, prompt: Text("Rows"))
-                    TextField("Columns", text: $columns, prompt: Text("Columns"))
+                    VStack(alignment: .leading) {
+                        TextField("Rows", text: $rows, prompt: Text("Rows"))
+                        if rowsError {
+                            Text("Invalid number of rows")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                        }
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        TextField("Columns", text: $columns, prompt: Text("Columns"))
+                        if colsError {
+                            Text("Invalid number of columns")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                        }
+                    }
+                    
                     Slider(value: $mines, in: 0...maxMines) {
                         Text("\(Int(mines)) Mines")
                     }
@@ -78,6 +102,13 @@ struct CustomGameView: View {
                     self.onDismiss?()
                 }
                 Button("Generate") {
+                    if rows == "" || columns == "" {
+                        return
+                    }
+                    if rowsError || colsError {
+                        return
+                    }
+                    
                     NotificationCenter.default.post(
                         name: .newCustomGame,
                         object: [
@@ -91,8 +122,22 @@ struct CustomGameView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
             .padding(.top, 12)
-            
+            .onChange(of: rows, perform: { input in
+                if let val = Int(input), val > 0 {
+                    rowsError = false
+                } else {
+                    rowsError = true
+                }
+            })
+            .onChange(of: columns, perform: { input in
+                if let val = Int(input), val > 0 {
+                    colsError = false
+                } else {
+                    colsError = true
+                }
+            })
         }
-        .frame(width: 350, height: 265)
+        .frame(width: 350)
+        .fixedSize(horizontal: false, vertical: true)
     }
 }

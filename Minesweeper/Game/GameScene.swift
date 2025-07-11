@@ -57,6 +57,13 @@ class GameScene: SKScene {
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.restartGame(_:)), name: .restartGame, object: nil)
     }
+    
+    /// Called when the scene is presented by a view
+    /// - Parameter view: The view that is presenting this scene
+    override func didMove(to view: SKView) {
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        addNodes()
+    }
 
     /// Creates the game board, number displays, and borders with the current theme. Adds all to this game scene
     func addNodes() {
@@ -102,13 +109,6 @@ class GameScene: SKScene {
         mineCounter.updateScale(sceneSize: size, scale: scale)
     }
 
-    /// Called when the scene is presented by a view
-    /// - Parameter view: The view that is presenting this scene
-    override func didMove(to view: SKView) {
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        addNodes()
-    }
-
     /// Handle game ending logic for the board, main button, and stats
     /// - Parameter won: Whether the player won the game
     func finishGame(won: Bool) {
@@ -134,19 +134,20 @@ class GameScene: SKScene {
 
         board.reset(restart: restart)
         gameTimer.reset()
-        mineCounter.reset(mines: self.mines)
+        mineCounter.reset(mines: mines)
     }
 
     /// Called when the previous board should be replayed
-    /// - Parameter notification: The notification triggering this callback
-    @objc func restartGame(_ notification: Notification) {
+    @objc func restartGame(_: Notification) {
         newGame(restart: true)
     }
 
+    /// Required method
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
 
+    /// Required method
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

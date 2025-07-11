@@ -13,7 +13,10 @@ import SpriteKit
 class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
+    
     var difficulty = Defaults[.Game.difficulty]
+    let scale = Defaults[.General.scale]
+    
     var minesLayout: [(Int, Int)]?
     var rows, cols, mines: Int!
 
@@ -28,12 +31,12 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(
-            self, selector: #selector(self.setSubtitle(notification:)), name: .setSubtitle, object: nil)
+            self, selector: #selector(self.setSubtitle(_:)), name: .setSubtitle, object: nil)
         NotificationCenter.default.addObserver(
-            self, selector: #selector(self.setScale(notification:)), name: .setScale, object: nil)
+            self, selector: #selector(self.setScale(_:)), name: .setScale, object: nil)
 
         if let view = self.skView {
-            let scale = Defaults[.General.scale]
+            ThemeManager.shared.setCurrent(with: Defaults[.Themes.theme])
 
             if difficulty == "Custom" || difficulty == "Loaded Custom" {
                 rows = Defaults[.Game.customDifficulty][0]
@@ -49,7 +52,6 @@ class ViewController: NSViewController {
             view.setFrameSize(
                 NSSize(width: scale * CGFloat(24 + cols * 16), height: scale * CGFloat(67 + rows * 16)))
 
-            ThemeManager.shared.setCurrent(with: Defaults[.Themes.theme])
             let scene = GameScene(
                 size: self.skView.frame.size, scale: scale, rows: rows, cols: cols, mines: mines,
                 minesLayout: minesLayout)
@@ -66,7 +68,7 @@ class ViewController: NSViewController {
         }
     }
 
-    @objc func setSubtitle(notification: Notification) {
+    @objc func setSubtitle(_: Notification) {
         if Defaults[.General.toolbarDifficulty] {
             view.window!.subtitle = difficulty
         } else {
@@ -74,7 +76,7 @@ class ViewController: NSViewController {
         }
     }
 
-    @objc func setScale(notification: Notification) {
+    @objc func setScale(_: Notification) {
         let scale = Defaults[.General.scale]
 
         let newSize = NSSize(

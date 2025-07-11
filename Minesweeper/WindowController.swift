@@ -22,8 +22,7 @@ class WindowController: NSWindowController {
     }()
 
     private var statsWC: NSWindowController = {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateController(withIdentifier: "Stats") as! NSWindowController
+        NSStoryboard.main.instantiateController(withIdentifier: "Stats") as! NSWindowController
     }()
 
     var viewController: ViewController {
@@ -53,7 +52,7 @@ class WindowController: NSWindowController {
         super.windowDidLoad()
 
         NotificationCenter.default.addObserver(
-            self, selector: #selector(self.updateFavorites(notification:)), name: .updateFavorites,
+            self, selector: #selector(self.updateFavorites(_:)), name: .updateFavorites,
             object: nil)
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.setTheme(notification:)), name: .setTheme, object: nil)
@@ -85,23 +84,18 @@ class WindowController: NSWindowController {
             if ThemeManager.shared.current.name == "Classic" {
                 ThemeManager.shared.setCurrent(with: "Classic Dark")
                 Defaults[.Themes.theme] = "Classic Dark"
-
-                if let gameScene = viewController.getScene() {
-                    gameScene.updateTextures()
-                }
-                updateThemesMenu()
             }
         } else {
             if ThemeManager.shared.current.name == "Classic Dark" {
                 ThemeManager.shared.setCurrent(with: "Classic")
                 Defaults[.Themes.theme] = "Classic"
-
-                if let gameScene = viewController.getScene() {
-                    gameScene.updateTextures()
-                }
-                updateThemesMenu()
             }
         }
+        
+        if let gameScene = viewController.getScene() {
+            gameScene.updateTextures()
+        }
+        updateThemesMenu()
     }
 
     @objc func showStatsWindow() {
@@ -143,7 +137,7 @@ class WindowController: NSWindowController {
         updateThemesMenu()
     }
 
-    @objc func updateFavorites(notification: Notification) {
+    @objc func updateFavorites(_: Notification) {
         updateThemesMenu()
     }
 

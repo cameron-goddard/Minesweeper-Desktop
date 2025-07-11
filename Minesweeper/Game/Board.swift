@@ -446,8 +446,26 @@ class Board {
         minesLayout.removeAll(where: { $0 == (row, col) })
         minesLayout.append((new.r, new.c))
     }
+    
+    func serialize() -> Data {
+        var data = Data()
 
-    func initThemePreview() {
+        data.append(UInt8(cols))
+        data.append(UInt8(rows))
+
+        let mines = UInt16(mines)
+        data.append(UInt8((mines >> 8) & 0xFF))
+        data.append(UInt8(mines & 0xFF))
+
+        for (r, c) in minesLayout {
+            data.append(UInt8(c))
+            data.append(UInt8(r))
+        }
+        
+        return data
+    }
+    
+    private func initThemePreview() {
         let _ = revealAt(r: 2, c: 2, isChord: false)
         tiles[2][0].setState(state: .Question)
         tiles[1][5].setState(state: .Flagged)

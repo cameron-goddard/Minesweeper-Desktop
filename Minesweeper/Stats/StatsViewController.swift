@@ -87,7 +87,7 @@ class StatsViewController: NSViewController {
         tableView.reloadData()
     }
 
-    @objc func revealStats(_ notification: Notification) {
+    @objc func revealStats(_: Notification) {
         revealStats = true
 
         // Calculate time-based stats
@@ -103,7 +103,7 @@ class StatsViewController: NSViewController {
         tableView.reloadData()
     }
 
-    @objc func resetStats(_ notification: Notification) {
+    @objc func resetStats(_: Notification) {
         totalClicks = 0
         effectiveClicks = 0
 

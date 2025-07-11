@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var checkForUpdatesItem: NSMenuItem!
     let updaterController: SPUStandardUpdaterController
     
-    
     private lazy var hostingController: NSHostingController<CustomGameView> = {
         let customGameView = CustomGameView(onDismiss: { [weak self] in
             guard let self else { return }
@@ -84,8 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func newGame(_ sender: NSMenuItem) {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+        let controller = NSStoryboard.main.instantiateController(withIdentifier: "Main") as! ViewController
 
         if sender.title != "New Game" {
             controller.difficulty = sender.title
@@ -105,7 +103,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func customGame(_ sender: NSMenuItem) {
-        
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
                 window.contentViewController?.presentAsSheet(hostingController)
@@ -119,16 +116,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let oldScene = oldController.getScene()
         else { return }
 
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateController(withIdentifier: "Main") as! ViewController
+        let controller = NSStoryboard.main.instantiateController(withIdentifier: "Main") as! ViewController
 
         oldScene.gameTimer.reset()
 
         controller.difficulty = "Custom"
         Defaults[.Game.difficulty] = "Custom"
 
-        Defaults[.Game.customDifficulty][0] = (notification.object as! [Int])[1]
-        Defaults[.Game.customDifficulty][1] = (notification.object as! [Int])[0]
+        Defaults[.Game.customDifficulty][0] = (notification.object as! [Int])[0]
+        Defaults[.Game.customDifficulty][1] = (notification.object as! [Int])[1]
         Defaults[.Game.customDifficulty][2] = (notification.object as! [Int])[2]
 
         window.contentViewController = controller
@@ -147,36 +143,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         savePanel.beginSheetModal(
             for: window,
             completionHandler: { num in
-                if num == .OK, let path = savePanel.url {
-                    var data = Data()
-
-                    data.append(UInt8(board.cols))
-                    data.append(UInt8(board.rows))
-
-                    let mines = UInt16(board.mines)
-
-                    data.append(UInt8((mines >> 8) & 0xFF))
-                    data.append(UInt8(mines & 0xFF))
-
-                    for (r, c) in board.minesLayout {
-                        data.append(UInt8(c))
-                        data.append(UInt8(r))
-                    }
-
+                if num == .OK, let url = savePanel.url {
                     do {
-                        try data.write(to: path)
+                        try board.serialize().write(to: url)
                     } catch {
-
+                        let alert = NSAlert()
+                        alert.messageText = "Board Save Error"
+                        alert.informativeText = "Could not write the board to a file."
+                        alert.runModal()
                     }
                 }
             })
     }
 
     @IBAction func openBoard(_ sender: NSMenuItem) {
-        guard let window = NSApplication.shared.mainWindow,
-            let oldController = window.contentViewController as? ViewController,
-            let oldScene = oldController.getScene()
-        else { return }
+        guard let window = NSApplication.shared.mainWindow else { return }
 
         let openPanel = NSOpenPanel()
         openPanel.allowedContentTypes = [.mbf]
@@ -184,73 +165,79 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         openPanel.beginSheetModal(
             for: window,
             completionHandler: { num in
-                if num == .OK, let path = openPanel.url {
-                    do {
-                        let file = try Data(contentsOf: path)
-                        if file.count < 4 {
-                            self.showInvalidBoardAlert()
-                            return
-                        }
-
-                        let rows = Int(file[1])
-                        let cols = Int(file[0])
-                        if rows == 0 || cols == 0 {
-                            self.showInvalidBoardAlert()
-                            return
-                        }
-
-                        let mines = Int(file[3]) | Int(file[2]) << 8
-                        if mines > rows * cols {
-                            self.showInvalidBoardAlert()
-                            return
-                        }
-
-                        var minesLayout: [(Int, Int)] = []
-                        let minesData = file[4...]
-                        if minesData.count != mines * 2 {
-                            self.showInvalidBoardAlert()
-                            return
-                        }
-
-                        for i in stride(from: minesData.startIndex, to: minesData.endIndex, by: 2) {
-                            if i + 1 < minesData.endIndex {
-                                minesLayout.append((Int(minesData[i + 1]), Int(minesData[i])))
-                            }
-                        }
-
-                        oldScene.gameTimer.reset()
-
-                        Defaults[.Game.customDifficulty][0] = rows
-                        Defaults[.Game.customDifficulty][1] = cols
-                        Defaults[.Game.customDifficulty][2] = mines
-
-                        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-                        let controller =
-                            storyboard.instantiateController(withIdentifier: "Main") as! ViewController
-
-                        controller.difficulty = "Loaded Custom"
-                        controller.minesLayout = minesLayout
-
-                        window.contentViewController = controller
-                    } catch {
-                        self.showInvalidBoardAlert()
-                    }
+                if num == .OK, let url = openPanel.url {
+                    self.openFromURL(url)
                 }
             })
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
-        // TODO
+        openFromURL(urls[0])
     }
 
-    private func showInvalidBoardAlert() {
-        let alert = NSAlert()
-        alert.messageText = "Invalid Board File"
-        alert.informativeText = "The selected file is not a valid Minesweeper board."
-        alert.runModal()
+    private func openFromURL(_ url: URL) {
+        guard let window = NSApplication.shared.mainWindow,
+            let oldController = window.contentViewController as? ViewController,
+            let oldScene = oldController.getScene()
+        else { return }
+        
+        do {
+            let file = try Data(contentsOf: url)
+            if file.count < 4 {
+                throw NSError.invalidBoardError()
+            }
+
+            let rows = Int(file[1])
+            let cols = Int(file[0])
+            if rows == 0 || cols == 0 {
+                throw NSError.invalidBoardError()
+            }
+
+            let mines = Int(file[3]) | Int(file[2]) << 8
+            if mines > rows * cols {
+                throw NSError.invalidBoardError()
+            }
+
+            let minesData = file[4...]
+            if minesData.count != mines * 2 {
+                throw NSError.invalidBoardError()
+            }
+
+            var minesLayout: [(Int, Int)] = []
+            for i in stride(from: minesData.startIndex, to: minesData.endIndex, by: 2) {
+                if i + 1 < minesData.endIndex {
+                    minesLayout.append((Int(minesData[i + 1]), Int(minesData[i])))
+                }
+            }
+            
+            Defaults[.Game.customDifficulty][0] = rows
+            Defaults[.Game.customDifficulty][1] = cols
+            Defaults[.Game.customDifficulty][2] = mines
+            
+            oldScene.gameTimer.reset()
+
+            let controller =
+        NSStoryboard.main.instantiateController(withIdentifier: "Main") as! ViewController
+
+            controller.difficulty = "Loaded Custom"
+            controller.minesLayout = minesLayout
+
+            window.contentViewController = controller
+        } catch {
+            let alert = NSAlert()
+            alert.messageText = "Invalid Board File"
+            alert.informativeText = error.localizedDescription
+            alert.runModal()
+        }
     }
 }
 
 extension UTType {
     public static let mbf = UTType(exportedAs: "com.camerongoddard.Minesweeper.mbf")
+}
+
+extension NSStoryboard {
+    static var main: NSStoryboard {
+        return NSStoryboard(name: "Main", bundle: nil)
+    }
 }

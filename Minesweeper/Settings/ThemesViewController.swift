@@ -158,7 +158,7 @@ extension ThemesViewController: NSTableViewDataSource {
 }
 
 extension ThemesViewController: NSTableViewDelegate {
-    func tableViewSelectionDidChange(_ notification: Notification) {
+    func tableViewSelectionDidChange(_: Notification) {
         showThemeInfo()
     }
 }

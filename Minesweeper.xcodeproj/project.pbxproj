@@ -123,7 +123,6 @@
 				3B402A122E15B1D600EB9ACE /* CustomGameView.swift */,
 				3B4E3F102E221293006CD97C /* BestTimesViewController.swift */,
 				3B5B08242E0A352D0067FAE5 /* Game */,
-				3B9DF114289DBBE1007CADA6 /* Number Displays */,
 				3B1BDB04286BBDD000A36569 /* Stats */,
 				3BF1A78B285ED79900566000 /* Settings */,
 				3B5B082B2E0B21E00067FAE5 /* Themes */,
@@ -147,6 +146,7 @@
 				3B5B1CB02E0729A600A84348 /* Borders.swift */,
 				3B5B08252E0A362F0067FAE5 /* MainButton.swift */,
 				3B5AB55427F974AE0059BB0A /* Tile.swift */,
+				3B9DF114289DBBE1007CADA6 /* Number Displays */,
 			);
 			path = Game;
 			sourceTree = "<group>";

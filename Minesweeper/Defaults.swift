@@ -39,8 +39,10 @@ extension Defaults.Keys {
     }
     
     enum BestTimes {
-        static let beginner = Key<[Double]>("beginnerBestTimes", default: [-1, -1, -1])
-        static let intermediate = Key<[Double]>("intermediateBestTimes", default: [-1, -1, -1])
-        static let hard = Key<[Double]>("hardBestTimes", default: [-1, -1, -1])
+//        static let beginner = Key<[Double]>("beginnerBestTimes", default: [-1, -1, -1])
+//        static let intermediate = Key<[Double]>("intermediateBestTimes", default: [-1, -1, -1])
+//        static let hard = Key<[Double]>("hardBestTimes", default: [-1, -1, -1])
+        
+        static let bestTimes = Key<[Double]>("bestTimes", default: [99, -1, -1, -1, -1, -1, -1, -1, -1])
     }
 }

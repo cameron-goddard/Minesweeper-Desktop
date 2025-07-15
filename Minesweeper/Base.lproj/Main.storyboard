@@ -516,7 +516,7 @@
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJC-Vy-uBw">
                                 <rect key="frame" x="48" y="143" width="64" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="1234.55 s" id="5RN-z4-WFq">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="5RN-z4-WFq">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -561,7 +561,7 @@
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="57h-QN-XIU">
                                 <rect key="frame" x="168" y="143" width="64" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="1234.55 s" id="1Rh-cG-6LC">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="1Rh-cG-6LC">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -606,7 +606,7 @@
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H2z-vH-Pgh">
                                 <rect key="frame" x="288" y="144" width="64" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="1234.55 s" id="0wn-m6-Xga">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="0wn-m6-Xga">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -720,7 +720,7 @@ DQ
                 </viewController>
                 <customObject id="vbG-vj-JYG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879" y="-164"/>
+            <point key="canvasLocation" x="879" y="-164.5"/>
         </scene>
         <!--Themes-->
         <scene sceneID="mhV-eq-9bE">

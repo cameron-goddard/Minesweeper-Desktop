@@ -118,12 +118,41 @@ class GameScene: SKScene {
             gameState = .Won
             board.flagMines()
             mainButton.set(state: .Cool)
+            
+            updateBestTimes()
         } else {
             gameState = .Lost
             board.lostGame()
             mainButton.set(state: .Dead)
         }
         gameTimer.stop()
+    }
+    
+    private func updateBestTimes() {
+        let offset: Int
+        switch Defaults[.Game.difficulty] {
+        case "Beginner":
+            offset = 0
+        case "Intermediate":
+            offset = 2
+        case "Hard":
+            offset = 5
+        default:
+            return
+        }
+        
+        if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset] || Defaults[.BestTimes.bestTimes][offset] == -1 {
+            Defaults[.BestTimes.bestTimes][offset + 2] = Defaults[.BestTimes.bestTimes][offset + 1]
+            Defaults[.BestTimes.bestTimes][offset + 1] = Defaults[.BestTimes.bestTimes][offset]
+            Defaults[.BestTimes.bestTimes][offset] = gameTimer.elapsedTime
+        }
+        else if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset + 1] || Defaults[.BestTimes.bestTimes][offset + 1] == -1 {
+            Defaults[.BestTimes.bestTimes][offset + 2] = Defaults[.BestTimes.bestTimes][offset + 1]
+            Defaults[.BestTimes.bestTimes][offset + 1] = gameTimer.elapsedTime
+        }
+        else if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset + 2] || Defaults[.BestTimes.bestTimes][offset + 2] == -1 {
+            Defaults[.BestTimes.bestTimes][offset + 2] = gameTimer.elapsedTime
+        }
     }
 
     /// Handles game reset logic for the board, stats, and number displays

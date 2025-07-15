@@ -109,6 +109,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+    
+    @IBAction func showBestTimes(_ sender: NSMenuItem) {
+        if let window = NSApplication.shared.mainWindow {
+            if window.identifier?.rawValue == "Main" {
+                let bestTimes = NSStoryboard.main.instantiateController(withIdentifier: "BestTimes")
+                window.contentViewController?.presentAsSheet(bestTimes as! BestTimesViewController)
+            }
+        }
+    }
 
     @objc func newCustomGame(notification: Notification) {
         guard let window = NSApplication.shared.mainWindow,

@@ -12,6 +12,7 @@
 		3B48305A2842C76F0060FCFD /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberDisplay.swift */; };
 		3B48DBCD2AD2060D00E54243 /* ThemeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */; };
 		3B4E3F0F2E218FB7006CD97C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4E3F0E2E218FB7006CD97C /* Errors.swift */; };
+		3B4E3F112E221293006CD97C /* BestTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4E3F102E221293006CD97C /* BestTimesViewController.swift */; };
 		3B5AB53C27F96F710059BB0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB53B27F96F710059BB0A /* AppDelegate.swift */; };
 		3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54127F96F710059BB0A /* GameScene.swift */; };
 		3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AB54327F96F710059BB0A /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 		3B4830592842C76F0060FCFD /* NumberDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDisplay.swift; sourceTree = "<group>"; };
 		3B48DBCC2AD2060D00E54243 /* ThemeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCellView.swift; sourceTree = "<group>"; };
 		3B4E3F0E2E218FB7006CD97C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		3B4E3F102E221293006CD97C /* BestTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTimesViewController.swift; sourceTree = "<group>"; };
 		3B5AB53827F96F710059BB0A /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5AB53B27F96F710059BB0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B5AB54127F96F710059BB0A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				3BF1A7CD2866AAD600566000 /* WindowController.swift */,
 				3B5AB54327F96F710059BB0A /* ViewController.swift */,
 				3B402A122E15B1D600EB9ACE /* CustomGameView.swift */,
+				3B4E3F102E221293006CD97C /* BestTimesViewController.swift */,
 				3B5B08242E0A352D0067FAE5 /* Game */,
 				3B9DF114289DBBE1007CADA6 /* Number Displays */,
 				3B1BDB04286BBDD000A36569 /* Stats */,
@@ -258,6 +261,7 @@
 				3B5AB55B27F9789C0059BB0A /* SpriteSheet.swift in Sources */,
 				3B5B082A2E0B1F060067FAE5 /* Defaults.swift in Sources */,
 				3B5AB54427F96F710059BB0A /* ViewController.swift in Sources */,
+				3B4E3F112E221293006CD97C /* BestTimesViewController.swift in Sources */,
 				3B5AB54227F96F710059BB0A /* GameScene.swift in Sources */,
 				3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */,
 				3B5AB55527F974AE0059BB0A /* Tile.swift in Sources */,

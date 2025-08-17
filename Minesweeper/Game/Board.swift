@@ -145,7 +145,6 @@ class Board {
 
     /// Force update the size of all tiles. Called when the scale setting is changed, or the Zoom button is pressed
     func updateScale(scale: CGFloat) {
-        // Update tile sizes and positions
         self.scale = scale
         let originX = -(CGFloat(cols) * tileSize.width) / 2
         let originY = (CGFloat(rows) * tileSize.height) / 2
@@ -223,7 +222,11 @@ class Board {
             }
         }
     }
-
+    
+    /// Registers a press at the specified tile, including all adjacent tiles. Used for chording
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
     func adjacentPressAt(r: Int, c: Int) {
         for tile in getAdjacentTiles(r: r, c: c) {
             if tile.state == .Covered || tile.state == .Question {
@@ -231,7 +234,13 @@ class Board {
             }
         }
     }
-
+    
+    /// Registers a press raise at the specified tile, including all adjacent tiles. Used for chording
+    /// - Parameters:
+    ///   - r: The row of the target tile
+    ///   - c: The column of the target tile
+    ///   - diffR: The row of the last adjacently raised tile
+    ///   - diffC: The column of the last adjacently raised tile
     func adjacentRaiseAt(r: Int, c: Int, diffR: Int = -1, diffC: Int = -1) {
         if diffR != -1 && diffC != -1 {
             let fromTiles = getAdjacentTiles(r: r, c: c)
@@ -313,7 +322,7 @@ class Board {
                 reveal(r: r, c: c)
             } else {
                 if revealedTiles == 0 && Defaults[.General.safeFirstClick] && tile.value == .Mine
-                    && !loadedBoard
+                    && !loadedBoard && mines < rows * cols
                 {
 
                     let allTiles = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
@@ -447,6 +456,8 @@ class Board {
         minesLayout.append((new.r, new.c))
     }
     
+    /// Serializes this board (dimensions and mine layout). Used for board saving
+    /// - Returns: The serialized board
     func serialize() -> Data {
         var data = Data()
 
@@ -465,6 +476,7 @@ class Board {
         return data
     }
     
+    /// Sets up a board to be used for previewing a theme in settings
     private func initThemePreview() {
         let _ = revealAt(r: 2, c: 2, isChord: false)
         tiles[2][0].setState(state: .Question)

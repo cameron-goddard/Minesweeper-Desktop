@@ -238,6 +238,7 @@ class Borders: SKNode {
         addNodes()
     }
 
+    /// Required method
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

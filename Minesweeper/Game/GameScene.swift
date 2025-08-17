@@ -128,6 +128,7 @@ class GameScene: SKScene {
         gameTimer.stop()
     }
     
+    /// Update the list of best game times across all difficulties
     private func updateBestTimes() {
         let offset: Int
         switch Defaults[.Game.difficulty] {

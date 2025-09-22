@@ -4,36 +4,21 @@
   },
   "groups" : [
     {
-      "blend-mode-specializations" : [
-        {
-          "appearance" : "dark",
-          "value" : "normal"
-        }
-      ],
-      "blur-material-specializations" : [
-        {
-          "appearance" : "dark",
-          "value" : null
-        }
-      ],
+      "blur-material" : null,
       "layers" : [
         {
-          "blend-mode-specializations" : [
-            {
-              "appearance" : "dark",
-              "value" : "normal"
-            }
-          ],
           "fill-specializations" : [
             {
               "appearance" : "dark",
               "value" : {
-                "automatic-gradient" : "extended-gray:0.90330,1.00000"
+                "automatic-gradient" : "extended-gray:0.90000,1.00000"
               }
             },
             {
               "appearance" : "tinted",
-              "value" : "none"
+              "value" : {
+                "automatic-gradient" : "extended-gray:1.00000,1.00000"
+              }
             }
           ],
           "glass-specializations" : [
@@ -41,29 +26,24 @@
               "value" : true
             },
             {
-              "appearance" : "dark",
-              "value" : true
-            },
-            {
               "appearance" : "tinted",
               "value" : true
             }
           ],
-          "hidden" : false,
           "image-name-specializations" : [
             {
-              "value" : "mine_hollow_dark.png"
-            },
-            {
-              "appearance" : "light",
-              "value" : "mine_filled_light.svg"
+              "value" : "mine_light.svg"
             },
             {
               "appearance" : "dark",
-              "value" : "mine_hollow_dark.png"
+              "value" : "mine_dark_mono.svg"
+            },
+            {
+              "appearance" : "tinted",
+              "value" : "mine_dark_mono.svg"
             }
           ],
-          "name" : "mine_hollow_dark",
+          "name" : "mine_dark_mono",
           "opacity-specializations" : [
             {
               "appearance" : "dark",
@@ -73,69 +53,18 @@
               "appearance" : "tinted",
               "value" : 0.5
             }
-          ],
-          "position-specializations" : [
-            {
-              "value" : {
-                "scale" : 1,
-                "translation-in-points" : [
-                  0,
-                  0
-                ]
-              }
-            },
-            {
-              "appearance" : "dark",
-              "value" : {
-                "scale" : 0.5,
-                "translation-in-points" : [
-                  0,
-                  0
-                ]
-              }
-            },
-            {
-              "appearance" : "tinted",
-              "value" : {
-                "scale" : 0.5,
-                "translation-in-points" : [
-                  0,
-                  0
-                ]
-              }
-            }
           ]
         }
       ],
-      "name" : "Group",
       "shadow" : {
         "kind" : "layer-color",
-        "opacity" : 0.25
+        "opacity" : 0.5
       },
-      "specular-specializations" : [
-        {
-          "value" : true
-        },
-        {
-          "appearance" : "dark",
-          "value" : true
-        }
-      ],
-      "translucency-specializations" : [
-        {
-          "value" : {
-            "enabled" : false,
-            "value" : 0.5
-          }
-        },
-        {
-          "appearance" : "dark",
-          "value" : {
-            "enabled" : false,
-            "value" : 0.5
-          }
-        }
-      ]
+      "specular" : true,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
     }
   ],
   "supported-platforms" : {

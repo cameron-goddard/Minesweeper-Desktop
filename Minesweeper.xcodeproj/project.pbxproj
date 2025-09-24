@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B2BCD012E8119CA00B52BFC /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3B2BCD002E8119CA00B52BFC /* AppIcon.icon */; };
 		3B34CCBC2869FE3800B76AE6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B34CCBB2869FE3800B76AE6 /* Theme.swift */; };
 		3B402A132E15B1D600EB9ACE /* CustomGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B402A122E15B1D600EB9ACE /* CustomGameView.swift */; };
 		3B48305A2842C76F0060FCFD /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4830592842C76F0060FCFD /* NumberDisplay.swift */; };
@@ -35,6 +34,7 @@
 		3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB04F032AA3F01A00893F21 /* Defaults */; };
 		3BD4B22D2E2D8A9F00798237 /* BindingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD4B22C2E2D8A9F00798237 /* BindingsCellView.swift */; };
 		3BD4B22F2E2D971F00798237 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD4B22E2E2D971F00798237 /* Binding.swift */; };
+		3BD67C9D2E83BC250024CFA5 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3BD67C9C2E83BC250024CFA5 /* AppIcon.icon */; };
 		3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3BD95C772B8D99AA00D9BC3B /* Credits.rtf */; };
 		3BF1A7642856F7CB00566000 /* GameScene+Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7632856F7CB00566000 /* GameScene+Input.swift */; };
 		3BF1A78A285ED78F00566000 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A789285ED78F00566000 /* GeneralViewController.swift */; };
@@ -45,7 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B2BCD002E8119CA00B52BFC /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppIcon.icon; sourceTree = "<group>"; };
 		3B34CCBB2869FE3800B76AE6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3B402A122E15B1D600EB9ACE /* CustomGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameView.swift; sourceTree = "<group>"; };
 		3B4830592842C76F0060FCFD /* NumberDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDisplay.swift; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		3BB6CA15290DE6F2009F339D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3BD4B22C2E2D8A9F00798237 /* BindingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingsCellView.swift; sourceTree = "<group>"; };
 		3BD4B22E2E2D971F00798237 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
+		3BD67C9C2E83BC250024CFA5 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		3BD95C772B8D99AA00D9BC3B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		3BF1A7632856F7CB00566000 /* GameScene+Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Input.swift"; sourceTree = "<group>"; };
 		3BF1A789285ED78F00566000 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 				3B5B08292E0B1F060067FAE5 /* Defaults.swift */,
 				3B5B082C2E0B40EE0067FAE5 /* Notifications.swift */,
 				3B4E3F0E2E218FB7006CD97C /* Errors.swift */,
-				3B2BCD002E8119CA00B52BFC /* AppIcon.icon */,
+				3BD67C9C2E83BC250024CFA5 /* AppIcon.icon */,
 				3B5AB54527F96F720059BB0A /* Assets.xcassets */,
 				3B5AB54727F96F720059BB0A /* Main.storyboard */,
 				3BD95C772B8D99AA00D9BC3B /* Credits.rtf */,
@@ -257,7 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			files = (
 				3B5AB54627F96F720059BB0A /* Assets.xcassets in Resources */,
-				3B2BCD012E8119CA00B52BFC /* AppIcon.icon in Resources */,
+				3BD67C9D2E83BC250024CFA5 /* AppIcon.icon in Resources */,
 				3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */,
 				3B5AB54927F96F720059BB0A /* Main.storyboard in Resources */,
 			);

@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/badge/version-alpha-red)](https://github.com/cameron-goddard/Minesweeper-Desktop/releases/latest)
 [![License](https://img.shields.io/github/license/cameron-goddard/diningbar?color=green)](https://github.com/cameron-goddard/Minesweeper-Desktop/blob/main/LICENSE)
-[![macOS](https://img.shields.io/badge/macOS-12.0+-blue.svg)](https://apps.apple.com/us/app/macos-big-sur/id1526878132?mt=12/)
+[![macOS](https://img.shields.io/badge/macOS-13.0+-blue.svg)](https://apps.apple.com/us/app/macos-ventura/id1638787999?mt=12)
 [![Swift](https://img.shields.io/badge/Swift-6.1-orange.svg)](https://www.swift.org/blog/swift-6.1-released/)
 
 _Download the latest release [here](https://github.com/cameron-goddard/Minesweeper-Desktop/releases/latest)!_

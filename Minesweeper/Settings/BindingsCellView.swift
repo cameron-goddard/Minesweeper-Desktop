@@ -15,5 +15,5 @@ class BindingsCellView: NSTableCellView {
 
         // Drawing code here.
     }
-    
+
 }

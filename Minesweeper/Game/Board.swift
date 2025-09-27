@@ -222,7 +222,7 @@ class Board {
             }
         }
     }
-    
+
     /// Registers a press at the specified tile, including all adjacent tiles. Used for chording
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -234,7 +234,7 @@ class Board {
             }
         }
     }
-    
+
     /// Registers a press raise at the specified tile, including all adjacent tiles. Used for chording
     /// - Parameters:
     ///   - r: The row of the target tile
@@ -455,7 +455,7 @@ class Board {
         minesLayout.removeAll(where: { $0 == (row, col) })
         minesLayout.append((new.r, new.c))
     }
-    
+
     /// Serializes this board (dimensions and mine layout). Used for board saving
     /// - Returns: The serialized board
     func serialize() -> Data {
@@ -472,10 +472,10 @@ class Board {
             data.append(UInt8(c))
             data.append(UInt8(r))
         }
-        
+
         return data
     }
-    
+
     /// Sets up a board to be used for previewing a theme in settings
     private func initThemePreview() {
         let _ = revealAt(r: 2, c: 2, isChord: false)

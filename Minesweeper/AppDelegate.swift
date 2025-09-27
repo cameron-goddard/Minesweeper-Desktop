@@ -8,15 +8,15 @@
 import Cocoa
 import Defaults
 import Sparkle
-import UniformTypeIdentifiers
 import SwiftUI
+import UniformTypeIdentifiers
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var checkForUpdatesItem: NSMenuItem!
     let updaterController: SPUStandardUpdaterController
-    
+
     private lazy var hostingController: NSHostingController<CustomGameView> = {
         let customGameView = CustomGameView(onDismiss: { [weak self] in
             guard let self else { return }
@@ -109,7 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
-    
+
     @IBAction func showBestTimes(_ sender: NSMenuItem) {
         if let window = NSApplication.shared.mainWindow {
             if window.identifier?.rawValue == "Main" {
@@ -189,7 +189,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let oldController = window.contentViewController as? ViewController,
             let oldScene = oldController.getScene()
         else { return }
-        
+
         do {
             let file = try Data(contentsOf: url)
             if file.count < 4 {
@@ -218,15 +218,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     minesLayout.append((Int(minesData[i + 1]), Int(minesData[i])))
                 }
             }
-            
+
             Defaults[.Game.customDifficulty][0] = rows
             Defaults[.Game.customDifficulty][1] = cols
             Defaults[.Game.customDifficulty][2] = mines
-            
+
             oldScene.gameTimer.reset()
 
             let controller =
-        NSStoryboard.main.instantiateController(withIdentifier: "Main") as! ViewController
+                NSStoryboard.main.instantiateController(withIdentifier: "Main") as! ViewController
 
             controller.difficulty = "Loaded Custom"
             controller.minesLayout = minesLayout

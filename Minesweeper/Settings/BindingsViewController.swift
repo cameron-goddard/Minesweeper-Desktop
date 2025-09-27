@@ -27,12 +27,12 @@ extension BindingsViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return 5
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         return NSView()
     }
 }
 
 extension BindingsViewController: NSTableViewDelegate {
-    
+
 }

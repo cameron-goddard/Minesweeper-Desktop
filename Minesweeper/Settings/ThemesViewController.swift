@@ -142,7 +142,9 @@ extension ThemesViewController: NSTableViewDataSource {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard
-            let themeCell = tableView.makeView(withIdentifier: .init(rawValue: "themeCell"), owner: self) as? ThemeCellView else { return nil }
+            let themeCell = tableView.makeView(withIdentifier: .init(rawValue: "themeCell"), owner: self)
+                as? ThemeCellView
+        else { return nil }
         themeCell.themeName.stringValue = themes[row].name
 
         if themes[row].isFavorite {

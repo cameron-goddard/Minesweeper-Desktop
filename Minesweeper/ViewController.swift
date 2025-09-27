@@ -13,10 +13,10 @@ import SpriteKit
 class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
-    
+
     var difficulty = Defaults[.Game.difficulty]
     let scale = Defaults[.General.scale]
-    
+
     var minesLayout: [(Int, Int)]?
     var rows, cols, mines: Int!
 

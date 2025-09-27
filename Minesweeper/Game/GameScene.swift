@@ -57,7 +57,7 @@ class GameScene: SKScene {
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.restartGame(_:)), name: .restartGame, object: nil)
     }
-    
+
     /// Called when the scene is presented by a view
     /// - Parameter view: The view that is presenting this scene
     override func didMove(to view: SKView) {
@@ -118,7 +118,7 @@ class GameScene: SKScene {
             gameState = .Won
             board.flagMines()
             mainButton.set(state: .Cool)
-            
+
             updateBestTimes()
         } else {
             gameState = .Lost
@@ -127,7 +127,7 @@ class GameScene: SKScene {
         }
         gameTimer.stop()
     }
-    
+
     /// Update the list of best game times across all difficulties
     private func updateBestTimes() {
         let offset: Int
@@ -141,17 +141,21 @@ class GameScene: SKScene {
         default:
             return
         }
-        
-        if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset] || Defaults[.BestTimes.bestTimes][offset] == -1 {
+
+        if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset]
+            || Defaults[.BestTimes.bestTimes][offset] == -1
+        {
             Defaults[.BestTimes.bestTimes][offset + 2] = Defaults[.BestTimes.bestTimes][offset + 1]
             Defaults[.BestTimes.bestTimes][offset + 1] = Defaults[.BestTimes.bestTimes][offset]
             Defaults[.BestTimes.bestTimes][offset] = gameTimer.elapsedTime
-        }
-        else if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset + 1] || Defaults[.BestTimes.bestTimes][offset + 1] == -1 {
+        } else if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset + 1]
+            || Defaults[.BestTimes.bestTimes][offset + 1] == -1
+        {
             Defaults[.BestTimes.bestTimes][offset + 2] = Defaults[.BestTimes.bestTimes][offset + 1]
             Defaults[.BestTimes.bestTimes][offset + 1] = gameTimer.elapsedTime
-        }
-        else if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset + 2] || Defaults[.BestTimes.bestTimes][offset + 2] == -1 {
+        } else if gameTimer.elapsedTime < Defaults[.BestTimes.bestTimes][offset + 2]
+            || Defaults[.BestTimes.bestTimes][offset + 2] == -1
+        {
             Defaults[.BestTimes.bestTimes][offset + 2] = gameTimer.elapsedTime
         }
     }

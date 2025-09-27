@@ -15,9 +15,12 @@ class WindowController: NSWindowController {
     // There is a bug in the way macOS handles adding to NSMenu, see updateThemesMenu
     let themesItem: NSMenuToolbarItem = {
         let item = NSMenuToolbarItem(itemIdentifier: .toolbarThemesMenuItem)
-        item.toolTip = "Themes"
-        item.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)
         item.label = "Themes"
+        item.toolTip = "Themes"
+
+        item.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)!
+            .withSymbolConfiguration(.init(scale: .medium))
+
         return item
     }()
 
@@ -91,7 +94,7 @@ class WindowController: NSWindowController {
                 Defaults[.Themes.theme] = "Classic"
             }
         }
-        
+
         if let gameScene = viewController.getScene() {
             gameScene.updateTextures()
         }
@@ -182,8 +185,13 @@ extension WindowController: NSToolbarDelegate {
         if itemIdentifier == .toolbarShareButtonItem {
             let item = NSSharingServicePickerToolbarItem(itemIdentifier: itemIdentifier)
             item.delegate = self
-            item.menuFormRepresentation?.image = NSImage(
-                systemSymbolName: "square.and.arrow.up", accessibilityDescription: nil)
+
+            let shareImage = NSImage(
+                systemSymbolName: "square.and.arrow.up", accessibilityDescription: nil)?
+                .withSymbolConfiguration(.init(scale: .medium))
+            item.image = shareImage
+            item.menuFormRepresentation?.image = shareImage
+
             return item
         }
 
@@ -196,7 +204,8 @@ extension WindowController: NSToolbarDelegate {
             item.label = "Stats"
             item.toolTip = "Stats"
             item.isBordered = true
-            item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)
+            item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)?
+                .withSymbolConfiguration(.init(scale: .medium))
             item.action = #selector(showStatsWindow)
             return item
         }

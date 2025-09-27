@@ -37,7 +37,7 @@ extension Defaults.Keys {
     enum Keys {
 
     }
-    
+
     enum BestTimes {
         static let bestTimes = Key<[Double]>("bestTimes", default: [-1, -1, -1, -1, -1, -1, -1, -1, -1])
     }

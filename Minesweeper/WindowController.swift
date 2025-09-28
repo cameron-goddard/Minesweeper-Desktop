@@ -18,8 +18,12 @@ class WindowController: NSWindowController {
         item.label = "Themes"
         item.toolTip = "Themes"
 
-        item.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)!
-            .withSymbolConfiguration(.init(scale: .medium))
+        if #available(macOS 26.0, *) {
+            item.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)?
+                .withSymbolConfiguration(.init(scale: .medium))
+        } else {
+            item.image = NSImage(systemSymbolName: "paintbrush", accessibilityDescription: nil)
+        }
 
         return item
     }()
@@ -186,10 +190,16 @@ extension WindowController: NSToolbarDelegate {
             let item = NSSharingServicePickerToolbarItem(itemIdentifier: itemIdentifier)
             item.delegate = self
 
-            let shareImage = NSImage(
-                systemSymbolName: "square.and.arrow.up", accessibilityDescription: nil)?
-                .withSymbolConfiguration(.init(scale: .medium))
-            item.image = shareImage
+            let shareImage: NSImage?
+            if #available(macOS 26.0, *) {
+                shareImage = NSImage(
+                    systemSymbolName: "square.and.arrow.up", accessibilityDescription: nil)?
+                    .withSymbolConfiguration(.init(scale: .medium))
+                item.image = shareImage
+            } else {
+                shareImage = NSImage(
+                    systemSymbolName: "square.and.arrow.up", accessibilityDescription: nil)
+            }
             item.menuFormRepresentation?.image = shareImage
 
             return item
@@ -204,8 +214,12 @@ extension WindowController: NSToolbarDelegate {
             item.label = "Stats"
             item.toolTip = "Stats"
             item.isBordered = true
-            item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)?
-                .withSymbolConfiguration(.init(scale: .medium))
+            if #available(macOS 26.0, *) {
+                item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)?
+                    .withSymbolConfiguration(.init(scale: .medium))
+            } else {
+                item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)
+            }
             item.action = #selector(showStatsWindow)
             return item
         }

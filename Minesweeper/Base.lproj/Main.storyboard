@@ -23,12 +23,12 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                        <menuItem title="Preferences…" secondaryImage="gear" catalog="system" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <segue destination="fmA-Dd-Pvy" kind="show" id="adb-xu-kxo"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Check for Updates..." id="C1Y-N6-n45">
+                                        <menuItem title="Check for Updates..." secondaryImage="arrow.trianglehead.2.clockwise.rotate.90" catalog="system" id="C1Y-N6-n45">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -67,12 +67,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Game" id="AYK-yK-rRo">
                                     <items>
-                                        <menuItem title="New Game" keyEquivalent="n" id="Rg2-eb-gfa">
+                                        <menuItem title="New Game" secondaryImage="plus" catalog="system" keyEquivalent="n" id="Rg2-eb-gfa">
                                             <connections>
                                                 <action selector="newGame:" target="Voe-Tx-rLC" id="m0b-0G-Lji"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Restart Game" id="Kre-DC-zEh">
+                                        <menuItem title="Restart Game" secondaryImage="arrow.counterclockwise" catalog="system" id="Kre-DC-zEh">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="restartGame:" target="Voe-Tx-rLC" id="f9r-zI-K7N"/>
@@ -101,7 +101,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="xY9-uv-FvY"/>
-                                        <menuItem title="Best Times..." id="0fi-BC-OMd">
+                                        <menuItem title="Best Times..." secondaryImage="medal.fill" catalog="system" id="0fi-BC-OMd">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="showBestTimes:" target="Voe-Tx-rLC" id="NMz-Tb-KhK"/>
@@ -114,12 +114,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Board" id="LjP-Rb-xDe">
                                     <items>
-                                        <menuItem title="Save Board..." keyEquivalent="s" id="Lq0-Fd-cuC">
+                                        <menuItem title="Save Board..." secondaryImage="square.and.arrow.down" catalog="system" keyEquivalent="s" id="Lq0-Fd-cuC">
                                             <connections>
                                                 <action selector="saveBoard:" target="Voe-Tx-rLC" id="rUT-Ys-OoS"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open Board..." keyEquivalent="o" id="rN3-BN-MT3">
+                                        <menuItem title="Open Board..." secondaryImage="arrow.up.forward" catalog="system" keyEquivalent="o" id="rN3-BN-MT3">
                                             <connections>
                                                 <action selector="openBoard:" target="Voe-Tx-rLC" id="tBM-nh-Mnh"/>
                                             </connections>
@@ -144,7 +144,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show Stats" keyEquivalent="S" id="kIP-vf-haE"/>
+                                        <menuItem title="Show Stats" secondaryImage="chart.bar" catalog="system" keyEquivalent="S" id="kIP-vf-haE"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -1076,12 +1076,18 @@ DQ
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.counterclockwise" catalog="system" width="14" height="16"/>
+        <image name="arrow.trianglehead.2.clockwise.rotate.90" catalog="system" width="16" height="15"/>
+        <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
+        <image name="chart.bar" catalog="system" width="20" height="14"/>
+        <image name="gear" catalog="system" width="17" height="16"/>
         <image name="gearshape" catalog="system" width="16" height="16"/>
         <image name="keyboard" catalog="system" width="19" height="13"/>
         <image name="medal.fill" catalog="system" width="16" height="17"/>
         <image name="minus" catalog="system" width="14" height="4"/>
         <image name="paintbrush" catalog="system" width="17" height="18"/>
         <image name="plus" catalog="system" width="14" height="13"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
         <image name="star" catalog="system" width="17" height="16"/>
     </resources>
 </document>

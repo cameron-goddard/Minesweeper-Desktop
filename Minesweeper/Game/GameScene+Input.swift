@@ -43,6 +43,11 @@ extension GameScene {
         if clickedNode.isEmpty {
             mainButton.set(state: .Happy)
             if isChord {
+                // Raise tiles if we were chording and released outside a tile
+                if let tileName = currentTile {
+                    let coords = convertLocation(name: tileName)
+                    board.adjacentRaiseAt(r: coords[0], c: coords[1])
+                }
                 isChord = false
             }
             return
@@ -116,7 +121,40 @@ extension GameScene {
         }
     }
 
-    override func rightMouseUp(with event: NSEvent) {}
+    override func rightMouseUp(with event: NSEvent) {
+        // If we were chording, we need to perform the chord action
+        if isChord {
+            let clickedNode = self.nodes(at: event.location(in: scene!))
+
+            // If still over a tile, perform the chord
+            if !clickedNode.isEmpty, let name = clickedNode[0].name, name != "Main Button" {
+                if gameState == .Won || gameState == .Lost {
+                    isChord = false
+                    return
+                }
+                if gameState == .Unstarted {
+                    gameTimer.start()
+                    gameState = .InProgress
+                }
+
+                let coords = convertLocation(name: name)
+                let tile = board.tileAt(r: coords[0], c: coords[1])!
+
+                if board.revealAt(r: coords[0], c: coords[1], isChord: true) {
+                    finishGame(won: false)
+                } else if board.revealedTiles == rows * cols - mines {
+                    finishGame(won: true)
+                }
+            } else if let tileName = currentTile {
+                // If not over a tile, use the last known tile position
+                let coords = convertLocation(name: tileName)
+                board.adjacentRaiseAt(r: coords[0], c: coords[1])
+            }
+
+            isChord = false
+            mainButton.set(state: .Happy)
+        }
+    }
 
     override func mouseDragged(with event: NSEvent) {
         let clickedNode = self.nodes(at: event.location(in: scene!))

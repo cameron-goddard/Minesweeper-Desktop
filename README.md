@@ -9,18 +9,19 @@ _Download the latest release [here](https://github.com/cameron-goddard/Minesweep
 
 A modern Minesweeper clone for the Mac. Designed to retain the classic Minesweeper look while fitting in natively with macOS. Featuring customizable themes, boards, and much more in the works. 
 
+
 <p align="left">
-  <img width="300" alt="Beginner Covered" src="https://github.com/user-attachments/assets/bfa9d49b-3794-41de-bd7e-59472bef3d22" />
-  <img width="398" alt="Intermediate In Progress with Stats" src="https://github.com/user-attachments/assets/34607614-8bbe-43ba-89d9-cb532a667d97" />
+  <img width="300" alt="Beginner Covered" src="https://github.com/user-attachments/assets/bc9e6aef-65cd-4436-b438-3f5d031bc3e6" />
+  <img width="398" alt="Intermediate in Progress with Stats" src="https://github.com/user-attachments/assets/29eb5823-8876-43db-b932-5865852b0fc0" />
 </p>
 
 ## Themes
 Themes are fully compatible with [Minesweeper X](https://www.curtisbright.com/msx/) themes. You can download 24 custom themes [here](https://minesweepergame.com/download/minesweeper-x-skins.zip), or browse some more [here](https://mzrg.com/mines/msx/index.html).
 
-<p align="left">
-<img width="300" alt="Theme Preview" src="https://github.com/user-attachments/assets/4e22c07f-9c8e-4797-b40f-4eaa255347a3" />
-<img width="329" alt="Theme Preview with Settings" src="https://github.com/user-attachments/assets/b6acaede-11ed-40e4-b6b2-e86ac9d449e3" />
 
+<p align="left">
+<img width="300" alt="Theme Preview" src="https://github.com/user-attachments/assets/3bbd95f1-4f8d-40c9-8520-de2f398d433d" />
+<img width="324" alt="Theme Preview with Settings" src="https://github.com/user-attachments/assets/c0bb703d-d086-4407-a507-d521ce588b3d" />
 </p>
 
 ## Roadmap

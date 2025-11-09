@@ -1,0 +1,9 @@
+# macOS junk
+.DS_Store
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+
+# Other common Xcode ignores
+DerivedData/

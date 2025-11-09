@@ -66,6 +66,13 @@ class ViewController: NSViewController {
         if Defaults[.General.toolbarDifficulty] {
             view.window!.subtitle = difficulty
         }
+
+        // Ensure window level matches the persisted preference when the view appears
+        if Defaults[.General.alwaysOnTop] {
+            view.window?.level = .floating
+        } else {
+            view.window?.level = .normal
+        }
     }
 
     @objc func setSubtitle(_: Notification) {

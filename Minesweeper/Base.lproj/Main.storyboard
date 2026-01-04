@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24128"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -72,8 +72,7 @@
                                                 <action selector="newGame:" target="Voe-Tx-rLC" id="m0b-0G-Lji"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Restart Game" secondaryImage="arrow.counterclockwise" catalog="system" id="Kre-DC-zEh">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Restart Game" secondaryImage="arrow.counterclockwise" catalog="system" keyEquivalent="r" id="Kre-DC-zEh">
                                             <connections>
                                                 <action selector="restartGame:" target="Voe-Tx-rLC" id="f9r-zI-K7N"/>
                                             </connections>
@@ -144,7 +143,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show Stats" secondaryImage="chart.bar" catalog="system" keyEquivalent="S" id="kIP-vf-haE"/>
+                                        <menuItem title="Show Stats" secondaryImage="chart.bar" catalog="system" keyEquivalent="S" id="kIP-vf-haE">
+                                            <connections>
+                                                <action selector="showStats:" target="Voe-Tx-rLC" id="rWB-qy-eiS"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
@@ -194,10 +197,13 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="2ja-wy-Zxd"/>
-                                        <menuItem title="Release Notes" id="DPw-Uy-Ehh">
+                                        <menuItem title="Release Notes" secondaryImage="book.pages" catalog="system" id="DPw-Uy-Ehh">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showReleaseNotes:" target="Voe-Tx-rLC" id="7UQ-Xy-4zB"/>
+                                            </connections>
                                         </menuItem>
-                                        <menuItem title="Buy Me a Coffee" id="vgV-Pg-hGf">
+                                        <menuItem title="Buy Me a Coffee" secondaryImage="cup.and.heat.waves" catalog="system" id="vgV-Pg-hGf">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
@@ -1079,7 +1085,9 @@ DQ
         <image name="arrow.counterclockwise" catalog="system" width="14" height="16"/>
         <image name="arrow.trianglehead.2.clockwise.rotate.90" catalog="system" width="16" height="15"/>
         <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
+        <image name="book.pages" catalog="system" width="15" height="18"/>
         <image name="chart.bar" catalog="system" width="20" height="14"/>
+        <image name="cup.and.heat.waves" catalog="system" width="17" height="16"/>
         <image name="gear" catalog="system" width="17" height="16"/>
         <image name="gearshape" catalog="system" width="16" height="16"/>
         <image name="keyboard" catalog="system" width="19" height="13"/>

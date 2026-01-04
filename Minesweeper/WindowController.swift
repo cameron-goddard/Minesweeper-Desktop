@@ -105,7 +105,7 @@ class WindowController: NSWindowController {
         updateThemesMenu()
     }
 
-    @objc func showStatsWindow() {
+    @objc func toggleStatsWindow() {
         if let statsVC = statsWC.contentViewController as? StatsViewController {
             if let gameScene = viewController.getScene() {
                 gameScene.gameTimer.delegate = statsVC
@@ -220,7 +220,7 @@ extension WindowController: NSToolbarDelegate {
             } else {
                 item.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: nil)
             }
-            item.action = #selector(showStatsWindow)
+            item.action = #selector(toggleStatsWindow)
             return item
         }
         return nil

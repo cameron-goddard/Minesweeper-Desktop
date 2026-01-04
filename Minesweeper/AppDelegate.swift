@@ -239,6 +239,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             alert.runModal()
         }
     }
+
+    @IBAction func showStats(_ sender: NSMenuItem) {
+        guard let window = NSApplication.shared.mainWindow,
+            let windowController = window.windowController as? WindowController
+        else { return }
+
+        windowController.toggleStatsWindow()
+    }
+
+    @IBAction func showReleaseNotes(_ sender: NSMenuItem) {
+        NSWorkspace.shared.open(URL(string: "https://www.camerongoddard.com/ms-desktop/release_notes.html")!)
+    }
 }
 
 extension UTType {

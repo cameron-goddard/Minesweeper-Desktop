@@ -523,7 +523,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = exactVersion;
-				version = 2.8.0;
+				version = 2.8.1;
 			};
 		};
 		3BB04F022AA3F01A00893F21 /* XCRemoteSwiftPackageReference "Defaults" */ = {
@@ -531,7 +531,7 @@
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
 			requirement = {
 				kind = exactVersion;
-				version = 9.0.2;
+				version = 9.0.6;
 			};
 		};
 		3BF1D9AE2BC0E5A70005200A /* XCRemoteSwiftPackageReference "swift-collections" */ = {

@@ -1,3 +1,4 @@
+
 //
 //  Defaults.swift
 //  Minesweeper
@@ -21,6 +22,7 @@ extension Defaults.Keys {
         static let scale = Key<CGFloat>("scale", default: 1.5)
         static let questions = Key<Bool>("questions", default: false)
         static let safeFirstClick = Key<Bool>("safeFirstClick", default: true)
+        static let alwaysOnTop = Key<Bool>("alwaysOnTop", default: false)
     }
 
     enum Themes {

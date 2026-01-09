@@ -1,4 +1,3 @@
-
 //
 //  ViewController.swift
 //  Minesweeper
@@ -69,7 +68,7 @@ class ViewController: NSViewController {
         }
 
         // Ensure window level matches the persisted preference when the view appears
-        if Defaults[.General.alwaysOnTop] {
+        if Defaults[.General.keepOnTop] {
             view.window?.level = .floating
         } else {
             view.window?.level = .normal

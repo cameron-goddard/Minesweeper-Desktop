@@ -71,9 +71,9 @@ class WindowController: NSWindowController {
             zoomButton.target = self
             zoomButton.action = #selector(zoomButtonClicked(_:))
         }
-        
-        // Apply persisted "Always on Top" preference
-        if Defaults[.General.alwaysOnTop] {
+
+        // Apply persisted "Keep on Top" preference
+        if Defaults[.General.keepOnTop] {
             window?.level = .floating
         } else {
             window?.level = .normal

@@ -72,7 +72,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.addObserver(
             self, selector: #selector(self.newCustomGame(notification:)), name: .newCustomGame,
             object: nil)
-        setupAlwaysOnTopMenuItem()
+
+        setupKeepOnTopMenuItem()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -253,25 +254,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.open(URL(string: "https://www.camerongoddard.com/ms-desktop/release_notes.html")!)
     }
 
-    private func setupAlwaysOnTopMenuItem() {
+    private func setupKeepOnTopMenuItem() {
         guard let windowMenu = NSApplication.shared.windowsMenu else { return }
+
         // Avoid duplicate insertion if called more than once
-        if windowMenu.items.contains(where: { $0.action == #selector(toggleAlwaysOnTop(_:)) }) {
+        if windowMenu.items.contains(where: { $0.action == #selector(toggleKeepOnTop(_:)) }) {
             return
         }
-        windowMenu.addItem(.separator())
-        let item = NSMenuItem(title: "Always on Top", action: #selector(toggleAlwaysOnTop(_:)), keyEquivalent: "")
+
+        let item = NSMenuItem(title: "Keep on Top", action: #selector(toggleKeepOnTop(_:)), keyEquivalent: "")
+
         item.target = self
+        item.image = NSImage(systemSymbolName: "rectangle.badge.plus", accessibilityDescription: nil)
+
+        windowMenu.addItem(.separator())
         windowMenu.addItem(item)
     }
 
-    @objc func toggleAlwaysOnTop(_ sender: NSMenuItem) {
+    @objc func toggleKeepOnTop(_ sender: NSMenuItem) {
         guard let window = NSApplication.shared.keyWindow else { return }
         let shouldFloat = window.level != .floating
         window.level = shouldFloat ? .floating : .normal
         // Persist preference when toggling the main game window
         if window.identifier?.rawValue == "Main" {
-            Defaults[.General.alwaysOnTop] = shouldFloat
+            Defaults[.General.keepOnTop] = shouldFloat
         }
     }
 }
@@ -288,7 +294,7 @@ extension NSStoryboard {
 
 extension AppDelegate: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(toggleAlwaysOnTop(_:)) {
+        if menuItem.action == #selector(toggleKeepOnTop(_:)) {
             if let window = NSApplication.shared.keyWindow {
                 menuItem.state = (window.level == .floating) ? .on : .off
                 return true

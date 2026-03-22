@@ -57,8 +57,8 @@ class Board {
         self.isThemePreview = isThemePreview
 
         // Mark this as a loaded board if given a predefined mine layout
-        if minesLayout != nil {
-            self.minesLayout = minesLayout!
+        if let minesLayout {
+            self.minesLayout = minesLayout
             self.loadedBoard = true
         }
 
@@ -103,19 +103,12 @@ class Board {
         } else {
             minesLayout = []
 
-            var addedMines = 0
-            while addedMines < mines {
-                for r in 0..<rows {
-                    for c in 0..<cols {
-                        if Int.random(in: 0...100) == 0 && tiles[r][c].value == .Empty
-                            && addedMines < mines
-                        {
-                            tiles[r][c].setValue(val: .Mine)
-                            minesLayout.append((r, c))
-                            addedMines += 1
-                        }
-                    }
-                }
+            var positions = (0..<(rows * cols)).map { (r: $0 / cols, c: $0 % cols) }
+            positions.shuffle()
+
+            for (r, c) in positions.prefix(mines) {
+                tiles[r][c].setValue(val: .Mine)
+                minesLayout.append((r, c))
             }
         }
 
@@ -137,7 +130,7 @@ class Board {
     func updateTextures(to theme: Theme) {
         for r in 0..<rows {
             for c in 0..<cols {
-                let tile = tileAt(r: r, c: c)!
+                let tile = tiles[r][c]
                 tile.setState(state: tile.state, theme: theme)
             }
         }
@@ -197,7 +190,7 @@ class Board {
     private func setNumbers() {
         for r in 0..<rows {
             for c in 0..<cols {
-                if tileAt(r: r, c: c)!.value != .Mine {
+                if tiles[r][c].value != .Mine {
                     switch numberOfAdjacentMines(r: r, c: c) {
                     case 1:
                         tiles[r][c].setValue(val: .One)
@@ -253,7 +246,7 @@ class Board {
             }
             return
         }
-        tileAt(r: r, c: c)!.raised()
+        tiles[r][c].raised()
         for tile in getAdjacentTiles(r: r, c: c) {
             tile.raised()
         }
@@ -322,13 +315,17 @@ class Board {
                 reveal(r: r, c: c)
             } else {
                 if revealedTiles == 0 && Defaults[.General.safeFirstClick] && tile.value == .Mine
-                    && !loadedBoard && mines < rows * cols
+                    && !loadedBoard
                 {
+                    let neighborhood = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
+                    let tilesOutsideNeighborhood = rows * cols - neighborhood.count
 
-                    let allTiles = getAdjacentTiles(r: tile.r, c: tile.c) + [tile]
-
-                    allTiles.forEach { adjTile in
-                        createBlankFrom(row: adjTile.r, col: adjTile.c, avoid: allTiles)
+                    if mines <= tilesOutsideNeighborhood {
+                        neighborhood.forEach { adjTile in
+                            createBlankFrom(row: adjTile.r, col: adjTile.c, avoid: neighborhood)
+                        }
+                    } else if mines < rows * cols {
+                        createBlankFrom(row: r, col: c, avoid: [tile])
                     }
                     setNumbers()
                     reveal(r: r, c: c)
@@ -445,15 +442,21 @@ class Board {
         }
         tiles[row][col].setValue(val: .Empty)
 
-        var new = tiles[Int.random(in: 0..<rows - 1)][Int.random(in: 0..<cols - 1)]
-        while new.value != .Empty || avoid.contains(new) {
-            new = tiles[Int.random(in: 0..<rows - 1)][Int.random(in: 0..<cols - 1)]
-        }
+        // Collect and shuffle all valid candidates, then pick the first one
+        let candidates = (0..<rows).flatMap { r in
+            (0..<cols).compactMap { c -> Tile? in
+                let tile = tiles[r][c]
+                guard tile.value != .Mine && !avoid.contains(tile) else { return nil }
+                return tile
+            }
+        }.shuffled()
 
-        new.setValue(val: .Mine)
+        guard let target = candidates.first else { return }
+
+        target.setValue(val: .Mine)
 
         minesLayout.removeAll(where: { $0 == (row, col) })
-        minesLayout.append((new.r, new.c))
+        minesLayout.append((target.r, target.c))
     }
 
     /// Serializes this board (dimensions and mine layout). Used for board saving

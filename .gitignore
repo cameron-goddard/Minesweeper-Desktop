@@ -1,5 +1,6 @@
 # macOS
-**/.DS_Store
+.DS_Store
 
 # Xcode
-Minesweeper.xcodeproj/project.xcworkspace/xcuserdata
+Minesweeper.xcodeproj/project.xcworkspace/xcuserdata/
+Minesweeper.xcodeproj/xcuserdata/

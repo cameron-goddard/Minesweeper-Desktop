@@ -18,8 +18,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build
-        run: xcodebuild clean build analyze -project Minesweeper.xcodeproj -scheme Minesweeper -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - name: Build & Analyze (Release)
+        run: |
+          xcodebuild clean build analyze \
+            -project Minesweeper.xcodeproj \
+            -scheme Minesweeper \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
-        
+
+      - name: UI Tests
+        run: |
+          xcodebuild test \
+            -project Minesweeper.xcodeproj \
+            -scheme Minesweeper \
+            -configuration Debug \
+            -destination 'platform=macOS' \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGN_IDENTITY=- \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM=""
+        env:
+          DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+
+      - name: Upload test results on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults
+          path: TestResults.xcresult

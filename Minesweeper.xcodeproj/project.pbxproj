@@ -42,7 +42,23 @@
 		3BF1A791285ED7CF00566000 /* BindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A790285ED7CF00566000 /* BindingsViewController.swift */; };
 		3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7CD2866AAD600566000 /* WindowController.swift */; };
 		3BF1D9B02BC0E5A70005200A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 3BF1D9AF2BC0E5A70005200A /* Collections */; };
+		AAB1000000000000000000A2 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1000000000000000000A1 /* MinesweeperUITests.swift */; };
+		AAB2000000000000000000A2 /* MenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2000000000000000000A1 /* MenuTests.swift */; };
+		AAB3000000000000000000A2 /* CustomGameSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB3000000000000000000A1 /* CustomGameSheetTests.swift */; };
+		AAB4000000000000000000A2 /* BestTimesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4000000000000000000A1 /* BestTimesTests.swift */; };
+		AAB5000000000000000000A2 /* StatsAndToolbarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB5000000000000000000A1 /* StatsAndToolbarTests.swift */; };
+		AAB6000000000000000000A2 /* WindowMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB6000000000000000000A1 /* WindowMenuTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA09000000000000000000A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B5AB53027F96F710059BB0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3B5AB53727F96F710059BB0A;
+			remoteInfo = Minesweeper;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3B34CCBB2869FE3800B76AE6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -80,6 +96,13 @@
 		3BF1A78C285ED7BE00566000 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		3BF1A790285ED7CF00566000 /* BindingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingsViewController.swift; sourceTree = "<group>"; };
 		3BF1A7CD2866AAD600566000 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		AA10000000000000000000A1 /* MinesweeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB1000000000000000000A1 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
+		AAB2000000000000000000A1 /* MenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTests.swift; sourceTree = "<group>"; };
+		AAB3000000000000000000A1 /* CustomGameSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameSheetTests.swift; sourceTree = "<group>"; };
+		AAB4000000000000000000A1 /* BestTimesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTimesTests.swift; sourceTree = "<group>"; };
+		AAB5000000000000000000A1 /* StatsAndToolbarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsAndToolbarTests.swift; sourceTree = "<group>"; };
+		AAB6000000000000000000A1 /* WindowMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowMenuTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +112,11 @@
 				3BF1D9B02BC0E5A70005200A /* Collections in Frameworks */,
 				3BB04F042AA3F01A00893F21 /* Defaults in Frameworks */,
 				3B9DF10928971939007CADA6 /* Sparkle in Frameworks */,
+			);
+		};
+		AA06000000000000000000A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -108,6 +136,7 @@
 			children = (
 				3BB6CA15290DE6F2009F339D /* README.md */,
 				3B5AB53A27F96F710059BB0A /* Minesweeper */,
+				AA11000000000000000000A1 /* MinesweeperUITests */,
 				3B5AB53927F96F710059BB0A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				3B5AB53827F96F710059BB0A /* Minesweeper.app */,
+				AA10000000000000000000A1 /* MinesweeperUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,6 +221,19 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		AA11000000000000000000A1 /* MinesweeperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AAB1000000000000000000A1 /* MinesweeperUITests.swift */,
+				AAB2000000000000000000A1 /* MenuTests.swift */,
+				AAB3000000000000000000A1 /* CustomGameSheetTests.swift */,
+				AAB4000000000000000000A1 /* BestTimesTests.swift */,
+				AAB5000000000000000000A1 /* StatsAndToolbarTests.swift */,
+				AAB6000000000000000000A1 /* WindowMenuTests.swift */,
+			);
+			path = MinesweeperUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,6 +257,24 @@
 			productReference = 3B5AB53827F96F710059BB0A /* Minesweeper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AA01000000000000000000A1 /* MinesweeperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA02000000000000000000A1 /* Build configuration list for PBXNativeTarget "MinesweeperUITests" */;
+			buildPhases = (
+				AA05000000000000000000A1 /* Sources */,
+				AA06000000000000000000A1 /* Frameworks */,
+				AA07000000000000000000A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA08000000000000000000A1 /* PBXTargetDependency */,
+			);
+			name = MinesweeperUITests;
+			productName = MinesweeperUITests;
+			productReference = AA10000000000000000000A1 /* MinesweeperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -226,6 +287,10 @@
 				TargetAttributes = {
 					3B5AB53727F96F710059BB0A = {
 						CreatedOnToolsVersion = 13.3;
+					};
+					AA01000000000000000000A1 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 3B5AB53727F96F710059BB0A;
 					};
 				};
 			};
@@ -248,6 +313,7 @@
 			projectRoot = "";
 			targets = (
 				3B5AB53727F96F710059BB0A /* Minesweeper */,
+				AA01000000000000000000A1 /* MinesweeperUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +326,11 @@
 				3BD67C9D2E83BC250024CFA5 /* AppIcon.icon in Resources */,
 				3BD95C782B8D99AA00D9BC3B /* Credits.rtf in Resources */,
 				3B5AB54927F96F720059BB0A /* Main.storyboard in Resources */,
+			);
+		};
+		AA07000000000000000000A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
 			);
 		};
 /* End PBXResourcesBuildPhase section */
@@ -298,7 +369,26 @@
 				3B88CEA628023695008C84E2 /* MineCounter.swift in Sources */,
 			);
 		};
+		AA05000000000000000000A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				AAB1000000000000000000A2 /* MinesweeperUITests.swift in Sources */,
+				AAB2000000000000000000A2 /* MenuTests.swift in Sources */,
+				AAB3000000000000000000A2 /* CustomGameSheetTests.swift in Sources */,
+				AAB4000000000000000000A2 /* BestTimesTests.swift in Sources */,
+				AAB5000000000000000000A2 /* StatsAndToolbarTests.swift in Sources */,
+				AAB6000000000000000000A2 /* WindowMenuTests.swift in Sources */,
+			);
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA08000000000000000000A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3B5AB53727F96F710059BB0A /* Minesweeper */;
+			targetProxy = AA09000000000000000000A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3B5AB54727F96F720059BB0A /* Main.storyboard */ = {
@@ -443,7 +533,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -457,7 +547,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.5.2;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -476,7 +566,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -490,11 +580,49 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.5.2;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		AA03000000000000000000A1 /* Debug configuration for PBXNativeTarget "MinesweeperUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AUBXDCV2VL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.MinesweeperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TEST_TARGET_NAME = Minesweeper;
+			};
+			name = Debug;
+		};
+		AA04000000000000000000A1 /* Release configuration for PBXNativeTarget "MinesweeperUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AUBXDCV2VL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.MinesweeperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TEST_TARGET_NAME = Minesweeper;
 			};
 			name = Release;
 		};
@@ -514,6 +642,14 @@
 			buildConfigurations = (
 				3B5AB54E27F96F720059BB0A /* Debug configuration for PBXNativeTarget "Minesweeper" */,
 				3B5AB54F27F96F720059BB0A /* Release configuration for PBXNativeTarget "Minesweeper" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		AA02000000000000000000A1 /* Build configuration list for PBXNativeTarget "MinesweeperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA03000000000000000000A1 /* Debug configuration for PBXNativeTarget "MinesweeperUITests" */,
+				AA04000000000000000000A1 /* Release configuration for PBXNativeTarget "MinesweeperUITests" */,
 			);
 			defaultConfigurationName = Release;
 		};

@@ -57,6 +57,7 @@ struct CustomGameView: View {
                 Section {
                     VStack(alignment: .leading) {
                         TextField("Rows", text: $rows, prompt: Text("Rows"))
+                            .accessibilityIdentifier("customGame.rows")
                         if rowsError {
                             Text("Invalid number of rows")
                                 .font(.caption)
@@ -66,6 +67,7 @@ struct CustomGameView: View {
 
                     VStack(alignment: .leading) {
                         TextField("Columns", text: $columns, prompt: Text("Columns"))
+                            .accessibilityIdentifier("customGame.columns")
                         if colsError {
                             Text("Invalid number of columns")
                                 .font(.caption)
@@ -76,12 +78,14 @@ struct CustomGameView: View {
                     Slider(value: $mines, in: 0...maxMines) {
                         Text("\(Int(mines)) Mines")
                     }
+                    .accessibilityIdentifier("customGame.mines")
                 } header: {
                     VStack(alignment: .leading) {
                         Text("Custom Game")
                         Text("Difficulty: \(difficultyLabel)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
+                            .accessibilityIdentifier("customGame.difficultyLabel")
                     }
                 }
             }
@@ -97,10 +101,12 @@ struct CustomGameView: View {
                     columns = String(Int.random(in: 1..<40))
                     mines = .random(in: 1..<maxMines)
                 }
+                .accessibilityIdentifier("customGame.random")
                 Spacer()
                 Button("Cancel") {
                     self.onDismiss?()
                 }
+                .accessibilityIdentifier("customGame.cancel")
                 Button("Generate") {
                     if rows == "" || columns == "" {
                         return
@@ -118,6 +124,7 @@ struct CustomGameView: View {
                     self.onDismiss?()
                 }
                 .keyboardShortcut(.defaultAction)
+                .accessibilityIdentifier("customGame.generate")
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
@@ -144,5 +151,6 @@ struct CustomGameView: View {
         }
         .frame(width: 350)
         .fixedSize(horizontal: false, vertical: true)
+        .accessibilityIdentifier("customGameSheet")
     }
 }

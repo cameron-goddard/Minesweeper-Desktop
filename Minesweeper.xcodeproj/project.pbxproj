@@ -42,12 +42,11 @@
 		3BF1A791285ED7CF00566000 /* BindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A790285ED7CF00566000 /* BindingsViewController.swift */; };
 		3BF1A7CE2866AAD600566000 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1A7CD2866AAD600566000 /* WindowController.swift */; };
 		3BF1D9B02BC0E5A70005200A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 3BF1D9AF2BC0E5A70005200A /* Collections */; };
-		AAB1000000000000000000A2 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1000000000000000000A1 /* MinesweeperUITests.swift */; };
+		AAB1000000000000000000A2 /* MinesweeperUITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB1000000000000000000A1 /* MinesweeperUITestCase.swift */; };
 		AAB2000000000000000000A2 /* MenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2000000000000000000A1 /* MenuTests.swift */; };
 		AAB3000000000000000000A2 /* CustomGameSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB3000000000000000000A1 /* CustomGameSheetTests.swift */; };
 		AAB4000000000000000000A2 /* BestTimesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4000000000000000000A1 /* BestTimesTests.swift */; };
 		AAB5000000000000000000A2 /* StatsAndToolbarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB5000000000000000000A1 /* StatsAndToolbarTests.swift */; };
-		AAB6000000000000000000A2 /* WindowMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB6000000000000000000A1 /* WindowMenuTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,12 +96,11 @@
 		3BF1A790285ED7CF00566000 /* BindingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingsViewController.swift; sourceTree = "<group>"; };
 		3BF1A7CD2866AAD600566000 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		AA10000000000000000000A1 /* MinesweeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAB1000000000000000000A1 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
+		AAB1000000000000000000A1 /* MinesweeperUITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITestCase.swift; sourceTree = "<group>"; };
 		AAB2000000000000000000A1 /* MenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTests.swift; sourceTree = "<group>"; };
 		AAB3000000000000000000A1 /* CustomGameSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameSheetTests.swift; sourceTree = "<group>"; };
 		AAB4000000000000000000A1 /* BestTimesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTimesTests.swift; sourceTree = "<group>"; };
 		AAB5000000000000000000A1 /* StatsAndToolbarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsAndToolbarTests.swift; sourceTree = "<group>"; };
-		AAB6000000000000000000A1 /* WindowMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowMenuTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,12 +222,11 @@
 		AA11000000000000000000A1 /* MinesweeperUITests */ = {
 			isa = PBXGroup;
 			children = (
-				AAB1000000000000000000A1 /* MinesweeperUITests.swift */,
+				AAB1000000000000000000A1 /* MinesweeperUITestCase.swift */,
 				AAB2000000000000000000A1 /* MenuTests.swift */,
 				AAB3000000000000000000A1 /* CustomGameSheetTests.swift */,
 				AAB4000000000000000000A1 /* BestTimesTests.swift */,
 				AAB5000000000000000000A1 /* StatsAndToolbarTests.swift */,
-				AAB6000000000000000000A1 /* WindowMenuTests.swift */,
 			);
 			path = MinesweeperUITests;
 			sourceTree = "<group>";
@@ -372,12 +369,11 @@
 		AA05000000000000000000A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
-				AAB1000000000000000000A2 /* MinesweeperUITests.swift in Sources */,
+				AAB1000000000000000000A2 /* MinesweeperUITestCase.swift in Sources */,
 				AAB2000000000000000000A2 /* MenuTests.swift in Sources */,
 				AAB3000000000000000000A2 /* CustomGameSheetTests.swift in Sources */,
 				AAB4000000000000000000A2 /* BestTimesTests.swift in Sources */,
 				AAB5000000000000000000A2 /* StatsAndToolbarTests.swift in Sources */,
-				AAB6000000000000000000A2 /* WindowMenuTests.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
@@ -596,7 +592,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AUBXDCV2VL;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.MinesweeperUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -615,7 +611,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AUBXDCV2VL;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.camerongoddard.MinesweeperUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

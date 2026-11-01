@@ -2,54 +2,40 @@ import XCTest
 
 final class StatsAndToolbarTests: MinesweeperUITestCase {
 
-    func testShowStatsShortcutOpensStatsPanel() {
-        XCTAssertFalse(app.tables["stats.table"].exists)
+    private static let expectedStatsRowCount = 6
 
+    private var statsTable: XCUIElement { app.tables[AccessibilityID.Stats.table] }
+
+    private func toggleStats() {
         app.typeKey("s", modifierFlags: [.command, .shift])
-
-        XCTAssertTrue(app.tables["stats.table"].waitForExistence(timeout: 5))
-        
-        let timerExists = app.textFields["stats.timer"].exists
-            || app.staticTexts["stats.timer"].exists
-        XCTAssertTrue(timerExists)
     }
 
-    func testShowStatsTogglesPanelOff() {
-        app.typeKey("s", modifierFlags: [.command, .shift])
-        let table = app.tables["stats.table"]
-        XCTAssertTrue(table.waitForExistence(timeout: 5))
+    func testShowStatsShortcutTogglesStatsPanel() {
+        XCTAssertFalse(statsTable.exists, "Stats panel should start hidden")
 
-        app.typeKey("s", modifierFlags: [.command, .shift])
+        toggleStats()
 
-        let deadline = Date().addingTimeInterval(5)
-        while table.exists && Date() < deadline {
-            usleep(100_000)
+        XCTAssertTrue(statsTable.waitForExistence(timeout: 5), "Stats table did not appear")
+        XCTAssertEqual(statsTable.tableRows.count, Self.expectedStatsRowCount)
+        XCTAssertTrue(
+            app.descendants(matching: .any)[AccessibilityID.Stats.timer].exists,
+            "Stats timer missing"
+        )
+
+        toggleStats()
+
+        waitForDisappearance(of: statsTable)
+    }
+
+    func testToolbarHasThemesAndStatsItems() {
+        // The Beginner window is narrow enough to push toolbar items into the overflow menu.
+        app.typeKey("3", modifierFlags: .command)
+
+        let toolbar = app.toolbars.firstMatch
+        XCTAssertTrue(toolbar.waitForExistence(timeout: 5), "Toolbar missing")
+
+        for title in ["Themes", "Stats"] {
+            XCTAssertTrue(toolbar.descendants(matching: .any)[title].exists, "Toolbar item '\(title)' missing")
         }
-        XCTAssertFalse(table.exists)
-    }
-
-    func testStatsPanelHasSixRows() {
-        app.typeKey("s", modifierFlags: [.command, .shift])
-        let table = app.tables["stats.table"]
-        XCTAssertTrue(table.waitForExistence(timeout: 5))
-        XCTAssertEqual(table.tableRows.count, 6)
-    }
-
-    func testThemesToolbarItemExists() {
-        XCTAssertTrue(
-            app.toolbars.firstMatch.waitForExistence(timeout: 5)
-        )
-        XCTAssertTrue(
-            app.toolbars.buttons["Themes"].exists
-                || app.toolbars.descendants(matching: .any)["Themes"].exists
-        )
-    }
-
-    func testStatsToolbarItemExists() {
-        XCTAssertTrue(app.toolbars.firstMatch.waitForExistence(timeout: 5))
-        XCTAssertTrue(
-            app.toolbars.buttons["Stats"].exists
-                || app.toolbars.descendants(matching: .any)["Stats"].exists
-        )
     }
 }

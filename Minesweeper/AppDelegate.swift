@@ -82,6 +82,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func newGame(_ sender: NSMenuItem) {
+        guard let window = NSApplication.shared.mainWindow,
+            let windowController = window.windowController as? WindowController
+        else { return }
+
         let controller = NSStoryboard.main.instantiateController(withIdentifier: "Main") as! ViewController
 
         if sender.title != "New Game" {
@@ -90,11 +94,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             controller.difficulty = Defaults[.Game.difficulty]
         }
-        if let window = NSApplication.shared.mainWindow {
-            if let windowController = window.windowController as? WindowController {
-                windowController.contentViewController = controller
-            }
-        }
+
+        windowController.contentViewController = controller
     }
 
     @IBAction func restartGame(_ sender: NSMenuItem) {
@@ -120,6 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func newCustomGame(notification: Notification) {
         guard let window = NSApplication.shared.mainWindow,
+            let windowController = window.windowController as? WindowController,
             let oldController = window.contentViewController as? ViewController,
             let oldScene = oldController.getScene()
         else { return }
@@ -135,7 +137,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Defaults[.Game.customDifficulty][1] = (notification.object as! [Int])[1]
         Defaults[.Game.customDifficulty][2] = (notification.object as! [Int])[2]
 
-        window.contentViewController = controller
+        windowController.contentViewController = controller
     }
 
     @IBAction func saveBoard(_ sender: NSMenuItem) {
@@ -230,7 +232,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             controller.difficulty = "Loaded Custom"
             controller.minesLayout = minesLayout
 
-            window.contentViewController = controller
+            if let windowController = window.windowController as? WindowController {
+                windowController.contentViewController = controller
+            } else {
+                window.contentViewController = controller
+            }
         } catch {
             let alert = NSAlert()
             alert.messageText = "Invalid Board File"

@@ -26,6 +26,7 @@ struct CustomGameView: View {
         guard r > 0, c > 0 else {
             return 0
         }
+
         return Double(r * c)
     }
 
@@ -97,9 +98,8 @@ struct CustomGameView: View {
 
             HStack {
                 Button("Random") {
-                    rows = String(Int.random(in: 1..<40))
-                    columns = String(Int.random(in: 1..<40))
-                    mines = .random(in: 1..<maxMines)
+                    rows = String(Int.random(in: 1..<1000))
+                    columns = String(Int.random(in: 1..<1000))
                 }
                 .accessibilityIdentifier("customGame.random")
                 Spacer()
